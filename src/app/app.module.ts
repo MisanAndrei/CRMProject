@@ -15,17 +15,23 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialogModule } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatSelectModule } from '@angular/material/select';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ElementsComponent } from './Components/elemenents-component/elements.component';
+import { ElementsComponent } from './Components/elements/elemenents-component/elements.component';
 import { DashboardComponent } from './Components/dashboard-component/dashboard.component';
+import { UpsertElementComponent } from './Components/elements/element-upsert-component/upsert-element.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ElementsComponent,
-    DashboardComponent
+    DashboardComponent,
+    UpsertElementComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +48,11 @@ import { DashboardComponent } from './Components/dashboard-component/dashboard.c
     MatSortModule,
     MatPaginatorModule,
     ReactiveFormsModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatDialogModule,
+    FormsModule,
+    MatChipsModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

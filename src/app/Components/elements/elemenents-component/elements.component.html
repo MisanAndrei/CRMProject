@@ -5,13 +5,13 @@
       <input matInput [formControl]="searchControl" placeholder="Search">
     </mat-form-field>
     <div class="icon-container">
-      <button mat-icon-button aria-label="Add">
+      <button mat-icon-button aria-label="Add" (click)="addElement()">
         <mat-icon>add</mat-icon>
       </button>
-      <button mat-icon-button aria-label="Remove">
+      <button mat-icon-button aria-label="Remove" [disabled]="!selection.hasValue()" (click)="openDeleteDialog()">
         <mat-icon>remove</mat-icon>
       </button>
-      <button mat-icon-button aria-label="Edit">
+      <button mat-icon-button aria-label="Edit" [disabled]="!isSingleSelection()">
         <mat-icon>edit</mat-icon>
       </button>
     </div>

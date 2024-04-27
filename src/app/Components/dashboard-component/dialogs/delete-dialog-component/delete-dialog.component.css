@@ -1,0 +1,42 @@
+.content-dialog {
+    height: 200px;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center-align the content horizontally */
+    justify-content: center; /* Center-align the content vertically */
+    text-align: center;
+}
+
+.button {
+    width: 60px;
+    height: 30px;
+    border-radius: 20%;
+    background-color: white;
+    margin: 20px 20px;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}  
+
+.button-yes {
+    color: red;
+}
+
+.button-no {
+    color: black;
+}
+
+.button-yes:hover {
+    background-color: red;
+    color: white;
+}
+
+.button-no:hover {
+    background-color: black;
+    color: white;
+}
+
+.button :hover{
+    cursor: pointer;
+}

@@ -1,0 +1,82 @@
+
+<div class="content">
+    <!-- Product and Service selection -->
+    <div class="selection-container">
+      <div class="selection-option" [ngClass]="{'selected': elementType === 1}" (click)="selectElementType(1)">Product</div>
+      <div class="selection-option" [ngClass]="{'selected': elementType === 2}" (click)="selectElementType(2)">Service</div>
+    </div>
+  
+    <!-- Nume and Categorie inputs -->
+    <div class="input-row">
+      <div class="input-container">
+        <label for="nume">Nume</label>
+        <mat-form-field>
+        <input matInput id="nume" [(ngModel)]="nume">
+    </mat-form-field>
+      </div>
+      <div class="input-container">
+        <label for="categorie">Categorie</label>
+        <mat-form-field>
+        <input matInput id="categorie" [(ngModel)]="categorie">
+    </mat-form-field>
+      </div>
+    </div>
+
+    <div class="input-row">
+        <div class="checkbox-field">
+            <input type="checkbox" id="acquireInfo" [(ngModel)]="acquireInfo" (change)="toggleAcquireInfo()">
+            <label for="acquireInfo">Acquire Info</label>
+            <div class="input-field">
+              <label for="acquireInfoInput">Acquire Info Value:</label>
+              <mat-form-field>
+              <input matInput type="text" id="acquireInfoInput" [(ngModel)]="acquireInfoValue" [disabled]="!acquireInfo">
+            </mat-form-field>
+            </div>
+          </div>
+        
+          <!-- Selling Info -->
+          <div class="checkbox-field">
+            <input type="checkbox" id="sellingInfo" [(ngModel)]="sellingInfo" (change)="toggleSellingInfo()">
+            <label for="sellingInfo">Selling Info</label>
+            <div class="input-field">
+              <label for="sellingInfoInput">Selling Info Value:</label>
+              <mat-form-field>
+              <input matInput type="text" id="sellingInfoInput" [(ngModel)]="sellingInfoValue" [disabled]="!sellingInfo">
+            </mat-form-field>
+            </div>
+          </div>
+    </div>
+
+    
+  
+    <!-- Descriere input -->
+    <div class="input-row">
+      <label for="descriere">Descriere</label>
+      <mat-form-field  class="description"> 
+      <textarea class="description" matInput id="descriere" [(ngModel)]="descriere" rows="4" cols="8"></textarea>
+    </mat-form-field>
+    </div>
+
+    <div class="input-row">
+        <mat-form-field>
+            <mat-label>Taxes</mat-label>
+            <mat-select [formControl]="taxesControl" multiple>
+          
+              <mat-select-trigger>
+                <mat-chip-listbox>
+                  <mat-chip *ngFor="let tax of taxesControl.value"
+                    [removable]="true" (removed)="onTaxRemoved(tax)">
+                    {{ tax.name }}
+                    <mat-icon matChipRemove>cancel</mat-icon>
+                  </mat-chip>
+                </mat-chip-listbox>
+              </mat-select-trigger>
+          
+              <mat-option *ngFor="let tax of taxes" [value]="tax">{{tax.name}}</mat-option>
+          
+            </mat-select>
+          </mat-form-field>
+    </div>
+
+    <button class="button" (click)="saveElement()">Save</button>
+  </div>

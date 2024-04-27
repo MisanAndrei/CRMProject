@@ -4,9 +4,12 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { Element } from '../../Utilities/Models';
+import { Element } from '../../../Utilities/Models';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { SelectionModel } from '@angular/cdk/collections';
+import { DeleteElementsDialogComponent } from '../../dashboard-component/dialogs/delete-dialog-component/delete-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-elements',
@@ -25,7 +28,7 @@ export class ElementsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private _liveAnnouncer: LiveAnnouncer) {
+  constructor(private _liveAnnouncer: LiveAnnouncer, private dialog: MatDialog, private router: Router) {
     this.dataSource = new MatTableDataSource<Element>();
 
   }
@@ -37,18 +40,18 @@ export class ElementsComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     // Example data
     const ELEMENT_DATA: Element[] = [
-      { nume: 'Element 1', categorie: 'Category 1', culoare: 'Red', taxe: 'TVA', pretAchizitie: 10, pretVanzare: 20 },
-      { nume: 'Element 2', categorie: 'Category 2', culoare: 'Blue', taxe: 'TVA', pretAchizitie: 15, pretVanzare: 25 },
-      { nume: 'Element 1', categorie: 'Category 1', culoare: 'Red', taxe: 'TVA', pretAchizitie: 10, pretVanzare: 20 },
-      { nume: 'Element 2', categorie: 'Category 2', culoare: 'Blue', taxe: 'TVA', pretAchizitie: 15, pretVanzare: 25 },
-      { nume: 'Element 1', categorie: 'Category 1', culoare: 'Red', taxe: 'TVA', pretAchizitie: 10, pretVanzare: 20 },
-      { nume: 'Element 2', categorie: 'Category 2', culoare: 'Blue', taxe: 'TVA', pretAchizitie: 15, pretVanzare: 25 },
-      { nume: 'Element 1', categorie: 'Category 1', culoare: 'Red', taxe: 'TVA', pretAchizitie: 10, pretVanzare: 20 },
-      { nume: 'Element 2', categorie: 'Category 2', culoare: 'Blue', taxe: 'TVA', pretAchizitie: 15, pretVanzare: 25 },
-      { nume: 'Element 1', categorie: 'Category 1', culoare: 'Red', taxe: 'TVA', pretAchizitie: 10, pretVanzare: 20 },
-      { nume: 'Element 2', categorie: 'Category 2', culoare: 'Blue', taxe: 'TVA', pretAchizitie: 15, pretVanzare: 25 },
-      { nume: 'Element 1', categorie: 'Category 1', culoare: 'Red', taxe: 'TVA', pretAchizitie: 10, pretVanzare: 20 },
-      { nume: 'Element 2', categorie: 'Category 2', culoare: 'Blue', taxe: 'TVA', pretAchizitie: 15, pretVanzare: 25 },
+      { id: 1, nume: 'Element 1', categorie: 'Category 1', culoare: 'Red', taxe: 'TVA', pretAchizitie: 10, pretVanzare: 20 },
+      { id: 1, nume: 'Element 2', categorie: 'Category 2', culoare: 'Blue', taxe: 'TVA', pretAchizitie: 15, pretVanzare: 25 },
+      { id: 1, nume: 'Element 1', categorie: 'Category 1', culoare: 'Red', taxe: 'TVA', pretAchizitie: 10, pretVanzare: 20 },
+      { id: 1, nume: 'Element 2', categorie: 'Category 2', culoare: 'Blue', taxe: 'TVA', pretAchizitie: 15, pretVanzare: 25 },
+      { id: 1, nume: 'Element 1', categorie: 'Category 1', culoare: 'Red', taxe: 'TVA', pretAchizitie: 10, pretVanzare: 20 },
+      { id: 1, nume: 'Element 2', categorie: 'Category 2', culoare: 'Blue', taxe: 'TVA', pretAchizitie: 15, pretVanzare: 25 },
+      { id: 1, nume: 'Element 1', categorie: 'Category 1', culoare: 'Red', taxe: 'TVA', pretAchizitie: 10, pretVanzare: 20 },
+      { id: 1, nume: 'Element 2', categorie: 'Category 2', culoare: 'Blue', taxe: 'TVA', pretAchizitie: 15, pretVanzare: 25 },
+      { id: 1, nume: 'Element 1', categorie: 'Category 1', culoare: 'Red', taxe: 'TVA', pretAchizitie: 10, pretVanzare: 20 },
+      { id: 1, nume: 'Element 2', categorie: 'Category 2', culoare: 'Blue', taxe: 'TVA', pretAchizitie: 15, pretVanzare: 25 },
+      { id: 1, nume: 'Element 1', categorie: 'Category 1', culoare: 'Red', taxe: 'TVA', pretAchizitie: 10, pretVanzare: 20 },
+      { id: 1, nume: 'Element 2', categorie: 'Category 2', culoare: 'Blue', taxe: 'TVA', pretAchizitie: 15, pretVanzare: 25 },
       // Add more data as needed
     ];
 
@@ -91,5 +94,28 @@ export class ElementsComponent implements OnInit, AfterViewInit {
     this.isAllSelected() ?
         this.selection.clear() :
         this.dataSource.data.forEach(row => this.selection.select(row));
+  }
+  
+  isSingleSelection(): boolean {
+    return this.selection.selected.length === 1;
+  }
+
+  openDeleteDialog(): void {
+    const dialogRef = this.dialog.open(DeleteElementsDialogComponent, {
+      data: { title: 'Confirma stergerea', message: 'Esti sigur ca vrei sa stergi aceste categorii?' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        const selectedIds = this.selection.selected.map(element => element.id);
+        
+        // Call your function to delete elements using selectedIds
+      }
+      this.selection.clear();
+    });
+  }
+
+  addElement() {
+    this.router.navigate(['/AdaugaElement']);
   }
 }
