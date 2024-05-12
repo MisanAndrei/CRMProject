@@ -12,3 +12,13 @@ export interface Element {
     id: number;
     name: string;
   }
+
+  export interface Partner {
+    id: number;
+    name: string;
+    cui: string;
+    email: string;
+    phoneNumber: string;
+    country: string;
+    bill: string;
+  }

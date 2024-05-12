@@ -13,7 +13,7 @@
 			<div class="submenu" [ngClass]="{'expanded' : showSubmenu}" *ngIf="isShowing || isExpanded">
 				<a mat-list-item routerLink="/Tabloudebord">Tablou de bord</a>
         <a mat-list-item routerLink="/Elemente">Elemente</a>
-        <a mat-list-item>Parteneri</a>
+        <a mat-list-item routerLink="/Parteneri">Parteneri</a>
         <a mat-list-item>Facturi vanzari</a>
         <a mat-list-item>Facturi achizitii</a>
 				<mat-list-item (click)="showSubSubMenuBank = !showSubSubMenuBank" class="parent">

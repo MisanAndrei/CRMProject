@@ -3,11 +3,11 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatButton } from '@angular/material/button';
 
 @Component({
-  selector: 'app-delete-elements-dialog',
+  selector: 'app-delete-dialog',
   templateUrl: './delete-dialog.component.html',
   styleUrls: ['./delete-dialog.component.css']
 })
-export class DeleteElementsDialogComponent {
+export class DeleteDialogComponent {
 
   constructor(
     public dialogRef: MatDialogRef<boolean>,

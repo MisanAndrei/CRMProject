@@ -25,13 +25,15 @@ import { AppComponent } from './app.component';
 import { ElementsComponent } from './Components/elements/elemenents-component/elements.component';
 import { DashboardComponent } from './Components/dashboard-component/dashboard.component';
 import { UpsertElementComponent } from './Components/elements/element-upsert-component/upsert-element.component';
+import { PartnersComponent } from './Components/partners-component/partners.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ElementsComponent,
     DashboardComponent,
-    UpsertElementComponent
+    UpsertElementComponent,
+    PartnersComponent
   ],
   imports: [
     BrowserModule,

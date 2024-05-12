@@ -1,13 +1,13 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort, Sort } from '@angular/material/sort';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Element } from '../../../Utilities/Models';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { SelectionModel } from '@angular/cdk/collections';
-import { DeleteElementsDialogComponent } from '../../dashboard-component/dialogs/delete-dialog-component/delete-dialog.component';
+import { DeleteDialogComponent } from '../../dialogs/delete-dialog-component/delete-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 
@@ -101,7 +101,7 @@ export class ElementsComponent implements OnInit, AfterViewInit {
   }
 
   openDeleteDialog(): void {
-    const dialogRef = this.dialog.open(DeleteElementsDialogComponent, {
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {
       data: { title: 'Confirma stergerea', message: 'Esti sigur ca vrei sa stergi aceste categorii?' }
     });
 
@@ -117,5 +117,18 @@ export class ElementsComponent implements OnInit, AfterViewInit {
 
   addElement() {
     this.router.navigate(['/AdaugaElement']);
+  }
+
+  onPaginatorPageChange(event: PageEvent) {
+    const pageIndex = event.pageIndex;
+    const pageSize = event.pageSize;
+    const length = this.dataSource.data.length; // Total number of items
+
+    // Now you have the pagination details, you can use them as needed
+    console.log(`Page index: ${pageIndex}, Page size: ${pageSize}, Total items: ${length}`);
+
+    // Here you can call your function to fetch data from the backend with these pagination details
+    // For example:
+    // this.fetchDataFromBackend(pageIndex, pageSize);
   }
 }
