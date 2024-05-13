@@ -26,6 +26,12 @@ import { ElementsComponent } from './Components/elements/elemenents-component/el
 import { DashboardComponent } from './Components/dashboard-component/dashboard.component';
 import { UpsertElementComponent } from './Components/elements/element-upsert-component/upsert-element.component';
 import { PartnersComponent } from './Components/partners-component/partners.component';
+import { BillsComponent } from './Components/bills/bills-component/bills.component';
+import { AccountsComponent } from './Components/accounts/accounts-component/accounts.component';
+import { TransactionsComponent } from './Components/transactions/transactions-component/transactions.component';
+import { CategoriesComponent } from './Components/categories/categories-component/categories.component';
+import { CurrenciesComponent } from './Components/currencies/currencies-component/currencies.component';
+import { TaxesComponent } from './Components/taxes/taxes-component/taxes.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +39,13 @@ import { PartnersComponent } from './Components/partners-component/partners.comp
     ElementsComponent,
     DashboardComponent,
     UpsertElementComponent,
-    PartnersComponent
+    PartnersComponent,
+    BillsComponent,
+    AccountsComponent,
+    TransactionsComponent,
+    CategoriesComponent,
+    CurrenciesComponent,
+    TaxesComponent
   ],
   imports: [
     BrowserModule,
