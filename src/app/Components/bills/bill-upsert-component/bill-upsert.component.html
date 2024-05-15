@@ -1,0 +1,77 @@
+<div class="container">
+    <div class="section">
+        <h2>Companie</h2>
+        <div class="row">
+          <!-- Companie - First Column -->
+          <div class="column">
+            <mat-form-field>
+              <mat-label>Titlu</mat-label>
+              <input matInput placeholder="Titlu" [(ngModel)]="companyTitle">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Subantet</mat-label>
+              <input matInput placeholder="Subantet" [(ngModel)]="companySubtitle">
+            </mat-form-field>
+          </div>
+          <!-- Companie - Second Column -->
+          <div class="column">
+            <img src="path/to/company-image.jpg" alt="Company Image">
+          </div>
+          <!-- Companie - Third Column -->
+          <div class="column">
+            <h3>Company Info</h3>
+            <p>{{ companyInfo.address }}</p>
+            <p>{{ companyInfo.phone }}</p>
+            <p>{{ companyInfo.email }}</p>
+            <p>{{ companyInfo.website }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="section">
+        <h2>Facturare</h2>
+        <!-- Subsection 1 -->
+        <div class="subsection">
+          <div class="row">
+            <!-- First Column -->
+            <div class="column">
+              <h3>Partner Details</h3>
+              <p>Paragraph 1</p>
+              <p>Paragraph 2</p>
+              <p>Paragraph 3</p>
+              <p>Paragraph 4</p>
+              <p>Paragraph 5</p>
+            </div>
+            <!-- Second Column -->
+            <div class="column">
+              <mat-form-field>
+                <mat-label>Data Facturii</mat-label>
+                <input matInput placeholder="Data Facturii" [(ngModel)]="facturaData">
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Data Scadenta</mat-label>
+                <input matInput placeholder="Data Scadenta" [(ngModel)]="scadentaData">
+              </mat-form-field>
+            </div>
+            <!-- Third Column -->
+            <div class="column">
+              <mat-form-field>
+                <mat-label>Numar Factura</mat-label>
+                <input matInput placeholder="Numar Factura" [(ngModel)]="numarFactura">
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Numar Comanda</mat-label>
+                <input matInput placeholder="Numar Comanda" [(ngModel)]="numarComanda">
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <mat-form-field class="full-width">
+            <textarea matInput placeholder="Nota" rows="5" ></textarea>
+          </mat-form-field>
+        
+      </div>
+    <div class="section">
+      <h2>Avansat</h2>
+      <!-- Add content for Avansat section here -->
+    </div>
+  </div>

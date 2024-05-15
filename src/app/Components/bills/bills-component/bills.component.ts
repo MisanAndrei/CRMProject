@@ -102,7 +102,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
 
   addBill() {
     // Navigate to the page for adding a new bill
-    this.router.navigate(['/add-bill']);
+    this.router.navigate(['/FacturaNoua']);
   }
 
   addPayment(){

@@ -29,7 +29,7 @@
 					<mat-icon class="menu-button" [ngClass]="{'rotated' : showSubSubMenuSettings}" *ngIf="isExpanded || isShowing">expand_more</mat-icon>
 				</mat-list-item>
 				<div class="submenu" [ngClass]="{'expanded' : showSubSubMenuSettings}" *ngIf="(isShowing || isExpanded) && showSubSubMenuSettings">
-					<mat-list-item>Companie</mat-list-item>
+					<a mat-list-item routerLink="/Companie">Companie</a>
 					<mat-list-item>Factura</mat-list-item>
           <a mat-list-item>Implicit</a>
           <a routerLink="/Categorii" mat-list-item>Categorii</a>

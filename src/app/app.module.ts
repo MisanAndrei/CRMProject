@@ -32,6 +32,8 @@ import { TransactionsComponent } from './Components/transactions/transactions-co
 import { CategoriesComponent } from './Components/categories/categories-component/categories.component';
 import { CurrenciesComponent } from './Components/currencies/currencies-component/currencies.component';
 import { TaxesComponent } from './Components/taxes/taxes-component/taxes.component';
+import { BillUpsertComponent } from './Components/bills/bill-upsert-component/bill-upsert.component';
+import { CompanyComponent } from './Components/company/company.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import { TaxesComponent } from './Components/taxes/taxes-component/taxes.compone
     TransactionsComponent,
     CategoriesComponent,
     CurrenciesComponent,
-    TaxesComponent
+    TaxesComponent,
+    BillUpsertComponent,
+    CompanyComponent
   ],
   imports: [
     BrowserModule,
