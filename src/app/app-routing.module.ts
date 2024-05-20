@@ -12,6 +12,7 @@ import { CurrenciesComponent } from './Components/currencies/currencies-componen
 import { TaxesComponent } from './Components/taxes/taxes-component/taxes.component';
 import { BillUpsertComponent } from './Components/bills/bill-upsert-component/bill-upsert.component';
 import { CompanyComponent } from './Components/company/company.component';
+import { ImplicitComponent } from './Components/implicit/implicit-component/implicit.component';
 
 const routes: Routes = [{ path: '', redirectTo: '/Tabloudebord', pathMatch: 'full' },
 { path: 'Tabloudebord', component: DashboardComponent},
@@ -25,7 +26,8 @@ const routes: Routes = [{ path: '', redirectTo: '/Tabloudebord', pathMatch: 'ful
 { path: 'Valute', component: CurrenciesComponent},
 { path: 'Taxe', component: TaxesComponent},
 { path: 'FacturaNoua', component: BillUpsertComponent},
-{ path: 'Companie', component: CompanyComponent}];
+{ path: 'Companie', component: CompanyComponent},
+{ path: 'Implicit', component: ImplicitComponent}];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
