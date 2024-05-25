@@ -1,0 +1,44 @@
+<form [formGroup]="transferForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="payableAccount">Payable Account</label>
+      <select id="payableAccount" formControlName="payableAccount">
+        <option *ngFor="let account of accounts" [value]="account.id">{{ account.name }}</option>
+      </select>
+    </div>
+  
+    <div>
+      <label for="beneficiarAccount">Beneficiar Account</label>
+      <select id="beneficiarAccount" formControlName="beneficiarAccount">
+        <option *ngFor="let account of accounts" [value]="account.id">{{ account.name }}</option>
+      </select>
+    </div>
+  
+    <div>
+      <label for="dateOfTransaction">Date of Transaction</label>
+      <input id="dateOfTransaction" formControlName="dateOfTransaction" type="date">
+    </div>
+  
+    <div>
+      <label for="sum">Sum</label>
+      <input id="sum" formControlName="sum" type="number" step="0.01">
+    </div>
+  
+    <div>
+      <label for="description">Description</label>
+      <textarea id="description" formControlName="description" rows="3"></textarea>
+    </div>
+  
+    <div>
+      <label for="paymentMethod">Payment Method</label>
+      <select id="paymentMethod" formControlName="paymentMethod">
+        <option *ngFor="let method of methodsOfPayment" [value]="method.id">{{ method.name }}</option>
+      </select>
+    </div>
+  
+    <div>
+      <label for="reference">Reference</label>
+      <input id="reference" formControlName="reference" type="text">
+    </div>
+  
+    <button type="submit">Save Transfer</button>
+  </form>

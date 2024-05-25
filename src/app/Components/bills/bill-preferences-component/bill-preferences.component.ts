@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-bill-preferences',
@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 export class BillPreferencesComponent implements OnInit {
   preferencesForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private http: HttpClient) {
+  constructor(private fb: FormBuilder) {
     this.preferencesForm = this.fb.group({
       prefix: ['', Validators.required],
       nextNumber: [1, [Validators.required, Validators.min(1)]],
@@ -27,18 +27,7 @@ export class BillPreferencesComponent implements OnInit {
   }
 
   loadPreferences(): void {
-    this.http.get<any>('https://your-api-endpoint.com/preferences')
-      .subscribe(data => {
-        this.preferencesForm.patchValue({
-          prefix: data.prefix,
-          nextNumber: data.nextNumber,
-          numberOfDecimals: data.numberOfDecimals,
-          title: data.title,
-          note: data.note,
-          subantet: data.subantet,
-          subsol: data.subsol
-        });
-      });
+    
   }
 
   onSubmit(): void {

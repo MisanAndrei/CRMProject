@@ -36,6 +36,8 @@ import { BillUpsertComponent } from './Components/bills/bill-upsert-component/bi
 import { CompanyComponent } from './Components/company/company.component';
 import { ImplicitComponent } from './Components/implicit/implicit-component/implicit.component';
 import { BillPreferencesComponent } from './Components/bills/bill-preferences-component/bill-preferences.component';
+import { TransferUpsertComponent } from './Components/transfers/transfer-upsert-component/transfer-upsert.component';
+import { TransfersComponent } from './Components/transfers/transfers-component/transfers.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,9 @@ import { BillPreferencesComponent } from './Components/bills/bill-preferences-co
     BillUpsertComponent,
     CompanyComponent,
     ImplicitComponent,
-    BillPreferencesComponent
+    BillPreferencesComponent,
+    TransferUpsertComponent,
+    TransfersComponent
   ],
   imports: [
     BrowserModule,

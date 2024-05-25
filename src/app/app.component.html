@@ -22,7 +22,7 @@
 				<div class="submenu" [ngClass]="{'expanded' : showSubSubMenuBank}" *ngIf="(isShowing || isExpanded) && showSubSubMenuBank">
 					<a mat-list-item routerLink="/Conturi">Conturi</a>
 					<a mat-list-item routerLink="/Tranzactii">Tranzactii</a>
-          <mat-list-item>Transfer nou</mat-list-item>
+          			<a mat-list-item routerLink="/Transferuri">Transferuri</a>
 				</div>
         <mat-list-item (click)="showSubSubMenuSettings = !showSubSubMenuSettings" class="parent">
 					<span class="full-width" *ngIf="isExpanded || isShowing">Setari</span>

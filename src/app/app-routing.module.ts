@@ -14,6 +14,8 @@ import { BillUpsertComponent } from './Components/bills/bill-upsert-component/bi
 import { CompanyComponent } from './Components/company/company.component';
 import { ImplicitComponent } from './Components/implicit/implicit-component/implicit.component';
 import { BillPreferencesComponent } from './Components/bills/bill-preferences-component/bill-preferences.component';
+import { TransferUpsertComponent } from './Components/transfers/transfer-upsert-component/transfer-upsert.component';
+import { TransfersComponent } from './Components/transfers/transfers-component/transfers.component';
 
 const routes: Routes = [{ path: '', redirectTo: '/Tabloudebord', pathMatch: 'full' },
 { path: 'Tabloudebord', component: DashboardComponent},
@@ -29,7 +31,9 @@ const routes: Routes = [{ path: '', redirectTo: '/Tabloudebord', pathMatch: 'ful
 { path: 'FacturaNoua', component: BillUpsertComponent},
 { path: 'Companie', component: CompanyComponent},
 { path: 'Implicit', component: ImplicitComponent},
-{ path: 'Preferinte', component: BillPreferencesComponent}];
+{ path: 'Preferinte', component: BillPreferencesComponent},
+{ path: 'TransferNou', component: TransferUpsertComponent},
+{ path: 'Transferuri', component: TransfersComponent}];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
