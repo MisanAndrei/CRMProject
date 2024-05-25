@@ -1,0 +1,38 @@
+<form [formGroup]="preferencesForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="prefix">Prefix</label>
+      <input id="prefix" formControlName="prefix" type="text">
+    </div>
+  
+    <div>
+      <label for="nextNumber">Next Number</label>
+      <input id="nextNumber" formControlName="nextNumber" type="number">
+    </div>
+  
+    <div>
+      <label for="numberOfDecimals">Number of Decimals</label>
+      <input id="numberOfDecimals" formControlName="numberOfDecimals" type="number">
+    </div>
+  
+    <div>
+      <label for="title">Title</label>
+      <input id="title" formControlName="title" type="text">
+    </div>
+  
+    <div>
+      <label for="note">Note</label>
+      <textarea id="note" formControlName="note"></textarea>
+    </div>
+  
+    <div>
+      <label for="subantet">Subantet</label>
+      <input id="subantet" formControlName="subantet" type="text">
+    </div>
+  
+    <div>
+      <label for="subsol">Subsol</label>
+      <input id="subsol" formControlName="subsol" type="text">
+    </div>
+  
+    <button type="submit">Save Preferences</button>
+  </form>

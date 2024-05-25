@@ -35,6 +35,7 @@ import { TaxesComponent } from './Components/taxes/taxes-component/taxes.compone
 import { BillUpsertComponent } from './Components/bills/bill-upsert-component/bill-upsert.component';
 import { CompanyComponent } from './Components/company/company.component';
 import { ImplicitComponent } from './Components/implicit/implicit-component/implicit.component';
+import { BillPreferencesComponent } from './Components/bills/bill-preferences-component/bill-preferences.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { ImplicitComponent } from './Components/implicit/implicit-component/impl
     TaxesComponent,
     BillUpsertComponent,
     CompanyComponent,
-    ImplicitComponent
+    ImplicitComponent,
+    BillPreferencesComponent
   ],
   imports: [
     BrowserModule,
