@@ -6,7 +6,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon'
+import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 
 import { MatInputModule } from '@angular/material/input';
@@ -41,6 +41,7 @@ import { TransfersComponent } from './Components/transfers/transfers-component/t
 import { AccountUpsertComponent } from './Components/accounts/account-upsert-component/account-upsert.component';
 import { PartnerUpsertComponent } from './Components/partners/partner-upsert-component/partner-upsert.component';
 import { TransactionUpsertComponent } from './Components/transactions/transaction-upsert-component/transaction-upsert.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -84,9 +85,10 @@ import { TransactionUpsertComponent } from './Components/transactions/transactio
     MatDialogModule,
     FormsModule,
     MatChipsModule,
-    MatSelectModule
+    MatSelectModule,
+    NgbModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
