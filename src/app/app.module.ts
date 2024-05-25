@@ -6,7 +6,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon'
+import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 
 import { MatInputModule } from '@angular/material/input';
@@ -34,6 +34,7 @@ import { CurrenciesComponent } from './Components/currencies/currencies-componen
 import { TaxesComponent } from './Components/taxes/taxes-component/taxes.component';
 import { BillUpsertComponent } from './Components/bills/bill-upsert-component/bill-upsert.component';
 import { CompanyComponent } from './Components/company/company.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,7 @@ import { CompanyComponent } from './Components/company/company.component';
     CurrenciesComponent,
     TaxesComponent,
     BillUpsertComponent,
-    CompanyComponent
+    CompanyComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,9 +71,10 @@ import { CompanyComponent } from './Components/company/company.component';
     MatDialogModule,
     FormsModule,
     MatChipsModule,
-    MatSelectModule
+    MatSelectModule,
+    NgbModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

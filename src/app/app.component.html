@@ -1,47 +1,112 @@
 <mat-toolbar class="example-toolbar">
-	<button mat-icon-button (click)="isExpanded = !isExpanded"><mat-icon>menu</mat-icon></button>
-	<h1 class="example-app-name">Numele companiei</h1>
+  <button mat-icon-button (click)="isExpanded = !isExpanded">
+    <mat-icon class="icon-meniu">menu</mat-icon>
+  </button>
+  <div class="toolbar-title-container">
+    <h1 class="example-app-name">Numele companiei</h1>
+  </div>
 </mat-toolbar>
 <mat-sidenav-container class="example-container">
-	<mat-sidenav #sidenav mode="side" opened="true" (mouseenter)="mouseenter()" (mouseleave)="mouseleave()" class="left-sidenav">
-		<mat-nav-list>
-			<mat-list-item (click)="showSubmenu = !showSubmenu" class="parent">
-				<span class="full-width" *ngIf="isExpanded || isShowing">Meniu</span>
-				<mat-icon mat-list-icon>home</mat-icon>
-				<mat-icon class="menu-button" [ngClass]="{'rotated' : showSubmenu}" *ngIf="isExpanded || isShowing">expand_more</mat-icon>
-			</mat-list-item>
-			<div class="submenu" [ngClass]="{'expanded' : showSubmenu}" *ngIf="isShowing || isExpanded">
-				<a mat-list-item routerLink="/Tabloudebord">Tablou de bord</a>
-        <a mat-list-item routerLink="/Elemente">Elemente</a>
-        <a mat-list-item routerLink="/Parteneri">Parteneri</a>
-        <a mat-list-item routerLink="/Facturi">Facturi</a>
-				<mat-list-item (click)="showSubSubMenuBank = !showSubSubMenuBank" class="parent">
-					<span class="full-width" *ngIf="isExpanded || isShowing">Bancare</span>
-					<mat-icon class="menu-button" [ngClass]="{'rotated' : showSubSubMenuBank}" *ngIf="isExpanded || isShowing">expand_more</mat-icon>
-				</mat-list-item>
-				<div class="submenu" [ngClass]="{'expanded' : showSubSubMenuBank}" *ngIf="(isShowing || isExpanded) && showSubSubMenuBank">
-					<a mat-list-item routerLink="/Conturi">Conturi</a>
-					<a mat-list-item routerLink="/Tranzactii">Tranzactii</a>
-          <mat-list-item>Transfer nou</mat-list-item>
-				</div>
-        <mat-list-item (click)="showSubSubMenuSettings = !showSubSubMenuSettings" class="parent">
-					<span class="full-width" *ngIf="isExpanded || isShowing">Setari</span>
-					<mat-icon class="menu-button" [ngClass]="{'rotated' : showSubSubMenuSettings}" *ngIf="isExpanded || isShowing">expand_more</mat-icon>
-				</mat-list-item>
-				<div class="submenu" [ngClass]="{'expanded' : showSubSubMenuSettings}" *ngIf="(isShowing || isExpanded) && showSubSubMenuSettings">
-					<a mat-list-item routerLink="/Companie">Companie</a>
-					<mat-list-item>Factura</mat-list-item>
-          <a mat-list-item>Implicit</a>
-          <a routerLink="/Categorii" mat-list-item>Categorii</a>
-          <a routerLink="/Valute" mat-list-item>Valute</a>
-          <a routerLink="/Taxe" mat-list-item>Taxe</a>
-				</div>
-			</div>
-		</mat-nav-list>
+  <mat-sidenav
+    #sidenav
+    mode="side"
+    opened="true"
+    (mouseenter)="mouseenter()"
+    (mouseleave)="mouseleave()"
+    class="left-sidenav"
+  >
     <mat-nav-list>
-</mat-nav-list>
-	</mat-sidenav>
-
-	<router-outlet></router-outlet>
-
+      <mat-list-item (click)="showSubmenu = !showSubmenu" class="parent">
+        <mat-icon class="icon-margin">home</mat-icon>
+        <span class="text-align" *ngIf="isExpanded || isShowing">Meniu</span>
+        <mat-icon
+          class="menu-button expand-icon"
+          [ngClass]="{ rotated: showSubmenu }"
+          *ngIf="isExpanded || isShowing"
+          >expand_more</mat-icon
+        >
+      </mat-list-item>
+      <div
+        class="submenu"
+        [ngClass]="{ expanded: showSubmenu }"
+        *ngIf="isShowing || isExpanded"
+      >
+        <a mat-list-item routerLink="/Tabloudebord">
+          <mat-icon class="icon-margin">dashboard</mat-icon>
+          <span class="text-align">Tablou de bord</span>
+        </a>
+        <a mat-list-item routerLink="/Elemente">
+          <mat-icon class="icon-margin">inventory</mat-icon>
+          <span class="text-align">Elemente</span>
+        </a>
+        <a mat-list-item routerLink="/Parteneri">
+          <mat-icon class="icon-margin">accessibility</mat-icon>
+          <span class="text-align">Parteneri</span>
+        </a>
+        <a mat-list-item routerLink="/Facturi">
+          <mat-icon class="icon-margin">document_scanner</mat-icon>
+          <span class="text-align">Facturi</span>
+        </a>
+        <mat-list-item
+          (click)="showSubSubMenuBank = !showSubSubMenuBank"
+          class="parent"
+        >
+          <span class="full-width" *ngIf="isExpanded || isShowing">
+            <mat-icon class="icon-margin">account_balance</mat-icon
+            ><span class="text-align">Bancare</span></span
+          >
+          <mat-icon
+            class="menu-button expand-icon"
+            [ngClass]="{ rotated: showSubSubMenuBank }"
+            *ngIf="isExpanded || isShowing"
+            >expand_more</mat-icon
+          >
+        </mat-list-item>
+        <div
+          class="submenu subsubmenu"
+          [ngClass]="{ expanded: showSubSubMenuBank }"
+          *ngIf="(isShowing || isExpanded) && showSubSubMenuBank"
+        >
+          <a mat-list-item routerLink="/Conturi">Conturi</a>
+          <a mat-list-item routerLink="/Tranzactii">Tranzactii</a>
+          <mat-list-item>Transfer nou</mat-list-item>
+        </div>
+        <mat-list-item
+          (click)="showSubSubMenuSettings = !showSubSubMenuSettings"
+          class="parent"
+        >
+          <span class="full-width" *ngIf="isExpanded || isShowing">
+            <mat-icon class="icon-margin">settings</mat-icon>
+            <span class="text-align">Setari</span></span
+          >
+          <mat-icon
+            class="menu-button expand-icon"
+            [ngClass]="{ rotated: showSubSubMenuSettings }"
+            *ngIf="isExpanded || isShowing"
+            >expand_more</mat-icon
+          >
+        </mat-list-item>
+        <div
+          class="submenu subsubmenu"
+          [ngClass]="{ expanded: showSubSubMenuSettings }"
+          *ngIf="(isShowing || isExpanded) && showSubSubMenuSettings"
+        >
+          <a mat-list-item class="submenu-item" routerLink="/Companie"
+            >Companie</a
+          >
+          <mat-list-item class="submenu-item">Factura</mat-list-item>
+          <a mat-list-item class="submenu-item">Implicit</a>
+          <a class="submenu-item" routerLink="/Categorii" mat-list-item
+            >Categorii</a
+          >
+          <a class="submenu-item" routerLink="/Valute" mat-list-item>Valute</a>
+          <a class="submenu-item" routerLink="/Taxe" mat-list-item>Taxe</a>
+        </div>
+      </div>
+    </mat-nav-list>
+    <mat-nav-list> </mat-nav-list>
+  </mat-sidenav>
+  <div class="main-content-wrapper">
+    <router-outlet></router-outlet>
+  </div>
 </mat-sidenav-container>

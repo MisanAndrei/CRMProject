@@ -1,38 +1,106 @@
 .example-container {
-    height: 100%;
-    overflow: hidden !important;
-    border: 1px solid rgba(0, 0, 0, 0.5);
-  }
-  .example-sidenav-content {
-    display: flex;
-    overflow: hidden !important;
-    align-items: center;
-    justify-content: center;
-  }
-  .example-sidenav {
-     user-select: none;
-  }
-  .full-width {
-    width: 100%;
-  }
-  .menu-button {
-    transition: 300ms ease-in-out;
-    transform: rotate(0deg);
-  }
-  .menu-button.rotated {
-    transform: rotate(180deg);
-  }
-  .submenu {
-    overflow-y: hidden;
-    transition: transform 300ms ease;
-    transform: scaleY(0);
-    transform-origin: top;
-    padding-left: 30px;
-  }
-  .submenu.expanded {
-    transform: scaleY(1);
-  }
+  height: 100%;
+  overflow: hidden !important;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+.example-sidenav-content {
+  display: flex;
+  overflow: hidden !important;
+  align-items: center;
+  justify-content: center;
+}
+.example-sidenav {
+  user-select: none;
+}
+.full-width {
+  width: 100%;
+}
+.menu-button {
+  transition: 300ms ease-in-out;
+  transform: rotate(0deg);
+}
+.menu-button.rotated {
+  transform: rotate(180deg);
+}
+.submenu {
+  overflow-y: hidden;
+  transition: transform 300ms ease;
+  transform: scaleY(0);
+  transform-origin: top;
+  margin-left: 20px;
+}
 
-  .left-sidenav {
-    overflow: hidden !important;
-  }
+.subsubmenu {
+  padding-left: 16px;
+  border-left: 1.5px solid #E8E8E8;
+  margin-left: 20px;
+}
+
+.submenu.expanded {
+  transform: scaleY(1);
+}
+
+.left-sidenav {
+  overflow: hidden !important;
+}
+
+mat-sidenav-container {
+  height: 100%;
+  width: 100%;
+}
+
+/* icons from nav - styles */
+
+.icon-margin {
+  margin-right: 12px;
+  color: #d3d3d3;
+  vertical-align: middle;
+}
+
+.icon-meniu {
+  color: #818589;
+}
+
+.expand-icon {
+  vertical-align: middle; 
+  color: #818589;
+}
+
+.text-align {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+}
+
+.border-text {
+  border-bottom: 5px;
+}
+
+/* nav bar */
+
+.example-toolbar {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+button[mat-icon-button] {
+  margin-right: auto;
+}
+
+.toolbar-title-container {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.example-app-name {
+  margin: 0;
+}
+
+/* content wrapper */
+.main-content-wrapper {
+  width: 80%;
+  margin: 0 auto;
+  transition: margin-left 0.3s;
+}
