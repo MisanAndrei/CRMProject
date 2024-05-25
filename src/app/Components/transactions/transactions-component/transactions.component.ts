@@ -106,7 +106,7 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
   }
 
   addTransaction() {
-    // Implement navigation logic to add transaction page
+    this.router.navigateByUrl('/TranzactieNoua');
   }
 
   onPaginatorPageChange(event: PageEvent) {

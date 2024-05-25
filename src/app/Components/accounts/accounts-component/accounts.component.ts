@@ -106,7 +106,7 @@ export class AccountsComponent implements OnInit, AfterViewInit {
   }
 
   addAccount() {
-    // Implement navigation logic to add account page
+    this.router.navigateByUrl('/ContNou');
   }
 
   onPaginatorPageChange(event: PageEvent) {

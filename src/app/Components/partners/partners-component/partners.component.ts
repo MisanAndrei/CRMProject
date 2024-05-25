@@ -8,8 +8,8 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { SelectionModel } from '@angular/cdk/collections';// Adjust this import based on your application structure
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { Partner } from '../../Utilities/Models';
-import { DeleteDialogComponent } from '../dialogs/delete-dialog-component/delete-dialog.component';
+import { Partner } from '../../../Utilities/Models';
+import { DeleteDialogComponent } from '../../dialogs/delete-dialog-component/delete-dialog.component';
 
 @Component({
   selector: 'app-partners',
@@ -109,6 +109,6 @@ export class PartnersComponent implements OnInit, AfterViewInit {
   
   // For example, adding a new partner
   addPartner() {
-    this.router.navigate(['/AddPartner']);
+    this.router.navigate(['/PartenerNou']);
   }
 }

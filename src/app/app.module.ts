@@ -25,7 +25,7 @@ import { AppComponent } from './app.component';
 import { ElementsComponent } from './Components/elements/elemenents-component/elements.component';
 import { DashboardComponent } from './Components/dashboard-component/dashboard.component';
 import { UpsertElementComponent } from './Components/elements/element-upsert-component/upsert-element.component';
-import { PartnersComponent } from './Components/partners-component/partners.component';
+import { PartnersComponent } from './Components/partners/partners-component/partners.component';
 import { BillsComponent } from './Components/bills/bills-component/bills.component';
 import { AccountsComponent } from './Components/accounts/accounts-component/accounts.component';
 import { TransactionsComponent } from './Components/transactions/transactions-component/transactions.component';
@@ -38,6 +38,9 @@ import { ImplicitComponent } from './Components/implicit/implicit-component/impl
 import { BillPreferencesComponent } from './Components/bills/bill-preferences-component/bill-preferences.component';
 import { TransferUpsertComponent } from './Components/transfers/transfer-upsert-component/transfer-upsert.component';
 import { TransfersComponent } from './Components/transfers/transfers-component/transfers.component';
+import { AccountUpsertComponent } from './Components/accounts/account-upsert-component/account-upsert.component';
+import { PartnerUpsertComponent } from './Components/partners/partner-upsert-component/partner-upsert.component';
+import { TransactionUpsertComponent } from './Components/transactions/transaction-upsert-component/transaction-upsert.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +60,10 @@ import { TransfersComponent } from './Components/transfers/transfers-component/t
     ImplicitComponent,
     BillPreferencesComponent,
     TransferUpsertComponent,
-    TransfersComponent
+    TransfersComponent,
+    AccountUpsertComponent,
+    PartnerUpsertComponent,
+    TransactionUpsertComponent
   ],
   imports: [
     BrowserModule,
