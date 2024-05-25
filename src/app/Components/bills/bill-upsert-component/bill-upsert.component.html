@@ -8,6 +8,26 @@
   </div>
   
   <div>
+    <label for="dateOfBill">Date of Bill</label>
+    <input id="dateOfBill" formControlName="dateOfBill" type="date">
+  </div>
+
+  <div>
+    <label for="dueDate">Due Date</label>
+    <input id="dueDate" formControlName="dueDate" type="date">
+  </div>
+
+  <div>
+    <label for="numberOfBill">Number of Bill</label>
+    <input id="numberOfBill" formControlName="numberOfBill" type="text">
+  </div>
+
+  <div>
+    <label for="orderNumber">Order Number</label>
+    <input id="orderNumber" formControlName="orderNumber" type="text">
+  </div>
+  
+  <div>
     <label for="customer">Customer</label>
     <select id="customer" formControlName="customer" (change)="onCustomerChange($event)">
       <option value="">Select Customer</option>
@@ -40,21 +60,33 @@
   <div>
     <label for="items">Items</label>
     <div formArrayName="items">
-      <div *ngFor="let item of items.controls; let i = index">
-        <div [formGroupName]="i">
+      <div *ngFor="let item of items.controls; let i = index" class="item-row">
+        <div [formGroupName]="i" class="item-fields">
+          <select formControlName="selectedItem" (change)="onItemChange(i)">
+            <option value="">Select Item</option>
+            <option *ngFor="let predefinedItem of predefinedItems" [value]="predefinedItem.id">
+              {{ predefinedItem.name }}
+            </option>
+          </select>
           <input formControlName="description" placeholder="Description" type="text">
-          <input formControlName="quantity" placeholder="Quantity" type="number">
-          <input formControlName="price" placeholder="Price" type="number">
-          <select formControlName="tax">
+          <input formControlName="quantity" placeholder="Quantity" type="number" (change)="onQuantityOrPriceChange(i)">
+          <input formControlName="price" placeholder="Price" type="number" (change)="onQuantityOrPriceChange(i)">
+          <select formControlName="tax" (change)="onQuantityOrPriceChange(i)">
             <option *ngFor="let tax of taxOptions" [value]="tax.id">
               {{ tax.description }}
             </option>
           </select>
+          <input formControlName="total" placeholder="Total" type="text" [disabled]="true">
           <button type="button" (click)="removeItem(i)">Remove</button>
         </div>
       </div>
     </div>
     <button type="button" (click)="addItem()">Add Item</button>
+  </div>
+
+  <div class="overall-total">
+    <label for="overallTotal">Overall Total:</label>
+    <input id="overallTotal" [value]="overallTotal.toFixed(2)" disabled>
   </div>
   
   <button type="submit">{{ isPurchase() ? 'Create Purchase' : 'Create Sale' }}</button>

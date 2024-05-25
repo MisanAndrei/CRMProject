@@ -21,3 +21,37 @@ input, select {
 button {
   margin-top: 10px;
 }
+
+.item-row {
+  display: flex;
+  align-items: center;
+}
+
+.item-fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 100%;
+}
+
+.item-fields input,
+.item-fields select {
+  flex: 1;
+  min-width: 120px;
+}
+
+.item-fields button {
+  flex: none;
+  margin-left: 10px;
+}
+
+.overall-total {
+  margin-top: 20px;
+  font-weight: bold;
+  text-align: right;
+}
+
+.overall-total input {
+  width: auto;
+  display: inline-block;
+}
