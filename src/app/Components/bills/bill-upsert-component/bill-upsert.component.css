@@ -1,66 +1,57 @@
-.container {
-    display: flex;
-    flex-direction: column;
-    width: 90%;
-    margin: 0 auto; /* Centers the container horizontally */
-    overflow: hidden !important;
-  }
-  
-  .section {
-    margin-bottom: 20px; /* Adds spacing between sections */
-    
-    padding: 10px;
-  }
+form {
+  max-width: 600px;
+  margin: auto;
+}
 
-  .row {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .column {
-    flex: 1;
-    margin-right: 20px;
-  }
-  
-  .column:last-child {
-    margin-right: 0;
-  }
-  
-  /* Adjust the width of the input fields */
-  .mat-form-field {
-    width: 100%;
-  }
-  
-  /* Style the image */
-  .column img {
-    max-width: 100%;
-    height: auto;
-  }
-  
-  /* Style the company info */
-  .column h3 {
-    margin-top: 0;
-  }
-  
-  .column p {
-    margin-top: 5px;
-  }
+div {
+  margin-bottom: 15px;
+}
 
-  .add-button {
-    width: 100%;
-    background-color: transparent;
-    border: none;
-    outline: none;
-    padding: 10px;
-    margin-top: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .add-button:hover {
-    background-color: lightgray;
-  }
+label {
+  display: block;
+  margin-bottom: 5px;
+}
 
-  .full-width {
-    width: 100%;
-  }
+input, select {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+button {
+  margin-top: 10px;
+}
+
+.item-row {
+  display: flex;
+  align-items: center;
+}
+
+.item-fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 100%;
+}
+
+.item-fields input,
+.item-fields select {
+  flex: 1;
+  min-width: 120px;
+}
+
+.item-fields button {
+  flex: none;
+  margin-left: 10px;
+}
+
+.overall-total {
+  margin-top: 20px;
+  font-weight: bold;
+  text-align: right;
+}
+
+.overall-total input {
+  width: auto;
+  display: inline-block;
+}

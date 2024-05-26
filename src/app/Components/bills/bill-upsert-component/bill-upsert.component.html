@@ -1,77 +1,136 @@
-<div class="container">
-    <div class="section">
-        <h2>Companie</h2>
-        <div class="row">
-          <!-- Companie - First Column -->
-          <div class="column">
-            <mat-form-field>
-              <mat-label>Titlu</mat-label>
-              <input matInput placeholder="Titlu" [(ngModel)]="companyTitle">
-            </mat-form-field>
-            <mat-form-field>
-              <mat-label>Subantet</mat-label>
-              <input matInput placeholder="Subantet" [(ngModel)]="companySubtitle">
-            </mat-form-field>
-          </div>
-          <!-- Companie - Second Column -->
-          <div class="column">
-            <img src="path/to/company-image.jpg" alt="Company Image">
-          </div>
-          <!-- Companie - Third Column -->
-          <div class="column">
-            <h3>Company Info</h3>
-            <p>{{ companyInfo.address }}</p>
-            <p>{{ companyInfo.phone }}</p>
-            <p>{{ companyInfo.email }}</p>
-            <p>{{ companyInfo.website }}</p>
-          </div>
-        </div>
-      </div>
-      <div class="section">
-        <h2>Facturare</h2>
-        <!-- Subsection 1 -->
-        <div class="subsection">
-          <div class="row">
-            <!-- First Column -->
-            <div class="column">
-              <h3>Partner Details</h3>
-              <p>Paragraph 1</p>
-              <p>Paragraph 2</p>
-              <p>Paragraph 3</p>
-              <p>Paragraph 4</p>
-              <p>Paragraph 5</p>
-            </div>
-            <!-- Second Column -->
-            <div class="column">
-              <mat-form-field>
-                <mat-label>Data Facturii</mat-label>
-                <input matInput placeholder="Data Facturii" [(ngModel)]="facturaData">
-              </mat-form-field>
-              <mat-form-field>
-                <mat-label>Data Scadenta</mat-label>
-                <input matInput placeholder="Data Scadenta" [(ngModel)]="scadentaData">
-              </mat-form-field>
-            </div>
-            <!-- Third Column -->
-            <div class="column">
-              <mat-form-field>
-                <mat-label>Numar Factura</mat-label>
-                <input matInput placeholder="Numar Factura" [(ngModel)]="numarFactura">
-              </mat-form-field>
-              <mat-form-field>
-                <mat-label>Numar Comanda</mat-label>
-                <input matInput placeholder="Numar Comanda" [(ngModel)]="numarComanda">
-              </mat-form-field>
-            </div>
-          </div>
-        </div>
-        <mat-form-field class="full-width">
-            <textarea matInput placeholder="Nota" rows="5" ></textarea>
-          </mat-form-field>
-        
-      </div>
-    <div class="section">
-      <h2>Avansat</h2>
-      <!-- Add content for Avansat section here -->
-    </div>
+<form [formGroup]="transactionForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="transactionType">Transaction Type</label>
+    <select id="transactionType" formControlName="transactionType">
+      <option value="purchase">Purchase</option>
+      <option value="sale">Sale</option>
+    </select>
   </div>
+
+  <div>
+    <label for="dateOfBill">Date of Bill</label>
+    <input id="dateOfBill" formControlName="dateOfBill" type="date" />
+  </div>
+
+  <div>
+    <label for="dueDate">Due Date</label>
+    <input id="dueDate" formControlName="dueDate" type="date" />
+  </div>
+
+  <div>
+    <label for="numberOfBill">Number of Bill</label>
+    <input id="numberOfBill" formControlName="numberOfBill" type="text" />
+  </div>
+
+  <div>
+    <label for="orderNumber">Order Number</label>
+    <input id="orderNumber" formControlName="orderNumber" type="text" />
+  </div>
+
+  <div>
+    <label for="customer">Customer</label>
+    <select
+      id="customer"
+      formControlName="customer"
+      (change)="onCustomerChange($event)"
+    >
+      <option value="">Select Customer</option>
+      <option *ngFor="let customer of customers" [value]="customer.id">
+        {{ customer.name }}
+      </option>
+    </select>
+  </div>
+
+  <div>
+    <label for="customerName">Customer Name</label>
+    <input
+      id="customerName"
+      formControlName="customerName"
+      type="text"
+      [disabled]="!transactionForm.get('customerName')?.enabled"
+    />
+  </div>
+
+  <div>
+    <label for="customerCui">Customer CUI</label>
+    <input
+      id="customerCui"
+      formControlName="customerCui"
+      type="text"
+      [disabled]="!transactionForm.get('customerCui')?.enabled"
+    />
+  </div>
+
+  <div>
+    <label for="customerCity">Customer City</label>
+    <input
+      id="customerCity"
+      formControlName="customerCity"
+      type="text"
+      [disabled]="!transactionForm.get('customerCity')?.enabled"
+    />
+  </div>
+
+  <div>
+    <label for="date">Date</label>
+    <input id="date" formControlName="date" type="date" />
+  </div>
+
+  <div>
+    <label for="items">Items</label>
+    <div formArrayName="items">
+      <div *ngFor="let item of items.controls; let i = index" class="item-row">
+        <div [formGroupName]="i" class="item-fields">
+          <select formControlName="selectedItem" (change)="onItemChange(i)">
+            <option value="">Select Item</option>
+            <option
+              *ngFor="let predefinedItem of predefinedItems"
+              [value]="predefinedItem.id"
+            >
+              {{ predefinedItem.name }}
+            </option>
+          </select>
+          <input
+            formControlName="description"
+            placeholder="Description"
+            type="text"
+          />
+          <input
+            formControlName="quantity"
+            placeholder="Quantity"
+            type="number"
+            (change)="onQuantityOrPriceChange(i)"
+          />
+          <input
+            formControlName="price"
+            placeholder="Price"
+            type="number"
+            (change)="onQuantityOrPriceChange(i)"
+          />
+          <select formControlName="tax" (change)="onQuantityOrPriceChange(i)">
+            <option *ngFor="let tax of taxOptions" [value]="tax.id">
+              {{ tax.description }}
+            </option>
+          </select>
+          <input
+            formControlName="total"
+            placeholder="Total"
+            type="text"
+            [disabled]="true"
+          />
+          <button type="button" (click)="removeItem(i)">Remove</button>
+        </div>
+      </div>
+    </div>
+    <button type="button" (click)="addItem()">Add Item</button>
+  </div>
+
+  <div class="overall-total">
+    <label for="overallTotal">Overall Total:</label>
+    <input id="overallTotal" [value]="overallTotal.toFixed(2)" disabled />
+  </div>
+
+  <button type="submit">
+    {{ isPurchase() ? "Create Purchase" : "Create Sale" }}
+  </button>
+</form>

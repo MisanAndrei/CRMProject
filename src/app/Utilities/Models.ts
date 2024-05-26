@@ -69,3 +69,11 @@ export interface Element {
     type?: string;
     percent?: number;
   }
+
+  export interface Transfer {
+    id: number;
+    payingAccount: string;
+    receivingAccount: string;
+    sum: number;
+    date: string;
+  }

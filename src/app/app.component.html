@@ -68,8 +68,8 @@
           *ngIf="(isShowing || isExpanded) && showSubSubMenuBank"
         >
           <a mat-list-item routerLink="/Conturi">Conturi</a>
-          <a mat-list-item routerLink="/Tranzactii">Tranzactii</a>
-          <mat-list-item>Transfer nou</mat-list-item>
+          <a mat-list-item routerLink="/Tranzactii">Tranzacții</a>
+          <a mat-list-item routerLink="/Transferuri">Transferuri</a>
         </div>
         <mat-list-item
           (click)="showSubSubMenuSettings = !showSubSubMenuSettings"
@@ -77,7 +77,7 @@
         >
           <span class="full-width" *ngIf="isExpanded || isShowing">
             <mat-icon class="icon-margin">settings</mat-icon>
-            <span class="text-align">Setari</span></span
+            <span class="text-align">Setări</span></span
           >
           <mat-icon
             class="menu-button expand-icon"
@@ -91,16 +91,12 @@
           [ngClass]="{ expanded: showSubSubMenuSettings }"
           *ngIf="(isShowing || isExpanded) && showSubSubMenuSettings"
         >
-          <a mat-list-item class="submenu-item" routerLink="/Companie"
-            >Companie</a
-          >
-          <mat-list-item class="submenu-item">Factura</mat-list-item>
-          <a mat-list-item class="submenu-item">Implicit</a>
-          <a class="submenu-item" routerLink="/Categorii" mat-list-item
-            >Categorii</a
-          >
-          <a class="submenu-item" routerLink="/Valute" mat-list-item>Valute</a>
-          <a class="submenu-item" routerLink="/Taxe" mat-list-item>Taxe</a>
+          <a mat-list-item routerLink="/Companie" class="submenu-item">Companie</a>
+          <a routerLink="/Preferinte" mat-list-item class="submenu-item">Factura</a>
+          <a routerLink="/Implicit" mat-list-item class="submenu-item">Implicit</a>
+          <a routerLink="/Categorii" mat-list-item class="submenu-item">Categorii</a>
+          <a routerLink="/Valute" mat-list-item class="submenu-item" >Valute</a>
+          <a routerLink="/Taxe" mat-list-item class="submenu-item">Taxe</a>
         </div>
       </div>
     </mat-nav-list>

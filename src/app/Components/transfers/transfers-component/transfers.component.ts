@@ -4,34 +4,40 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { Account } from '../../../Utilities/Models';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { SelectionModel } from '@angular/cdk/collections';
 import { DeleteDialogComponent } from '../../dialogs/delete-dialog-component/delete-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 
+interface Transfer {
+  id: number;
+  payingAccount: string;
+  receivingAccount: string;
+  sum: number;
+  date: string;
+}
+
 @Component({
-  selector: 'app-accounts',
-  templateUrl: './accounts.component.html',
-  styleUrls: ['./accounts.component.css']
+  selector: 'app-transfers',
+  templateUrl: './transfers.component.html',
+  styleUrls: ['./transfers.component.css']
 })
-export class AccountsComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['select', 'name', 'bankName', 'phone', 'sold'];
-  dataSource: MatTableDataSource<Account>;
+export class TransfersComponent implements OnInit, AfterViewInit {
+  displayedColumns: string[] = ['select', 'payingAccount', 'receivingAccount', 'sum', 'date'];
+  dataSource: MatTableDataSource<Transfer>;
   searchControl: FormControl = new FormControl('');
   initialSelection = [];
   allowMultiSelect = true;
-  selection = new SelectionModel<Account>(this.allowMultiSelect, this.initialSelection);
-  
+  selection = new SelectionModel<Transfer>(this.allowMultiSelect, this.initialSelection);
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private _liveAnnouncer: LiveAnnouncer, private dialog: MatDialog, private router: Router) {
-    this.dataSource = new MatTableDataSource<Account>();
-
+    this.dataSource = new MatTableDataSource<Transfer>();
   }
+
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
@@ -39,14 +45,14 @@ export class AccountsComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     // Example data
-    const ACCOUNTS_DATA: Account[] = [
-      { id: 1, name: 'Account 1', bankName: 'Bank 1', phone: '123456789', sold: '1000 RON' },
-      { id: 2, name: 'Account 2', bankName: 'Bank 2', phone: '987654321', sold: '2000 RON' },
-      // Add more data as needed
+    const TRANSFER_DATA: Transfer[] = [
+      { id: 1, payingAccount: 'Account A', receivingAccount: 'Account B', sum: 100.50, date: '2023-05-20' },
+      { id: 2, payingAccount: 'Account C', receivingAccount: 'Account D', sum: 200.75, date: '2023-05-21' },
+      { id: 3, payingAccount: 'Account E', receivingAccount: 'Account F', sum: 300.00, date: '2023-05-22' },
+      // Add more transfer data as needed
     ];
 
-    this.dataSource.data = ACCOUNTS_DATA;
-
+    this.dataSource.data = TRANSFER_DATA;
 
     this.searchControl.valueChanges.pipe(
       debounceTime(300),
@@ -62,10 +68,6 @@ export class AccountsComponent implements OnInit, AfterViewInit {
   }
 
   announceSortChange(sortState: Sort) {
-    // This example uses English messages. If your application supports
-    // multiple language, you would internationalize these strings.
-    // Furthermore, you can customize the message to add additional
-    // details about the values being sorted.
     if (sortState.direction) {
       this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
     } else {
@@ -76,49 +78,42 @@ export class AccountsComponent implements OnInit, AfterViewInit {
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.data.length;
-    return numSelected == numRows;
+    return numSelected === numRows;
   }
-  
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
+
   toggleAllRows() {
     this.isAllSelected() ?
-        this.selection.clear() :
-        this.dataSource.data.forEach(row => this.selection.select(row));
+      this.selection.clear() :
+      this.dataSource.data.forEach(row => this.selection.select(row));
   }
-  
+
   isSingleSelection(): boolean {
     return this.selection.selected.length === 1;
   }
 
   openDeleteDialog(): void {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
-      data: { title: 'Confirm deletion', message: 'Are you sure you want to delete these accounts?' }
+      data: { title: 'Confirm deletion', message: 'Are you sure you want to delete these transfers?' }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        const selectedIds = this.selection.selected.map(account => account.id);
-        
-        // Call your function to delete accounts using selectedIds
+        const selectedIds = this.selection.selected.map(transfer => transfer.id);
+        // Call your function to delete transfers using selectedIds
       }
       this.selection.clear();
     });
   }
 
-  addAccount() {
-    this.router.navigateByUrl('/ContNou');
+  addTransfer() {
+    this.router.navigate(['/TransferNou']);
   }
 
   onPaginatorPageChange(event: PageEvent) {
     const pageIndex = event.pageIndex;
     const pageSize = event.pageSize;
-    const length = this.dataSource.data.length; // Total number of items
+    const length = this.dataSource.data.length;
 
-    // Now you have the pagination details, you can use them as needed
     console.log(`Page index: ${pageIndex}, Page size: ${pageSize}, Total items: ${length}`);
-
-    // Here you can call your function to fetch data from the backend with these pagination details
-    // For example:
-    // this.fetchDataFromBackend(pageIndex, pageSize);
   }
 }
