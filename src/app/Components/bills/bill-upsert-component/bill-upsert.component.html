@@ -6,30 +6,34 @@
       <option value="sale">Sale</option>
     </select>
   </div>
-  
+
   <div>
     <label for="dateOfBill">Date of Bill</label>
-    <input id="dateOfBill" formControlName="dateOfBill" type="date">
+    <input id="dateOfBill" formControlName="dateOfBill" type="date" />
   </div>
 
   <div>
     <label for="dueDate">Due Date</label>
-    <input id="dueDate" formControlName="dueDate" type="date">
+    <input id="dueDate" formControlName="dueDate" type="date" />
   </div>
 
   <div>
     <label for="numberOfBill">Number of Bill</label>
-    <input id="numberOfBill" formControlName="numberOfBill" type="text">
+    <input id="numberOfBill" formControlName="numberOfBill" type="text" />
   </div>
 
   <div>
     <label for="orderNumber">Order Number</label>
-    <input id="orderNumber" formControlName="orderNumber" type="text">
+    <input id="orderNumber" formControlName="orderNumber" type="text" />
   </div>
-  
+
   <div>
     <label for="customer">Customer</label>
-    <select id="customer" formControlName="customer" (change)="onCustomerChange($event)">
+    <select
+      id="customer"
+      formControlName="customer"
+      (change)="onCustomerChange($event)"
+    >
       <option value="">Select Customer</option>
       <option *ngFor="let customer of customers" [value]="customer.id">
         {{ customer.name }}
@@ -39,24 +43,39 @@
 
   <div>
     <label for="customerName">Customer Name</label>
-    <input id="customerName" formControlName="customerName" type="text" [disabled]="!transactionForm.get('customerName')?.enabled">
+    <input
+      id="customerName"
+      formControlName="customerName"
+      type="text"
+      [disabled]="!transactionForm.get('customerName')?.enabled"
+    />
   </div>
 
   <div>
     <label for="customerCui">Customer CUI</label>
-    <input id="customerCui" formControlName="customerCui" type="text" [disabled]="!transactionForm.get('customerCui')?.enabled">
+    <input
+      id="customerCui"
+      formControlName="customerCui"
+      type="text"
+      [disabled]="!transactionForm.get('customerCui')?.enabled"
+    />
   </div>
 
   <div>
     <label for="customerCity">Customer City</label>
-    <input id="customerCity" formControlName="customerCity" type="text" [disabled]="!transactionForm.get('customerCity')?.enabled">
+    <input
+      id="customerCity"
+      formControlName="customerCity"
+      type="text"
+      [disabled]="!transactionForm.get('customerCity')?.enabled"
+    />
   </div>
-  
+
   <div>
     <label for="date">Date</label>
-    <input id="date" formControlName="date" type="date">
+    <input id="date" formControlName="date" type="date" />
   </div>
-  
+
   <div>
     <label for="items">Items</label>
     <div formArrayName="items">
@@ -64,19 +83,41 @@
         <div [formGroupName]="i" class="item-fields">
           <select formControlName="selectedItem" (change)="onItemChange(i)">
             <option value="">Select Item</option>
-            <option *ngFor="let predefinedItem of predefinedItems" [value]="predefinedItem.id">
+            <option
+              *ngFor="let predefinedItem of predefinedItems"
+              [value]="predefinedItem.id"
+            >
               {{ predefinedItem.name }}
             </option>
           </select>
-          <input formControlName="description" placeholder="Description" type="text">
-          <input formControlName="quantity" placeholder="Quantity" type="number" (change)="onQuantityOrPriceChange(i)">
-          <input formControlName="price" placeholder="Price" type="number" (change)="onQuantityOrPriceChange(i)">
+          <input
+            formControlName="description"
+            placeholder="Description"
+            type="text"
+          />
+          <input
+            formControlName="quantity"
+            placeholder="Quantity"
+            type="number"
+            (change)="onQuantityOrPriceChange(i)"
+          />
+          <input
+            formControlName="price"
+            placeholder="Price"
+            type="number"
+            (change)="onQuantityOrPriceChange(i)"
+          />
           <select formControlName="tax" (change)="onQuantityOrPriceChange(i)">
             <option *ngFor="let tax of taxOptions" [value]="tax.id">
               {{ tax.description }}
             </option>
           </select>
-          <input formControlName="total" placeholder="Total" type="text" [disabled]="true">
+          <input
+            formControlName="total"
+            placeholder="Total"
+            type="text"
+            [disabled]="true"
+          />
           <button type="button" (click)="removeItem(i)">Remove</button>
         </div>
       </div>
@@ -86,8 +127,10 @@
 
   <div class="overall-total">
     <label for="overallTotal">Overall Total:</label>
-    <input id="overallTotal" [value]="overallTotal.toFixed(2)" disabled>
+    <input id="overallTotal" [value]="overallTotal.toFixed(2)" disabled />
   </div>
-  
-  <button type="submit">{{ isPurchase() ? 'Create Purchase' : 'Create Sale' }}</button>
+
+  <button type="submit">
+    {{ isPurchase() ? "Create Purchase" : "Create Sale" }}
+  </button>
 </form>

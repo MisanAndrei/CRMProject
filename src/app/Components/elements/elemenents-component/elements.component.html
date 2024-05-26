@@ -1,9 +1,9 @@
 <div class="header">
   <h1>Elemente</h1>
   <div class="input-icons">
-    <mat-form-field>
-      <input matInput [formControl]="searchControl" placeholder="Search">
-    </mat-form-field>
+    <div class="input-container-global large">
+      <input matInput [formControl]="searchControl" placeholder="Search" class="legacy-input">
+    </div>
     <div class="icon-container">
       <button mat-icon-button aria-label="Add" (click)="addElement()">
         <mat-icon>add</mat-icon>

@@ -1,4 +1,71 @@
 /* You can add global styles to this file, and also import other style files */
+@import "@fortawesome/fontawesome-free/css/all.css";
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: "Quicksand", sans-serif;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.table-container {
+  display: flex;
+  flex-direction: column;
+  overflow-x: auto;
+}
+
+/* input style */
+
+.input-container-global {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.legacy-input {
+  width: 100%;
+  padding: 8px 0;
+  border: none;
+  border-bottom: 1px solid #d3d3d3;
+  background: none;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.legacy-input:focus {
+  outline: none;
+  border-bottom: 1.5px solid #999;
+}
+
+.legacy-input::placeholder {
+  color: #999;
+}
+
+.input-container-global::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 100%;
+  background: currentColor;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.legacy-input:focus ~ .input-container-global::after {
+  transform: scaleX(1);
+}
+
+/* Custom widths for inputs */
+.input-container-global.small {
+  width: 30%; 
+}
+
+.input-container-global.medium {
+  width: 60%; 
+}
+
+.input-container-global.large {
+  width: 80%; 
+}

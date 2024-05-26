@@ -14,4 +14,9 @@
   .header {
     margin-left: 5%;
     margin-right: 5%;
+    margin-top: 20px;
+  }
+
+  ::ng-deep .mat-form-field-underline {
+    display: none;
   }
