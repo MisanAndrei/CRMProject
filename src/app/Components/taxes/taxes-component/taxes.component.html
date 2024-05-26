@@ -1,7 +1,7 @@
 <div class="header">
     <h1>Taxe</h1>
     <div class="input-icons">
-      <div class="input-container large">
+      <div class="input-container-global large">
         <input matInput [formControl]="searchControl" placeholder="Caută" class="legacy-input">
       </div>
       <div class="icon-container">
@@ -18,7 +18,7 @@
     </div>
   </div>
   
-  <div class="mat-elevation-z8 table-container">
+  <div class="table-container">
     <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
   
       <ng-container matColumnDef="select">

@@ -1,40 +1,40 @@
 <form [formGroup]="transactionForm" (ngSubmit)="onSubmit()">
   <div>
-    <label for="transactionType">Transaction Type</label>
+    <label for="transactionType">Tipul Tranzacției</label>
     <select id="transactionType" formControlName="transactionType">
-      <option value="purchase">Purchase</option>
-      <option value="sale">Sale</option>
+      <option value="purchase">Cumpărare</option>
+      <option value="sale">Vânzare</option>
     </select>
   </div>
 
   <div>
-    <label for="dateOfBill">Date of Bill</label>
+    <label for="dateOfBill">Data facturii</label>
     <input id="dateOfBill" formControlName="dateOfBill" type="date" />
   </div>
 
   <div>
-    <label for="dueDate">Due Date</label>
+    <label for="dueDate">Data Scadentă</label>
     <input id="dueDate" formControlName="dueDate" type="date" />
   </div>
 
   <div>
-    <label for="numberOfBill">Number of Bill</label>
+    <label for="numberOfBill">Numărul facturii</label>
     <input id="numberOfBill" formControlName="numberOfBill" type="text" />
   </div>
 
   <div>
-    <label for="orderNumber">Order Number</label>
+    <label for="orderNumber">Număr de comandă</label>
     <input id="orderNumber" formControlName="orderNumber" type="text" />
   </div>
 
   <div>
-    <label for="customer">Customer</label>
+    <label for="customer">Client</label>
     <select
       id="customer"
       formControlName="customer"
       (change)="onCustomerChange($event)"
     >
-      <option value="">Select Customer</option>
+      <option value="">Selectează client</option>
       <option *ngFor="let customer of customers" [value]="customer.id">
         {{ customer.name }}
       </option>
@@ -42,7 +42,7 @@
   </div>
 
   <div>
-    <label for="customerName">Customer Name</label>
+    <label for="customerName">Nume client</label>
     <input
       id="customerName"
       formControlName="customerName"
@@ -52,7 +52,7 @@
   </div>
 
   <div>
-    <label for="customerCui">Customer CUI</label>
+    <label for="customerCui">CUI</label>
     <input
       id="customerCui"
       formControlName="customerCui"
@@ -62,7 +62,7 @@
   </div>
 
   <div>
-    <label for="customerCity">Customer City</label>
+    <label for="customerCity">Oraș</label>
     <input
       id="customerCity"
       formControlName="customerCity"
@@ -72,17 +72,17 @@
   </div>
 
   <div>
-    <label for="date">Date</label>
+    <label for="date">Data</label>
     <input id="date" formControlName="date" type="date" />
   </div>
 
   <div>
-    <label for="items">Items</label>
+    <label for="items">Articole</label>
     <div formArrayName="items">
       <div *ngFor="let item of items.controls; let i = index" class="item-row">
         <div [formGroupName]="i" class="item-fields">
           <select formControlName="selectedItem" (change)="onItemChange(i)">
-            <option value="">Select Item</option>
+            <option value="">Adaugă</option>
             <option
               *ngFor="let predefinedItem of predefinedItems"
               [value]="predefinedItem.id"
@@ -92,7 +92,7 @@
           </select>
           <input
             formControlName="description"
-            placeholder="Description"
+            placeholder="Descriere"
             type="text"
           />
           <input
@@ -118,19 +118,19 @@
             type="text"
             [disabled]="true"
           />
-          <button type="button" (click)="removeItem(i)">Remove</button>
+          <button type="button" (click)="removeItem(i)">Anulează</button>
         </div>
       </div>
     </div>
-    <button type="button" (click)="addItem()">Add Item</button>
+    <button type="button" (click)="addItem()">Adaugă element</button>
   </div>
 
   <div class="overall-total">
-    <label for="overallTotal">Overall Total:</label>
+    <label for="overallTotal">Total:</label>
     <input id="overallTotal" [value]="overallTotal.toFixed(2)" disabled />
   </div>
 
   <button type="submit">
-    {{ isPurchase() ? "Create Purchase" : "Create Sale" }}
+    {{ isPurchase() ? "Creează achiziție" : "Creează vânzare" }}
   </button>
 </form>

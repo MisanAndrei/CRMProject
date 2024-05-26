@@ -1,39 +1,39 @@
 <form [formGroup]="transactionForm" (ngSubmit)="onSubmit()">
     <div>
-      <label for="date">Date</label>
+      <label for="date">Data</label>
       <input id="date" formControlName="date" type="date">
     </div>
   
     <div>
-      <label for="methodOfPayment">Method of Payment</label>
+      <label for="methodOfPayment">Modalitate de plată</label>
       <select id="methodOfPayment" formControlName="methodOfPayment">
         <option *ngFor="let method of paymentMethods" [value]="method.id">{{ method.name }}</option>
       </select>
     </div>
   
     <div>
-      <label for="account">Account</label>
+      <label for="account">Cont</label>
       <select id="account" formControlName="account">
         <option *ngFor="let account of accounts" [value]="account.id">{{ account.name }}</option>
       </select>
     </div>
   
     <div>
-      <label for="sum">Sum</label>
+      <label for="sum">Suma</label>
       <input id="sum" formControlName="sum" type="number" step="0.01">
     </div>
   
     <div>
-      <label for="description">Description</label>
+      <label for="description">Descriere</label>
       <textarea id="description" formControlName="description" rows="3"></textarea>
     </div>
   
     <div>
-      <label for="invoice">Invoice</label>
+      <label for="invoice">Factură</label>
       <select id="invoice" formControlName="invoice">
         <option *ngFor="let invoice of invoices" [value]="invoice.id">{{ invoice.name }}</option>
       </select>
     </div>
   
-    <button type="submit">Save Transaction</button>
+    <button type="submit">Salvează tranzacția</button>
   </form>
