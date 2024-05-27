@@ -1,6 +1,10 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { KeycloakService, KeycloakAngularModule } from 'keycloak-angular';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { initializeKeycloak } from './app-init';
+
 
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
@@ -42,6 +46,9 @@ import { AccountUpsertComponent } from './Components/accounts/account-upsert-com
 import { PartnerUpsertComponent } from './Components/partners/partner-upsert-component/partner-upsert.component';
 import { TransactionUpsertComponent } from './Components/transactions/transaction-upsert-component/transaction-upsert.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { TokenInterceptor } from './interceptors/token.interceptor';
+import { AuthService } from './Services/auth.service';
+import { ApiService } from './Services/ApiService';
 
 @NgModule({
   declarations: [
@@ -88,7 +95,19 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MatSelectModule,
     NgbModule,
   ],
-  providers: [],
+  providers: [{
+    provide: APP_INITIALIZER,
+    useFactory: initializeKeycloak,
+    multi: true,
+    deps: [KeycloakService]
+  },
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptor,
+    multi: true
+  },
+  AuthService,
+  ApiService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
