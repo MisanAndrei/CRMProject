@@ -21,3 +21,11 @@
     height: 20px;
     border-radius: 50%;
   }
+  
+  mat-paginator {
+    background-color: #fafafa;
+  }
+  
+  table {
+    background-color: #fafafa;
+  }

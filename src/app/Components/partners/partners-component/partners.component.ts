@@ -30,7 +30,7 @@ export class PartnersComponent implements OnInit, AfterViewInit {
 
   constructor(private _liveAnnouncer: LiveAnnouncer, private dialog: MatDialog, private router: Router) {
     this.dataSource = new MatTableDataSource<Partner>();
-
+    
   }
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;

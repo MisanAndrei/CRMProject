@@ -69,3 +69,21 @@ body {
 .input-container-global.large {
   width: 80%; 
 }
+
+.mat-sort-header-container {
+  font-family: "Quicksand", sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.header {
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 20px;
+}
+
+.mat-mdc-checkbox.mat-mdc-checkbox-checked .mdc-checkbox__background, .mdc-checkbox__ripple {
+
+  background-color: rgb(78, 57, 212) !important;
+  border-color: rgba(91, 75, 234, 0.775) !important;
+}
