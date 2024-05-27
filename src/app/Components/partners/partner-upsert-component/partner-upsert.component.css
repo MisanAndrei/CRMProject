@@ -1,23 +1,61 @@
+.header {
+  padding-bottom: 6px;
+}
+
 form {
-    max-width: 600px;
-    margin: auto;
-  }
-  
-  div {
-    margin-bottom: 15px;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  input, select, textarea {
-    width: 100%;
-    padding: 8px;
-    box-sizing: border-box;
-  }
-  
-  button {
-    margin-top: 10px;
-  }
+  margin: auto;
+}
+
+div {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+button {
+  margin-top: 10px;
+}
+
+::placeholder {
+  color: lightgray; /* Set the placeholder text color to light grey */
+  opacity: 1; /* Firefox */
+}
+
+::-ms-input-placeholder {
+  /* Edge 12 -18 */
+  color: lightgrey;
+}
+
+.input-container {
+  display: flex;
+  gap: 70px;
+  justify-content: space-between;
+}
+
+.input-container input {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.single-input-wrapper {
+  max-width: 445px; /* Set max-width for single input fields */
+  width: 100%;
+  margin-bottom: 15px;
+}

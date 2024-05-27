@@ -10,7 +10,7 @@
     <!-- Product and Service selection -->
     <div class="selection-container">
       <label class="margin-label bold-label">Tip</label>
-      <div class="button-container">
+      <div class="button-container-m">
         <div class="selection-option" [ngClass]="{'selected': elementType === 1}" (click)="selectElementType(1)">Produs</div>
         <div class="selection-option margin-label" [ngClass]="{'selected': elementType === 2}" (click)="selectElementType(2)">Serviciu</div>
       </div>
@@ -19,13 +19,13 @@
     <!-- Nume and Categorie inputs -->
     <div class="input-row">
       <div class="input-container selection-container">
-        <label class="margin-label bold-label" for="nume">Nume</label>
+        <label class="margin-label" for="nume">Nume</label>
         <mat-form-field class="input-size">
         <input matInput id="nume" [(ngModel)]="nume">
         </mat-form-field>
       </div>
       <div class="input-container selection-container">
-        <label class="margin-label bold-label" for="categorie">Categorie</label>
+        <label class="margin-label" for="categorie">Categorie</label>
         <mat-form-field class="input-size">
         <input matInput id="categorie" [(ngModel)]="categorie">
         </mat-form-field>
@@ -34,7 +34,7 @@
 
     <!-- Descriere input -->
     <div class="selection-container">
-      <label class="margin-label bold-label" for="descriere">Descriere</label>
+      <label class="margin-label" for="descriere">Descriere</label>
       <mat-form-field  class="description"> 
       <textarea class="description" matInput id="descriere" [(ngModel)]="descriere" rows="4" cols="8"></textarea>
     </mat-form-field>
@@ -50,7 +50,7 @@
             <input class="checkbox-upd" type="checkbox" id="acquireInfo" [(ngModel)]="acquireInfo" (change)="toggleAcquireInfo()">
             <label for="acquireInfo">Informații cumpărare</label>
             <div class="input-field">
-              <label class="margin-label bold-label" for="acquireInfoInput">Cost de achiziție: </label>
+              <label class="margin-label" for="acquireInfoInput">Cost de achiziție: </label>
               <mat-form-field class="input-size">
               <input matInput type="text" id="acquireInfoInput" [(ngModel)]="acquireInfoValue" [disabled]="!acquireInfo">
             </mat-form-field>
