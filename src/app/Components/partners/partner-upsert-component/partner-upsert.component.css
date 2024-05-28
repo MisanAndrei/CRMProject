@@ -28,34 +28,11 @@ button {
 }
 
 ::placeholder {
-  color: lightgray; /* Set the placeholder text color to light grey */
+  color: #D8D8D8; /* Set the placeholder text color to light grey */
   opacity: 1; /* Firefox */
 }
 
 ::-ms-input-placeholder {
   /* Edge 12 -18 */
   color: lightgrey;
-}
-
-.input-container {
-  display: flex;
-  gap: 70px;
-  justify-content: space-between;
-}
-
-.input-container input {
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.input-wrapper {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-
-.single-input-wrapper {
-  max-width: 445px; /* Set max-width for single input fields */
-  width: 100%;
-  margin-bottom: 15px;
 }
