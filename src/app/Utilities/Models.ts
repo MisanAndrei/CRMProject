@@ -77,3 +77,8 @@ export interface Element {
     sum: number;
     date: string;
   }
+
+  export interface CashFlow {
+    month: number;
+    
+  }

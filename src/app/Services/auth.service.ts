@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+/*import { Injectable } from '@angular/core';
 import { KeycloakService } from 'keycloak-angular';
 
 @Injectable({
@@ -22,4 +22,4 @@ export class AuthService {
   getToken(): string | undefined {
     return this.keycloakService.getKeycloakInstance().token;
   }
-}
+}*/
