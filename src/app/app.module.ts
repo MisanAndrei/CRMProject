@@ -49,6 +49,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { AuthService } from './Services/auth.service';
 import { ApiService } from './Services/ApiService';
+import { TaxesUpsertComponent } from './Components/taxes/taxes-upsert-component/taxes-upsert/taxes-upsert.component';
+import { CategoriesUpsertComponent } from './Components/categories/categories-upsert-component/categories-upsert/categories-upsert.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +73,9 @@ import { ApiService } from './Services/ApiService';
     TransfersComponent,
     AccountUpsertComponent,
     PartnerUpsertComponent,
-    TransactionUpsertComponent
+    TransactionUpsertComponent,
+    TaxesUpsertComponent,
+    CategoriesUpsertComponent
   ],
   imports: [
     BrowserModule,

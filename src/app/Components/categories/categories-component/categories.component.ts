@@ -105,8 +105,8 @@ export class CategoriesComponent implements OnInit, AfterViewInit {
     });
   }
 
-  addCategory() {
-    // Implement navigation logic to add category page
+  addCategory() { 
+    this.router.navigate(['/CategorieNoua']); 
   }
 
   onPaginatorPageChange(event: PageEvent) {

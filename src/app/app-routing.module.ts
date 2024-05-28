@@ -19,6 +19,9 @@ import { TransfersComponent } from './Components/transfers/transfers-component/t
 import { AccountUpsertComponent } from './Components/accounts/account-upsert-component/account-upsert.component';
 import { PartnerUpsertComponent } from './Components/partners/partner-upsert-component/partner-upsert.component';
 import { TransactionUpsertComponent } from './Components/transactions/transaction-upsert-component/transaction-upsert.component';
+import { TaxesUpsertComponent } from './Components/taxes/taxes-upsert-component/taxes-upsert/taxes-upsert.component';
+import { CategoriesUpsertComponent } from './Components/categories/categories-upsert-component/categories-upsert/categories-upsert.component';
+
 
 const routes: Routes = [{ path: '', redirectTo: '/Tabloudebord', pathMatch: 'full' },
 { path: 'Tabloudebord', component: DashboardComponent},
@@ -39,7 +42,9 @@ const routes: Routes = [{ path: '', redirectTo: '/Tabloudebord', pathMatch: 'ful
 { path: 'Transferuri', component: TransfersComponent},
 { path: 'ContNou', component: AccountUpsertComponent},
 { path: 'PartenerNou', component: PartnerUpsertComponent},
-{ path: 'TranzactieNoua', component: TransactionUpsertComponent}];
+{ path: 'TranzactieNoua', component: TransactionUpsertComponent},
+{ path: 'TaxaNoua', component: TaxesUpsertComponent},
+{ path: 'CategorieNoua', component: CategoriesUpsertComponent}];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
