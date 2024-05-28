@@ -17,7 +17,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./currencies.component.css']
 })
 export class CurrenciesComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['select', 'name', 'code', 'symbol', 'rate'];
+  displayedColumns: string[] = ['name', 'code', 'symbol', 'rate'];
   dataSource: MatTableDataSource<Currency>;
   searchControl: FormControl = new FormControl('');
   initialSelection = [];

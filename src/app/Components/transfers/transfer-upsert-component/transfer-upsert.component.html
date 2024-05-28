@@ -1,44 +1,68 @@
+<div class="header">
+  <h1>Transfer Nou</h1>
+</div>
 <form [formGroup]="transferForm" (ngSubmit)="onSubmit()">
-    <div>
-      <label for="payableAccount">Payable Account</label>
-      <select id="payableAccount" formControlName="payableAccount">
-        <option *ngFor="let account of accounts" [value]="account.id">{{ account.name }}</option>
-      </select>
+  <div>
+    <h4>Preferinţe generale</h4>
+    <div class="separator-line"></div>
+
+    <div class="subsection">
+      <div class="double-input-container">
+        <div class="input-wrapper">
+          <label for="payableAccount">Cont Plătitor</label>
+          <select id="payableAccount" formControlName="payableAccount">
+            <option *ngFor="let account of accounts" [value]="account.id">{{ account.name }}</option>
+          </select>
+        </div>
+      
+        <div class="input-wrapper">
+          <label for="beneficiarAccount">Cont Beneficiar</label>
+          <select id="beneficiarAccount" formControlName="beneficiarAccount">
+            <option *ngFor="let account of accounts" [value]="account.id">{{ account.name }}</option>
+          </select>
+        </div>
+      </div>
+    
+      <div class="double-input-container">
+        <div class="input-wrapper">
+          <label for="dateOfTransaction">Dată Transacție</label>
+          <input id="dateOfTransaction" formControlName="dateOfTransaction" type="date">
+        </div>
+      
+        <div class="input-wrapper">
+          <label for="sum">Sumă</label>
+          <input id="sum" formControlName="sum" type="number" step="0.01">
+        </div>
+      </div>
+    
+      <div class="single-input-wrapper">
+        <label for="description">Descriere</label>
+        <textarea id="description" formControlName="description" rows="3" placeholder="Introduceți Descriere"></textarea>
+      </div>
     </div>
-  
-    <div>
-      <label for="beneficiarAccount">Beneficiar Account</label>
-      <select id="beneficiarAccount" formControlName="beneficiarAccount">
-        <option *ngFor="let account of accounts" [value]="account.id">{{ account.name }}</option>
-      </select>
+
+    <div class="section-delimiter">
+      <h4>Plată</h4>
+      <div class="separator-line"></div>
+
+      <div class="subsection">
+        <div class="double-input-container">
+          <div class="input-wrapper">
+            <label for="paymentMethod">Metodă de Plată</label>
+            <select id="paymentMethod" formControlName="paymentMethod">
+              <option *ngFor="let method of methodsOfPayment" [value]="method.id">{{ method.name }}</option>
+            </select>
+          </div>
+        
+          <div class="input-wrapper">
+            <label for="reference">Referință</label>
+            <input id="reference" formControlName="reference" type="text" placeholder="Referință">
+          </div>
+        </div>
+      </div>
     </div>
-  
-    <div>
-      <label for="dateOfTransaction">Date of Transaction</label>
-      <input id="dateOfTransaction" formControlName="dateOfTransaction" type="date">
+    <div class="button-container">
+      <button class="button content" type="submit">Salvează Transfer</button>
     </div>
-  
-    <div>
-      <label for="sum">Sum</label>
-      <input id="sum" formControlName="sum" type="number" step="0.01">
-    </div>
-  
-    <div>
-      <label for="description">Description</label>
-      <textarea id="description" formControlName="description" rows="3"></textarea>
-    </div>
-  
-    <div>
-      <label for="paymentMethod">Payment Method</label>
-      <select id="paymentMethod" formControlName="paymentMethod">
-        <option *ngFor="let method of methodsOfPayment" [value]="method.id">{{ method.name }}</option>
-      </select>
-    </div>
-  
-    <div>
-      <label for="reference">Reference</label>
-      <input id="reference" formControlName="reference" type="text">
-    </div>
-  
-    <button type="submit">Save Transfer</button>
-  </form>
+  </div>
+</form>

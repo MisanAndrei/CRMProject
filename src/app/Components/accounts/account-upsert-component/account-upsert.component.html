@@ -1,38 +1,62 @@
+<div class="header">
+  <h1>Cont Nou</h1>
+</div>
 <form [formGroup]="accountForm" (ngSubmit)="onSubmit()">
-    <div>
-      <label for="name">Name</label>
-      <input id="name" formControlName="name" type="text">
+  <div>
+    <h4>Preferinţe generale</h4>
+    <div class="separator-line"></div>
+
+    <div class="subsection">
+      <div class="double-input-container">
+        <div class="input-wrapper">
+          <label for="name">Nume</label>
+          <input id="name" formControlName="name" type="text" placeHolder="Introduceți Nume">
+        </div>
+      
+        <div class="input-wrapper">
+          <label for="number">Număr</label>
+          <input id="number" formControlName="number" type="text" placeHolder="Introduceți Număr">
+        </div>
+      </div>
+    
+      <div class="double-input-container">
+        <div class="input-wrapper">
+          <label for="currency">Monedă</label>
+          <input id="currency" formControlName="currency" type="text" [disabled]="true">
+        </div>
+      
+        <div class="input-wrapper">
+          <label for="initialSold">Soldul Inițial</label>
+          <input id="initialSold" formControlName="initialSold" type="number" step="0.01">
+        </div>
+      </div>
     </div>
+  </div>
   
-    <div>
-      <label for="number">Number</label>
-      <input id="number" formControlName="number" type="text">
+  <div class="section-delimiter">
+    <h4>Detalii Bancă</h4>
+    <div class="separator-line"></div>
+
+    <div class="subsection">
+      <div class="single-input-wrapper">
+        <label for="nameOfTheBank">Numele Băncii</label>
+        <input id="nameOfTheBank" formControlName="nameOfTheBank" type="text" placeHolder="Introduceți Numele Băncii">
+      </div>
+    
+      <div class="double-input-container">
+        <div class="input-wrapper">
+          <label for="phoneOfTheBank">Telefonul Băncii</label>
+          <input id="phoneOfTheBank" formControlName="phoneOfTheBank" type="text" placeHolder="Introduceți Telefonul Băncii">
+        </div>
+      
+        <div class="input-wrapper">
+          <label for="addressOfTheBank">Adresa Băncii</label>
+          <input id="addressOfTheBank" formControlName="addressOfTheBank" type="text" placeHolder="Introduceți Adresa Băncii">
+        </div>
+      </div>
     </div>
-  
-    <div>
-      <label for="currency">Currency</label>
-      <input id="currency" formControlName="currency" type="text" [disabled]="true">
-    </div>
-  
-    <div>
-      <label for="initialSold">Initial Sold</label>
-      <input id="initialSold" formControlName="initialSold" type="number" step="0.01">
-    </div>
-  
-    <div>
-      <label for="nameOfTheBank">Name of the Bank</label>
-      <input id="nameOfTheBank" formControlName="nameOfTheBank" type="text">
-    </div>
-  
-    <div>
-      <label for="phoneOfTheBank">Phone of the Bank</label>
-      <input id="phoneOfTheBank" formControlName="phoneOfTheBank" type="text">
-    </div>
-  
-    <div>
-      <label for="addressOfTheBank">Address of the Bank</label>
-      <input id="addressOfTheBank" formControlName="addressOfTheBank" type="text">
-    </div>
-  
-    <button type="submit">Save Account</button>
+  </div>
+  <div class="button-container">
+    <button type="submit" class="button content">Salvează Cont</button>
+  </div>
   </form>
