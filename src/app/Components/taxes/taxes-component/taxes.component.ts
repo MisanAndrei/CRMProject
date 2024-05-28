@@ -98,7 +98,7 @@ export class TaxesComponent implements OnInit, AfterViewInit {
   }
 
   addTax() {
-    this.router.navigate(['/addTax']);
+    this.router.navigate(['/TaxaNoua']);
   }
 
   onPaginatorPageChange(event: PageEvent) {
