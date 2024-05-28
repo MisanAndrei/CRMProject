@@ -99,18 +99,7 @@ import { CategoriesUpsertComponent } from './Components/categories/categories-up
     MatSelectModule,
     NgbModule,
   ],
-  providers: [{
-    provide: APP_INITIALIZER,
-    useFactory: initializeKeycloak,
-    multi: true,
-    deps: [KeycloakService]
-  },
-  {
-    provide: HTTP_INTERCEPTORS,
-    useClass: TokenInterceptor,
-    multi: true
-  },
-  AuthService,
+  providers: [
   ApiService],
   bootstrap: [AppComponent],
 })
