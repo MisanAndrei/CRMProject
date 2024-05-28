@@ -1,136 +1,163 @@
+<div class="header">
+  <h1>Factura noua</h1>
+</div>
 <form [formGroup]="transactionForm" (ngSubmit)="onSubmit()">
   <div>
-    <label for="transactionType">Tipul Tranzacției</label>
-    <select id="transactionType" formControlName="transactionType">
-      <option value="purchase">Cumpărare</option>
-      <option value="sale">Vânzare</option>
-    </select>
-  </div>
+    <h4>Detalii de facturare</h4>
+    <div class="separator-line"></div>
 
-  <div>
-    <label for="dateOfBill">Data facturii</label>
-    <input id="dateOfBill" formControlName="dateOfBill" type="date" />
-  </div>
+    <div class="subsection">
+      <div class="single-input-wrapper">
+        <label for="transactionType">Tipul Tranzacției</label>
+        <select id="transactionType" formControlName="transactionType">
+          <option value="purchase">Cumpărare</option>
+          <option value="sale">Vânzare</option>
+        </select>
+      </div>
 
-  <div>
-    <label for="dueDate">Data Scadentă</label>
-    <input id="dueDate" formControlName="dueDate" type="date" />
-  </div>
+      <div class="double-input-container">
+        <div class="input-wrapper">
+          <label for="dateOfBill">Data Facturii</label>
+          <input id="dateOfBill" formControlName="dateOfBill" type="date" />
+        </div>
 
-  <div>
-    <label for="numberOfBill">Numărul facturii</label>
-    <input id="numberOfBill" formControlName="numberOfBill" type="text" />
-  </div>
+        <div class="input-wrapper">
+          <label for="dueDate">Data Scadentă</label>
+          <input id="dueDate" formControlName="dueDate" type="date" />
+        </div>
+      </div>
 
-  <div>
-    <label for="orderNumber">Număr de comandă</label>
-    <input id="orderNumber" formControlName="orderNumber" type="text" />
-  </div>
+      <div class="double-input-container">
+        <div class="input-wrapper">
+          <label for="numberOfBill">Numărul Facturii</label>
+          <input id="numberOfBill" formControlName="numberOfBill" type="text" placeholder="Introduceți Numărul Facturii"/>
+        </div>
 
-  <div>
-    <label for="customer">Client</label>
-    <select
-      id="customer"
-      formControlName="customer"
-      (change)="onCustomerChange($event)"
-    >
-      <option value="">Selectează client</option>
-      <option *ngFor="let customer of customers" [value]="customer.id">
-        {{ customer.name }}
-      </option>
-    </select>
-  </div>
+        <div class="input-wrapper">
+          <label for="orderNumber">Număr de Comandă</label>
+          <input id="orderNumber" formControlName="orderNumber" type="text" placeholder="Introduceți Număr de Comandă"/>
+        </div>
+      </div>
 
-  <div>
-    <label for="customerName">Nume client</label>
-    <input
-      id="customerName"
-      formControlName="customerName"
-      type="text"
-      [disabled]="!transactionForm.get('customerName')?.enabled"
-    />
-  </div>
-
-  <div>
-    <label for="customerCui">CUI</label>
-    <input
-      id="customerCui"
-      formControlName="customerCui"
-      type="text"
-      [disabled]="!transactionForm.get('customerCui')?.enabled"
-    />
-  </div>
-
-  <div>
-    <label for="customerCity">Oraș</label>
-    <input
-      id="customerCity"
-      formControlName="customerCity"
-      type="text"
-      [disabled]="!transactionForm.get('customerCity')?.enabled"
-    />
-  </div>
-
-  <div>
-    <label for="date">Data</label>
-    <input id="date" formControlName="date" type="date" />
-  </div>
-
-  <div>
-    <label for="items">Articole</label>
-    <div formArrayName="items">
-      <div *ngFor="let item of items.controls; let i = index" class="item-row">
-        <div [formGroupName]="i" class="item-fields">
-          <select formControlName="selectedItem" (change)="onItemChange(i)">
-            <option value="">Adaugă</option>
-            <option
-              *ngFor="let predefinedItem of predefinedItems"
-              [value]="predefinedItem.id"
-            >
-              {{ predefinedItem.name }}
+      <div class="double-input-container">
+        <div class="input-wrapper">
+          <label for="customer">Client</label>
+          <select
+            id="customer"
+            formControlName="customer"
+            (change)="onCustomerChange($event)"
+          >
+            <option value="">Selectează Client</option>
+            <option *ngFor="let customer of customers" [value]="customer.id">
+              {{ customer.name }}
             </option>
           </select>
+        </div>
+
+        <div class="input-wrapper">
+          <label for="customerName">Nume Client</label>
           <input
-            formControlName="description"
-            placeholder="Descriere"
+            id="customerName"
+            formControlName="customerName"
             type="text"
+            [disabled]="!transactionForm.get('customerName')?.enabled"
+            placeholder="Introduceți Nume Client"
           />
+        </div>
+      </div>
+
+      <div class="double-input-container">
+        <div class="input-wrapper">
+          <label for="customerCui">CUI</label>
           <input
-            formControlName="quantity"
-            placeholder="Quantity"
-            type="number"
-            (change)="onQuantityOrPriceChange(i)"
-          />
-          <input
-            formControlName="price"
-            placeholder="Price"
-            type="number"
-            (change)="onQuantityOrPriceChange(i)"
-          />
-          <select formControlName="tax" (change)="onQuantityOrPriceChange(i)">
-            <option *ngFor="let tax of taxOptions" [value]="tax.id">
-              {{ tax.description }}
-            </option>
-          </select>
-          <input
-            formControlName="total"
-            placeholder="Total"
+            id="customerCui"
+            formControlName="customerCui"
             type="text"
-            [disabled]="true"
+            [disabled]="!transactionForm.get('customerCui')?.enabled"
+            placeholder="Introduceți CUI"
           />
-          <button type="button" (click)="removeItem(i)">Anulează</button>
+        </div>
+
+        <div class="input-wrapper">
+          <label for="customerCity">Oraș</label>
+          <input
+            id="customerCity"
+            formControlName="customerCity"
+            type="text"
+            [disabled]="!transactionForm.get('customerCity')?.enabled"
+            placeholder="Introduceți Oraș"
+          />
+        </div>
+
+        <div class="input-wrapper">
+          <label for="date">Data</label>
+          <input id="date" formControlName="date" type="date" />
         </div>
       </div>
     </div>
-    <button type="button" (click)="addItem()">Adaugă element</button>
+  </div>
+  <div class="section-delimiter">
+    <h4>Articole</h4>
+    <div class="separator-line"></div>
+
+    <div class="subsection">
+      <label for="items">Articole</label>
+      <div formArrayName="items">
+        <div *ngFor="let item of items.controls; let i = index" class="item-row">
+          <div [formGroupName]="i" class="item-fields">
+            <select formControlName="selectedItem" (change)="onItemChange(i)">
+              <option value="">Adaugă</option>
+              <option
+                *ngFor="let predefinedItem of predefinedItems"
+                [value]="predefinedItem.id"
+              >
+                {{ predefinedItem.name }}
+              </option>
+            </select>
+            <input
+              formControlName="description"
+              placeholder="Descriere"
+              type="text"
+            />
+            <input
+              formControlName="quantity"
+              placeholder="Quantity"
+              type="number"
+              (change)="onQuantityOrPriceChange(i)"
+            />
+            <input
+              formControlName="price"
+              placeholder="Price"
+              type="number"
+              (change)="onQuantityOrPriceChange(i)"
+            />
+            <select formControlName="tax" (change)="onQuantityOrPriceChange(i)">
+              <option *ngFor="let tax of taxOptions" [value]="tax.id">
+                {{ tax.description }}
+              </option>
+            </select>
+            <input
+              formControlName="total"
+              placeholder="Total"
+              type="text"
+              [disabled]="true"
+            />
+            <button type="button" (click)="removeItem(i)" class="elements-buttons delete-btn">Anulează</button>
+          </div>
+        </div>
+      </div>
+      <button type="button" (click)="addItem()" class="elements-buttons add-btn">Adaugă element</button>
+    </div>
+
+    <div class="overall-total">
+      <label for="overallTotal">Total:</label>
+      <input id="overallTotal" [value]="overallTotal.toFixed(2)" disabled />
+    </div>
   </div>
 
-  <div class="overall-total">
-    <label for="overallTotal">Total:</label>
-    <input id="overallTotal" [value]="overallTotal.toFixed(2)" disabled />
+  <div class="button-container">
+    <button type="submit" class="button content">
+      {{ isPurchase() ? "Creează achiziție" : "Creează vânzare" }}
+    </button>
   </div>
-
-  <button type="submit">
-    {{ isPurchase() ? "Creează achiziție" : "Creează vânzare" }}
-  </button>
 </form>
