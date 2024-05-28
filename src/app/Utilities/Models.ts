@@ -80,5 +80,13 @@ export interface Element {
 
   export interface CashFlow {
     month: number;
-    
+    collectionsSum: number;
+    costsSum: number;
+  }
+
+  export interface CategoryCashFlow {
+    id: number;
+    name: string;
+    collectionsSum: number;
+    costsSum: number;
   }

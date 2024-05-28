@@ -51,6 +51,8 @@ import { ApiService } from './Services/ApiService';
 import { TaxesUpsertComponent } from './Components/taxes/taxes-upsert-component/taxes-upsert/taxes-upsert.component';
 import { CategoriesUpsertComponent } from './Components/categories/categories-upsert-component/categories-upsert/categories-upsert.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
+import { BaseChartDirective } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -75,7 +77,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     PartnerUpsertComponent,
     TransactionUpsertComponent,
     TaxesUpsertComponent,
-    CategoriesUpsertComponent
+    CategoriesUpsertComponent,
+    AccountUpsertComponent
   ],
   imports: [
     BrowserModule,
@@ -98,8 +101,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MatChipsModule,
     MatSelectModule,
     NgbModule,
+    BaseChartDirective
   ],
-  providers: [
+  providers: [provideCharts(withDefaultRegisterables()),
   ApiService],
   bootstrap: [AppComponent],
 })
