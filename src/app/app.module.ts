@@ -46,7 +46,7 @@ import { AccountUpsertComponent } from './Components/accounts/account-upsert-com
 import { PartnerUpsertComponent } from './Components/partners/partner-upsert-component/partner-upsert.component';
 import { TransactionUpsertComponent } from './Components/transactions/transaction-upsert-component/transaction-upsert.component';
 //import { TokenInterceptor } from './interceptors/token.interceptor';
-import { AuthService } from './Services/Auth.Service';
+import { AuthService } from './Services/Auth.service';
 import { ApiService } from './Services/ApiService';
 import { TaxesUpsertComponent } from './Components/taxes/taxes-upsert-component/taxes-upsert/taxes-upsert.component';
 import { CategoriesUpsertComponent } from './Components/categories/categories-upsert-component/categories-upsert/categories-upsert.component';

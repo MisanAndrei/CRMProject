@@ -20,8 +20,8 @@ export class AuthService {
       await this.keycloakService.init({
         config: {
           url: 'http://localhost:8080/auth', // Update with your Keycloak server URL
-          realm: 'your-realm', // Replace with your realm name
-          clientId: 'your-client-id', // Replace with your client ID
+          realm: 'crm', // Replace with your realm name
+          clientId: 'crm_client', // Replace with your client ID
         },
         initOptions: {
           onLoad: 'check-sso',
@@ -32,13 +32,16 @@ export class AuthService {
   }
 
   async customLogin(username: string, password: string): Promise<void> {
+    const clientId = 'crm_client'; // Replace with your client ID
+    const clientSecret = 'Weu1BgfKQZpj0h4KjIicOUMevtXiO4rF'; // Replace with your client secret
+    const basicAuth = btoa(`${clientId}:${clientSecret}`);
+
     const headers = new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded'
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': `Basic ${basicAuth}`
     });
 
     const body = new URLSearchParams();
-    body.set('client_id', 'crm_client'); // Replace with your client ID
-    body.set('client_secret', 'Weu1BgfKQZpj0h4KjIicOUMevtXiO4rF');
     body.set('username', username);
     body.set('password', password);
     body.set('grant_type', 'password');
