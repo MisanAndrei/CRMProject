@@ -33,6 +33,8 @@
 .input-row {
   display: flex;
   justify-content: space-between;
+  flex-direction: row;
+  align-items: flex-end;
 }
 
 .input-container {
