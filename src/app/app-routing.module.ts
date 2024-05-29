@@ -47,7 +47,9 @@ const routes: Routes = [{ path: '', redirectTo: '/Tabloudebord', pathMatch: 'ful
 { path: 'TranzactieNoua', component: TransactionUpsertComponent, canActivate: [AuthGuard]},
 { path: 'TaxaNoua', component: TaxesUpsertComponent, canActivate: [AuthGuard]},
 { path: 'CategorieNoua', component: CategoriesUpsertComponent, canActivate: [AuthGuard]},
-{ path: 'login', component: LoginComponent }];
+{ path: 'login', component: LoginComponent },
+{ path: '', redirectTo: '/login', pathMatch: 'full' },
+{ path: '**', redirectTo: '/login' }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

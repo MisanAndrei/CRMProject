@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
-import { KeycloakService } from 'keycloak-angular';
 import { AuthService } from '../Services/auth.service';
 
 @Injectable({
@@ -9,7 +8,6 @@ import { AuthService } from '../Services/auth.service';
 export class AuthGuard implements CanActivate {
   constructor(
     private authService: AuthService,
-    private keycloakService: KeycloakService,
     private router: Router
   ) {}
 
@@ -22,7 +20,7 @@ export class AuthGuard implements CanActivate {
     if (isLoggedIn) {
       return true;
     } else {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
       return false;
     }
   }
