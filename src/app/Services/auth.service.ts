@@ -38,6 +38,7 @@ export class AuthService {
 
     const body = new URLSearchParams();
     body.set('client_id', 'crm_client'); // Replace with your client ID
+    body.set('client_secret', 'Weu1BgfKQZpj0h4KjIicOUMevtXiO4rF');
     body.set('username', username);
     body.set('password', password);
     body.set('grant_type', 'password');
