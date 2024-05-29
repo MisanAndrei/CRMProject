@@ -22,30 +22,31 @@ import { TransactionUpsertComponent } from './Components/transactions/transactio
 import { TaxesUpsertComponent } from './Components/taxes/taxes-upsert-component/taxes-upsert/taxes-upsert.component';
 import { CategoriesUpsertComponent } from './Components/categories/categories-upsert-component/categories-upsert/categories-upsert.component';
 import { LoginComponent } from './Components/login/login.component';
+import { AuthGuard } from './guards/auth.guard';
 
 
-const routes: Routes = [{ path: '', redirectTo: '/Tabloudebord', pathMatch: 'full' },
-{ path: 'Tabloudebord', component: DashboardComponent},
-{ path: 'Elemente', component: ElementsComponent},
-{ path: 'AdaugaElement', component: UpsertElementComponent},
-{ path: 'Parteneri', component: PartnersComponent},
-{ path: 'Facturi', component: BillsComponent},
-{ path: 'Conturi', component: AccountsComponent},
-{ path: 'Tranzactii', component: TransactionsComponent},
-{ path: 'Categorii', component: CategoriesComponent},
-{ path: 'Valute', component: CurrenciesComponent},
-{ path: 'Taxe', component: TaxesComponent},
-{ path: 'FacturaNoua', component: BillUpsertComponent},
-{ path: 'Companie', component: CompanyComponent},
-{ path: 'Implicit', component: ImplicitComponent},
-{ path: 'Preferinte', component: BillPreferencesComponent},
-{ path: 'TransferNou', component: TransferUpsertComponent},
-{ path: 'Transferuri', component: TransfersComponent},
-{ path: 'ContNou', component: AccountUpsertComponent},
-{ path: 'PartenerNou', component: PartnerUpsertComponent},
-{ path: 'TranzactieNoua', component: TransactionUpsertComponent},
-{ path: 'TaxaNoua', component: TaxesUpsertComponent},
-{ path: 'CategorieNoua', component: CategoriesUpsertComponent},
+const routes: Routes = [{ path: '', redirectTo: '/Tabloudebord', pathMatch: 'full', canActivate: [AuthGuard] },
+{ path: 'Tabloudebord', component: DashboardComponent, canActivate: [AuthGuard]},
+{ path: 'Elemente', component: ElementsComponent, canActivate: [AuthGuard]},
+{ path: 'AdaugaElement', component: UpsertElementComponent, canActivate: [AuthGuard]},
+{ path: 'Parteneri', component: PartnersComponent, canActivate: [AuthGuard]},
+{ path: 'Facturi', component: BillsComponent, canActivate: [AuthGuard]},
+{ path: 'Conturi', component: AccountsComponent, canActivate: [AuthGuard]},
+{ path: 'Tranzactii', component: TransactionsComponent, canActivate: [AuthGuard]},
+{ path: 'Categorii', component: CategoriesComponent, canActivate: [AuthGuard]},
+{ path: 'Valute', component: CurrenciesComponent, canActivate: [AuthGuard]},
+{ path: 'Taxe', component: TaxesComponent, canActivate: [AuthGuard]},
+{ path: 'FacturaNoua', component: BillUpsertComponent, canActivate: [AuthGuard]},
+{ path: 'Companie', component: CompanyComponent, canActivate: [AuthGuard]},
+{ path: 'Implicit', component: ImplicitComponent, canActivate: [AuthGuard]},
+{ path: 'Preferinte', component: BillPreferencesComponent, canActivate: [AuthGuard]},
+{ path: 'TransferNou', component: TransferUpsertComponent, canActivate: [AuthGuard]},
+{ path: 'Transferuri', component: TransfersComponent, canActivate: [AuthGuard]},
+{ path: 'ContNou', component: AccountUpsertComponent, canActivate: [AuthGuard]},
+{ path: 'PartenerNou', component: PartnerUpsertComponent, canActivate: [AuthGuard]},
+{ path: 'TranzactieNoua', component: TransactionUpsertComponent, canActivate: [AuthGuard]},
+{ path: 'TaxaNoua', component: TaxesUpsertComponent, canActivate: [AuthGuard]},
+{ path: 'CategorieNoua', component: CategoriesUpsertComponent, canActivate: [AuthGuard]},
 { path: 'login', component: LoginComponent }];
 
 @NgModule({

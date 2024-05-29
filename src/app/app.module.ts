@@ -55,6 +55,7 @@ import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 import { BaseChartDirective } from 'ng2-charts';
 import { LoginComponent } from './Components/login/login.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { AuthGuard } from './guards/auth.guard';
 
 @NgModule({
   declarations: [
@@ -112,6 +113,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
   providers: [provideCharts(withDefaultRegisterables()),
   ApiService,
   AuthService,
+  AuthGuard,
   {
     provide: APP_INITIALIZER,
     useFactory: initializeKeycloak,
