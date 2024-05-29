@@ -8,7 +8,7 @@ import { initializeKeycloak } from './app-init';
 
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -51,6 +51,13 @@ import { AuthService } from './Services/auth.service';
 import { ApiService } from './Services/ApiService';
 import { TaxesUpsertComponent } from './Components/taxes/taxes-upsert-component/taxes-upsert/taxes-upsert.component';
 import { CategoriesUpsertComponent } from './Components/categories/categories-upsert-component/categories-upsert/categories-upsert.component';
+import { LoginComponent } from './Components/login/login/login.component';
+
+const appRoutes: Routes = [
+  { path: 'login', component: LoginComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'Tabloudebord', component: DashboardComponent }, 
+];
 
 @NgModule({
   declarations: [
@@ -75,7 +82,8 @@ import { CategoriesUpsertComponent } from './Components/categories/categories-up
     PartnerUpsertComponent,
     TransactionUpsertComponent,
     TaxesUpsertComponent,
-    CategoriesUpsertComponent
+    CategoriesUpsertComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -98,6 +106,7 @@ import { CategoriesUpsertComponent } from './Components/categories/categories-up
     MatChipsModule,
     MatSelectModule,
     NgbModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [
   ApiService],

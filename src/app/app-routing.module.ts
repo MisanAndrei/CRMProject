@@ -23,7 +23,7 @@ import { TaxesUpsertComponent } from './Components/taxes/taxes-upsert-component/
 import { CategoriesUpsertComponent } from './Components/categories/categories-upsert-component/categories-upsert/categories-upsert.component';
 
 
-const routes: Routes = [{ path: '', redirectTo: '/Tabloudebord', pathMatch: 'full' },
+const routes: Routes = [{ path: '', redirectTo: '/login', pathMatch: 'full' },
 { path: 'Tabloudebord', component: DashboardComponent},
 { path: 'Elemente', component: ElementsComponent},
 { path: 'AdaugaElement', component: UpsertElementComponent},
