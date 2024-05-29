@@ -49,7 +49,7 @@ const routes: Routes = [
 { path: 'TranzactieNoua', component: TransactionUpsertComponent, canActivate: [AuthGuard]},
 { path: 'TaxaNoua', component: TaxesUpsertComponent, canActivate: [AuthGuard]},
 { path: 'CategorieNoua', component: CategoriesUpsertComponent, canActivate: [AuthGuard]},
-{ path: '', redirectTo: '/Tabloudebord', pathMatch: 'full' },
+{ path: '', redirectTo: '/login', pathMatch: 'full' },
 { path: '**', redirectTo: '/login' }];
 
 @NgModule({
