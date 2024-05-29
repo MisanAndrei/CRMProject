@@ -77,3 +77,16 @@ export interface Element {
     sum: number;
     date: string;
   }
+
+  export interface CashFlow {
+    month: number;
+    collectionsSum: number;
+    costsSum: number;
+  }
+
+  export interface CategoryCashFlow {
+    id: number;
+    name: string;
+    collectionsSum: number;
+    costsSum: number;
+  }

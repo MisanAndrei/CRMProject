@@ -59,15 +59,15 @@ body {
 
 /* Custom widths for inputs */
 .input-container-global.small {
-  width: 30%; 
+  width: 30%;
 }
 
 .input-container-global.medium {
-  width: 60%; 
+  width: 60%;
 }
 
 .input-container-global.large {
-  width: 80%; 
+  width: 80%;
 }
 
 .mat-sort-header-container {
@@ -76,14 +76,89 @@ body {
   font-size: 14px;
 }
 
-.header {
-  margin-left: 5%;
+h1 {
   margin-right: 5%;
+  margin-top: 30px;
+  position: relative;
+  padding-bottom: 10px;
+  align-items: center;
+}
+
+.mat-mdc-checkbox.mat-mdc-checkbox-checked .mdc-checkbox__background,
+.mdc-checkbox__ripple {
+  background-color: rgb(78, 57, 212) !important;
+  border-color: rgba(91, 75, 234, 0.775) !important;
+}
+
+h4 {
+  align-self: flex-start;
+  margin: 0;
+  color: grey;
+}
+
+.separator-line {
+  width: 100%;
+  height: 1px;
+  background-color: lightgrey;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.section {
+  width: 100%;
+  max-width: 8000px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.subsection {
+  margin: 0px 30px;
+}
+
+.button {
+  width: 200px;
+  height: 50px;
+  border-radius: 5%;
+  background-color: #6ea152;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  margin-bottom: 30px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end; /* Align button to the right */
   margin-top: 20px;
 }
 
-.mat-mdc-checkbox.mat-mdc-checkbox-checked .mdc-checkbox__background, .mdc-checkbox__ripple {
+/* styles for simple inputs(not material ones) structure on a page*/
 
-  background-color: rgb(78, 57, 212) !important;
-  border-color: rgba(91, 75, 234, 0.775) !important;
+.double-input-container {
+  display: flex;
+  gap: 70px;
+  justify-content: space-between;
+}
+
+.double-input-container input {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.single-input-wrapper {
+  max-width: 525px; /* Set max-width for single input fields */
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.section-delimiter {
+  margin-top: 30px;
 }

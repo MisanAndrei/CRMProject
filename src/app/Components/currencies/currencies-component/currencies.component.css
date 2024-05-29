@@ -2,15 +2,6 @@
     margin: 0 5%;
   }
 
-  .input-icons {
-    display: flex;
-    align-items: center;
-  }
-  
-  .icon-container {
-    margin-left: auto; /* Pushes the icons to the right */
-  }
-
   .header {
     margin-left: 5%;
     margin-right: 5%;

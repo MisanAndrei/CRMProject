@@ -7,7 +7,14 @@
   </div>
 </mat-toolbar>
 <mat-sidenav-container class="example-container">
-	<mat-sidenav #sidenav mode="side" opened="true" (mouseenter)="mouseenter()" (mouseleave)="mouseleave()" class="left-sidenav">
+  <mat-sidenav
+    #sidenav
+    mode="side"
+    opened="true"
+    (mouseenter)="mouseenter()"
+    (mouseleave)="mouseleave()"
+    class="left-sidenav"
+  >
     <mat-nav-list>
       <mat-list-item (click)="showSubmenu = !showSubmenu" class="parent">
         <mat-icon class="icon-margin">home</mat-icon>

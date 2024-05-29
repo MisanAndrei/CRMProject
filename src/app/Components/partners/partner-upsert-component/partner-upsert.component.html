@@ -1,58 +1,82 @@
+<div class="header">
+  <h1>Partener Nou</h1>
+</div>
 <form [formGroup]="partnerForm" (ngSubmit)="onSubmit()">
-    <div>
-      <label for="name">Name</label>
-      <input id="name" formControlName="name" type="text">
+  <div>
+    <h4>Preferinţe generale</h4>
+    <div class="separator-line"></div>
+
+    <div class="subsection">
+      <div class="double-input-container">
+        <div class="input-wrapper">
+          <label for="name">Nume</label>
+          <input id="name" formControlName="name" type="text" class="set-border" placeholder="Introduceți Nume"/>
+        </div>
+
+        <div class="input-wrapper">
+          <label for="email">Email</label>
+          <input id="email" formControlName="email" type="email" placeholder="Introduceți Email"/>
+        </div>
+      </div>
+    
+      <div class="double-input-container">
+        <div class="input-wrapper">
+          <label for="phone">Telefon</label>
+          <input id="phone" formControlName="phone" type="text" placeholder="Introduceți Telefon"/>
+        </div>
+
+        <div class="input-wrapper">
+          <label for="website">Website</label>
+          <input id="website" formControlName="website" type="text" placeholder="Introduceți Website"/>
+        </div>
+      </div>
+      <div class="double-input-container">
+        <div class="input-wrapper">
+          <label for="reference">Referință</label>
+          <input id="reference" formControlName="reference" type="text" placeholder="Introduceți Referință"/>
+        </div>
+
+        <div class="input-wrapper">
+          <label for="image">Imagine</label>
+          <input id="image" type="file" (change)="onImageChange($event)" />
+        </div>
+      </div>
+      </div>
+  </div>
+  <div class="section-delimiter">
+    <h4>Facturare</h4>
+    <div class="separator-line"></div>
+
+    <div class="subsection">
+        <div class="single-input-wrapper">
+          <label for="cui">CUI</label>
+          <input id="cui" formControlName="cui" type="text" placeholder="Introduceți CUI"/>
+        </div>
+
+      <div class="double-input-container">
+        <div class="input-wrapper">
+          <label for="address">Adresă</label>
+          <input id="address" formControlName="address" rows="3" placeholder="Introduceți Adresă"/>
+        </div>
+
+        <div class="input-wrapper">
+          <label for="postalCode">Cod Poștal</label>
+          <input id="postalCode" formControlName="postalCode" type="text" placeholder="Introduceți Cod Poștal"/>
+        </div>
+      </div>
+      <div class="double-input-container">
+        <div class="input-wrapper">
+          <label for="county">Țară</label>
+          <input id="county" formControlName="county" type="text" placeholder="Introduceți Țară"/>
+        </div>
+        <div class="input-wrapper">
+          <label for="city">Oraș</label>
+          <input id="city" formControlName="city" type="text" placeholder="Introduceți Oraș"/>
+        </div>
+      </div>
     </div>
-  
-    <div>
-      <label for="email">Email</label>
-      <input id="email" formControlName="email" type="email">
-    </div>
-  
-    <div>
-      <label for="phone">Phone</label>
-      <input id="phone" formControlName="phone" type="text">
-    </div>
-  
-    <div>
-      <label for="website">Website</label>
-      <input id="website" formControlName="website" type="text">
-    </div>
-  
-    <div>
-      <label for="reference">Reference</label>
-      <input id="reference" formControlName="reference" type="text">
-    </div>
-  
-    <div>
-      <label for="image">Image</label>
-      <input id="image" type="file" (change)="onImageChange($event)">
-    </div>
-  
-    <div>
-      <label for="cui">CUI</label>
-      <input id="cui" formControlName="cui" type="text">
-    </div>
-  
-    <div>
-      <label for="address">Address</label>
-      <textarea id="address" formControlName="address" rows="3"></textarea>
-    </div>
-  
-    <div>
-      <label for="postalCode">Postal Code</label>
-      <input id="postalCode" formControlName="postalCode" type="text">
-    </div>
-  
-    <div>
-      <label for="county">County</label>
-      <input id="county" formControlName="county" type="text">
-    </div>
-  
-    <div>
-      <label for="city">City</label>
-      <input id="city" formControlName="city" type="text">
-    </div>
-  
-    <button type="submit">Save Partner</button>
-  </form>
+  </div>
+  <div class="button-container">
+    <button class="button content" type="submit">Salvează Partener</button>
+  </div>
+</form>
