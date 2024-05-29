@@ -9,17 +9,6 @@ export interface Element {
   sellingPrice?: number;
   taxValue: number;
   taxId: number;
-  
-  }
-
-  export interface Partner {
-    id: number;
-    name: string;
-    cui: string;
-    email: string;
-    phoneNumber: string;
-    country: string;
-    bill: string;
   }
 
   export interface Bill {
@@ -33,11 +22,11 @@ export interface Element {
   }
 
   export interface Account {
-    id: number;
+    id?: number;
     name: string;
-    bankName: string;
-    phone: string;
-    sold: string;
+    accountNumber: string;
+    description?: string;
+    sold: number;
   }
 
   export interface Transaction {
@@ -76,10 +65,15 @@ export interface Element {
 
   export interface Transfer {
     id: number;
-    payingAccount: string;
-    receivingAccount: string;
-    sum: number;
-    date: string;
+    date: Date;
+    amount: number;
+    fromBankAcoountId: number;
+    fromBankAcoountName?: string;
+    toBankAcoountId: number;
+    toBankAcoountName?: string;
+    description?: string;
+    paymentMethod: string;
+    reference?: string;
   }
 
   export interface CashFlow {
@@ -102,4 +96,20 @@ export interface Element {
     dbSchema: string;
     status: string;
     colorCode: string;
+  }
+  
+  export interface Partner {
+    id: number;
+    name: string;
+    cui: string;
+    email: string;
+    phoneNumber?: string;
+    country: string;
+    website?: string;
+    reference?: string;
+    address: string;
+    city: string;
+    county?: string;
+    postalCode: string;
+    image?: string;
   }

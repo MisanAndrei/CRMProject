@@ -48,10 +48,16 @@
     <div class="separator-line"></div>
 
     <div class="subsection">
-        <div class="single-input-wrapper">
-          <label for="cui">CUI</label>
-          <input id="cui" formControlName="cui" type="text" placeholder="Introduceți CUI"/>
-        </div>
+      <div class="double-input-container">  
+        <div class="input-wrapper">
+            <label for="cui">CUI</label>
+            <input id="cui" formControlName="cui" type="text" placeholder="Introduceți CUI"/>
+          </div>
+          <div class="input-wrapper">
+            <label for="postalCode">Cod Poștal</label>
+            <input id="postalCode" formControlName="postalCode" type="text" placeholder="Introduceți Cod Poștal"/>
+          </div>
+      </div>
 
       <div class="double-input-container">
         <div class="input-wrapper">
@@ -60,14 +66,14 @@
         </div>
 
         <div class="input-wrapper">
-          <label for="postalCode">Cod Poștal</label>
-          <input id="postalCode" formControlName="postalCode" type="text" placeholder="Introduceți Cod Poștal"/>
+          <label for="country">Țară</label>
+          <input id="country" formControlName="country" type="text" placeholder="Introduceți Țară"/>
         </div>
       </div>
       <div class="double-input-container">
         <div class="input-wrapper">
-          <label for="county">Țară</label>
-          <input id="county" formControlName="county" type="text" placeholder="Introduceți Țară"/>
+          <label for="county">Judet</label>
+          <input id="county" formControlName="county" type="text" placeholder="Introduceți Judet"/>
         </div>
         <div class="input-wrapper">
           <label for="city">Oraș</label>
