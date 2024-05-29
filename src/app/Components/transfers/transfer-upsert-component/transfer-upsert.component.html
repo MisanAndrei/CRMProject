@@ -9,15 +9,15 @@
     <div class="subsection">
       <div class="double-input-container">
         <div class="input-wrapper">
-          <label for="payableAccount">Cont Plătitor</label>
-          <select id="payableAccount" formControlName="payableAccount">
+          <label for="fromBankAccount">Cont Plătitor</label>
+          <select id="fromBankAccount" formControlName="fromBankAccount">
             <option *ngFor="let account of accounts" [value]="account.id">{{ account.name }}</option>
           </select>
         </div>
       
         <div class="input-wrapper">
-          <label for="beneficiarAccount">Cont Beneficiar</label>
-          <select id="beneficiarAccount" formControlName="beneficiarAccount">
+          <label for="toBankAccountName">Cont Beneficiar</label>
+          <select id="toBankAccountName" formControlName="toBankAccountName">
             <option *ngFor="let account of accounts" [value]="account.id">{{ account.name }}</option>
           </select>
         </div>
@@ -25,13 +25,13 @@
     
       <div class="double-input-container">
         <div class="input-wrapper">
-          <label for="dateOfTransaction">Dată Transacție</label>
-          <input id="dateOfTransaction" formControlName="dateOfTransaction" type="date">
+          <label for="date">Dată Transacție</label>
+          <input id="date" formControlName="date" type="date">
         </div>
       
         <div class="input-wrapper">
-          <label for="sum">Sumă</label>
-          <input id="sum" formControlName="sum" type="number" step="0.01">
+          <label for="amount">Sumă</label>
+          <input id="amount" formControlName="amount" type="number" step="0.01">
         </div>
       </div>
     

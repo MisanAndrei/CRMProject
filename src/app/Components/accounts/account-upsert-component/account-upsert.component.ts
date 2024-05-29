@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ApiService } from '../../../Services/ApiService'; // Update the path as necessary
+import { Account } from '../../../Utilities/Models'; // Update the path as necessary
 
 @Component({
   selector: 'app-account-upsert',
@@ -8,8 +11,15 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class AccountUpsertComponent implements OnInit {
   accountForm: FormGroup;
+  accountId?: number;
+  isEditMode = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    private apiService: ApiService
+  ) {
     this.accountForm = this.fb.group({
       name: ['', Validators.required],
       number: ['', Validators.required],
@@ -21,12 +31,42 @@ export class AccountUpsertComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.accountId = +this.route.snapshot.paramMap.get('id')!;
+    this.isEditMode = !!this.accountId;
+
+    if (this.isEditMode) {
+      this.fetchAccountDetails(this.accountId);
+    }
+  }
+
+  fetchAccountDetails(id: number): void {
+    this.apiService.get<Account>(`/accounts/${id}`).subscribe((account) => {
+      this.accountForm.patchValue({
+        name: account.name,
+        number: account.accountNumber
+      });
+    });
+  }
 
   onSubmit(): void {
     if (this.accountForm.valid) {
-      console.log(this.accountForm.value);
-      // Handle form submission logic here, such as saving account data to a server
+      const accountData: Account = {
+        id: this.accountId,
+        name: this.accountForm.get('name')?.value,
+        accountNumber: this.accountForm.get('number')?.value,
+        sold: this.accountForm.get('initialSold')?.value
+      };
+
+      if (this.isEditMode) {
+        this.apiService.put(`/accounts/${this.accountId}`, accountData).subscribe(() => {
+          this.router.navigate(['/accounts']);
+        });
+      } else {
+        this.apiService.post('/accounts', accountData).subscribe(() => {
+          this.router.navigate(['/accounts']);
+        });
+      }
     } else {
       console.log('Form is invalid');
     }

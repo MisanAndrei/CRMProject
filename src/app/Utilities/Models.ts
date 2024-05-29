@@ -64,13 +64,13 @@ export interface Element {
   }
 
   export interface Transfer {
-    id: number;
+    id?: number;
     date: Date;
     amount: number;
-    fromBankAcoountId: number;
-    fromBankAcoountName?: string;
-    toBankAcoountId: number;
-    toBankAcoountName?: string;
+    fromBankAccountId: number;
+    fromBankAccountName?: string;
+    toBankAccountId: number;
+    toBankAccountName?: string;
     description?: string;
     paymentMethod: string;
     reference?: string;
