@@ -1,20 +1,40 @@
-.section {
-    width: 80%;
+  .header {
+    padding-bottom: 6px;
+  }
+  
+  form {
     margin: auto;
   }
   
-  .row {
-    display: flex;
-    flex-wrap: wrap;
+  div {
+    margin-bottom: 15px;
   }
   
-  .column {
-    width: 40%;
-    padding: 0 10px;
+  label {
+    display: block;
+    margin-bottom: 5px;
   }
   
-  .full-width {
+  input,
+  select,
+  textarea {
     width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+  }
+  
+  button {
+    margin-top: 10px;
+  }
+  
+  ::placeholder {
+    color: #D8D8D8; /* Set the placeholder text color to light grey */
+    opacity: 1; /* Firefox */
+  }
+  
+  ::-ms-input-placeholder {
+    /* Edge 12 -18 */
+    color: lightgrey;
   }
 
   .image-container {
@@ -24,15 +44,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 30px;
+    margin-left: 50px;
   }
-  
-  .image {
-    max-width: 100%;
-    max-height: 100%;
-  }
-
-  .container-width {
-    width: 82%;
-    padding: 0 10px;
-  }
-  
