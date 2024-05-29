@@ -65,11 +65,5 @@ export class DashboardComponent implements OnInit {
     
    }
 
-   login(): void {
-    this.authService.login().then(() => {
-      console.log('Logged in');
-    }).catch((error) => {
-      console.error('Login failed', error);
-    });
-  }
+   
 }
