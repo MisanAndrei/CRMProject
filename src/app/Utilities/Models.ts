@@ -94,3 +94,12 @@ export interface Element {
     collectionsSum: number;
     costsSum: number;
   }
+
+  export interface Organization {
+    name: string;
+    tenantId: string;
+    license: string;
+    dbSchema: string;
+    status: string;
+    colorCode: string;
+  }
