@@ -1,46 +1,58 @@
 
+<div class="header">
+  <h1>Categorie Noua</h1>
+</div>
 <form [formGroup]="typeForm" (ngSubmit)="onSubmit()">
-    <div>
-      <label for="name">Nume</label>
-      <input
-        id="name"
-        formControlName="name"
-        type="string"
-        placeholder="Introduceți nume"
-      />
-    </div>
-    <div>
-      <label for="type">Tip</label>
-      <select id="type" formControlName="type">
-        <option value="" disabled selected>Selectează tip</option>
-        <option *ngFor="let type of types" [value]="type.id">
-          {{ type.name }}
-        </option>
-      </select>
-      <button type="submit">Salvează</button>
-    </div>
-  
-    <div class="color-picker-wrapper">
-      <label for="colorPicker">Selectează o culoare:</label>
-      <div class="input-wrapper">
-        <input
-          type="text"
-          class="color-name"
-          [value]="selectedColor.name"
-          readonly
-        />
-        <div class="color-options">
-          <div
-            *ngFor="let color of colorOptions"
-            class="color-circle"
-            [style.background-color]="color.hex"
-            [class.selected]="color.hex === selectedColor.hex"
-            (click)="onColorChange(color)"
-          ></div>
+  <div>
+    <h4>Preferinţe generale</h4>
+    <div class="separator-line"></div>
+
+    <div class="subsection">
+      <div class="double-input-container">
+        <div class="input-wrapper">
+          <label for="name">Nume</label>
+          <input
+            id="name"
+            formControlName="name"
+            type="string"
+            placeholder="Introduceți nume"
+          />
         </div>
-        <input type="hidden" formControlName="selectedColor" />
+        <div class="input-wrapper">
+          <label for="type">Tip</label>
+          <select id="type" formControlName="type">
+            <option value="" disabled selected>Selectează tip</option>
+            <option *ngFor="let type of types" [value]="type.id">
+              {{ type.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="color-picker-wrapper">
+        <label for="colorPicker">Selectează o culoare:</label>
+        <div class="single-input-wrapper">
+          <input
+            type="text"
+            class="color-name"
+            [value]="selectedColor.name"
+            readonly
+          />
+          <div class="color-options">
+            <div
+              *ngFor="let color of colorOptions"
+              class="color-circle"
+              [style.background-color]="color.hex"
+              [class.selected]="color.hex === selectedColor.hex"
+              (click)="onColorChange(color)"
+            ></div>
+          </div>
+          <input type="hidden" formControlName="selectedColor" />
+        </div>
       </div>
     </div>
-    <button type="submit">Salvează</button>
-  </form>
+    <div class="button-container">
+      <button class="button content" type="submit">Salvează</button>
+    </div>
+  </div>
+</form>
   
