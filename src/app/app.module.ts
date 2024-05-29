@@ -99,7 +99,8 @@ import { LoginComponent } from './Components/login/login/login.component';
     MatChipsModule,
     MatSelectModule,
     NgbModule,
-    BaseChartDirective
+    BaseChartDirective,
+    HttpClientModule
   ],
   providers: [provideCharts(withDefaultRegisterables()),
   ApiService],

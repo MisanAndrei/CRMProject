@@ -1,11 +1,15 @@
 export interface Element {
-    id: number;
-    nume: string;
-    categorie: string;
-    culoare?: string;
-    taxe: string;
-    pretAchizitie: number;
-    pretVanzare: number;
+  id?: number;
+  type: string;
+  name: string;
+  categoryName: string;
+  categoryId: number;
+  description?: string;
+  aquisitionPrice?: number;
+  sellingPrice?: number;
+  taxValue: number;
+  taxId: number;
+  
   }
 
   export interface Partner {
@@ -49,10 +53,10 @@ export interface Element {
   }
 
   export interface Category {
-    id: number;
+    id?: number;
     name: string;
     type: string;
-    color: string;
+    colorCode: string;
   }
 
   export interface Currency {
@@ -64,10 +68,10 @@ export interface Element {
   }
 
   export interface Tax {
-    id: number;
+    id?: number;
     name: string;
     type?: string;
-    percent?: number;
+    value?: number;
   }
 
   export interface Transfer {

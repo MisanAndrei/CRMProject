@@ -40,7 +40,7 @@
     <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name">
       Nume
     </th>
-    <td mat-cell *matCellDef="let element"> {{element.nume}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
   </ng-container>
 
   <!-- Categorie Column -->
@@ -48,7 +48,7 @@
     <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by category">
       Categorie
     </th>
-    <td mat-cell *matCellDef="let element"> {{element.categorie}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.categoryName}} </td>
   </ng-container>
 
   <!-- Culoare Column -->
@@ -56,7 +56,7 @@
     <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by taxe">
       Taxe
     </th>
-    <td mat-cell *matCellDef="let element"> {{element.taxe}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.taxValue}} </td>
   </ng-container>
 
   <!-- Pret Achizitie Column -->
@@ -64,7 +64,7 @@
     <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by purchase price">
       Pret de Achizitie
     </th>
-    <td mat-cell *matCellDef="let element"> {{element.pretAchizitie}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.aquisitionPrice}} </td>
   </ng-container>
 
   <!-- Pret Vanzare Column -->
@@ -72,7 +72,7 @@
     <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by selling price">
       Pret de Vanzare
     </th>
-    <td mat-cell *matCellDef="let element"> {{element.pretVanzare}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.sellingPrice}} </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
