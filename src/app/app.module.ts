@@ -1,9 +1,9 @@
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-//import { KeycloakService, KeycloakAngularModule } from 'keycloak-angular';
+import { KeycloakService, KeycloakAngularModule } from 'keycloak-angular';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-//import { initializeKeycloak } from './app-init';
+import { initializeKeycloak } from './app-init';
 
 
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -46,7 +46,7 @@ import { AccountUpsertComponent } from './Components/accounts/account-upsert-com
 import { PartnerUpsertComponent } from './Components/partners/partner-upsert-component/partner-upsert.component';
 import { TransactionUpsertComponent } from './Components/transactions/transaction-upsert-component/transaction-upsert.component';
 //import { TokenInterceptor } from './interceptors/token.interceptor';
-//import { AuthService } from './Services/auth.service';
+import { AuthService } from './Services/Auth.Service';
 import { ApiService } from './Services/ApiService';
 import { TaxesUpsertComponent } from './Components/taxes/taxes-upsert-component/taxes-upsert/taxes-upsert.component';
 import { CategoriesUpsertComponent } from './Components/categories/categories-upsert-component/categories-upsert/categories-upsert.component';
@@ -101,10 +101,20 @@ import { BaseChartDirective } from 'ng2-charts';
     MatChipsModule,
     MatSelectModule,
     NgbModule,
-    BaseChartDirective
+    BaseChartDirective,
+    HttpClientModule,
+    KeycloakAngularModule
+
   ],
   providers: [provideCharts(withDefaultRegisterables()),
-  ApiService],
+  ApiService,
+  AuthService,
+  {
+    provide: APP_INITIALIZER,
+    useFactory: initializeKeycloak,
+    multi: true,
+    deps: [KeycloakService]
+  }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

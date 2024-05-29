@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartData, ChartOptions } from 'chart.js';
 import { CashFlow, CategoryCashFlow } from '../../Utilities/Models';
+import { AuthService } from '../../Services/Auth.Service';
 
 @Component({
   selector: 'app-dashboard',
@@ -58,7 +59,17 @@ export class DashboardComponent implements OnInit {
     ],
   };
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    
+   }
+
+   login(): void {
+    this.authService.login().then(() => {
+      console.log('Logged in');
+    }).catch((error) => {
+      console.error('Login failed', error);
+    });
+  }
 }
