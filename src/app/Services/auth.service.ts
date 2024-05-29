@@ -19,7 +19,7 @@ export class AuthService {
     if (!this.keycloakInstance.authenticated) {
       await this.keycloakService.init({
         config: {
-          url: 'http://localhost:8080/auth', // Update with your Keycloak server URL
+          url: 'http://localhost:8890', // Update with your Keycloak server URL
           realm: 'crm', // Replace with your realm name
           clientId: 'crm_client', // Replace with your client ID
         },

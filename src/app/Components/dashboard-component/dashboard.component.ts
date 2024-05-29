@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartData, ChartOptions } from 'chart.js';
 import { CashFlow, CategoryCashFlow } from '../../Utilities/Models';
-import { AuthService } from '../../Services/Auth.service';
+import { AuthService } from '../../Services/auth.service';
 
 @Component({
   selector: 'app-dashboard',
