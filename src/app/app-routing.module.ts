@@ -25,7 +25,9 @@ import { LoginComponent } from './Components/login/login.component';
 import { AuthGuard } from './guards/auth.guard';
 
 
-const routes: Routes = [{ path: '', redirectTo: '/Tabloudebord', pathMatch: 'full', canActivate: [AuthGuard] },
+const routes: Routes = [
+{ path: 'login', component: LoginComponent },
+{ path: '', redirectTo: '/Tabloudebord', canActivate: [AuthGuard] },
 { path: 'Tabloudebord', component: DashboardComponent, canActivate: [AuthGuard]},
 { path: 'Elemente', component: ElementsComponent, canActivate: [AuthGuard]},
 { path: 'AdaugaElement', component: UpsertElementComponent, canActivate: [AuthGuard]},
@@ -47,8 +49,7 @@ const routes: Routes = [{ path: '', redirectTo: '/Tabloudebord', pathMatch: 'ful
 { path: 'TranzactieNoua', component: TransactionUpsertComponent, canActivate: [AuthGuard]},
 { path: 'TaxaNoua', component: TaxesUpsertComponent, canActivate: [AuthGuard]},
 { path: 'CategorieNoua', component: CategoriesUpsertComponent, canActivate: [AuthGuard]},
-{ path: 'login', component: LoginComponent },
-{ path: '', redirectTo: '/login', pathMatch: 'full' },
+{ path: '', redirectTo: '/Tabloudebord', pathMatch: 'full' },
 { path: '**', redirectTo: '/login' }];
 
 @NgModule({
