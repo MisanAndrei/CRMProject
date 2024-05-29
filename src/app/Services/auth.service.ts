@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { KeycloakService } from 'keycloak-angular';
 import { KeycloakInstance } from 'keycloak-js';
 import { decodeToken } from '../Utilities/jwt-decode';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -36,15 +37,15 @@ export class AuthService {
     });
 
     const body = new URLSearchParams();
-    body.set('client_id', 'your-client-id'); // Replace with your client ID
+    body.set('client_id', 'crm_client'); // Replace with your client ID
     body.set('username', username);
     body.set('password', password);
     body.set('grant_type', 'password');
 
-    const url = 'http://localhost:8080/auth/realms/your-realm/protocol/openid-connect/token'; // Replace with your Keycloak token URL
+    const url = 'http://localhost:8890/realms/crm/protocol/openid-connect/token'; // Replace with your Keycloak token URL
 
     try {
-      const response: any = await this.http.post(url, body.toString(), { headers }).toPromise();
+      const response: any = await firstValueFrom(this.http.post(url, body.toString(), { headers }));
       this.keycloakInstance.token = response.access_token;
       this.keycloakInstance.refreshToken = response.refresh_token;
       this.keycloakInstance.idToken = response.id_token;
