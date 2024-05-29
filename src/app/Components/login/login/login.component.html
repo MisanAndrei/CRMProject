@@ -1,0 +1,35 @@
+<div class="login-container">
+    <h3>Conectează-te pentru a începe sesiunea</h3>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" formControlName="email" placeholder="Introdu aici email-ul">
+        <div *ngIf="loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)">
+          <small *ngIf="loginForm.get('email')?.errors?.['required']">Emailul este necesar.</small>
+          <small *ngIf="loginForm.get('email')?.errors?.['email']">Emailul nu este valid.</small>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="password">Parola</label>
+        <input type="password" id="password" formControlName="password" placeholder="Introdu aici parola">
+        <div *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)">
+          <small *ngIf="loginForm.get('password')?.errors?.['required']">Parola este necesară.</small>
+          <small *ngIf="loginForm.get('password')?.errors?.['minlength']">Parola trebuie să aibă cel puțin 6 caractere.</small>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label>
+          <input type="checkbox" formControlName="rememberMe"> Ține-mă minte
+        </label>
+      </div>
+  
+      <div class="form-group">
+        <a href="#" class="forgot-password">Am uitat parola</a>
+      </div>
+  
+      <button type="submit" [disabled]="loginForm.invalid">Conectare</button>
+    </form>
+  </div>
+  

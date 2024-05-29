@@ -48,6 +48,8 @@ import { CategoriesUpsertComponent } from './Components/categories/categories-up
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 import { BaseChartDirective } from 'ng2-charts';
+import { LoginComponent } from './Components/login/login/login.component';
+
 
 @NgModule({
   declarations: [
@@ -73,7 +75,8 @@ import { BaseChartDirective } from 'ng2-charts';
     TransactionUpsertComponent,
     TaxesUpsertComponent,
     CategoriesUpsertComponent,
-    AccountUpsertComponent
+    AccountUpsertComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
