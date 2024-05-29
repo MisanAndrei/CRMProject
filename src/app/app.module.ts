@@ -53,10 +53,6 @@ import { TaxesUpsertComponent } from './Components/taxes/taxes-upsert-component/
 import { CategoriesUpsertComponent } from './Components/categories/categories-upsert-component/categories-upsert/categories-upsert.component';
 import { LoginComponent } from './Components/login/login/login.component';
 
-const appRoutes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: '', redirectTo: '/login', pathMatch: 'full' }
-];
 
 @NgModule({
   declarations: [
@@ -104,8 +100,7 @@ const appRoutes: Routes = [
     FormsModule,
     MatChipsModule,
     MatSelectModule,
-    NgbModule,
-    RouterModule.forRoot(appRoutes)
+    NgbModule
   ],
   providers: [
   ApiService],
