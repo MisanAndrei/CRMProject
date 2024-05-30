@@ -1,17 +1,20 @@
-<div style="display: block; width: 50%; margin: auto;">
-    <h3>Monthly Cash Flow</h3>
-    <canvas baseChart
-            [data]="barChartData"
-            [options]="barChartOptions"
-            [type]="'bar'">
-    </canvas>
-  </div>
-  
-  <div style="display: block; width: 50%; margin: auto; margin-top: 50px;">
+ <div class="chart-container-pie">
     <h3>Category Cash Flow</h3>
+    <div class="separator-line"></div>
     <canvas baseChart
             [data]="pieChartData"
             [options]="pieChartOptions"
-            [type]="'pie'">
+            [type]="'pie'"
+            class="chart-canvas">
     </canvas>
+  </div>
+
+  <div class="chart-container-bar">
+        <h3>Monthly Cash Flow</h3>
+        <div class="separator-line"></div>
+        <canvas baseChart
+                [data]="barChartData"
+                [options]="barChartOptions"
+                [type]="'bar'">
+        </canvas>
   </div>
