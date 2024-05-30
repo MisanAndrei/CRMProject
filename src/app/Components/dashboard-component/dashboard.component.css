@@ -15,7 +15,7 @@
   
   .chart-container-bar {
     position: absolute;
-    bottom: 20px;
+    bottom: 7rem;
     right: 20px;
     max-width: 800px;
     display: flex;
@@ -49,4 +49,8 @@
   
   .chart-container-bar .chart-description {
     margin-right: 20px;
+  }
+
+  span {
+    text-align: justify;
   }
