@@ -40,10 +40,7 @@ export class CurrenciesComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     // Example data
     const CURRENCY_DATA: Currency[] = [
-      { id: 1, name: 'US Dollar', code: 'USD', symbol: '$', rate: 1.0 },
-      { id: 2, name: 'Euro', code: 'EUR', symbol: '€', rate: 0.85 },
-      { id: 3, name: 'British Pound', code: 'GBP', symbol: '£', rate: 0.72 },
-      // Add more currency data as needed
+      { id: 2, name: 'Leu Românesc', code: 'RON', symbol: 'LEI', rate: 4.5 },
     ];
 
     this.dataSource.data = CURRENCY_DATA;
