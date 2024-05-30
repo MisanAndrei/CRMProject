@@ -22,7 +22,7 @@ interface Organization {
 })
 export class CompanyComponent implements OnInit {
   companyForm: FormGroup;
-  selectedColor: string = '#7abf95';
+  selectedColor: string = '#9dcd8a';
   imageBase64: string | ArrayBuffer | null = '';
 
   @ViewChild('colorInput') colorInput!: ElementRef<HTMLInputElement>;

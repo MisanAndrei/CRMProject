@@ -13,7 +13,7 @@ interface Type {
 })
 export class CategoriesUpsertComponent implements OnInit {
   typeForm: FormGroup;
-  selectedColor: string = '#7abf95';
+  selectedColor: string = '#9dcd8a';
 
   types: Type[] = [
         { id: 1, name: 'Alta' },
