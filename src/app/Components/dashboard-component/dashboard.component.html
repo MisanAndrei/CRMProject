@@ -1,20 +1,29 @@
  <div class="chart-container-pie">
     <h4>Categorii - Cheltuieli - Venituri</h4>
     <div class="separator-line"></div>
-    <canvas baseChart
-            [data]="pieChartData"
-            [options]="pieChartOptions"
-            [type]="'pie'"
-            class="chart-canvas">
-    </canvas>
-  </div>
+    <div class="chart-content">
+        <canvas baseChart
+                [data]="pieChartData"
+                [options]="pieChartOptions"
+                [type]="'pie'"
+                class="chart-canvas-pie">
+        </canvas>
+
+        <p class="chart-description">Acest grafic prezintă distribuția cheltuielilor și veniturilor pe categorii. Puteți vedea cum se împart cheltuielile și veniturile în funcție de diversele categorii definite.</p>
+    </div>
+</div>
 
   <div class="chart-container-bar">
         <h4>Raport Lunar - Cheltuieli si Venituri</h4>
         <div class="separator-line"></div>
-        <canvas baseChart
-                [data]="barChartData"
-                [options]="barChartOptions"
-                [type]="'bar'">
-        </canvas>
-  </div>
+        <div class="chart-content">
+          <p class="chart-description">Acest grafic prezintă statisticile lunare ale cheltuielilor și veniturilor. Fiecare bară reprezintă totalul cheltuielilor și veniturilor pentru fiecare lună.</p>
+          
+          <canvas baseChart
+                        [data]="barChartData"
+                        [options]="barChartOptions"
+                        [type]="'bar'"
+                        class="chart-canvas-bar">
+          </canvas>
+        </div>
+</div>
