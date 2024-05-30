@@ -17,7 +17,7 @@ import { DeleteDialogComponent } from '../../dialogs/delete-dialog-component/del
   styleUrls: ['./partners.component.css']
 })
 export class PartnersComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['select', 'name', 'cui', 'email', 'phoneNumber', 'bill', 'country'];
+  displayedColumns: string[] = ['select', 'name', 'cui', 'email', 'phoneNumber', 'country'];
   dataSource: MatTableDataSource<Partner>;
   searchControl: FormControl = new FormControl('');
   initialSelection = [];
@@ -40,8 +40,8 @@ export class PartnersComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     // Example data
     const PARTNER_DATA: Partner[] = [
-      { id: 1, name: 'Partner 1', cui: 'CUI 1', email: 'partner1@example.com', phoneNumber: '123456789', bill: 'RON', country: 'Country 1' },
-      { id: 2, name: 'Partner 2', cui: 'CUI 2', email: 'partner2@example.com', phoneNumber: '987654321', bill: 'EURO', country: 'Country 2' },
+      { id: 1, name: 'Partner 1', cui: 'CUI 1', email: 'partner1@example.com', phoneNumber: '123456789', country: 'Country 1', address: 'asd', city: 'asdfa', postalCode: 'asdfasf' },
+      { id: 2, name: 'Partner 2', cui: 'CUI 2', email: 'partner2@example.com', phoneNumber: '987654321', country: 'Country 2', address: 'asd', city: 'asdfa', postalCode: 'asdfasf' },
       // Add more data as needed
     ];
 

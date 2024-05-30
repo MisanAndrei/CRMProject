@@ -40,8 +40,8 @@ export class CategoriesComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     // Example data
     const CATEGORIES_DATA: Category[] = [
-      { id: 1, name: 'Category 1', type: 'Expense', color: 'red' },
-      { id: 2, name: 'Category 2', type: 'Income', color: 'red' },
+      { id: 1, name: 'Category 1', type: 'Expense', colorCode: 'red' },
+      { id: 2, name: 'Category 2', type: 'Income', colorCode: 'red' },
       // Add more data as needed
     ];
 

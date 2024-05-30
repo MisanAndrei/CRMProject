@@ -1,78 +1,72 @@
-<h1>Implicit</h1>
-<div class="section">
-    <h2>Preferinte generale</h2>
-    <div class="row">
-      <!-- Second Column -->
- 
-        
-        <div class="column">
-            <mat-form-field class="full-width">
-              <mat-label>Cont</mat-label>
-              <input matInput placeholder="Cont">
-            </mat-form-field>
-            <mat-form-field class="full-width">
-              <mat-label>Taxa</mat-label>
-              <input matInput placeholder="Taxa">
-            </mat-form-field>
-          </div>
-          <div class="column">
-            <mat-form-field class="full-width">
-              <mat-label>Moneda</mat-label>
-              <input matInput placeholder="Moneda">
-            </mat-form-field>
-            <mat-form-field class="full-width">
-              <mat-label>Metoda de plata</mat-label>
-              <input matInput placeholder="Metoda de plata">
-            </mat-form-field>
+<div class="header">
+  <h1>Implicit</h1>
+</div>
+<form>
+  <div>
+    <h4>Preferinte generale</h4>
+    <div class="separator-line"></div>
 
+    <div class="subsection">
+        <div class="double-input-container">
+            <div class="input-wrapper">
+              <label for="cont">Cont</label>
+              <input id="cont" formControlName="cont" type="text" class="set-border" placeholder="Introduceți Cont"/>
+            </div>
+            <div class="input-wrapper">
+              <label for="taxa">Taxa</label>
+              <input id="taxa" formControlName="taxa" type="text" class="set-border" placeholder="Introduceți Taxa"/>
+            </div>
+        </div>
+        <div class="double-input-container">
+            <div class="input-wrapper">
+              <label for="moneda">Moneda</label>
+              <input id="moneda" formControlName="moneda" type="text" class="set-border" placeholder="Introduceți Moneda"/>
+            </div>
+            <div class="input-wrapper">
+              <label for="metoda">Metoda de plata</label>
+              <input id="metoda" formControlName="metoda" type="text" class="set-border" placeholder="Introduceți Metoda de Plata"/>
+            </div>
+        </div>
+    </div>
+  
+
+    <div class="section-delimiter">
+      <h4>Categorie</h4>
+      <div class="separator-line"></div>
+
+      <div class="subsection">
+        <div class="double-input-container">
+          <div class="input-wrapper">
+              <label for="venit">Venituri pe Categorii</label>
+              <input id="venit" formControlName="venit" type="text" placeholder="Introduceți Venituri pe Categorii"/>
           </div>
+          <div class="input-wrapper">
+              <label for="cheltuieli">Cheltuieli pe Categorii</label>
+              <input id="cheltuieli" formControlName="cheltuieli" type="text" placeholder="Introduceți Cheltuieli pe Categorii"/>
+          </div>
+          </div>
+      </div>
+    </div>
+
+    <div class="section-delimiter">
+      <h4>Alta</h4>
+      <div class="separator-line"></div>
+
+      <div class="subsection">
+          <div class="double-input-container">
+              <div class="input-wrapper">
+                <label for="limba">Limba</label>
+                <input id="limba" formControlName="limba" type="text" placeholder="Introduceți Limba"/>
+              </div>
+              <div class="input-wrapper">
+                <label for="inregistrari">Inregistrari pe Pagina</label>
+                <input id="inregistrari" formControlName="inregistrari" type="text" placeholder="Introduceți Inregistrari pe Pagina"/>
+              </div>
+          </div>
+      </div>
     </div>
   </div>
-
-  <div class="section">
-    <h2>Categorie</h2>
-    <div class="row">
-      <!-- Second Column -->
- 
-        
-        <div class="column">
-            <mat-form-field class="full-width">
-              <mat-label>Venituri pe categorii</mat-label>
-              <input matInput placeholder="Venituri pe categorii">
-            </mat-form-field>
-           
-          </div>
-          <div class="column">
-            <mat-form-field class="full-width">
-              <mat-label>Cheltuieli pe categorii</mat-label>
-              <input matInput placeholder="Cheltuieli pe categorii">
-            </mat-form-field>
-
-
-          </div>
-    </div>
+  <div class="button-container">
+    <button class="button content" type="submit">Salvează</button>
   </div>
-
-  <div class="section">
-    <h2>Alta</h2>
-    <div class="row">
-      <!-- Second Column -->
- 
-        
-        <div class="column">
-            <mat-form-field class="full-width">
-              <mat-label>Limba</mat-label>
-              <input matInput placeholder="Limba">
-            </mat-form-field>
-           
-          </div>
-          <div class="column">
-            <mat-form-field class="full-width">
-              <mat-label>Inregistrari pe pagina</mat-label>
-              <input matInput placeholder="Inregistrari pe pagina">
-            </mat-form-field>
-
-
-          </div>
-    </div>
-  </div>
+</form>

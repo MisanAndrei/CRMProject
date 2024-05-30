@@ -17,7 +17,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./accounts.component.css']
 })
 export class AccountsComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['select', 'name', 'bankName', 'phone', 'sold'];
+  displayedColumns: string[] = ['select', 'name', 'accountNumber', 'sold'];
   dataSource: MatTableDataSource<Account>;
   searchControl: FormControl = new FormControl('');
   initialSelection = [];
@@ -40,8 +40,8 @@ export class AccountsComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     // Example data
     const ACCOUNTS_DATA: Account[] = [
-      { id: 1, name: 'Account 1', bankName: 'Bank 1', phone: '123456789', sold: '1000 RON' },
-      { id: 2, name: 'Account 2', bankName: 'Bank 2', phone: '987654321', sold: '2000 RON' },
+      { id: 1, name: 'Account 1', accountNumber: 'Bank 1', sold: 1000 },
+      { id: 2, name: 'Account 2', accountNumber: 'Bank 2', sold: 1000 },
       // Add more data as needed
     ];
 

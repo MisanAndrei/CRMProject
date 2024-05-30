@@ -1,21 +1,14 @@
 export interface Element {
-    id: number;
-    nume: string;
-    categorie: string;
-    culoare?: string;
-    taxe: string;
-    pretAchizitie: number;
-    pretVanzare: number;
-  }
-
-  export interface Partner {
-    id: number;
-    name: string;
-    cui: string;
-    email: string;
-    phoneNumber: string;
-    country: string;
-    bill: string;
+  id?: number;
+  type: string;
+  name: string;
+  categoryName: string;
+  categoryId: number;
+  description?: string;
+  aquisitionPrice?: number;
+  sellingPrice?: number;
+  taxValue: number;
+  taxId: number;
   }
 
   export interface Bill {
@@ -29,15 +22,15 @@ export interface Element {
   }
 
   export interface Account {
-    id: number;
+    id?: number;
     name: string;
-    bankName: string;
-    phone: string;
-    sold: string;
+    accountNumber: string;
+    description?: string;
+    sold: number;
   }
 
   export interface Transaction {
-    id: number;
+    id?: number;
     date: string;
     number: string;
     type: string;
@@ -49,10 +42,10 @@ export interface Element {
   }
 
   export interface Category {
-    id: number;
+    id?: number;
     name: string;
     type: string;
-    color: string;
+    colorCode: string;
   }
 
   export interface Currency {
@@ -64,18 +57,23 @@ export interface Element {
   }
 
   export interface Tax {
-    id: number;
+    id?: number;
     name: string;
     type?: string;
-    percent?: number;
+    value?: number;
   }
 
   export interface Transfer {
-    id: number;
-    payingAccount: string;
-    receivingAccount: string;
-    sum: number;
-    date: string;
+    id?: number;
+    date: Date;
+    amount: number;
+    fromBankAccountId: number;
+    fromBankAccountName?: string;
+    toBankAccountId: number;
+    toBankAccountName?: string;
+    description?: string;
+    paymentMethod: string;
+    reference?: string;
   }
 
   export interface CashFlow {
@@ -91,10 +89,40 @@ export interface Element {
     costsSum: number;
   }
 
-    export interface Organization {
-      name: string;
-      tenantId: string;
-      license: string;
-      dbSchemaName: string;
-      status: string;
-    }
+  export interface OrganizationResponse {
+    name: string;
+    tenantId: string;
+    license: string;
+    dbSchema: string;
+    status: string;
+    colorCode: string;
+  }
+  
+  export interface Partner {
+    id: number;
+    name: string;
+    cui: string;
+    email: string;
+    phoneNumber?: string;
+    country: string;
+    website?: string;
+    reference?: string;
+    address: string;
+    city: string;
+    county?: string;
+    postalCode: string;
+    image?: string;
+  }
+
+  export interface Organization {
+    name: string;
+    email: string;
+    phone: string;
+    cui: string;
+    address: string;
+    city: string;
+    image: string;
+    postalCode: string;
+    county: string;
+    country: string;
+  }

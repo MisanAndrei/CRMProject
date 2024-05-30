@@ -11,8 +11,8 @@
     <div class="selection-container">
       <label class="margin-label bold-label">Tip</label>
       <div class="button-container-m">
-        <div class="selection-option" [ngClass]="{'selected': elementType === 1}" (click)="selectElementType(1)">Produs</div>
-        <div class="selection-option margin-label" [ngClass]="{'selected': elementType === 2}" (click)="selectElementType(2)">Serviciu</div>
+        <div class="selection-option" [ngClass]="{'selected': type === 1}" (click)="selectElementType(1)">Produs</div>
+        <div class="selection-option margin-label" [ngClass]="{'selected': type === 2}" (click)="selectElementType(2)">Serviciu</div>
       </div>
     </div>
   
@@ -21,13 +21,15 @@
       <div class="input-container selection-container">
         <label class="margin-label" for="nume">Nume</label>
         <mat-form-field class="input-size">
-        <input matInput id="nume" [(ngModel)]="nume">
+        <input matInput id="nume" [(ngModel)]="name">
         </mat-form-field>
       </div>
       <div class="input-container selection-container">
-        <label class="margin-label" for="categorie">Categorie</label>
         <mat-form-field class="input-size">
-        <input matInput id="categorie" [(ngModel)]="categorie">
+          <mat-label>Categorie</mat-label>
+          <mat-select (selectionChange)="onCategorySelected($event.value)">
+            <mat-option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</mat-option>
+          </mat-select>
         </mat-form-field>
       </div>
     </div>
@@ -36,7 +38,7 @@
     <div class="selection-container">
       <label class="margin-label" for="descriere">Descriere</label>
       <mat-form-field  class="description"> 
-      <textarea class="description" matInput id="descriere" [(ngModel)]="descriere" rows="4" cols="8"></textarea>
+      <textarea class="description" matInput id="descriere" [(ngModel)]="description" rows="4" cols="8"></textarea>
     </mat-form-field>
     </div>
   </div>
@@ -52,7 +54,7 @@
             <div class="input-field">
               <label class="margin-label" for="acquireInfoInput">Cost de achiziție: </label>
               <mat-form-field class="input-size">
-              <input matInput type="text" id="acquireInfoInput" [(ngModel)]="acquireInfoValue" [disabled]="!acquireInfo">
+              <input matInput type="text" id="acquireInfoInput" [(ngModel)]="aquisitionPrice" [disabled]="!acquireInfo">
             </mat-form-field>
             </div>
           </div>
@@ -64,31 +66,19 @@
             <div class="input-field">
               <label class="margin-label bold-label" for="sellingInfoInput">Preț de vânzare: </label>
               <mat-form-field class="input-size">
-              <input matInput type="text" id="sellingInfoInput" [(ngModel)]="sellingInfoValue" [disabled]="!sellingInfo">
+              <input matInput type="text" id="sellingInfoInput" [(ngModel)]="sellingPrice" [disabled]="!sellingInfo">
             </mat-form-field>
             </div>
           </div>
     </div>
 
     <div class="input-row">
-        <mat-form-field>
-            <mat-label>Taxă</mat-label>
-            <mat-select [formControl]="taxesControl" multiple>
-          
-              <mat-select-trigger>
-                <mat-chip-listbox>
-                  <mat-chip *ngFor="let tax of taxesControl.value"
-                    [removable]="true" (removed)="onTaxRemoved(tax)">
-                    {{ tax.name }}
-                    <mat-icon matChipRemove>cancel</mat-icon>
-                  </mat-chip>
-                </mat-chip-listbox>
-              </mat-select-trigger>
-          
-              <mat-option *ngFor="let tax of taxes" [value]="tax">{{tax.name}}</mat-option>
-          
-            </mat-select>
-          </mat-form-field>
+      <mat-form-field class="input-size">
+        <mat-label>Taxă</mat-label>
+        <mat-select (selectionChange)="onTaxSelected($event.value)">
+          <mat-option *ngFor="let tax of taxes" [value]="tax.id">{{ tax.name }} ({{ tax.value }}%)</mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
   </div>
   </div>

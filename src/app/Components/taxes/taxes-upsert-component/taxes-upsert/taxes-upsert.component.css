@@ -1,5 +1,4 @@
 form {
-    max-width: 600px;
     margin: auto;
   }
   
@@ -75,5 +74,9 @@ form {
   .selected-color-name {
     margin-top: 10px;
     font-weight: bold;
+  }
+
+  .header {
+    padding-bottom: 6px;
   }
   

@@ -39,8 +39,8 @@ export class TaxesComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     // Example data
     const TAX_DATA: Tax[] = [
-      { id: 1, name: 'Tax 1', type: 'Type 1', percent: 10 },
-      { id: 2, name: 'Tax 2', type: 'Type 2', percent: 15 },
+      { id: 1, name: 'Tax 1', type: 'Type 1', value: 10 },
+      { id: 2, name: 'Tax 2', type: 'Type 2', value: 15 },
       // Add more data as needed
     ];
 

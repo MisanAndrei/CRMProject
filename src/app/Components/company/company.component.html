@@ -1,65 +1,86 @@
 <div class="header">
   <h1>Companie</h1>
 </div>
-<div class="section">
-    <h2>First Section</h2>
-    <div class="row">
+<form [formGroup]="companyForm" (ngSubmit)="onSubmit()">
+  <div>
+    <h4>Preferinţe generale</h4>
+    <div class="separator-line"></div>
+
+    <div class="subsection">
       <!-- First Column -->
-      <div class="column">
-        <mat-form-field class="full-width">
-          <mat-label>Nume</mat-label>
-          <input matInput placeholder="Nume">
-        </mat-form-field>
-        <mat-form-field class="full-width">
-          <mat-label>Email</mat-label>
-          <input matInput placeholder="Email">
-        </mat-form-field>
-        <mat-form-field class="full-width">
-          <mat-label>Telefon</mat-label>
-          <input matInput placeholder="Telefon">
-        </mat-form-field>
-        <mat-form-field class="full-width">
-          <mat-label>Cod unic de înregistrare</mat-label>
-          <input matInput placeholder="Cod unic de inregistrare">
-        </mat-form-field>
-      </div>
-      <!-- Second Column (Empty for now) -->
-      <div class="column">
-        <div class="image-container">
-            <img src="path/to/image.jpg" alt="Image" class="image">
+      <div class="double-input-container">
+        <div class="input-wrapper">
+          <div>
+            <label for="name">Nume</label>
+            <input id="name" formControlName="name" type="text" class="set-border" placeholder="Introduceți Nume"/>
           </div>
+          <div>
+            <label for="email">Email</label>
+            <input id="email" formControlName="email" type="email" placeholder="Introduceți Email"/>
+          </div>
+          <div class="input-wrapper">
+            <label for="phone">Telefon</label>
+            <input id="phone" formControlName="phone" type="text" placeholder="Introduceți Telefon"/>
+          </div>
+  
+          <div class="input-wrapper">
+            <label for="cui">Cod unic de înregistrare</label>
+            <input id="cui" formControlName="cui" type="text" placeholder="Cod unic de înregistrare"/>
+          </div>
+        </div>
+      
+        <div class="input-wrapper">
+          <div class="image-container">
+            <img [src]=imageBase64 alt="Image" class="image">
+            
+          </div>
+          <input type="file" (change)="onImageChange($event)">
+        </div>
       </div>
     </div>
   </div>
   
-  <div class="section">
-    <h2>Second Section</h2>
-    <div class="row">
-      <!-- Second Column -->
- 
-        <mat-form-field class="container-width">
-          <textarea matInput placeholder="Adresa" rows="5" class="container-width"></textarea>
-        </mat-form-field>
-        <div class="column">
-            <mat-form-field class="full-width">
-              <mat-label>Oraș / Orașe</mat-label>
-              <input matInput placeholder="Oras / Orase">
-            </mat-form-field>
-            <mat-form-field class="full-width">
-              <mat-label>Cod Postal</mat-label>
-              <input matInput placeholder="Cod Postal">
-            </mat-form-field>
-          </div>
-          <div class="column">
-            <mat-form-field class="full-width">
-              <mat-label>Județ</mat-label>
-              <input matInput placeholder="Judet">
-            </mat-form-field>
-            <mat-form-field class="full-width">
-              <mat-label>Țara</mat-label>
-              <input matInput placeholder="Tara">
-            </mat-form-field>
+  <div class="section-delimiter">
+    <h4>Adresă</h4>
+    <div class="separator-line"></div>
 
-          </div>
+    <div class="subsection">
+      <div class="single-input-wrapper">
+        <label for="address">Adresa</label>
+        <textarea id="address" formControlName="address" rows="3" placeholder="Introduceți Adresa" class="container-width"></textarea>
+      </div>
+      <div class="double-input-container">
+        <div class="input-wrapper">
+          <label for="city">Oraș</label>
+          <input id="city" formControlName="city" type="text" placeholder="Introduceți Oraș"/>
+        </div>
+        <div class="input-wrapper">
+          <label for="postalCode">Cod Poștal</label>
+          <input id="postalCode" formControlName="postalCode" type="text" placeholder="Introduceți Cod Poștal"/>
+        </div>
+      </div>
+      <div class="double-input-container">
+        <div class="input-wrapper">
+          <label for="county">Județ</label>
+          <input id="county" formControlName="county" type="text" placeholder="Introduceți Județ"/>
+        </div>
+        <div class="input-wrapper">
+          <label for="country">Țară</label>
+          <input id="country" formControlName="country" type="text" placeholder="Introduceți Țară"/>
+        </div>
+      </div>
     </div>
   </div>
+
+  <div class="button-container">
+    <div class="color-picker-wrapper">
+      <label for="colorPicker">Selectează o culoare:</label>
+      <input type="color" id="colorPicker" #colorInput formControlName="selectedColor" class="hidden-color-input" />
+      
+      <div class="color-display">
+        <div [style.background-color]="selectedColor" class="color-circle" (click)="openColorPicker()" ></div> 
+      </div>
+    </div>
+    <button class="button content" type="submit">Salvează</button>
+  </div>
+</form>

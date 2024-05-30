@@ -1,5 +1,4 @@
 form {
-    max-width: 600px;
     margin: auto;
   }
   
@@ -24,56 +23,29 @@ form {
 
    .color-picker-wrapper {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    /* border: 1px solid; */
-    border-radius: 8px;
-    background-color: #f9f9f9;
-    margin-top: 1em;
-    width: 330px;
+    flex-direction: row;
+    padding: 1em;
+    border: 1px solid;
+    width: 300px;
+    justify-content: space-between;
+    height: 60px;
+    background-color: white;
+
+  }
+
+  .hidden-color-input {
+    display: none;
   }
   
-  .input-wrapper {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+  .color-display {
+    flex-direction: row;
   }
   
-  .color-name {
-    width: 100%;
-    margin-bottom: 10px; /* Spațiul între input și opțiuni */
-    padding: 8px;
-  }
-  
-  .color-options {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  
-  /* Stiluri pentru cercurile colorate */
   .color-circle {
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    border: 1px solid #000;
+    margin-right: 10px;
     cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-  
-  .color-circle.selected {
-    border: 2px solid #000;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  }
-  
-  .color-circle:hover {
-    transform: scale(1.1);
-  }
-  
-  /* Ajustează marginile */
-  .selected-color-name {
-    margin-top: 10px;
-    font-weight: bold;
   }
   
