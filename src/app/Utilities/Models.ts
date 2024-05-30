@@ -30,7 +30,7 @@ export interface Element {
   }
 
   export interface Transaction {
-    id: number;
+    id?: number;
     date: string;
     number: string;
     type: string;
@@ -89,7 +89,7 @@ export interface Element {
     costsSum: number;
   }
 
-  export interface Organization {
+  export interface OrganizationResponse {
     name: string;
     tenantId: string;
     license: string;
@@ -112,4 +112,17 @@ export interface Element {
     county?: string;
     postalCode: string;
     image?: string;
+  }
+
+  export interface Organization {
+    name: string;
+    email: string;
+    phone: string;
+    cui: string;
+    address: string;
+    city: string;
+    image: string;
+    postalCode: string;
+    county: string;
+    country: string;
   }
