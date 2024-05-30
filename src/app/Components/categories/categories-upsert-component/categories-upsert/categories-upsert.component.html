@@ -28,31 +28,18 @@
           </select>
         </div>
       </div>
-      <div class="color-picker-wrapper">
-        <label for="colorPicker">Selectează o culoare:</label>
-        <div class="single-input-wrapper">
-          <input
-            type="text"
-            class="color-name"
-            [value]="selectedColor.name"
-            readonly
-          />
-          <div class="color-options">
-            <div
-              *ngFor="let color of colorOptions"
-              class="color-circle"
-              [style.background-color]="color.hex"
-              [class.selected]="color.hex === selectedColor.hex"
-              (click)="onColorChange(color)"
-            ></div>
-          </div>
-          <input type="hidden" formControlName="selectedColor" />
-        </div>
+
+    <div class="color-picker-wrapper">
+      <label for="colorPicker">Selectează o culoare:</label>
+      <input type="color" id="colorPicker" #colorInput formControlName="selectedColor" class="hidden-color-input" />
+      
+      <div class="color-display">
+        <div [style.background-color]="selectedColor" class="color-circle" (click)="openColorPicker()" ></div> 
       </div>
     </div>
+    
     <div class="button-container">
       <button class="button content" type="submit">Salvează</button>
     </div>
   </div>
-</form>
   

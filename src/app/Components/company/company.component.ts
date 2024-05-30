@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../../Services/ApiService'; // Update the path as necessary
 
@@ -22,7 +22,10 @@ interface Organization {
 })
 export class CompanyComponent implements OnInit {
   companyForm: FormGroup;
+  selectedColor: string = '#7abf95';
   imageBase64: string | ArrayBuffer | null = '';
+
+  @ViewChild('colorInput') colorInput!: ElementRef<HTMLInputElement>;
 
   constructor(
     private fb: FormBuilder,
@@ -38,12 +41,21 @@ export class CompanyComponent implements OnInit {
       postalCode: ['', Validators.required],
       county: ['', Validators.required],
       country: ['', Validators.required],
-      image: ['']
+      image: [''],
+      selectedColor: [this.selectedColor]
     });
   }
 
   ngOnInit(): void {
+    this.companyForm.get('selectedColor')!.valueChanges.subscribe((value:string) => {
+      this.selectedColor = value;
+    })
+
     this.fetchCompanyDetails();
+  }
+
+  openColorPicker(): void {
+    this.colorInput.nativeElement.click();
   }
 
   fetchCompanyDetails(): void {

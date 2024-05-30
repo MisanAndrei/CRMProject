@@ -47,3 +47,36 @@
     margin-top: 30px;
     margin-left: 50px;
   }
+
+  .color-picker-wrapper {
+    display: flex;
+    flex-direction: row;
+    padding: 1em;
+    border: 1px solid;
+    width: 300px;
+    justify-content: space-between;
+    height: 60px;
+    background-color: white;
+
+  }
+
+  .hidden-color-input {
+    display: none;
+  }
+  
+  .color-display {
+    flex-direction: row;
+  }
+  
+  .color-circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  
+  .button-container {
+    justify-content: space-around;;
+
+  }

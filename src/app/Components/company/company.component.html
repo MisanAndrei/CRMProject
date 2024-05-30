@@ -73,6 +73,14 @@
   </div>
 
   <div class="button-container">
+    <div class="color-picker-wrapper">
+      <label for="colorPicker">Selectează o culoare:</label>
+      <input type="color" id="colorPicker" #colorInput formControlName="selectedColor" class="hidden-color-input" />
+      
+      <div class="color-display">
+        <div [style.background-color]="selectedColor" class="color-circle" (click)="openColorPicker()" ></div> 
+      </div>
+    </div>
     <button class="button content" type="submit">Salvează</button>
   </div>
 </form>
