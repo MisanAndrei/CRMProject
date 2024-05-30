@@ -1,18 +1,18 @@
 .chart-container-pie {
-display: block;
-width: 50%;
-margin-top: 50px;
-align-items: flex-start;
+  display: block;
+  width: 40%;
+  margin-top: 50px;
+  align-items: flex-start;
 }
 
 .chart-container-bar {
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-    margin-left: 37rem;
-    margin-bottom: 20px;
-    align-items: flex-end;
-    }
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin-left: 37rem;
+  margin-bottom: 20px;
+  align-items: flex-end;
+}
 
 .chart-canvas {
     width: 400px !important; 
