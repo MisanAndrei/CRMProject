@@ -1,19 +1,32 @@
-import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
+import { Router, NavigationEnd, Event } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+  styleUrls: ['./app.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   @ViewChild('sidenav') sidenav!: MatSidenav;
   isExpanded = true;
-  showSubmenu: boolean = false;
+  showSubmenu = false;
   isShowing = false;
-  showSubSubMenuBank: boolean = false;
-  showSubSubMenuSettings: boolean = false;
+  showSubSubMenuBank = false;
+  showSubSubMenuSettings = false;
+  isLoginRoute = false;
+
+  constructor(private router: Router) {}
+
+  ngOnInit() {
+    this.router.events.pipe(
+      filter((event: Event): event is NavigationEnd => event instanceof NavigationEnd)
+    ).subscribe((event: NavigationEnd) => {
+      this.isLoginRoute = event.url === '/login';
+    });
+  }
 
   mouseenter() {
     if (!this.isExpanded) {

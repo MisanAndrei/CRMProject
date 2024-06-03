@@ -1,4 +1,4 @@
-<mat-toolbar class="example-toolbar">
+<mat-toolbar class="example-toolbar" *ngIf="!isLoginRoute">
   <button mat-icon-button (click)="isExpanded = !isExpanded">
     <mat-icon class="icon-meniu">menu</mat-icon>
   </button>
@@ -7,7 +7,7 @@
   </div>
 </mat-toolbar>
 <mat-sidenav-container class="example-container">
-  <mat-sidenav
+  <mat-sidenav *ngIf="!isLoginRoute"
     #sidenav
     mode="side"
     opened="true"

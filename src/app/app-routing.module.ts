@@ -24,7 +24,7 @@ import { CategoriesUpsertComponent } from './Components/categories/categories-up
 import { LoginComponent } from './Components/login/login/login.component';
 
 
-const routes: Routes = [{ path: '', redirectTo: '/Tabloudebord', pathMatch: 'full' },
+const routes: Routes = [{ path: '', redirectTo: '/login', pathMatch: 'full' },
 { path: 'Tabloudebord', component: DashboardComponent},
 { path: 'Elemente', component: ElementsComponent},
 { path: 'AdaugaElement', component: UpsertElementComponent},
