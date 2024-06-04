@@ -5,50 +5,90 @@
       <div class="form-group">
         <label for="email">Email</label>
         <div class="input-container-global large">
-          <input matInput placeholder="Introdu aici email-ul" class="legacy-input">
+          <input
+            matInput
+            placeholder="Introdu aici email-ul"
+            class="legacy-input"
+          />
         </div>
-        <div *ngIf="loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)">
-          <small *ngIf="loginForm.get('email')?.errors?.['required']">Emailul este necesar.</small>
-          <small *ngIf="loginForm.get('email')?.errors?.['email']">Emailul nu este valid.</small>
+        <div
+          *ngIf="
+            loginForm.get('email')?.invalid &&
+            (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)
+          "
+        >
+          <small *ngIf="loginForm.get('email')?.errors?.['required']">
+            Emailul este necesar.
+          </small>
+          <small *ngIf="loginForm.get('email')?.errors?.['email']">
+            Emailul nu este valid.
+          </small>
         </div>
       </div>
-  
+
       <div class="form-group">
         <label for="password">Parola</label>
         <div class="input-container-global large">
-          <input matInput placeholder="Introdu aici parola" class="legacy-input" type="password">
+          <input
+            matInput
+            placeholder="Introdu aici parola"
+            class="legacy-input"
+            type="password"
+          />
         </div>
-        <div *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)">
-          <small *ngIf="loginForm.get('password')?.errors?.['required']">Parola este necesară.</small>
-          <small *ngIf="loginForm.get('password')?.errors?.['minlength']">Parola trebuie să aibă cel puțin 6 caractere.</small>
+        <div
+          *ngIf="
+            loginForm.get('password')?.invalid &&
+            (loginForm.get('password')?.dirty ||
+              loginForm.get('password')?.touched)
+          "
+        >
+          <small *ngIf="loginForm.get('password')?.errors?.['required']">
+            Parola este necesară.
+          </small>
+          <small *ngIf="loginForm.get('password')?.errors?.['minlength']">
+            Parola trebuie să aibă cel puțin 6 caractere.
+          </small>
         </div>
       </div>
 
       <div class="form-group">
-        <label for="license">Licenta</label>
+        <label for="license">Licența</label>
         <div class="input-container-global large">
-          <input matInput placeholder="Introdu aici licenta" class="legacy-input">
+          <input
+            matInput
+            placeholder="Introdu aici licența"
+            class="legacy-input"
+          />
         </div>
-        <div *ngIf="loginForm.get('license')?.invalid && (loginForm.get('license')?.dirty || loginForm.get('license')?.touched)">
-          <small *ngIf="loginForm.get('license')?.errors?.['required']">Parola este necesară.</small>
-
+        <div
+          *ngIf="
+            loginForm.get('license')?.invalid &&
+            (loginForm.get('license')?.dirty ||
+              loginForm.get('license')?.touched)
+          "
+        >
+          <small *ngIf="loginForm.get('license')?.errors?.['required']">
+            Parola este necesară.
+          </small>
         </div>
       </div>
-  
+
       <div class="form-group">
         <label>
-          <input type="checkbox" formControlName="rememberMe"> Ține-mă minte
+          <input type="checkbox" formControlName="rememberMe" />
+          Ține-mă minte
         </label>
       </div>
-  
+
       <div class="form-group">
         <a href="#" class="forgot-password">Am uitat parola</a>
       </div>
-  
+
       <button type="submit" [disabled]="loginForm.invalid">Conectare</button>
     </form>
   </div>
-    <div class="png-container">
-      <img class="img" src="assets/images/login.png">
-    </div>
+  <div class="png-container">
+    <img class="img" src="assets/images/login.png" />
+  </div>
 </div>
