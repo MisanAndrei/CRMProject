@@ -1,14 +1,14 @@
 .login-container {
   max-width: 400px;
   padding: 20px;
-  margin-top: 4rem;
+  margin-top: 64px;
 }
 
 .login {
   display: flex;
   justify-content: center;
   height: 750px;
-  background-image: linear-gradient(to top, #cde1f6 0%, white 100%);
+  background-image: linear-gradient(to left, #cde1f6 0%, white 100%);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
   margin-top: 95px;
   margin-bottom: 95px;
