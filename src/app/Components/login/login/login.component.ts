@@ -21,9 +21,8 @@ export class LoginComponent {
 
   onSubmit(): void {
     if (this.loginForm.valid) {
-      // Aici poți adăuga logica de autentificare
       console.log(this.loginForm.value);
-      this.router.navigate(['/Tabloudebord']); // Redirecționare la dashboard după login
+      this.router.navigate(['/Tabloudebord']); 
     }
   }
 }
