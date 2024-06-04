@@ -22,7 +22,7 @@ export class LoginComponent {
   onSubmit(): void {
     if (this.loginForm.valid) {
       console.log(this.loginForm.value);
-      this.router.navigate(['/Tabloudebord']); 
+      this.router.navigate(['/Tabloudebord']); ; // Redirecționare la dashboard după login
     }
   }
 }
