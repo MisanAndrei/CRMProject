@@ -47,18 +47,26 @@
     <h4>Adaugă Factură</h4>
     <h6 class="descr-subsection">Introduceți factura asociata tranzacției.</h6>
     <div class="separator-line"></div>
-
     <div class="subsection">
-      <div class="single-input-wrapper">
-        <label for="invoice">Factură</label>
-        <select id="invoice" formControlName="invoice">
-          <option *ngFor="let invoice of invoices" [value]="invoice.id">{{ invoice.name }}</option>
-        </select>
+      <div class="double-input-container">
+        <div class="input-wrapper">
+          <label for="invoice">Factură</label>
+          <select id="invoice" formControlName="invoice">
+            <option *ngFor="let invoice of invoices" [value]="invoice.id">{{ invoice.name }}</option>
+          </select>
+        </div>
+
+        <div class="input-wrapper">
+          <label for="reference">Referință</label>
+          <input id="reference" formControlName="reference" type="text" placeholder="Introduceți Referință"/>
+        </div>
       </div>
     </div>
   </div>
+
 
   <div class="button-container">
     <button class="button content" type="submit">Salvează tranzacția</button>
   </div>
   </form>
+

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 interface TaxOption {
   id: number;
@@ -7,7 +8,7 @@ interface TaxOption {
   value: number;
 }
 
-interface Customer {
+interface Partner {
   id: number;
   name: string;
   cui: string;
@@ -33,9 +34,9 @@ export class BillUpsertComponent implements OnInit {
     { id: 3, description: 'VAT 10%', value: 10 },
     { id: 4, description: 'Sales Tax 8%', value: 8 }
   ];
-  customers: Customer[] = [
-    { id: 1, name: 'Customer A', cui: 'CUI12345', city: 'City A' },
-    { id: 2, name: 'Customer B', cui: 'CUI67890', city: 'City B' }
+  partners: Partner[] = [
+    { id: 1, name: 'Partner A', cui: 'CUI12345', city: 'City A' },
+    { id: 2, name: 'Partner B', cui: 'CUI67890', city: 'City B' }
   ];
   predefinedItems: Item[] = [
     { id: 1, name: 'Item A', price: 100 },
@@ -44,18 +45,17 @@ export class BillUpsertComponent implements OnInit {
   ];
   overallTotal: number = 0;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private router: Router) {
     this.transactionForm = this.fb.group({
       transactionType: ['purchase', Validators.required],
       dateOfBill: ['', Validators.required],
       dueDate: ['', Validators.required],
       numberOfBill: ['', Validators.required],
       orderNumber: ['', Validators.required],
-      customer: [''],
-      customerName: [{ value: '', disabled: false }, Validators.required],
+      partner: [''],
+      partnerName: [{ value: '', disabled: false }, Validators.required],
       customerCui: [{ value: '', disabled: false }, Validators.required],
       customerCity: [{ value: '', disabled: false }, Validators.required],
-      date: ['', Validators.required],
       items: this.fb.array([])
     });
   }
@@ -85,18 +85,18 @@ export class BillUpsertComponent implements OnInit {
     this.updateOverallTotal();
   }
 
-  onCustomerChange(event: Event): void {
+  onPartnerChange(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
-    const customerId = Number(selectElement.value);
-    const selectedCustomer = this.customers.find(c => c.id === customerId);
+    const partnerId = Number(selectElement.value);
+    const selectedPartner = this.partners.find(c => c.id === partnerId);
 
-    if (selectedCustomer) {
+    if (selectedPartner) {
       this.transactionForm.patchValue({
-        customerName: selectedCustomer.name,
-        customerCui: selectedCustomer.cui,
-        customerCity: selectedCustomer.city
+        partnerName: selectedPartner.name,
+        customerCui: selectedPartner.cui,
+        customerCity: selectedPartner.city
       });
-      this.transactionForm.get('customerName')?.disable();
+      this.transactionForm.get('partnerName')?.disable();
       this.transactionForm.get('customerCui')?.disable();
       this.transactionForm.get('customerCity')?.disable();
     } else {
@@ -105,7 +105,7 @@ export class BillUpsertComponent implements OnInit {
         customerCui: '',
         customerCity: ''
       });
-      this.transactionForm.get('customerName')?.enable();
+      this.transactionForm.get('partnerName')?.enable();
       this.transactionForm.get('customerCui')?.enable();
       this.transactionForm.get('customerCity')?.enable();
     }
@@ -164,6 +164,10 @@ export class BillUpsertComponent implements OnInit {
     } else {
       console.log('Form is invalid');
     }
+  }
+  addPartner() {
+    // Navigate to the page for adding a new bill
+    this.router.navigate(['/Test']);
   }
 
   isPurchase(): boolean {

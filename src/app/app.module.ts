@@ -49,6 +49,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 import { BaseChartDirective } from 'ng2-charts';
 import { LoginComponent } from './Components/login/login/login.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -100,7 +101,8 @@ import { LoginComponent } from './Components/login/login/login.component';
     MatSelectModule,
     NgbModule,
     BaseChartDirective,
-    HttpClientModule
+    HttpClientModule,
+    MatTooltipModule
   ],
   providers: [provideCharts(withDefaultRegisterables()),
   ApiService],
