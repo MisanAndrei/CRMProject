@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Partner } from '../../../Utilities/Models';
 import { DeleteDialogComponent } from '../../dialogs/delete-dialog-component/delete-dialog.component';
+import { ApiService } from '../../../Services/ApiService';
 
 @Component({
   selector: 'app-partners',
@@ -28,7 +29,7 @@ export class PartnersComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private _liveAnnouncer: LiveAnnouncer, private dialog: MatDialog, private router: Router) {
+  constructor(private _liveAnnouncer: LiveAnnouncer, private dialog: MatDialog, private router: Router, private apiService: ApiService) {
     this.dataSource = new MatTableDataSource<Partner>();
     
   }
@@ -110,5 +111,20 @@ export class PartnersComponent implements OnInit, AfterViewInit {
   // For example, adding a new partner
   addPartner() {
     this.router.navigate(['/PartenerNou']);
+  }
+
+  fetchData(){
+    this.apiService.get<Partner[]>('partner').subscribe({
+      next: (data: Partner[]) => {
+        this.dataSource.data = data;
+        console.log(data);
+      },
+      error: (error) => {
+        console.error('Error fetching partners', error);
+      },
+      complete: () => {
+        console.info('partners data fetch complete');
+      }
+    });
   }
 }

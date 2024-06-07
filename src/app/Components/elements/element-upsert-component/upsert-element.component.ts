@@ -127,12 +127,24 @@ export class UpsertElementComponent {
     };
 
     if (this.isEditMode) {
-      this.apiService.put(`/elements`, element).subscribe(() => {
-        this.router.navigate(['/elements']);
+      this.apiService.put(`financial/element`, element).subscribe({
+        next: () => {
+          console.log('Element updated successfully');
+          this.router.navigate(['/elements']);
+        },
+        error: (error) => {
+          console.error('Error updating element', error);
+        }
       });
     } else {
-      this.apiService.post('/elements', element).subscribe(() => {
-        this.router.navigate(['/elements']);
+      this.apiService.post('financial/element', element).subscribe({
+        next: () => {
+          console.log('Element created successfully');
+          this.router.navigate(['/elements']);
+        },
+        error: (error) => {
+          console.error('Error creating element', error);
+        }
       });
     }
   }

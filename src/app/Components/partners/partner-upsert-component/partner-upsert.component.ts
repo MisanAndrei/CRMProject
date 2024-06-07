@@ -89,12 +89,24 @@ export class PartnerUpsertComponent implements OnInit {
     if (this.partnerForm.valid) {
       const partnerData = this.partnerForm.value;
       if (this.isEditMode) {
-        this.apiService.put(`/partners/${this.partnerId}`, partnerData).subscribe(() => {
-          this.router.navigate(['/partners']);
+        this.apiService.put('partner', partnerData).subscribe({
+          next: () => {
+            console.log('Partner updated successfully');
+            this.router.navigate(['/partners']);
+          },
+          error: (error) => {
+            console.error('Error updating partner', error);
+          }
         });
       } else {
-        this.apiService.post('/partners', partnerData).subscribe(() => {
-          this.router.navigate(['/partners']);
+        this.apiService.post('partner', partnerData).subscribe({
+          next: () => {
+            console.log('Partner created successfully');
+            this.router.navigate(['/partners']);
+          },
+          error: (error) => {
+            console.error('Error creating partner', error);
+          }
         });
       }
     } else {
