@@ -30,7 +30,7 @@
 
       <div class="double-input-container">
         <div class="input-wrapper">
-          <label for="numberOfBill">Numărul Facturii</label>
+                    <label for="numberOfBill">Numărul Facturii</label>
           <input id="numberOfBill" formControlName="numberOfBill" type="text" placeholder="Introduceți Numărul Facturii"/>
         </div>
 
@@ -42,32 +42,36 @@
 
       <div class="double-input-container">
         <div class="input-wrapper">
-          <label for="customer">Client</label>
-          <select
-            id="customer"
-            formControlName="customer"
-            (change)="onCustomerChange($event)"
-          >
-            <option value="">Selectează Client</option>
-            <option *ngFor="let customer of customers" [value]="customer.id">
-              {{ customer.name }}
-            </option>
-          </select>
-        </div>
-
-        <div class="input-wrapper">
-          <label for="customerName">Nume Client</label>
-          <input
-            id="customerName"
-            formControlName="customerName"
-            type="text"
-            [disabled]="!transactionForm.get('customerName')?.enabled"
-            placeholder="Introduceți Nume Client"
-          />
-        </div>
+          <label for="partner">Partener</label>
+            <select
+              id="partner"
+              formControlName="partner"
+              (change)="onPartnerChange($event)"
+            >
+              <option value="">Selectează Partener</option>
+              <option *ngFor="let partner of partners" [value]="partner.id">
+                {{ partner.name }}
+              </option>
+            </select>
+          </div>
+          <div class="input-wrapper plus-button">
+            <button mat-icon-button aria-label="Add" matTooltip="Adaugă partener nou" (click)="addPartner()">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
       </div>
 
       <div class="double-input-container">
+        <div class="input-wrapper">
+          <label for="partnerName">Nume Partener</label>
+          <input
+            id="partnerName"
+            formControlName="partnerName"
+            type="text"
+            [disabled]="!transactionForm.get('partnerName')?.enabled"
+            placeholder="Introduceți Nume Partener"
+          />
+        </div>
         <div class="input-wrapper">
           <label for="customerCui">CUI</label>
           <input
@@ -88,11 +92,6 @@
             [disabled]="!transactionForm.get('customerCity')?.enabled"
             placeholder="Introduceți Oraș"
           />
-        </div>
-
-        <div class="input-wrapper">
-          <label for="date">Data</label>
-          <input id="date" formControlName="date" type="date" />
         </div>
       </div>
     </div>

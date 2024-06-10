@@ -10,6 +10,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { DeleteDialogComponent } from '../../dialogs/delete-dialog-component/delete-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { ApiService } from '../../../Services/ApiService';
 
 @Component({
   selector: 'app-elements',
@@ -28,7 +29,7 @@ export class ElementsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private _liveAnnouncer: LiveAnnouncer, private dialog: MatDialog, private router: Router) {
+  constructor(private _liveAnnouncer: LiveAnnouncer, private dialog: MatDialog, private router: Router, private apiService: ApiService) {
     this.dataSource = new MatTableDataSource<Element>();
 
   }
@@ -57,6 +58,7 @@ export class ElementsComponent implements OnInit, AfterViewInit {
 
     this.dataSource.data = ELEMENT_DATA;
 
+    this.fetchData();
 
     this.searchControl.valueChanges.pipe(
       debounceTime(300),
@@ -130,5 +132,20 @@ export class ElementsComponent implements OnInit, AfterViewInit {
     // Here you can call your function to fetch data from the backend with these pagination details
     // For example:
     // this.fetchDataFromBackend(pageIndex, pageSize);
+  }
+  
+  fetchData(){
+    this.apiService.get<Element[]>('financial/element').subscribe({
+      next: (data: Element[]) => {
+        this.dataSource.data = data;
+        console.log(data);
+      },
+      error: (error) => {
+        console.error('Error fetching elements', error);
+      },
+      complete: () => {
+        console.info('elements data fetch complete');
+      }
+    });
   }
 }

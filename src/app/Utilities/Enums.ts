@@ -10,3 +10,15 @@ export enum ElementType {
   Produs = 1,
   Serviciu = 2
 }
+
+export enum InvoiceDirection {
+  in = "IN",
+  out = "OUT"
+}
+
+export enum CategoryType {
+  Cheltuiala = "Cheltuiala",
+  Element = "Element",
+  Venit = "Venit",
+  Alta = "Alta"
+}

@@ -1,3 +1,5 @@
+import { InvoiceDirection } from "./Enums";
+
 export interface Element {
   id?: number;
   type: string;
@@ -125,4 +127,29 @@ export interface Element {
     postalCode: string;
     county: string;
     country: string;
+  }
+
+  export interface InvoiceElement {
+    elementId: number;
+    elementName: string;
+    elementPrice: number;
+    elementDescription: string;
+    elementTax: number;
+    quantity: number;
+  }
+
+  export interface Invoice {
+    id?: number;
+    total: number;
+    partnerId: number;
+    partnerName: string;
+    categoryId?: number;
+    categoryName?: string;
+    invoiceNumber: string;
+    direction: InvoiceDirection;
+    invoiceDate: Date;
+    dueDate: Date;
+    status?: boolean;
+    elements?: InvoiceElement[];
+
   }
