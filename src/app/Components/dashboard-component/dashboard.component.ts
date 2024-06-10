@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartData, ChartOptions } from 'chart.js';
-import { CashFlow, CategoryCashFlow } from '../../Utilities/Models';
+import { CashFlow, Category, CategoryCashFlow } from '../../Utilities/Models';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,6 +9,10 @@ import { CashFlow, CategoryCashFlow } from '../../Utilities/Models';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
+  categories: Category[] = [];
+  selectedCategoryName: string = '';
+  selectedCategoryId: number = 0;
+
   // Sample data for CashFlow
   public cashFlowData: CashFlow[] = [
     { month: 1, collectionsSum: 5000, costsSum: 3000 },
@@ -58,7 +63,42 @@ export class DashboardComponent implements OnInit {
     ],
   };
 
-  constructor() { }
+  dateRangeForm: FormGroup = this.fb.group({
+    startDate: [''],
+    endDate: ['']
+  });
 
-  ngOnInit(): void { }
+  constructor(private fb: FormBuilder) { }
+
+  ngOnInit(): void { 
+    this.fetchCategories();
+  }
+
+  fetchCategories() {
+    // Replace with API call
+    this.categories = [
+      { id: 1, name: 'Category 1', type: 'Type 1', colorCode: '#FF0000' },
+      { id: 2, name: 'Category 2', type: 'Type 2', colorCode: '#00FF00' },
+    ];
+  }
+
+  onCategorySelected(categoryId: number) {
+    const selectedCategory = this.categories.find(category => category.id === categoryId);
+    if (selectedCategory) {
+      this.selectedCategoryId = selectedCategory.id!;
+      this.selectedCategoryName = selectedCategory.name!;
+    }
+  }
+
+  onSubmit(): void {
+
+    const startDate = this.dateRangeForm.get('startDate')?.value;
+    const endDate = this.dateRangeForm.get('endDate')?.value;
+
+    console.log(`Submitted Start Date: ${startDate}`);
+    console.log(`Submitted End Date: ${endDate}`);
+    console.log(`Category ID: ${this.selectedCategoryId}`);
+    console.log(`Category Name: ${this.selectedCategoryName}`);
+  }
+
 }

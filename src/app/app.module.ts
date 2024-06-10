@@ -20,6 +20,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatNativeDateModule } from '@angular/material/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -100,7 +103,10 @@ import { LoginComponent } from './Components/login/login/login.component';
     MatSelectModule,
     NgbModule,
     BaseChartDirective,
-    HttpClientModule
+    HttpClientModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatNativeDateModule
   ],
   providers: [provideCharts(withDefaultRegisterables()),
   ApiService],

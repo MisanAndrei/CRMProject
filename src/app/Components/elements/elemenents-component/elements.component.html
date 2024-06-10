@@ -5,13 +5,13 @@
       <input matInput [formControl]="searchControl" placeholder="Caută" class="legacy-input">
     </div>
     <div class="icon-container">
-      <button mat-icon-button aria-label="Add" (click)="addElement()">
+      <button mat-mini-fab  aria-label="Add" (click)="addElement()">
         <mat-icon>add</mat-icon>
       </button>
-      <button mat-icon-button aria-label="Remove" [disabled]="!selection.hasValue()" (click)="openDeleteDialog()">
+      <button mat-mini-fab  aria-label="Remove" [disabled]="!selection.hasValue()" (click)="openDeleteDialog()">
         <mat-icon>remove</mat-icon>
       </button>
-      <button mat-icon-button aria-label="Edit" [disabled]="!isSingleSelection()">
+      <button mat-mini-fab  aria-label="Edit" [disabled]="!isSingleSelection()">
         <mat-icon>edit</mat-icon>
       </button>
     </div>
