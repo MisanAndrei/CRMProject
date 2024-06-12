@@ -83,6 +83,7 @@
         <div [style.background-color]="selectedColor" class="color-circle" (click)="openColorPicker()" ></div> 
       </div>
     </div>
+    <app-font-picker (fontSelected)="onFontSelected($event)" formControlName="selectedFont"></app-font-picker>
     <button class="button content" type="submit">Salvează</button>
   </div>
 </form>

@@ -53,6 +53,7 @@ import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 import { BaseChartDirective } from 'ng2-charts';
 import { LoginComponent } from './Components/login/login/login.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { FontPickerComponent } from './Components/font-picker/font-picker.component';
 
 
 @NgModule({
@@ -80,7 +81,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     TaxesUpsertComponent,
     CategoriesUpsertComponent,
     AccountUpsertComponent,
-    LoginComponent
+    LoginComponent,
+    FontPickerComponent
   ],
   imports: [
     BrowserModule,

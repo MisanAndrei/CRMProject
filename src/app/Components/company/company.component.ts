@@ -1,6 +1,7 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../../Services/ApiService'; // Update the path as necessary
+import { DOCUMENT } from '@angular/common';
 
 interface Organization {
   name: string;
@@ -24,12 +25,15 @@ export class CompanyComponent implements OnInit {
   companyForm: FormGroup;
   selectedColor: string = '#9dcd8a';
   imageBase64: string | ArrayBuffer | null = '';
+  selectedFont: string = '';
 
   @ViewChild('colorInput') colorInput!: ElementRef<HTMLInputElement>;
 
   constructor(
     private fb: FormBuilder,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private renderer: Renderer2,
+    @Inject(DOCUMENT) private document: Document
   ) {
     this.companyForm = this.fb.group({
       name: ['', Validators.required],
@@ -42,7 +46,8 @@ export class CompanyComponent implements OnInit {
       county: ['', Validators.required],
       country: ['', Validators.required],
       image: [''],
-      selectedColor: [this.selectedColor]
+      selectedColor: [this.selectedColor],
+      selectedFont: this.selectedFont
     });
   }
 
@@ -52,6 +57,11 @@ export class CompanyComponent implements OnInit {
     })
 
     this.fetchCompanyDetails();
+
+    const font_ls = localStorage.getItem('selectedFont')
+    if(font_ls) {
+      this.applyFont(JSON.parse(font_ls).name)
+    }
   }
 
   openColorPicker(): void {
@@ -70,7 +80,7 @@ export class CompanyComponent implements OnInit {
         postalCode: company.postalCode,
         county: company.county,
         country: company.country,
-        image: this.stripBase64Prefix(company.image)
+        image: this.stripBase64Prefix(company.image),
       });
       this.imageBase64 = this.stripBase64Prefix(company.image);
     });
@@ -105,5 +115,15 @@ export class CompanyComponent implements OnInit {
     } else {
       console.log('Form is invalid');
     }
+  }
+
+  onFontSelected(font: string): void {
+    this.selectedFont = font;
+    localStorage.setItem('selectedFont', JSON.stringify({ name: font, url: null }));
+    this.applyFont(font);
+  }
+
+  applyFont(fontName: string): void {
+    this.renderer.setStyle(this.document.body, 'font-family', fontName);
   }
 }

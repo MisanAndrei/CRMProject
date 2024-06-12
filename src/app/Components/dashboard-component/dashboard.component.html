@@ -11,12 +11,6 @@
                                 <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                                 <mat-date-range-picker #picker></mat-date-range-picker>
                         </mat-form-field>
-                        <mat-form-field class="input-size">
-                                <mat-label>Categorie</mat-label>
-                                <mat-select (selectionChange)="onCategorySelected($event.value)">
-                                <mat-option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</mat-option>
-                                </mat-select>
-                        </mat-form-field>
                 
                         <button mat-stroked-button color="primary" type="submit" class="submit-button">Salveaza</button>
                 </form>
