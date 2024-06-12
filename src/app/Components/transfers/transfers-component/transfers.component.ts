@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
@@ -9,14 +9,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { DeleteDialogComponent } from '../../dialogs/delete-dialog-component/delete-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-
-interface Transfer {
-  id: number;
-  payingAccount: string;
-  receivingAccount: string;
-  sum: number;
-  date: string;
-}
+import { Transfer } from '../../../Utilities/Models';
 
 @Component({
   selector: 'app-transfers',
@@ -24,7 +17,7 @@ interface Transfer {
   styleUrls: ['./transfers.component.css']
 })
 export class TransfersComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['select', 'payingAccount', 'receivingAccount', 'sum', 'date'];
+  displayedColumns: string[] = ['select', 'fromBankAccountName', 'toBankAccountName', 'amount', 'date', 'paymentMethod', 'reference', 'description'];
   dataSource: MatTableDataSource<Transfer>;
   searchControl: FormControl = new FormControl('');
   initialSelection = [];
@@ -46,10 +39,9 @@ export class TransfersComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     // Example data
     const TRANSFER_DATA: Transfer[] = [
-      { id: 1, payingAccount: 'Account A', receivingAccount: 'Account B', sum: 100.50, date: '2023-05-20' },
-      { id: 2, payingAccount: 'Account C', receivingAccount: 'Account D', sum: 200.75, date: '2023-05-21' },
-      { id: 3, payingAccount: 'Account E', receivingAccount: 'Account F', sum: 300.00, date: '2023-05-22' },
-      // Add more transfer data as needed
+      { id: 1, fromBankAccountId: 1, fromBankAccountName: 'Account A', toBankAccountId: 2, toBankAccountName: 'Account B', amount: 100.50, date: new Date('2023-05-20'), paymentMethod: 'Credit Card', reference: 'Ref001', description: 'Transfer Description A' },
+      { id: 2, fromBankAccountId: 3, fromBankAccountName: 'Account C', toBankAccountId: 4, toBankAccountName: 'Account D', amount: 200.75, date: new Date('2023-05-21'), paymentMethod: 'Bank Transfer', reference: 'Ref002', description: 'Transfer Description B' },
+      { id: 3, fromBankAccountId: 5, fromBankAccountName: 'Account E', toBankAccountId: 6, toBankAccountName: 'Account F', amount: 300.00, date: new Date('2023-05-22'), paymentMethod: 'Cash', reference: 'Ref003', description: 'Transfer Description C' },
     ];
 
     this.dataSource.data = TRANSFER_DATA;

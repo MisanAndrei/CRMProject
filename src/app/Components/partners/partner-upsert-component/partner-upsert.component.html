@@ -84,7 +84,11 @@
       </div>
     </div>
   </div>
-  <div class="button-container">
+  <div class="button-container" *ngIf="dialogRef">
+    <button class="button content" mat-button mat-dialog-close>Renuntă</button>
+    <button class="button content" mat-button type="submit">Salvează Partener</button>
+  </div>
+  <div class="button-container" *ngIf="!dialogRef">
     <button class="button content" type="submit">Salvează Partener</button>
   </div>
 </form>

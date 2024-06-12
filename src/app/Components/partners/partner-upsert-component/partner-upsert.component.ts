@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Optional, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../../Services/ApiService'; // Update the path as necessary
 import { Partner } from '../../../Utilities/Models'; // Update the path as necessary
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-partner-upsert',
@@ -19,7 +20,9 @@ export class PartnerUpsertComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private apiService: ApiService
+    private apiService: ApiService,
+    @Optional() public dialogRef: MatDialogRef<PartnerUpsertComponent>,
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.partnerForm = this.fb.group({
       name: ['', Validators.required],
@@ -35,16 +38,11 @@ export class PartnerUpsertComponent implements OnInit {
       country: ['', Validators.required],
       city: ['', Validators.required]
     });
+
+    
   }
 
-  ngOnInit(): void {
-    this.partnerId = +this.route.snapshot.paramMap.get('id')!;
-    this.isEditMode = !!this.partnerId;
-
-    if (this.isEditMode) {
-      this.fetchPartnerDetails(this.partnerId);
-    }
-  }
+  ngOnInit(): void {}
 
   fetchPartnerDetails(id: number): void {
     this.apiService.get<Partner>(`/partners/${id}`).subscribe((partner) => {
@@ -92,7 +90,11 @@ export class PartnerUpsertComponent implements OnInit {
         this.apiService.put('partner', partnerData).subscribe({
           next: () => {
             console.log('Partner updated successfully');
-            this.router.navigate(['/partners']);
+            if (this.dialogRef) {
+              this.dialogRef.close(true); // Close the dialog and return true
+            } else {
+              this.router.navigate(['/partners']);
+            }
           },
           error: (error) => {
             console.error('Error updating partner', error);
@@ -102,7 +104,11 @@ export class PartnerUpsertComponent implements OnInit {
         this.apiService.post('partner', partnerData).subscribe({
           next: () => {
             console.log('Partner created successfully');
-            this.router.navigate(['/partners']);
+            if (this.dialogRef) {
+              this.dialogRef.close(true); // Close the dialog and return true
+            } else {
+              this.router.navigate(['/partners']);
+            }
           },
           error: (error) => {
             console.error('Error creating partner', error);

@@ -83,3 +83,21 @@ button {
   margin-top: 10px;
 }
 
+::ng-deep .mat-dialog-container {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  max-height: 80vh;
+}
+
+::ng-deep .mat-dialog-content {
+  overflow-y: auto;
+  flex: 1 1 auto;
+}
+
+::ng-deep .mat-dialog-actions {
+  flex-shrink: 0;
+}
+
+
+

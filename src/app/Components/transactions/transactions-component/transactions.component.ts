@@ -10,6 +10,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { DeleteDialogComponent } from '../../dialogs/delete-dialog-component/delete-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { TransactionDirection } from '../../../Utilities/Enums';
 
 @Component({
   selector: 'app-transactions',
@@ -17,21 +18,20 @@ import { Router } from '@angular/router';
   styleUrls: ['./transactions.component.css']
 })
 export class TransactionsComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['select', 'date', 'number', 'type', 'category', 'account', 'contact', 'document', 'sum'];
+  displayedColumns: string[] = ['select', 'paymentDate', 'invoiceId', 'reference', 'amount', 'paymentDirection', 'bankAccountId', 'paymentMethod', 'description'];
   dataSource: MatTableDataSource<Transaction>;
   searchControl: FormControl = new FormControl('');
   initialSelection = [];
   allowMultiSelect = true;
   selection = new SelectionModel<Transaction>(this.allowMultiSelect, this.initialSelection);
   
-
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private _liveAnnouncer: LiveAnnouncer, private dialog: MatDialog, private router: Router) {
     this.dataSource = new MatTableDataSource<Transaction>();
-
   }
+
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
@@ -40,13 +40,12 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     // Example data
     const TRANSACTIONS_DATA: Transaction[] = [
-      { id: 1, date: '2024-04-25', number: '001', type: 'Expense', category: 'Groceries', account: 'Account 1', contact: 'John Doe', document: 'Receipt', sum: '50' },
-      { id: 2, date: '2024-04-26', number: '002', type: 'Income', category: 'Salary', account: 'Account 2', contact: 'Jane Smith', document: 'Invoice', sum: '1000' },
+      { id: 1, paymentDate: new Date(), invoiceId: 101, reference: 'Ref001', amount: 50, paymentDirection: TransactionDirection.in, bankAccountId: 1, paymentMethod: 'Credit Card', description: 'Groceries' },
+      { id: 2, paymentDate: new Date(), invoiceId: 102, reference: 'Ref002', amount: 1000, paymentDirection: TransactionDirection.out, bankAccountId: 2, paymentMethod: 'Bank Transfer', description: 'Salary' },
       // Add more data as needed
     ];
 
     this.dataSource.data = TRANSACTIONS_DATA;
-
 
     this.searchControl.valueChanges.pipe(
       debounceTime(300),
@@ -62,10 +61,6 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
   }
 
   announceSortChange(sortState: Sort) {
-    // This example uses English messages. If your application supports
-    // multiple language, you would internationalize these strings.
-    // Furthermore, you can customize the message to add additional
-    // details about the values being sorted.
     if (sortState.direction) {
       this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
     } else {
@@ -79,7 +74,6 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
     return numSelected == numRows;
   }
   
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
   toggleAllRows() {
     this.isAllSelected() ?
         this.selection.clear() :
@@ -98,7 +92,6 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         const selectedIds = this.selection.selected.map(transaction => transaction.id);
-        
         // Call your function to delete transactions using selectedIds
       }
       this.selection.clear();

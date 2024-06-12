@@ -2,19 +2,9 @@ import { Component, ElementRef, Inject, OnInit, Renderer2, ViewChild } from '@an
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../../Services/ApiService'; // Update the path as necessary
 import { DOCUMENT } from '@angular/common';
+import { Organization } from '../../Utilities/Models';
 
-interface Organization {
-  name: string;
-  email: string;
-  phone: string;
-  cui: string;
-  address: string;
-  city: string;
-  image: string;
-  postalCode: string;
-  county: string;
-  country: string;
-}
+
 
 @Component({
   selector: 'app-company',

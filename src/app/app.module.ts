@@ -110,7 +110,8 @@ import { FontPickerComponent } from './Components/font-picker/font-picker.compon
     MatDatepickerModule,
     MatFormFieldModule,
     MatNativeDateModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatDialogModule
   ],
   providers: [provideCharts(withDefaultRegisterables()),
   ApiService],

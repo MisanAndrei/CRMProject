@@ -62,8 +62,8 @@ export class UpsertElementComponent {
       this.description = element.description || '';
       this.aquisitionPrice = element.aquisitionPrice || 0;
       this.sellingPrice = element.sellingPrice || 0;
-      this.selectedTaxId = element.taxId;
-      this.selectedTaxValue = element.taxValue;
+      this.selectedTaxId = element.taxId ?? 0;
+      this.selectedTaxValue = element.taxValue ?? 0;
     });
   }
 

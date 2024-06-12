@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 interface PaymentMethod {
   id: number;
@@ -38,15 +39,21 @@ export class TransactionUpsertComponent implements OnInit {
     { id: 2, name: 'Invoice 002' },
     { id: 3, name: 'Invoice 003' }
   ];
+  transactionDirections = [
+    { id: 'INCOME', name: 'Incasare' },
+    { id: 'EXPENSE', name: 'Plata' }
+  ];
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private router: Router) {
     this.transactionForm = this.fb.group({
       date: ['', Validators.required],
       methodOfPayment: ['', Validators.required],
       account: ['', Validators.required],
       sum: [0, [Validators.required, Validators.min(0)]],
       description: ['', Validators.required],
-      invoice: ['', Validators.required]
+      invoice: ['', Validators.required],
+      reference: [''],
+      direction: ['', Validators.required]
     });
   }
 
@@ -54,7 +61,18 @@ export class TransactionUpsertComponent implements OnInit {
 
   onSubmit(): void {
     if (this.transactionForm.valid) {
-      console.log(this.transactionForm.value);
+      const formValue = this.transactionForm.value;
+      const transaction = {
+        paymentDate: formValue.date,
+        invoiceId: formValue.invoice,
+        reference: formValue.reference,
+        amount: formValue.sum,
+        paymentDirection: formValue.direction === 'INCOME' ? 'In' : 'Out',
+        bankAccountId: formValue.account,
+        paymentMethod: formValue.methodOfPayment,
+        description: formValue.description,
+      };
+      console.log(transaction);
       // Handle form submission logic here, such as saving transaction data to a server
     } else {
       console.log('Form is invalid');

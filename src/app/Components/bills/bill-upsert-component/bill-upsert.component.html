@@ -16,6 +16,16 @@
         </select>
       </div>
 
+      <div class="single-input-wrapper">
+        <label for="category">Categorie</label>
+        <select id="category" formControlName="category" (change)="onCategoryChange($event)">
+          <option value="">Selectează Categorie</option>
+          <option *ngFor="let category of categories" [value]="category.id">
+            {{ category.name }}
+          </option>
+        </select>
+      </div>
+
       <div class="double-input-container">
         <div class="input-wrapper">
           <label for="dateOfBill">Data Facturii</label>
@@ -30,7 +40,7 @@
 
       <div class="double-input-container">
         <div class="input-wrapper">
-                    <label for="numberOfBill">Numărul Facturii</label>
+          <label for="numberOfBill">Numărul Facturii</label>
           <input id="numberOfBill" formControlName="numberOfBill" type="text" placeholder="Introduceți Numărul Facturii"/>
         </div>
 
@@ -109,34 +119,38 @@
             <select formControlName="selectedItem" (change)="onItemChange(i)">
               <option value="">Adaugă</option>
               <option
-                *ngFor="let predefinedItem of predefinedItems"
-                [value]="predefinedItem.id"
+                *ngFor="let element of elements"
+                [value]="element.id"
               >
-                {{ predefinedItem.name }}
+                {{ element.name }}
               </option>
             </select>
+
             <input
-              formControlName="description"
+              formControlName="elementDescription"
               placeholder="Descriere"
               type="text"
+              [disabled]="true"
             />
             <input
               formControlName="quantity"
-              placeholder="Quantity"
+              placeholder="Cantitate"
               type="number"
               (change)="onQuantityOrPriceChange(i)"
             />
             <input
-              formControlName="price"
-              placeholder="Price"
+              formControlName="elementPrice"
+              placeholder="Preț"
               type="number"
-              (change)="onQuantityOrPriceChange(i)"
+              [disabled]="true"
             />
-            <select formControlName="tax" (change)="onQuantityOrPriceChange(i)">
-              <option *ngFor="let tax of taxOptions" [value]="tax.id">
-                {{ tax.description }}
-              </option>
-            </select>
+              <input
+                formControlName="elementTax"
+                placeholder="Taxă"
+                type="number"
+                (change)="onTaxChange(i)"
+                [disabled]="false"
+              />
             <input
               formControlName="total"
               placeholder="Total"

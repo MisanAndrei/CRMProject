@@ -1,4 +1,4 @@
-import { InvoiceDirection } from "./Enums";
+import { InvoiceDirection, TransactionDirection } from "./Enums";
 
 export interface Element {
   id?: number;
@@ -9,8 +9,8 @@ export interface Element {
   description?: string;
   aquisitionPrice?: number;
   sellingPrice?: number;
-  taxValue: number;
-  taxId: number;
+  taxValue?: number;
+  taxId?: number;
   }
 
   export interface Bill {
@@ -33,14 +33,14 @@ export interface Element {
 
   export interface Transaction {
     id?: number;
-    date: string;
-    number: string;
-    type: string;
-    category: string;
-    account: string;
-    contact: string;
-    document: string;
-    sum: string;
+    paymentDate: Date;
+    invoiceId?: number;
+    reference?: string;
+    amount: number;
+    paymentDirection: TransactionDirection;
+    bankAccountId: number;
+    paymentMethod: string;
+    description: string;
   }
 
   export interface Category {
@@ -97,7 +97,9 @@ export interface Element {
     license: string;
     dbSchema: string;
     status: string;
-    colorCode: string;
+    colorCodeNavBar: string;
+    colorCodeLeftBar: string;
+    font: string;
   }
   
   export interface Partner {
@@ -127,6 +129,9 @@ export interface Element {
     postalCode: string;
     county: string;
     country: string;
+    colorCodeNavBar: string;
+    colorCodeLeftBar: string;
+    font: string;
   }
 
   export interface InvoiceElement {
@@ -146,10 +151,70 @@ export interface Element {
     categoryId?: number;
     categoryName?: string;
     invoiceNumber: string;
+    orderNumber: string;
     direction: InvoiceDirection;
     invoiceDate: Date;
     dueDate: Date;
-    status?: boolean;
+    completed?: boolean;
+    remainingAmount?: number;
     elements?: InvoiceElement[];
 
+  }
+
+
+  //tablou de bord
+
+  export interface AggregatedStatistics {
+    accountsSold: AccountSoldItem[];
+    receivables: Receivables;
+    payables: Payables;
+    cashFlow: CashFlowItem[];
+    incomeByCategory: IncomeByCategoryItem[];
+    expensesByCategory: ExpensesByCategoryItem[];
+  }
+
+  export interface Receivables {
+    totalToReceive: number;
+    totalOpen: number;
+    totalOverdue: number;
+  }
+
+  export interface Payables {
+    totalToPay: number;
+    totalOpen: number;
+    totalOverdue: number;
+  }
+
+  export interface AccountSoldItem {
+    accountName: string;
+    totalSold: number;
+  }
+
+  export interface CashFlowItem {
+    month: string;
+    year: number;
+    income: number;
+    expenses: number;
+  }
+
+  export interface IncomeByCategoryItem {
+    categoryName: string;
+    colorCode: string;
+    income: number;
+  }
+
+  export interface ExpensesByCategoryItem {
+    categoryName: string;
+    colorCode: string;
+    expenses: number;
+  }
+
+  //invoice preferences
+
+  export interface InvoicePreferences {
+    prefix: string;
+    startingNumber: number;
+    notes: string;
+    subHeader: string;
+    footer: string;
   }

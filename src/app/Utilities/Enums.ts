@@ -16,6 +16,11 @@ export enum InvoiceDirection {
   out = "OUT"
 }
 
+export enum TransactionDirection {
+  in = "IN",
+  out = "OUT"
+}
+
 export enum CategoryType {
   Cheltuiala = "Cheltuiala",
   Element = "Element",
