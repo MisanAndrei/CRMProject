@@ -15,34 +15,63 @@
                         <button mat-stroked-button color="primary" type="submit" class="submit-button">Salveaza</button>
                 </form>
         </div>
-
-        <div class="chart-container-pie">
-        <h4>Categorii - Cheltuieli - Venituri</h4>
-        <div class="separator-line custom-separator-line"></div>
-        <div class="chart-content">
-                <canvas baseChart
-                        [data]="pieChartData"
-                        [options]="pieChartOptions"
-                        [type]="'pie'"
-                        class="chart-canvas-pie">
-                </canvas>
-
-                <span class="chart-description">Distribuția cheltuielilor și a veniturilor pe categorii. Alegeti categotia dorita.</span>
+      
+        <!-- Receivables -->
+        <div class="info-section">
+          <h4>Receivables</h4>
+          <p>Total to Receive: {{ aggregatedStatistics.receivables.totalToReceive }}</p>
+          <p>Total Open: {{ aggregatedStatistics.receivables.totalOpen }}</p>
+          <p>Total Overdue: {{ aggregatedStatistics.receivables.totalOverdue }}</p>
         </div>
+      
+        <!-- Payables -->
+        <div class="info-section">
+          <h4>Payables</h4>
+          <p>Total to Pay: {{ aggregatedStatistics.payables.totalToPay }}</p>
+          <p>Total Open: {{ aggregatedStatistics.payables.totalOpen }}</p>
+          <p>Total Overdue: {{ aggregatedStatistics.payables.totalOverdue }}</p>
         </div>
-
+      
+        <!-- Accounts Sold -->
+        <div class="info-section">
+          <h4>Accounts Sold</h4>
+          <ul>
+            <li *ngFor="let account of aggregatedStatistics.accountsSold">
+              {{ account.accountName }}: {{ account.totalSold }}
+            </li>
+          </ul>
+        </div>
+      
+        <!-- Income by Category Pie Chart -->
+        <div>
+          <h4>Income by Category</h4>
+          <canvas baseChart
+            [data]="pieChartIncomeData"
+            [options]="pieChartIncomeOptions"
+            [type]="'pie'"
+            class="chart-canvas-pie">
+          </canvas>
+        </div>
+      
+        <!-- Expenses by Category Pie Chart -->
+        <div>
+          <h4>Expenses by Category</h4>
+          <canvas baseChart
+            [data]="pieChartExpensesData"
+            [options]="pieChartExpensesOptions"
+            [type]="'pie'"
+            class="chart-canvas-pie">
+          </canvas>
+        </div>
+      
+        <!-- Cash Flow Bar Chart -->
         <div class="chart-container-bar">
-                <h4>Raport Lunar - Cheltuieli si Venituri</h4>
-                <div class="separator-line"></div>
-                <div class="chart-content">
-                <span class="chart-description">Statisticile lunare ale cheltuielilor și a veniturilor.</span>
-                
-                <canvas baseChart
-                                [data]="barChartData"
-                                [options]="barChartOptions"
-                                [type]="'bar'"
-                                class="chart-canvas-bar">
-                </canvas>
-                </div>
+          <h4>Cash Flow</h4>
+          <canvas baseChart
+            [data]="barChartData"
+            [options]="barChartOptions"
+            [type]="'bar'"
+            class="chart-canvas-bar">
+          </canvas>
         </div>
-</div>
+      </div>

@@ -45,6 +45,13 @@
         </div>
 
         <div class="input-wrapper">
+          <label for="category">Categorie</label>
+          <select id="category" formControlName="category">
+            <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+          </select>
+        </div>
+
+        <div class="input-wrapper">
           <label for="description">Descriere</label>
           <textarea id="description" formControlName="description" rows="3" placeholder="Introduceți Descriere"></textarea>
         </div>

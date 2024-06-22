@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Category } from '../../../Utilities/Models';
 
 interface PaymentMethod {
   id: number;
@@ -43,6 +44,8 @@ export class TransactionUpsertComponent implements OnInit {
     { id: 'INCOME', name: 'Incasare' },
     { id: 'EXPENSE', name: 'Plata' }
   ];
+
+  categories: Category[] = [{id: 1, name: 'Categorie 1', type: 'Cheltuiala', colorCode: 'asdasd'}, {id: 2, name: 'Categorie 2', type: 'Venit', colorCode: 'asdasd'}];
 
   constructor(private fb: FormBuilder, private router: Router) {
     this.transactionForm = this.fb.group({

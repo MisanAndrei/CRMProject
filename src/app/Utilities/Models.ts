@@ -41,6 +41,8 @@ export interface Element {
     bankAccountId: number;
     paymentMethod: string;
     description: string;
+    categoryId?: number;
+    categoryName?: string;
   }
 
   export interface Category {

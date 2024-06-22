@@ -14,7 +14,6 @@ export class BillPreferencesComponent implements OnInit {
     this.preferencesForm = this.fb.group({
       prefix: ['', Validators.required],
       nextNumber: [1, [Validators.required, Validators.min(1)]],
-      numberOfDecimals: [2, [Validators.required, Validators.min(0)]],
       title: ['', Validators.required],
       note: [''],
       subantet: [''],

@@ -6,7 +6,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrl: './font-picker.component.css'
 })
 export class FontPickerComponent {
-  fonts = ['Quicksand', 'Arial', 'Times New Roman', 'Courier'];
+  fonts = ['Roboto','Open Sans','Lato','Montserrat','Source Sans Pro','Nunito','PT Sans','Raleway','Ubuntu','Noto Sans','Dosis','Muli','Work Sans','Poppins','Inter'];
   selectedFont = '';
 
   @Output() fontSelected = new EventEmitter<string>();
