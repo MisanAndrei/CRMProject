@@ -59,11 +59,11 @@ export class AccountUpsertComponent implements OnInit {
       };
 
       if (this.isEditMode) {
-        this.apiService.put(`/accounts/${this.accountId}`, accountData).subscribe(() => {
+        this.apiService.put(`financial/bank-account`, accountData).subscribe(() => {
           this.router.navigate(['/accounts']);
         });
       } else {
-        this.apiService.post('/accounts', accountData).subscribe(() => {
+        this.apiService.post('financial/bank-account', accountData).subscribe(() => {
           this.router.navigate(['/accounts']);
         });
       }

@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { DeleteDialogComponent } from '../../dialogs/delete-dialog-component/delete-dialog.component';
 import { Bill } from '../../../Utilities/Models';
+import { ApiService } from '../../../Services/ApiService';
 
 @Component({
   selector: 'app-bills',
@@ -28,7 +29,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private _liveAnnouncer: LiveAnnouncer, private dialog: MatDialog, private router: Router) {
+  constructor(private _liveAnnouncer: LiveAnnouncer, private dialog: MatDialog, private router: Router, private apiService: ApiService) {
     this.dataSource = new MatTableDataSource<Bill>();
 
   }
@@ -42,6 +43,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
     // For demonstration, let's assume you have a function called getBills() that returns the list of bills
     const billList: Bill[] = this.getBills();
     this.dataSource.data = billList;
+    this.fetchData();
 
     // Subscribe to search input changes
     this.searchControl.valueChanges.pipe(
@@ -130,5 +132,20 @@ export class BillsComponent implements OnInit, AfterViewInit {
     // Here you can call your function to fetch data from the backend with these pagination details
     // For example:
     // this.fetchDataFromBackend(pageIndex, pageSize);
+  }
+
+  fetchData(){
+    this.apiService.get<Bill[]>('financial/invoice').subscribe({
+      next: (data: Bill[]) => {
+        this.dataSource.data = data;
+        console.log(data);
+      },
+      error: (error) => {
+        console.error('Error fetching elements', error);
+      },
+      complete: () => {
+        console.info('elements data fetch complete');
+      }
+    });
   }
 }

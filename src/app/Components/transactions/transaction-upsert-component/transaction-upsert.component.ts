@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Category } from '../../../Utilities/Models';
+import { Category, Transaction } from '../../../Utilities/Models';
+import { ApiService } from '../../../Services/ApiService';
+import { TransactionDirection } from '../../../Utilities/Enums';
+
 
 interface PaymentMethod {
   id: number;
@@ -45,9 +48,12 @@ export class TransactionUpsertComponent implements OnInit {
     { id: 'EXPENSE', name: 'Plata' }
   ];
 
-  categories: Category[] = [{id: 1, name: 'Categorie 1', type: 'Cheltuiala', colorCode: 'asdasd'}, {id: 2, name: 'Categorie 2', type: 'Venit', colorCode: 'asdasd'}];
+  categories: Category[] = [
+    { id: 1, name: 'Categorie 1', type: 'Cheltuiala', colorCode: 'asdasd' },
+    { id: 2, name: 'Categorie 2', type: 'Venit', colorCode: 'asdasd' }
+  ];
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder, private router: Router, private apiService: ApiService) { // Inject your API service
     this.transactionForm = this.fb.group({
       date: ['', Validators.required],
       methodOfPayment: ['', Validators.required],
@@ -56,27 +62,58 @@ export class TransactionUpsertComponent implements OnInit {
       description: ['', Validators.required],
       invoice: ['', Validators.required],
       reference: [''],
-      direction: ['', Validators.required]
+      direction: ['', Validators.required],
+      category: ['', Validators.required]
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   onSubmit(): void {
     if (this.transactionForm.valid) {
       const formValue = this.transactionForm.value;
-      const transaction = {
+      const selectedCategory = this.categories.find(category => category.id === formValue.category);
+
+      const transaction: Transaction = {
         paymentDate: formValue.date,
         invoiceId: formValue.invoice,
         reference: formValue.reference,
         amount: formValue.sum,
-        paymentDirection: formValue.direction === 'INCOME' ? 'In' : 'Out',
+        paymentDirection: formValue.direction === 'INCOME' ? TransactionDirection.in : TransactionDirection.out,
         bankAccountId: formValue.account,
         paymentMethod: formValue.methodOfPayment,
         description: formValue.description,
+        categoryId: selectedCategory?.id,
+        categoryName: selectedCategory?.name
       };
-      console.log(transaction);
-      // Handle form submission logic here, such as saving transaction data to a server
+
+      if (transaction.id) {
+        this.apiService.put('/transactions', transaction).subscribe({
+          next: () => {
+            console.log('Transaction updated successfully');
+            this.router.navigate(['/Tranzactii']);
+          },
+          error: (error) => {
+            console.error('Error updating transaction', error);
+          },
+          complete: () => {
+            console.info('Transaction update complete');
+          }
+        });
+      } else {
+        this.apiService.post('financial/transaction', transaction).subscribe({
+          next: () => {
+            console.log('Transaction created successfully');
+            this.router.navigate(['/Tranzactii']);
+          },
+          error: (error) => {
+            console.error('Error creating transaction', error);
+          },
+          complete: () => {
+            console.info('Transaction creation complete');
+          }
+        });
+      }
     } else {
       console.log('Form is invalid');
     }

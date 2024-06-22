@@ -10,6 +10,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { DeleteDialogComponent } from '../../dialogs/delete-dialog-component/delete-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { ApiService } from '../../../Services/ApiService';
 
 @Component({
   selector: 'app-accounts',
@@ -28,7 +29,7 @@ export class AccountsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private _liveAnnouncer: LiveAnnouncer, private dialog: MatDialog, private router: Router) {
+  constructor(private _liveAnnouncer: LiveAnnouncer, private dialog: MatDialog, private router: Router, private apiService: ApiService) {
     this.dataSource = new MatTableDataSource<Account>();
 
   }
@@ -120,5 +121,20 @@ export class AccountsComponent implements OnInit, AfterViewInit {
     // Here you can call your function to fetch data from the backend with these pagination details
     // For example:
     // this.fetchDataFromBackend(pageIndex, pageSize);
+  }
+
+  fetchData(){
+    this.apiService.get<Account[]>('financial/bank-account').subscribe({
+      next: (data: Account[]) => {
+        this.dataSource.data = data;
+        console.log(data);
+      },
+      error: (error) => {
+        console.error('Error fetching elements', error);
+      },
+      complete: () => {
+        console.info('elements data fetch complete');
+      }
+    });
   }
 }

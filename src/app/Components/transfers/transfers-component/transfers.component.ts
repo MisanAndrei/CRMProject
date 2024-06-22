@@ -10,6 +10,7 @@ import { DeleteDialogComponent } from '../../dialogs/delete-dialog-component/del
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Transfer } from '../../../Utilities/Models';
+import { ApiService } from '../../../Services/ApiService';
 
 @Component({
   selector: 'app-transfers',
@@ -27,7 +28,7 @@ export class TransfersComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private _liveAnnouncer: LiveAnnouncer, private dialog: MatDialog, private router: Router) {
+  constructor(private _liveAnnouncer: LiveAnnouncer, private dialog: MatDialog, private router: Router, private apiService: ApiService) {
     this.dataSource = new MatTableDataSource<Transfer>();
   }
 
@@ -45,6 +46,8 @@ export class TransfersComponent implements OnInit, AfterViewInit {
     ];
 
     this.dataSource.data = TRANSFER_DATA;
+
+    this.fetchData();
 
     this.searchControl.valueChanges.pipe(
       debounceTime(300),
@@ -107,5 +110,20 @@ export class TransfersComponent implements OnInit, AfterViewInit {
     const length = this.dataSource.data.length;
 
     console.log(`Page index: ${pageIndex}, Page size: ${pageSize}, Total items: ${length}`);
+  }
+
+  fetchData(){
+    this.apiService.get<Transfer[]>('financial/bank-account/transfer').subscribe({
+      next: (data: Transfer[]) => {
+        this.dataSource.data = data;
+        console.log(data);
+      },
+      error: (error) => {
+        console.error('Error fetching elements', error);
+      },
+      complete: () => {
+        console.info('elements data fetch complete');
+      }
+    });
   }
 }

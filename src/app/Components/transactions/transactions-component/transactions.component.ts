@@ -11,6 +11,7 @@ import { DeleteDialogComponent } from '../../dialogs/delete-dialog-component/del
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { TransactionDirection } from '../../../Utilities/Enums';
+import { ApiService } from '../../../Services/ApiService';
 
 @Component({
   selector: 'app-transactions',
@@ -28,7 +29,7 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private _liveAnnouncer: LiveAnnouncer, private dialog: MatDialog, private router: Router) {
+  constructor(private _liveAnnouncer: LiveAnnouncer, private dialog: MatDialog, private router: Router, private apiService: ApiService) {
     this.dataSource = new MatTableDataSource<Transaction>();
   }
 
@@ -46,6 +47,8 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
     ];
 
     this.dataSource.data = TRANSACTIONS_DATA;
+
+    this.fetchData();
 
     this.searchControl.valueChanges.pipe(
       debounceTime(300),
@@ -113,5 +116,20 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
     // Here you can call your function to fetch data from the backend with these pagination details
     // For example:
     // this.fetchDataFromBackend(pageIndex, pageSize);
+  }
+
+  fetchData(){
+    this.apiService.get<Transaction[]>('financial/transaction').subscribe({
+      next: (data: Transaction[]) => {
+        this.dataSource.data = data;
+        console.log(data);
+      },
+      error: (error) => {
+        console.error('Error fetching elements', error);
+      },
+      complete: () => {
+        console.info('elements data fetch complete');
+      }
+    });
   }
 }
