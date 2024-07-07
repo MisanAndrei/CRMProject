@@ -1,5 +1,5 @@
 <div class="header">
-  <h1>Rată de Impozitare Nouă</h1>
+  <h1>{{ isEditMode ? 'Editare Rată de Impozitare' : 'Rată de Impozitare Nouă' }}</h1>
 </div>
 <form [formGroup]="typeForm" (ngSubmit)="onSubmit()">
   <div>
@@ -14,7 +14,7 @@
           <input
             id="name"
             formControlName="name"
-            type="string"
+            type="text"
             placeholder="Introduceți Nume"
           />
         </div>
@@ -24,7 +24,7 @@
           <input
             id="tax"
             formControlName="tax"
-            type="string"
+            type="number"
             placeholder="Introduceți impozit (%)"
           />
         </div>
@@ -39,10 +39,9 @@
           </option>
         </select>
       </div>
-  </div>
+    </div>
   </div>
   <div class="button-container">
     <button class="button content" type="submit">Salvează</button>
   </div>
-  </form>
-
+</form>

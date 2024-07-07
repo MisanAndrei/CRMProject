@@ -24,10 +24,7 @@ export class AccountUpsertComponent implements OnInit {
       name: ['', Validators.required],
       number: ['', Validators.required],
       currency: [{ value: 'RON', disabled: true }, Validators.required],
-      initialSold: [0, [Validators.required, Validators.min(0)]],
-      nameOfTheBank: ['', Validators.required],
-      phoneOfTheBank: ['', Validators.required],
-      addressOfTheBank: ['', Validators.required]
+      initialSold: [0, [Validators.required, Validators.min(0)]]
     });
   }
 

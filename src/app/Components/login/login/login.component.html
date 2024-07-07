@@ -5,72 +5,32 @@
       <div class="form-group">
         <label for="email">Email</label>
         <div class="input-container-global large">
-          <input
-            matInput
-            placeholder="Introdu aici email-ul"
-            class="legacy-input"
-          />
+          <input matInput id="email" formControlName="email" placeholder="Introdu aici email-ul" class="legacy-input" />
         </div>
-        <div
-          *ngIf="
-            loginForm.get('email')?.invalid &&
-            (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)
-          "
-        >
-          <small *ngIf="loginForm.get('email')?.errors?.['required']">
-            Emailul este necesar.
-          </small>
-          <small *ngIf="loginForm.get('email')?.errors?.['email']">
-            Emailul nu este valid.
-          </small>
+        <div *ngIf="loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)">
+          <small *ngIf="loginForm.get('email')?.errors?.['required']">Emailul este necesar.</small>
+          <small *ngIf="loginForm.get('email')?.errors?.['email']">Emailul nu este valid.</small>
         </div>
       </div>
 
       <div class="form-group">
         <label for="password">Parola</label>
         <div class="input-container-global large">
-          <input
-            matInput
-            placeholder="Introdu aici parola"
-            class="legacy-input"
-            type="password"
-          />
+          <input matInput id="password" formControlName="password" placeholder="Introdu aici parola" class="legacy-input" type="password" />
         </div>
-        <div
-          *ngIf="
-            loginForm.get('password')?.invalid &&
-            (loginForm.get('password')?.dirty ||
-              loginForm.get('password')?.touched)
-          "
-        >
-          <small *ngIf="loginForm.get('password')?.errors?.['required']">
-            Parola este necesară.
-          </small>
-          <small *ngIf="loginForm.get('password')?.errors?.['minlength']">
-            Parola trebuie să aibă cel puțin 6 caractere.
-          </small>
+        <div *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)">
+          <small *ngIf="loginForm.get('password')?.errors?.['required']">Parola este necesară.</small>
+          <small *ngIf="loginForm.get('password')?.errors?.['minlength']">Parola trebuie să aibă cel puțin 6 caractere.</small>
         </div>
       </div>
 
       <div class="form-group">
         <label for="license">Licența</label>
         <div class="input-container-global large">
-          <input
-            matInput
-            placeholder="Introdu aici licența"
-            class="legacy-input"
-          />
+          <input matInput id="license" formControlName="license" placeholder="Introdu aici licența" class="legacy-input" />
         </div>
-        <div
-          *ngIf="
-            loginForm.get('license')?.invalid &&
-            (loginForm.get('license')?.dirty ||
-              loginForm.get('license')?.touched)
-          "
-        >
-          <small *ngIf="loginForm.get('license')?.errors?.['required']">
-            Parola este necesară.
-          </small>
+        <div *ngIf="loginForm.get('license')?.invalid && (loginForm.get('license')?.dirty || loginForm.get('license')?.touched)">
+          <small *ngIf="loginForm.get('license')?.errors?.['required']">Licența este necesară.</small>
         </div>
       </div>
 

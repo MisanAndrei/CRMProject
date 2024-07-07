@@ -55,6 +55,10 @@ export class BillUpsertComponent implements OnInit {
 
   ngOnInit(): void {
     this.addItem();
+    this.fetchCategories();
+    this.fetchElements();
+    this.fetchPartners();
+    this.fetchTaxes();
   }
 
   get items(): FormArray {
@@ -238,6 +242,17 @@ export class BillUpsertComponent implements OnInit {
     this.apiService.get<Partner[]>('partner').subscribe({
       next: (data: Partner[]) => {
         this.partners = data;
+      },
+      error: (error) => {
+        console.error('Error fetching partners', error);
+      }
+    });
+  }
+
+  fetchTaxes(): void {
+    this.apiService.get<Tax[]>('partner').subscribe({
+      next: (data: Tax[]) => {
+        this.taxOptions = data;
       },
       error: (error) => {
         console.error('Error fetching partners', error);

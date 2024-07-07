@@ -19,16 +19,18 @@ export class AppComponent implements OnInit {
   isLoginRoute = false;
   sidenavBackgroundColor = 'white';
   toolbarBackgroundColor = 'white';
-
+  companyVersion = localStorage.getItem("companyVersion") ?? '';
+  companyName: string = localStorage.getItem("organizationName") ?? '';
+  license: string = localStorage.getItem("license") ?? '';
+  footerText: string = 'Efcon CRM ' + 'V' + this.companyVersion + ' ' + 'Licenta client: ' + this.license;
+  
   constructor(private router: Router) {}
 
   ngOnInit() {
-    localStorage.setItem('sidenavBackgroundColor', "#E8DAEF");
-    localStorage.setItem('toolbarBackgroundColor', '#D7BDE2');
     this.router.events.pipe(
       filter((event: Event): event is NavigationEnd => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
-      this.isLoginRoute = event.url === '/login';
+      this.isLoginRoute = event.url.includes('login') || event.url.includes('Login') || event.urlAfterRedirects.includes('login');
     });
 
     this.setSidenavBackgroundColor();

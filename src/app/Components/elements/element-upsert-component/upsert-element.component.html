@@ -1,88 +1,79 @@
 <div class="header">
   <h1>Element Nou</h1>
 </div>
-<div class="content">
-  <div class="section">
-    <h4>Preferinţe generale</h4>
-    <h6 class="descr-subsection">Selectează o categorie pentru a face rapoartele mai detaliate. </h6>
-    <div class="separator-line"></div>
+<form [formGroup]="elementForm" (ngSubmit)="saveElement()">
+    <div>
+      <h4>Preferinţe generale</h4>
+      <h6 class="descr-subsection">Selectează o categorie pentru a face rapoartele mai detaliate.</h6>
+      <div class="separator-line"></div>
 
-    <div class="subsection">
-    <!-- Product and Service selection -->
-    <div class="selection-container">
-      <label class="margin-label bold-label">Tip</label>
-      <div class="button-container-m">
-        <div class="selection-option" [ngClass]="{'selected': type === 1}" (click)="selectElementType(1)">Produs</div>
-        <div class="selection-option margin-label" [ngClass]="{'selected': type === 2}" (click)="selectElementType(2)">Serviciu</div>
-      </div>
-    </div>
-  
-    <!-- Nume and Categorie inputs -->
-    <div class="input-row">
-      <div class="input-container selection-container">
-        <label class="margin-label" for="nume">Nume</label>
-        <mat-form-field class="input-size">
-        <input matInput id="nume" [(ngModel)]="name" placeholder="Introduceți Nume">
-        </mat-form-field>
-      </div>
-      <div class="input-container selection-container">
-        <mat-form-field class="input-size">
-          <mat-label>Categorie</mat-label>
-          <mat-select (selectionChange)="onCategorySelected($event.value)">
-            <mat-option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-    </div>
+      <div class="subsection">
+        <!-- Product and Service selection -->
+        <div class="single-input-wrapper">
+          <label >Tip</label>
+          <div class="button-container-m">
+            <div class="selection-option" [ngClass]="{'selected': elementForm.get('type')!.value === 1}" (click)="elementForm.patchValue({type: 1})">Produs</div>
+            <div class="selection-option" [ngClass]="{'selected': elementForm.get('type')!.value === 2}" (click)="elementForm.patchValue({type: 2})">Serviciu</div>
+          </div>
+        </div>
 
-    <!-- Descriere input -->
-    <div class="selection-container">
-      <label class="margin-label" for="descriere">Descriere</label>
-      <mat-form-field  class="description"> 
-      <textarea class="description" matInput id="descriere" [(ngModel)]="description" rows="4" cols="8" placeholder="Introduceți Descriere"></textarea>
-    </mat-form-field>
+        <!-- Nume and Categorie inputs -->
+        <div class="double-input-container">
+          <div class="input-wrapper">
+            <label for="nume">Nume</label>
+            <input id="nume" formControlName="name" placeholder="Introduceți Nume" />
+          </div>
+          <div class="input-wrapper">
+            <label for="categorie">Categorie</label>
+            <select id="categorie" formControlName="selectedCategoryId" (change)="onCategorySelected($event)">
+              <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Descriere input -->
+        <div class="single-input-wrapper">
+          <label for="descriere">Descriere</label>
+          <textarea id="descriere" formControlName="description" rows="3" placeholder="Introduceți Descriere"></textarea>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-  <div class="section">
-    <h4>Facturare</h4>
-    <h6 class="descr-subsection">Informațiile de vânzare sunt utilizate în cadrul facturilor, iar informațiile de achiziție sunt utilizate în cadrul facturile de achiziții.</h6>
-    <div class="separator-line"></div>
-    <div class="subsection">
-    <div class="input-row">
-        <div class="checkbox-field selection-container">
-            <input class="checkbox-upd" type="checkbox" id="acquireInfo" [(ngModel)]="acquireInfo" (change)="toggleAcquireInfo()">
+    <div class="section-delimiter">
+      <h4>Facturare</h4>
+      <h6 class="descr-subsection">Informațiile de vânzare sunt utilizate în cadrul facturilor, iar informațiile de achiziție sunt utilizate în cadrul facturile de achiziții.</h6>
+      <div class="separator-line"></div>
+
+      <div class="subsection">
+        <div class="double-input-container">
+          <div class="input-wrapper">
+            <input type="checkbox" id="acquireInfo" formControlName="acquireInfo" (change)="toggleAcquireInfo()">
             <label for="acquireInfo">Informații cumpărare</label>
             <div class="input-field">
               <label class="margin-label" for="acquireInfoInput">Cost de achiziție: </label>
-              <mat-form-field class="input-size">
-              <input matInput type="text" id="acquireInfoInput" [(ngModel)]="aquisitionPrice" [disabled]="!acquireInfo">
-            </mat-form-field>
+              <input type="text" id="acquireInfoInput" formControlName="aquisitionPrice" [disabled]="!elementForm.get('acquireInfo')!.value">
             </div>
           </div>
-        
+
           <!-- Selling Info -->
-          <div class="selection-container">
-            <input class="checkbox-upd" type="checkbox" id="sellingInfo" [(ngModel)]="sellingInfo" (change)="toggleSellingInfo()">
+          <div class="input-wrapper">
+            <input type="checkbox" id="sellingInfo" formControlName="sellingInfo" (change)="toggleSellingInfo()">
             <label for="sellingInfo">Informații vânzare</label>
             <div class="input-field">
               <label class="margin-label bold-label" for="sellingInfoInput">Preț de vânzare: </label>
-              <mat-form-field class="input-size">
-              <input matInput type="text" id="sellingInfoInput" [(ngModel)]="sellingPrice" [disabled]="!sellingInfo">
-            </mat-form-field>
+              <input type="text" id="sellingInfoInput" formControlName="sellingPrice" [disabled]="!elementForm.get('sellingInfo')!.value">
             </div>
           </div>
-    </div>
+        </div>
 
-    <div class="input-row">
-      <mat-form-field class="input-size">
-        <mat-label>Taxă</mat-label>
-        <mat-select (selectionChange)="onTaxSelected($event.value)">
-          <mat-option *ngFor="let tax of taxes" [value]="tax.id">{{ tax.name }} ({{ tax.value }}%)</mat-option>
-        </mat-select>
-      </mat-form-field>
+        <div class="single-input-wrapper">
+          <label for="taxa">Taxă</label>
+          <select id="taxa" formControlName="selectedTaxId" (change)="onTaxSelected($event)">
+            <option *ngFor="let tax of taxes" [value]="tax.id">{{ tax.name }} ({{ tax.value }}%)</option>
+          </select>
+        </div>
+      </div>
     </div>
-  </div>
-  </div>
-    <button class="button" (click)="saveElement()">Salvează</button>
-  </div>
+    <div class="button-container">
+      <button class="button" type="submit">Salvează</button>
+    </div>
+</form>

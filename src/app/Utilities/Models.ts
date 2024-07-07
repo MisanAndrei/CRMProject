@@ -102,6 +102,8 @@ export interface Element {
     colorCodeNavBar: string;
     colorCodeLeftBar: string;
     font: string;
+    version: number;
+    id: number;
   }
   
   export interface Partner {

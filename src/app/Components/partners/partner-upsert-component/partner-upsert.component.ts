@@ -15,6 +15,7 @@ export class PartnerUpsertComponent implements OnInit {
   imageBase64: string | ArrayBuffer | null = '';
   partnerId?: number;
   isEditMode = false;
+  elementId!: number;
 
   constructor(
     private fb: FormBuilder,
@@ -42,7 +43,14 @@ export class PartnerUpsertComponent implements OnInit {
     
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.elementId = +this.route.snapshot.paramMap.get('id')!;
+    this.isEditMode = !!this.elementId;
+
+    if (this.isEditMode) {
+      this.fetchPartnerDetails(this.elementId);
+    }
+  }
 
   fetchPartnerDetails(id: number): void {
     this.apiService.get<Partner>(`/partners/${id}`).subscribe((partner) => {
