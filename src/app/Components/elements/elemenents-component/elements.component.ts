@@ -135,7 +135,7 @@ export class ElementsComponent implements OnInit, AfterViewInit {
   }
   
   fetchData(){
-    this.apiService.get<Element[]>('financial/element').subscribe({
+    this.apiService.get<Element[]>('financial/element/').subscribe({
       next: (data: Element[]) => {
         this.dataSource.data = data;
         console.log(data);

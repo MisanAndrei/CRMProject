@@ -53,7 +53,7 @@ export class PartnerUpsertComponent implements OnInit {
   }
 
   fetchPartnerDetails(id: number): void {
-    this.apiService.get<Partner>(`/partners/${id}`).subscribe((partner) => {
+    this.apiService.get<Partner>(`partner/${id}`).subscribe((partner) => {
       this.partnerForm.patchValue({
         name: partner.name,
         email: partner.email,
@@ -95,7 +95,7 @@ export class PartnerUpsertComponent implements OnInit {
     if (this.partnerForm.valid) {
       const partnerData = this.partnerForm.value;
       if (this.isEditMode) {
-        this.apiService.put('partner', partnerData).subscribe({
+        this.apiService.put('partner/', partnerData).subscribe({
           next: () => {
             console.log('Partner updated successfully');
             if (this.dialogRef) {
@@ -109,7 +109,7 @@ export class PartnerUpsertComponent implements OnInit {
           }
         });
       } else {
-        this.apiService.post('partner', partnerData).subscribe({
+        this.apiService.post('partner/', partnerData).subscribe({
           next: () => {
             console.log('Partner created successfully');
             if (this.dialogRef) {

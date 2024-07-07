@@ -48,6 +48,8 @@ export class CategoriesComponent implements OnInit, AfterViewInit {
 
     this.dataSource.data = CATEGORIES_DATA;
 
+    this.fetchCategories();
+
 
     this.searchControl.valueChanges.pipe(
       debounceTime(300),
@@ -124,7 +126,7 @@ export class CategoriesComponent implements OnInit, AfterViewInit {
   }
 
   fetchCategories(){
-    this.apiService.get<Category[]>('financial/category').subscribe({
+    this.apiService.get<Category[]>('financial/category/').subscribe({
       next: (data: Category[]) => {
         this.dataSource.data = data;
         console.log(data);

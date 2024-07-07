@@ -114,7 +114,7 @@ export class PartnersComponent implements OnInit, AfterViewInit {
   }
 
   fetchData(){
-    this.apiService.get<Partner[]>('partner').subscribe({
+    this.apiService.get<Partner[]>('partner/').subscribe({
       next: (data: Partner[]) => {
         this.dataSource.data = data;
         console.log(data);

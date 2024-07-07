@@ -59,7 +59,7 @@ export class CompanyComponent implements OnInit {
   }
 
   fetchCompanyDetails(): void {
-    this.apiService.get<Organization>('/company').subscribe((company) => {
+    this.apiService.get<Organization>('organization/').subscribe((company) => {
       this.companyForm.patchValue({
         name: company.name,
         email: company.email,

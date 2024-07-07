@@ -206,7 +206,7 @@ export class BillUpsertComponent implements OnInit {
         }))
       };
 
-      this.apiService.post<Invoice>('invoice', invoice).subscribe({
+      this.apiService.post<Invoice>('financial/invoice/', invoice).subscribe({
         next: () => {
           console.log('Invoice created successfully');
           // Navigate to another page or show a success message
@@ -239,7 +239,7 @@ export class BillUpsertComponent implements OnInit {
   }
 
   fetchPartners(): void {
-    this.apiService.get<Partner[]>('partner').subscribe({
+    this.apiService.get<Partner[]>('partner/').subscribe({
       next: (data: Partner[]) => {
         this.partners = data;
       },
@@ -250,7 +250,7 @@ export class BillUpsertComponent implements OnInit {
   }
 
   fetchTaxes(): void {
-    this.apiService.get<Tax[]>('partner').subscribe({
+    this.apiService.get<Tax[]>('financial/tax/').subscribe({
       next: (data: Tax[]) => {
         this.taxOptions = data;
       },
@@ -261,7 +261,7 @@ export class BillUpsertComponent implements OnInit {
   }
 
   fetchCategories(): void {
-    this.apiService.get<Category[]>('category').subscribe({
+    this.apiService.get<Category[]>('category/').subscribe({
       next: (data: Category[]) => {
         this.categories = data;
       },
@@ -272,7 +272,7 @@ export class BillUpsertComponent implements OnInit {
   }
 
   fetchElements(): void {
-    this.apiService.get<Element[]>('element').subscribe({
+    this.apiService.get<Element[]>('element/').subscribe({
       next: (data: Element[]) => {
         this.elements = data;
       },

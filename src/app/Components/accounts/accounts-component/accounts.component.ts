@@ -124,7 +124,7 @@ export class AccountsComponent implements OnInit, AfterViewInit {
   }
 
   fetchData(){
-    this.apiService.get<Account[]>('financial/bank-account').subscribe({
+    this.apiService.get<Account[]>('financial/account/').subscribe({
       next: (data: Account[]) => {
         this.dataSource.data = data;
         console.log(data);

@@ -26,7 +26,7 @@ export class BillPreferencesComponent implements OnInit {
   }
 
   loadPreferences(): void {
-    this.apiService.get<InvoicePreferences>('invoice-preferences').subscribe({
+    this.apiService.get<InvoicePreferences>('organization/invoice-preferences').subscribe({
       next: (data: InvoicePreferences) => {
         this.preferencesForm.patchValue({
           prefix: data.prefix,

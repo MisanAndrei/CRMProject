@@ -113,7 +113,7 @@ export class TransfersComponent implements OnInit, AfterViewInit {
   }
 
   fetchData(){
-    this.apiService.get<Transfer[]>('financial/bank-account/transfer').subscribe({
+    this.apiService.get<Transfer[]>('financial/account/transfer/').subscribe({
       next: (data: Transfer[]) => {
         this.dataSource.data = data;
         console.log(data);

@@ -135,7 +135,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
   }
 
   fetchData(){
-    this.apiService.get<Bill[]>('financial/invoice').subscribe({
+    this.apiService.get<Bill[]>('financial/invoice/').subscribe({
       next: (data: Bill[]) => {
         this.dataSource.data = data;
         console.log(data);

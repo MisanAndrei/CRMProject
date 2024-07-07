@@ -92,7 +92,7 @@ export class TransactionUpsertComponent implements OnInit {
       };
 
       if (transaction.id) {
-        this.apiService.put('/transactions', transaction).subscribe({
+        this.apiService.put('financial/invoice/payments', transaction).subscribe({
           next: () => {
             console.log('Transaction updated successfully');
             this.router.navigate(['/Tranzactii']);
@@ -105,7 +105,7 @@ export class TransactionUpsertComponent implements OnInit {
           }
         });
       } else {
-        this.apiService.post('financial/transaction', transaction).subscribe({
+        this.apiService.post('financial/invoice/payments', transaction).subscribe({
           next: () => {
             console.log('Transaction created successfully');
             this.router.navigate(['/Tranzactii']);
@@ -124,7 +124,7 @@ export class TransactionUpsertComponent implements OnInit {
   }
 
   fetchAccounts() {
-    this.apiService.get<Account[]>('financial/accounts').subscribe({
+    this.apiService.get<Account[]>('financial/account/').subscribe({
       next: (data: Account[]) => {
         this.accounts = data;
         console.log(data);
@@ -139,7 +139,7 @@ export class TransactionUpsertComponent implements OnInit {
   }
 
   fetchInvoices() {
-    this.apiService.get<Invoice[]>('financial/invoice').subscribe({
+    this.apiService.get<Invoice[]>('financial/invoice/').subscribe({
       next: (data: Invoice[]) => {
         this.accounts = data;
         console.log(data);

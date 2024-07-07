@@ -119,7 +119,7 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
   }
 
   fetchData(){
-    this.apiService.get<Transaction[]>('financial/transaction').subscribe({
+    this.apiService.get<Transaction[]>('financial/invoice/payments').subscribe({
       next: (data: Transaction[]) => {
         this.dataSource.data = data;
         console.log(data);

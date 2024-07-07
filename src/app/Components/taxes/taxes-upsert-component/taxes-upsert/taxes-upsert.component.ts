@@ -71,12 +71,12 @@ export class TaxesUpsertComponent implements OnInit {
       const tax: Tax = {
         name: formValue.name,
         value: formValue.tax,
-        type: this.types.find(t => t.id === formValue.type)?.name
+        type: this.types.find(t => t.name === formValue.type)?.name
       };
 
       if (this.isEditMode && this.taxId) {
         tax.id = this.taxId;
-        this.apiService.put(`financial/tax`, tax).subscribe({
+        this.apiService.put(`financial/tax/`, tax).subscribe({
           next: () => {
             console.log('Tax updated successfully');
             this.router.navigate(['/taxes']);
@@ -86,7 +86,7 @@ export class TaxesUpsertComponent implements OnInit {
           }
         });
       } else {
-        this.apiService.post('financial/tax', tax).subscribe({
+        this.apiService.post('financial/tax/', tax).subscribe({
           next: () => {
             console.log('Tax created successfully');
             this.router.navigate(['/taxes']);

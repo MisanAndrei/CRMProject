@@ -13,10 +13,7 @@ import { Category, Element, Tax } from '../../../Utilities/Models';
 export class UpsertElementComponent implements OnInit {
   elementForm: FormGroup;
   categories: Category[] = [];
-  taxes: Tax[] = [
-    { id: 1, name: 'Tax 1', value: 25 },
-    { id: 2, name: 'Tax 2', value: 35 },
-  ];
+  taxes: Tax[] = [];
   elementId?: number;
   isEditMode = false;
   selectedCategoryName: string = '';
@@ -83,7 +80,7 @@ export class UpsertElementComponent implements OnInit {
   }
 
   fetchElementDetails(id: number) {
-    this.apiService.get<Element>(`/elements/${id}`).subscribe((element) => {
+    this.apiService.get<Element>(`/element/${id}`).subscribe((element) => {
       this.elementForm.patchValue({
         type: element.type === 'Produs' ? ElementType.Produs : ElementType.Serviciu,
         name: element.name,
@@ -152,26 +149,34 @@ export class UpsertElementComponent implements OnInit {
 
   saveElement() {
     if (this.elementForm.valid) {
-      const elementData = {
-        ...this.elementForm.value,
+        const elementData: Element = {
+        type: this.elementForm.get('type')?.value == 1 ? 'Produs' : 'Serviciu',
+        name: this.elementForm.get('name')?.value,
         categoryName: this.selectedCategoryName,
-      } as Element;
+        categoryId: this.elementForm.get('selectedCategoryId')?.value,
+        description: this.elementForm.get('description')?.value,
+        aquisitionPrice: this.elementForm.get('aquisitionPrice')?.value,
+        sellingPrice: this.elementForm.get('sellingPrice')?.value,
+        taxId: this.elementForm.get('selectedTaxId')?.value,
+        taxValue: this.elementForm.get('selectedTaxValue')?.value
+      };
 
       if (this.isEditMode) {
-        this.apiService.put('financial/element', elementData).subscribe({
+        elementData.id = this.elementId;
+        this.apiService.put('financial/element/', elementData).subscribe({
           next: () => {
             console.log('Element updated successfully');
-            this.router.navigate(['/elements']);
+            this.router.navigate(['/Elemente']);
           },
           error: (error) => {
             console.error('Error updating element', error);
           },
         });
       } else {
-        this.apiService.post('financial/element', elementData).subscribe({
+        this.apiService.post('financial/element/', elementData).subscribe({
           next: () => {
             console.log('Element created successfully');
-            this.router.navigate(['/elements']);
+            this.router.navigate(['/Elemente']);
           },
           error: (error) => {
             console.error('Error creating element', error);
@@ -184,15 +189,16 @@ export class UpsertElementComponent implements OnInit {
   }
 
   fetchCategories() {
-    // Replace with API call
-    this.categories = [
-      { id: 1, name: 'Category 1', type: 'Type 1', colorCode: '#FF0000' },
-      { id: 2, name: 'Category 2', type: 'Type 2', colorCode: '#00FF00' },
-    ];
-
-    this.apiService.get<Category[]>('financial/category').subscribe({
+    
+    this.apiService.get<Category[]>('financial/category/').subscribe({
       next: (data: Category[]) => {
-        this.categories = data.filter(x => x.type == 'Element');
+        this.categories = data.filter(x => x.type == 'element');
+        if (this.categories.length == 1){
+          this.selectedCategoryName = this.categories[0].name;
+          this.elementForm.patchValue({
+            selectedCategoryId: this.categories[0].id,
+          });
+        }
         console.log(data);
       },
       error: (error) => {
@@ -206,7 +212,7 @@ export class UpsertElementComponent implements OnInit {
   
 
   fetchTaxes() {
-    this.apiService.get<Tax[]>('financial/tax').subscribe({
+    this.apiService.get<Tax[]>('financial/tax/').subscribe({
       next: (data: Tax[]) => {
         this.taxes = data;
         console.log(data);

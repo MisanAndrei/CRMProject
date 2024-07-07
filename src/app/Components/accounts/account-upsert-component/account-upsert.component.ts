@@ -38,7 +38,7 @@ export class AccountUpsertComponent implements OnInit {
   }
 
   fetchAccountDetails(id: number): void {
-    this.apiService.get<Account>(`/accounts/${id}`).subscribe((account) => {
+    this.apiService.get<Account>(`/account/${id}`).subscribe((account) => {
       this.accountForm.patchValue({
         name: account.name,
         number: account.accountNumber
@@ -56,11 +56,11 @@ export class AccountUpsertComponent implements OnInit {
       };
 
       if (this.isEditMode) {
-        this.apiService.put(`financial/bank-account`, accountData).subscribe(() => {
+        this.apiService.put(`financial/account/`, accountData).subscribe(() => {
           this.router.navigate(['/accounts']);
         });
       } else {
-        this.apiService.post('financial/bank-account', accountData).subscribe(() => {
+        this.apiService.post('financial/account/', accountData).subscribe(() => {
           this.router.navigate(['/accounts']);
         });
       }

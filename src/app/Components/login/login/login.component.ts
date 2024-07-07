@@ -26,12 +26,12 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       this.authService.customLogin(this.loginForm.get('email')?.value, this.loginForm.get('password')?.value).then(() => {
         console.log('Logged in');
-        this.apiService.get<OrganizationResponse>('organization').subscribe({
+        this.apiService.get<OrganizationResponse>('organization/').subscribe({
           next: (data: OrganizationResponse) => {
             if (data.license != this.loginForm.get('license')?.value) {
               this.authService.logout();
             } else {
-              localStorage.setItem('sidenavBackgroundColor', data.colorCodeLeftBar);
+              localStorage.setItem('sidenavBackgroundColor', data.colorLeftSideBar);
               localStorage.setItem('toolbarBackgroundColor', data.colorCodeNavBar);
               localStorage.setItem('selectedFont', JSON.stringify({ name: data.font, url: null }));
               localStorage.setItem('organizationName', data.name);

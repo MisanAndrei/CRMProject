@@ -34,7 +34,7 @@
         <label for="type">Tip</label>
         <select id="type" formControlName="type">
           <option value="" disabled selected>Selectează tip</option>
-          <option *ngFor="let type of types" [value]="type.id">
+          <option *ngFor="let type of types" [value]="type.name">
             {{ type.name }}
           </option>
         </select>

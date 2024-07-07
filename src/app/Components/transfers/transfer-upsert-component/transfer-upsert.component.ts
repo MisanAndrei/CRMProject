@@ -67,7 +67,7 @@ export class TransferUpsertComponent implements OnInit {
   }
 
   fetchTransferDetails(id: number): void {
-    this.apiService.get<Transfer>(`/transfers/${id}`).subscribe((transfer) => {
+    this.apiService.get<Transfer>(`financial/account/transfer/${id}`).subscribe((transfer) => {
       this.transferForm.patchValue({
         fromBankAccount: transfer.fromBankAccountId,
         fromBankAccountId: transfer.fromBankAccountId,
@@ -117,11 +117,11 @@ export class TransferUpsertComponent implements OnInit {
       };
 
       if (this.isEditMode) {
-        this.apiService.put(`/transfers/${this.transferId}`, transferData).subscribe(() => {
+        this.apiService.put(`financial/account/transfer/${this.transferId}`, transferData).subscribe(() => {
           this.router.navigate(['/transfers']);
         });
       } else {
-        this.apiService.post('/transfers', transferData).subscribe(() => {
+        this.apiService.post('financial/account/transfer/create', transferData).subscribe(() => {
           this.router.navigate(['/transfers']);
         });
       }
@@ -131,7 +131,7 @@ export class TransferUpsertComponent implements OnInit {
   }
 
   fetchAccounts() {
-    this.apiService.get<Account[]>('financial/account').subscribe({
+    this.apiService.get<Account[]>('financial/account/').subscribe({
       next: (data: Account[]) => {
         this.accounts = data;
         console.log(data);

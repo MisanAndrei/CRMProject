@@ -100,7 +100,7 @@ export interface Element {
     dbSchema: string;
     status: string;
     colorCodeNavBar: string;
-    colorCodeLeftBar: string;
+    colorLeftSideBar: string;
     font: string;
     version: number;
     id: number;

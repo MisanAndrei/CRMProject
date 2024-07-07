@@ -16,7 +16,7 @@ export class AuthService {
   }
 
   async initKeycloak(): Promise<void> {
-    if (!this.keycloakInstance.authenticated) {
+    if (!this.isLoggedIn()) {
       await this.keycloakService.init({
         config: {
           url: 'https://backend-crm.efcon.ro/auth', // Update with your Keycloak server URL
@@ -56,21 +56,27 @@ export class AuthService {
       this.keycloakInstance.tokenParsed = decodeToken(response.access_token);
       this.keycloakInstance.refreshTokenParsed = decodeToken(response.refresh_token);
       this.keycloakInstance.onAuthSuccess && this.keycloakInstance.onAuthSuccess();
+      this.keycloakInstance.authenticated = true;
+      localStorage.setItem('access_cookie', response.access_token);
     } catch (error) {
       console.error('Login failed', error);
     }
   }
 
   logout(): Promise<void> {
+    localStorage.removeItem('access_cookie');
     return this.keycloakService.logout();
   }
 
   async isLoggedIn(): Promise<boolean> {
-    await this.initKeycloak();
-    return await this.keycloakService.isLoggedIn();
+    var token = localStorage.getItem('access_cookie');
+    if (token == null || token == undefined){
+      return false;
+    }
+    return true;
   }
 
   getToken(): string | undefined {
-    return this.keycloakService.getKeycloakInstance().token;
+    return localStorage.getItem('access_cookie') ?? undefined;
   }
 }

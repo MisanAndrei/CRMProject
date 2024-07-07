@@ -10,6 +10,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { DeleteDialogComponent } from '../../dialogs/delete-dialog-component/delete-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { ApiService } from '../../../Services/ApiService';
 
 @Component({
   selector: 'app-taxes',
@@ -27,7 +28,7 @@ export class TaxesComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private _liveAnnouncer: LiveAnnouncer, private dialog: MatDialog, private router: Router) {
+  constructor(private _liveAnnouncer: LiveAnnouncer, private dialog: MatDialog, private router: Router, private apiService: ApiService) {
     this.dataSource = new MatTableDataSource<Tax>();
   }
 
@@ -44,7 +45,10 @@ export class TaxesComponent implements OnInit, AfterViewInit {
       // Add more data as needed
     ];
 
+   
     this.dataSource.data = TAX_DATA;
+
+    this.fetchTaxes();
 
     this.searchControl.valueChanges.pipe(
       debounceTime(300),
@@ -108,5 +112,20 @@ export class TaxesComponent implements OnInit, AfterViewInit {
 
     console.log(`Page index: ${pageIndex}, Page size: ${pageSize}, Total items: ${length}`);
     // Here you can call your function to fetch data from the backend with these pagination details
+  }
+
+  fetchTaxes() {
+    this.apiService.get<Tax[]>('financial/tax/').subscribe({
+      next: (data: Tax[]) => {
+        this.dataSource.data = data;
+        console.log(data);
+      },
+      error: (error) => {
+        console.error('Error fetching categories', error);
+      },
+      complete: () => {
+        console.info('categories data fetch complete');
+      }
+    });
   }
 }

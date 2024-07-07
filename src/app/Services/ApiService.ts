@@ -7,7 +7,7 @@ import { tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = 'https://crmapi.com/api';
+  private apiUrl = 'https://backend-crm.efcon.ro/crm/api/v1';
 
   constructor(private http: HttpClient) { }
 
