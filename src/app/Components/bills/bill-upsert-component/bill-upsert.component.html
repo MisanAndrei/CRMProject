@@ -144,13 +144,12 @@
               type="number"
               [disabled]="true"
             />
-              <input
-                formControlName="elementTax"
-                placeholder="Taxă"
-                type="number"
-                (change)="onTaxChange(i)"
-                [disabled]="false"
-              />
+            <select formControlName="elementTax" (change)="onTaxChange(i)">
+              <option value="">Selectează Taxă</option>
+              <option *ngFor="let tax of taxOptions" [value]="tax.value">
+                {{ tax.name }}
+              </option>
+            </select>
             <input
               formControlName="total"
               placeholder="Total"

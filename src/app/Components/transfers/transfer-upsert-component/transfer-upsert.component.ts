@@ -27,9 +27,9 @@ export class TransferUpsertComponent implements OnInit {
     { id: 3, name: 'Account C' }
   ];
   methodsOfPayment: MethodOfPayment[] = [
-    { id: 1, name: 'Method A' },
-    { id: 2, name: 'Method B' },
-    { id: 3, name: 'Method C' }
+    { id: 1, name: 'Card de credit' },
+    { id: 2, name: 'Transfer Bancar' },
+    { id: 3, name: 'Cash' }
   ];
   transferId?: number;
   isEditMode = false;
@@ -62,6 +62,8 @@ export class TransferUpsertComponent implements OnInit {
     if (this.isEditMode) {
       this.fetchTransferDetails(this.transferId);
     }
+
+    this.fetchAccounts();
   }
 
   fetchTransferDetails(id: number): void {
@@ -126,5 +128,20 @@ export class TransferUpsertComponent implements OnInit {
     } else {
       console.log('Form is invalid');
     }
+  }
+
+  fetchAccounts() {
+    this.apiService.get<Account[]>('financial/account').subscribe({
+      next: (data: Account[]) => {
+        this.accounts = data;
+        console.log(data);
+      },
+      error: (error) => {
+        console.error('Error fetching categories', error);
+      },
+      complete: () => {
+        console.info('categories data fetch complete');
+      }
+    });
   }
 }

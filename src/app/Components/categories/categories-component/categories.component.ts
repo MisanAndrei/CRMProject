@@ -10,6 +10,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { DeleteDialogComponent } from '../../dialogs/delete-dialog-component/delete-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { ApiService } from '../../../Services/ApiService';
 
 @Component({
   selector: 'app-categories',
@@ -28,7 +29,7 @@ export class CategoriesComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private _liveAnnouncer: LiveAnnouncer, private dialog: MatDialog, private router: Router) {
+  constructor(private _liveAnnouncer: LiveAnnouncer, private dialog: MatDialog, private router: Router,  private apiService: ApiService) {
     this.dataSource = new MatTableDataSource<Category>();
 
   }
@@ -120,5 +121,20 @@ export class CategoriesComponent implements OnInit, AfterViewInit {
     // Here you can call your function to fetch data from the backend with these pagination details
     // For example:
     // this.fetchDataFromBackend(pageIndex, pageSize);
+  }
+
+  fetchCategories(){
+    this.apiService.get<Category[]>('financial/category').subscribe({
+      next: (data: Category[]) => {
+        this.dataSource.data = data;
+        console.log(data);
+      },
+      error: (error) => {
+        console.error('Error fetching categoryes', error);
+      },
+      complete: () => {
+        console.info('categories data fetch complete');
+      }
+    });
   }
 }

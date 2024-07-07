@@ -23,8 +23,8 @@ export class AppComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit() {
-    localStorage.setItem('sidenavBackgroundColor', "#E8DAEF");
-    localStorage.setItem('toolbarBackgroundColor', '#D7BDE2');
+    localStorage.setItem('sidenavBackgroundColor', "#808080");
+    localStorage.setItem('toolbarBackgroundColor', '#989898');
     this.router.events.pipe(
       filter((event: Event): event is NavigationEnd => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {

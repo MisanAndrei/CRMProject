@@ -29,8 +29,8 @@ interface Invoice {
 export class TransactionUpsertComponent implements OnInit {
   transactionForm: FormGroup;
   paymentMethods: PaymentMethod[] = [
-    { id: 1, name: 'Credit Card' },
-    { id: 2, name: 'Bank Transfer' },
+    { id: 1, name: 'Card de credit' },
+    { id: 2, name: 'Transfer Bancar' },
     { id: 3, name: 'Cash' }
   ];
   accounts: Account[] = [
@@ -43,6 +43,7 @@ export class TransactionUpsertComponent implements OnInit {
     { id: 2, name: 'Invoice 002' },
     { id: 3, name: 'Invoice 003' }
   ];
+
   transactionDirections = [
     { id: 'INCOME', name: 'Incasare' },
     { id: 'EXPENSE', name: 'Plata' }
@@ -67,7 +68,10 @@ export class TransactionUpsertComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.fetchAccounts();
+    this.fetchInvoices();
+   }
 
   onSubmit(): void {
     if (this.transactionForm.valid) {
@@ -117,5 +121,35 @@ export class TransactionUpsertComponent implements OnInit {
     } else {
       console.log('Form is invalid');
     }
+  }
+
+  fetchAccounts() {
+    this.apiService.get<Account[]>('financial/accounts').subscribe({
+      next: (data: Account[]) => {
+        this.accounts = data;
+        console.log(data);
+      },
+      error: (error) => {
+        console.error('Error fetching categories', error);
+      },
+      complete: () => {
+        console.info('categories data fetch complete');
+      }
+    });
+  }
+
+  fetchInvoices() {
+    this.apiService.get<Invoice[]>('financial/invoice').subscribe({
+      next: (data: Invoice[]) => {
+        this.accounts = data;
+        console.log(data);
+      },
+      error: (error) => {
+        console.error('Error fetching categories', error);
+      },
+      complete: () => {
+        console.info('categories data fetch complete');
+      }
+    });
   }
 }

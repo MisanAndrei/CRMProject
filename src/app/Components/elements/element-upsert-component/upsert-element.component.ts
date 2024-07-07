@@ -189,13 +189,34 @@ export class UpsertElementComponent implements OnInit {
       { id: 1, name: 'Category 1', type: 'Type 1', colorCode: '#FF0000' },
       { id: 2, name: 'Category 2', type: 'Type 2', colorCode: '#00FF00' },
     ];
+
+    this.apiService.get<Category[]>('financial/category').subscribe({
+      next: (data: Category[]) => {
+        this.categories = data.filter(x => x.type == 'Element');
+        console.log(data);
+      },
+      error: (error) => {
+        console.error('Error fetching categories', error);
+      },
+      complete: () => {
+        console.info('categories data fetch complete');
+      }
+    });
   }
+  
 
   fetchTaxes() {
-    // Replace with API call
-    this.taxes = [
-      { id: 1, name: 'Tax 1', type: 'Type 1', value: 5 },
-      { id: 2, name: 'Tax 2', type: 'Type 2', value: 10 },
-    ];
+    this.apiService.get<Tax[]>('financial/tax').subscribe({
+      next: (data: Tax[]) => {
+        this.taxes = data;
+        console.log(data);
+      },
+      error: (error) => {
+        console.error('Error fetching categories', error);
+      },
+      complete: () => {
+        console.info('categories data fetch complete');
+      }
+    });
   }
 }
