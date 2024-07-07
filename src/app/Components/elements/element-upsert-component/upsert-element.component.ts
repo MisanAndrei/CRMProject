@@ -1,44 +1,47 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ElementType } from '../../../Utilities/Enums';
-import { Category, Element, Tax } from '../../../Utilities/Models';
-import { MatChipInputEvent } from '@angular/material/chips';
-import { ENTER, COMMA } from '@angular/cdk/keycodes';
-import { FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../../Services/ApiService';
+import { Category, Element, Tax } from '../../../Utilities/Models';
 
 @Component({
   selector: 'app-upsert-element',
   templateUrl: './upsert-element.component.html',
   styleUrls: ['./upsert-element.component.css'],
 })
-export class UpsertElementComponent {
-  type: ElementType = ElementType.Produs; // Default to Product
-  name: string = '';
-  selectedCategoryName: string = '';
-  selectedCategoryId: number = 0;
-  description: string = '';
-  acquireInfo: boolean = true;
-  sellingInfo: boolean = false;
-  aquisitionPrice: number = 0;
-  sellingPrice: number = 0;
-  selectedTaxId: number = 0;
-  selectedTaxValue: number = 0;
+export class UpsertElementComponent implements OnInit {
+  elementForm: FormGroup;
   categories: Category[] = [];
-
-  elementId?: number;
-  isEditMode = false;
-
   taxes: Tax[] = [
     { id: 1, name: 'Tax 1', value: 25 },
     { id: 2, name: 'Tax 2', value: 35 },
   ];
+  elementId?: number;
+  isEditMode = false;
+  selectedCategoryName: string = '';
 
-  selectedTax: Tax | undefined;
+  constructor(
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    private apiService: ApiService
+  ) {
+    this.elementForm = this.fb.group({
+      type: [ElementType.Produs, Validators.required],
+      name: ['', Validators.required],
+      selectedCategoryId: [0, Validators.required],
+      description: [''],
+      acquireInfo: [true],
+      sellingInfo: [false],
+      aquisitionPrice: [0],
+      sellingPrice: [{ value: 0, disabled: true }],
+      selectedTaxId: [0],
+      selectedTaxValue: [0],
+    });
 
-  taxesControl = new FormControl<Tax[]>([]);
-
-  constructor(private route: ActivatedRoute, private router: Router, private apiService: ApiService) {}
+    this.setupFormListeners();
+  }
 
   ngOnInit(): void {
     this.elementId = +this.route.snapshot.paramMap.get('id')!;
@@ -52,25 +55,54 @@ export class UpsertElementComponent {
     }
   }
 
+  private setupFormListeners() {
+    this.elementForm.get('acquireInfo')!.valueChanges.subscribe((value) => {
+      if (value) {
+        this.elementForm.get('aquisitionPrice')!.enable();
+      } else {
+        this.elementForm.get('aquisitionPrice')!.disable();
+      }
+    });
+
+    this.elementForm.get('sellingInfo')!.valueChanges.subscribe((value) => {
+      if (value) {
+        this.elementForm.get('sellingPrice')!.enable();
+      } else {
+        this.elementForm.get('sellingPrice')!.disable();
+      }
+    });
+
+    // Initialize state based on the current values
+    if (!this.elementForm.get('acquireInfo')!.value) {
+      this.elementForm.get('aquisitionPrice')!.disable();
+    }
+
+    if (!this.elementForm.get('sellingInfo')!.value) {
+      this.elementForm.get('sellingPrice')!.disable();
+    }
+  }
+
   fetchElementDetails(id: number) {
-    // Replace with API call
     this.apiService.get<Element>(`/elements/${id}`).subscribe((element) => {
-      this.type = element.type === 'Produs' ? ElementType.Produs : ElementType.Serviciu;
-      this.name = element.name;
+      this.elementForm.patchValue({
+        type: element.type === 'Produs' ? ElementType.Produs : ElementType.Serviciu,
+        name: element.name,
+        selectedCategoryId: element.categoryId,
+        description: element.description || '',
+        aquisitionPrice: element.aquisitionPrice || 0,
+        sellingPrice: element.sellingPrice || 0,
+        selectedTaxId: element.taxId ?? 0,
+        selectedTaxValue: element.taxValue ?? 0,
+      });
+
       this.selectedCategoryName = element.categoryName;
-      this.selectedCategoryId = element.categoryId;
-      this.description = element.description || '';
-      this.aquisitionPrice = element.aquisitionPrice || 0;
-      this.sellingPrice = element.sellingPrice || 0;
-      this.selectedTaxId = element.taxId ?? 0;
-      this.selectedTaxValue = element.taxValue ?? 0;
     });
   }
 
   onTaxRemoved(tax: Tax) {
-    const taxes = this.taxesControl.value as Tax[];
+    const taxes = this.elementForm.get('selectedTaxId')!.value as Tax[];
     this.removeFirst(taxes, tax);
-    this.taxesControl.setValue(taxes); // To trigger change detection
+    this.elementForm.patchValue({ selectedTaxId: taxes }); // To trigger change detection
   }
 
   private removeFirst<T>(array: T[], toRemove: T): void {
@@ -81,71 +113,73 @@ export class UpsertElementComponent {
   }
 
   toggleAcquireInfo() {
-    if (!this.acquireInfo) {
-      this.sellingInfo = true;
+    if (!this.elementForm.get('acquireInfo')!.value) {
+      this.elementForm.patchValue({ sellingInfo: true });
     }
   }
 
   toggleSellingInfo() {
-    if (!this.sellingInfo) {
-      this.acquireInfo = true;
+    if (!this.elementForm.get('sellingInfo')!.value) {
+      this.elementForm.patchValue({ acquireInfo: true });
     }
   }
 
-  onTaxSelected(taxId: number) {
-    const selectedTax = this.taxes.find(tax => tax.id === taxId);
+  onTaxSelected(event: Event) {
+    const selectElement = event.target as HTMLSelectElement;
+    const taxId = Number(selectElement.value);
+    const selectedTax = this.taxes.find((tax) => tax.id === taxId);
     if (selectedTax) {
-      this.selectedTaxId = selectedTax.id!;
-      this.selectedTaxValue = selectedTax.value!;
+      this.elementForm.patchValue({
+        selectedTaxId: selectedTax.id,
+        selectedTaxValue: selectedTax.value,
+      });
     }
   }
 
-  onCategorySelected(categoryId: number) {
-    const selectedCategory = this.categories.find(category => category.id === categoryId);
+  onCategorySelected(event: Event) {
+    const selectElement = event.target as HTMLSelectElement;
+    const categoryId = Number(selectElement.value);
+    const selectedCategory = this.categories.find(
+      (category) => category.id === categoryId
+    );
     if (selectedCategory) {
-      this.selectedCategoryId = selectedCategory.id!;
-      this.selectedCategoryName = selectedCategory.name!;
+      this.elementForm.patchValue({
+        selectedCategoryId: selectedCategory.id,
+      });
+      this.selectedCategoryName = selectedCategory.name;
     }
-  }
-
-  selectElementType(type: ElementType) {
-    this.type = type;
   }
 
   saveElement() {
-    const element: Element = {
-      id: this.elementId,
-      type: this.type === ElementType.Produs ? 'Produs' : 'Serviciu',
-      name: this.name,
-      categoryName: this.selectedCategoryName,
-      categoryId: this.selectedCategoryId,
-      description: this.description,
-      aquisitionPrice: this.acquireInfo ? this.aquisitionPrice : undefined,
-      sellingPrice: this.sellingInfo ? this.sellingPrice : undefined,
-      taxId: this.selectedTaxId,
-      taxValue: this.selectedTaxValue
-    };
+    if (this.elementForm.valid) {
+      const elementData = {
+        ...this.elementForm.value,
+        categoryName: this.selectedCategoryName,
+      } as Element;
 
-    if (this.isEditMode) {
-      this.apiService.put(`financial/element`, element).subscribe({
-        next: () => {
-          console.log('Element updated successfully');
-          this.router.navigate(['/elements']);
-        },
-        error: (error) => {
-          console.error('Error updating element', error);
-        }
-      });
+      if (this.isEditMode) {
+        this.apiService.put('financial/element', elementData).subscribe({
+          next: () => {
+            console.log('Element updated successfully');
+            this.router.navigate(['/elements']);
+          },
+          error: (error) => {
+            console.error('Error updating element', error);
+          },
+        });
+      } else {
+        this.apiService.post('financial/element', elementData).subscribe({
+          next: () => {
+            console.log('Element created successfully');
+            this.router.navigate(['/elements']);
+          },
+          error: (error) => {
+            console.error('Error creating element', error);
+          },
+        });
+      }
     } else {
-      this.apiService.post('financial/element', element).subscribe({
-        next: () => {
-          console.log('Element created successfully');
-          this.router.navigate(['/elements']);
-        },
-        error: (error) => {
-          console.error('Error creating element', error);
-        }
-      });
+      console.log('Form is invalid');
     }
   }
 
