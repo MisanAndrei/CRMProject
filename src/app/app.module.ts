@@ -2,6 +2,9 @@ import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { KeycloakService, KeycloakAngularModule } from 'keycloak-angular';
+import { initializeKeycloak } from './app-init';
+
 
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
@@ -54,6 +57,9 @@ import { BaseChartDirective } from 'ng2-charts';
 import { LoginComponent } from './Components/login/login/login.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { FontPickerComponent } from './Components/font-picker/font-picker.component';
+import { AuthService } from './Services/auth.service';
+import { AuthGuard } from './guards/auth.guard';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 
 @NgModule({
@@ -114,7 +120,21 @@ import { FontPickerComponent } from './Components/font-picker/font-picker.compon
     MatDialogModule
   ],
   providers: [provideCharts(withDefaultRegisterables()),
-  ApiService],
+  ApiService,
+  ApiService,
+  AuthService,
+  AuthGuard,
+  {
+    provide: APP_INITIALIZER,
+    useFactory: initializeKeycloak,
+    multi: true,
+    deps: [KeycloakService]
+  },
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
