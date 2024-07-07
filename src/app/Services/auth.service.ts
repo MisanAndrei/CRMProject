@@ -19,7 +19,7 @@ export class AuthService {
     if (!this.keycloakInstance.authenticated) {
       await this.keycloakService.init({
         config: {
-          url: 'http://localhost:8890', // Update with your Keycloak server URL
+          url: 'https://backend-crm.efcon.ro/auth', // Update with your Keycloak server URL
           realm: 'crm', // Replace with your realm name
           clientId: 'crm_client', // Replace with your client ID
         },
@@ -33,7 +33,7 @@ export class AuthService {
 
   async customLogin(username: string, password: string): Promise<void> {
     const clientId = 'crm_client'; // Replace with your client ID
-    const clientSecret = 'Weu1BgfKQZpj0h4KjIicOUMevtXiO4rF'; // Replace with your client secret
+    const clientSecret = 'Br6EK5BFIcPFKODVq8CdlPRNsflhG9wG'; // Replace with your client secret
     const basicAuth = btoa(`${clientId}:${clientSecret}`);
 
     const headers = new HttpHeaders({
@@ -46,7 +46,7 @@ export class AuthService {
     body.set('password', password);
     body.set('grant_type', 'password');
 
-    const url = 'http://localhost:8890/realms/crm/protocol/openid-connect/token'; // Replace with your Keycloak token URL
+    const url = 'https://backend-crm.efcon.ro/auth/realms/crm/protocol/openid-connect/token'; // Replace with your Keycloak token URL
 
     try {
       const response: any = await firstValueFrom(this.http.post(url, body.toString(), { headers }));

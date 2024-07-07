@@ -54,6 +54,7 @@ const routes: Routes = [{ path: '', redirectTo: '/login', pathMatch: 'full' },
 { path: 'CategorieNoua', component: CategoriesUpsertComponent, canActivate: [AuthGuard]},
 { path: 'EditareCategorie/:id', component: CategoriesUpsertComponent, canActivate: [AuthGuard]},
 { path: 'login', component: LoginComponent },
+{ path: '**', redirectTo: '/login' }
 ];
 
 

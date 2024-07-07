@@ -117,7 +117,8 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     MatFormFieldModule,
     MatNativeDateModule,
     MatTooltipModule,
-    MatDialogModule
+    MatDialogModule,
+    KeycloakAngularModule
   ],
   providers: [provideCharts(withDefaultRegisterables()),
   ApiService,

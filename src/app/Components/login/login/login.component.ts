@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../Services/auth.service';
 import { ApiService } from '../../../Services/ApiService';
-import { Organization } from '../../../Utilities/Models';
+import { OrganizationResponse } from '../../../Utilities/Models';
 
 @Component({
   selector: 'app-login',
@@ -26,10 +26,19 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       this.authService.customLogin(this.loginForm.get('email')?.value, this.loginForm.get('password')?.value).then(() => {
         console.log('Logged in');
-        this.apiService.get<Organization>('/organization').subscribe({
-          next: (data: Organization) => {
-            
-            console.log(data);
+        this.apiService.get<OrganizationResponse>('organization').subscribe({
+          next: (data: OrganizationResponse) => {
+            if (data.license != this.loginForm.get('license')?.value) {
+              this.authService.logout();
+            } else {
+              localStorage.setItem('sidenavBackgroundColor', data.colorCodeLeftBar);
+              localStorage.setItem('toolbarBackgroundColor', data.colorCodeNavBar);
+              localStorage.setItem('selectedFont', JSON.stringify({ name: data.font, url: null }));
+              localStorage.setItem('organizationName', data.name);
+              localStorage.setItem('license', data.license);
+              localStorage.setItem('companyVersion', `${data.version}.${data.id}`);
+              this.router.navigate(['/Tabloudebord']);
+            }
           },
           error: (error) => {
             console.error('Error fetching organization', error);
