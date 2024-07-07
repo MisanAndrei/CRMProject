@@ -4,37 +4,66 @@
 <form [formGroup]="partnerForm" (ngSubmit)="onSubmit()">
   <div>
     <h4>Preferinţe generale</h4>
-    <h6 class="descr-subsection">Informațiile de contact ale partenerului tău vor apărea în facturi și în profilurile acestora.</h6>
+    <h6 class="descr-subsection">
+      Informațiile de contact ale partenerului tău vor apărea în facturi și în
+      profilurile acestora.
+    </h6>
     <div class="separator-line"></div>
 
     <div class="subsection">
       <div class="double-input-container">
         <div class="input-wrapper">
           <label for="name">Nume</label>
-          <input id="name" formControlName="name" type="text" class="set-border" placeholder="Introduceți Nume"/>
+          <input
+            id="name"
+            formControlName="name"
+            type="text"
+            class="set-border"
+            placeholder="Introduceți Nume"
+          />
         </div>
 
         <div class="input-wrapper">
           <label for="email">Email</label>
-          <input id="email" formControlName="email" type="email" placeholder="Introduceți Email"/>
+          <input
+            id="email"
+            formControlName="email"
+            type="email"
+            placeholder="Introduceți Email"
+          />
         </div>
       </div>
-    
+
       <div class="double-input-container">
         <div class="input-wrapper">
           <label for="phone">Telefon</label>
-          <input id="phone" formControlName="phone" type="text" placeholder="Introduceți Telefon"/>
+          <input
+            id="phone"
+            formControlName="phone"
+            type="text"
+            placeholder="Introduceți Telefon"
+          />
         </div>
 
         <div class="input-wrapper">
           <label for="website">Website</label>
-          <input id="website" formControlName="website" type="text" placeholder="Introduceți Website"/>
+          <input
+            id="website"
+            formControlName="website"
+            type="text"
+            placeholder="Introduceți Website"
+          />
         </div>
       </div>
       <div class="double-input-container">
         <div class="input-wrapper">
           <label for="reference">Referință</label>
-          <input id="reference" formControlName="reference" type="text" placeholder="Introduceți Referință"/>
+          <input
+            id="reference"
+            formControlName="reference"
+            type="text"
+            placeholder="Introduceți Referință"
+          />
         </div>
 
         <div class="input-wrapper">
@@ -42,7 +71,7 @@
           <input id="image" type="file" (change)="onImageChange($event)" />
         </div>
       </div>
-      </div>
+    </div>
   </div>
   <div class="section-delimiter">
     <h4>Facturare</h4>
@@ -50,45 +79,79 @@
     <div class="separator-line"></div>
 
     <div class="subsection">
-      <div class="double-input-container">  
+      <div class="double-input-container">
         <div class="input-wrapper">
-            <label for="cui">CUI</label>
-            <input id="cui" formControlName="cui" type="text" placeholder="Introduceți CUI"/>
-          </div>
-          <div class="input-wrapper">
-            <label for="postalCode">Cod Poștal</label>
-            <input id="postalCode" formControlName="postalCode" type="text" placeholder="Introduceți Cod Poștal"/>
-          </div>
+          <label for="cui">CUI</label>
+          <input
+            id="cui"
+            formControlName="cui"
+            type="text"
+            placeholder="Introduceți CUI"
+          />
+        </div>
+        <div class="input-wrapper">
+          <label for="postalCode">Cod Poștal</label>
+          <input
+            id="postalCode"
+            formControlName="postalCode"
+            type="text"
+            placeholder="Introduceți Cod Poștal"
+          />
+        </div>
       </div>
 
       <div class="double-input-container">
         <div class="input-wrapper">
           <label for="address">Adresă</label>
-          <input id="address" formControlName="address" rows="3" placeholder="Introduceți Adresă"/>
+          <input
+            id="address"
+            formControlName="address"
+            rows="3"
+            placeholder="Introduceți Adresă"
+          />
         </div>
 
         <div class="input-wrapper">
           <label for="country">Țară</label>
-          <input id="country" formControlName="country" type="text" placeholder="Introduceți Țară"/>
+          <input
+            id="country"
+            formControlName="country"
+            type="text"
+            placeholder="Introduceți Țară"
+          />
         </div>
       </div>
       <div class="double-input-container">
         <div class="input-wrapper">
           <label for="county">Judet</label>
-          <input id="county" formControlName="county" type="text" placeholder="Introduceți Judet"/>
+          <input
+            id="county"
+            formControlName="county"
+            type="text"
+            placeholder="Introduceți Judet"
+          />
         </div>
         <div class="input-wrapper">
           <label for="city">Oraș</label>
-          <input id="city" formControlName="city" type="text" placeholder="Introduceți Oraș"/>
+          <input
+            id="city"
+            formControlName="city"
+            type="text"
+            placeholder="Introduceți Oraș"
+          />
         </div>
       </div>
     </div>
   </div>
   <div class="button-container" *ngIf="dialogRef">
-    <button class="button content" mat-button mat-dialog-close>Renuntă</button>
-    <button class="button content" mat-button type="submit">Salvează Partener</button>
+    <button class="button-content-save" mat-button type="submit">
+      Salvează Partener
+    </button>
+    <button class="button-content-remove" mat-button mat-dialog-close>
+      Renuntă
+    </button>
   </div>
   <div class="button-container" *ngIf="!dialogRef">
-    <button class="button content" type="submit">Salvează Partener</button>
+    <button class="button-content-save" type="submit">Salvează Partener</button>
   </div>
 </form>

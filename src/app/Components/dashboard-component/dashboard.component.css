@@ -1,94 +1,133 @@
-   body {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-  }
-  
-  .dashboard-container {
-    display: grid;
-    grid-template-areas:
-      "header header header"
-      "pie-chart pie-chart pie-chart"
-      "bar-description bar-chart bar-chart";
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: auto auto 1fr;
-    grid-gap: 20px;
-    padding: 20px;
-    max-width: 1200px;
-    width: 100%;
-  }
-  
-  .header {
-    grid-area: header;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  .header h1 {
-    margin: 0;
-    padding-right: 20px;
-  }
-  
-  .form-container {
-    display: flex;
-    margin-top: 20px;
-    gap: 20px;
-  }
-  
-  .chart-container-pie {
-    grid-area: pie-chart;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  .chart-container-bar {
-    grid-area: bar-chart;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-  }
-  
-  .chart-content {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    width: 100%;
-    gap: 50px; /* Reduced gap */
-  }
-  
-  .chart-canvas-pie {
-    max-width: 320px;
-    max-height: 320px;
-  }
-  
-  .chart-canvas-bar {
-    max-width: 500px;
-    max-height: 300px;
-  }
-  
-  .chart-description {
-    color: #666;
-    max-width: 300px;
-  }
-  
-  .chart-container-bar .chart-description {
-    margin-right: 20px;
-  }
-  
-  span {
-    text-align: justify;
-  }
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
 
-  .custom-separator-line {
-    width: 60%; /* Adjust this value as needed */
-  }
+.dashboard-container {
+  display: grid;
+  grid-template-areas:
+    'header header header'
+    'pie-chart pie-chart pie-chart'
+    'bar-description bar-chart bar-chart';
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto auto 1fr;
+  grid-gap: 20px;
+  padding: 20px;
+  max-width: 1200px;
+  width: 100%;
+}
 
-  .submit-button {
-    margin-top: 10px;
-    color: #2E86C1;
-  }
+.header {
+  grid-area: header;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header h1 {
+  margin: 0;
+  padding-right: 20px;
+}
+
+.form-container {
+  display: flex;
+  margin-top: 20px;
+  gap: 20px;
+}
+
+.chart-container-pie {
+  grid-area: pie-chart;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+
+.chart-container-bar {
+  grid-area: bar-chart;
+  display: grid;
+  align-items: flex-start;
+  align-content: center;
+  justify-content: space-around;
+}
+
+.chart-content {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  gap: 50px;
+}
+
+.chart-canvas-pie {
+  max-width: 320px;
+  max-height: 320px;
+}
+
+.chart-canvas-bar {
+  max-width: 500px;
+  max-height: 300px;
+}
+
+.chart-description {
+  color: #666;
+  max-width: 300px;
+}
+
+.chart-container-bar .chart-description {
+  margin-right: 20px;
+}
+
+span {
+  text-align: justify;
+}
+
+.custom-separator-line {
+  width: 60%; /* Adjust this value as needed */
+}
+
+.submit-button {
+  margin-top: 10px;
+  color: #2e86c1;
+}
+
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: transparent !important;
+}
+
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled):hover {
+  background-color: transparent !important;
+}
+
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled):focus {
+  background-color: transparent !important;
+}
+
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled):active {
+  background-color: transparent !important;
+}
+
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) * {
+  background-color: transparent !important;
+} 
+
+.card {
+  background-color: #efefef;
+  border-color: #efefef;
+  border-radius: 10px;
+  padding: 13px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.info-section h4 {
+  margin-top: 5px;
+}
+
+.info-section p {
+  margin: 5px; 
+}
