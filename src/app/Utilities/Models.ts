@@ -7,7 +7,7 @@ export interface Element {
   categoryName: string;
   categoryId: number;
   description?: string;
-  aquisitionPrice?: number;
+  acquisitionPrice?: number;
   sellingPrice?: number;
   taxValue?: number;
   taxId?: number;

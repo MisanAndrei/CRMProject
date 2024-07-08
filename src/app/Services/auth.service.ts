@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { KeycloakService } from 'keycloak-angular';
-import { KeycloakInstance } from 'keycloak-js';
 import { decodeToken } from '../Utilities/jwt-decode';
 import { firstValueFrom } from 'rxjs';
 
@@ -9,27 +8,8 @@ import { firstValueFrom } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
-  private keycloakInstance: KeycloakInstance;
 
-  constructor(private keycloakService: KeycloakService, private http: HttpClient) {
-    this.keycloakInstance = keycloakService.getKeycloakInstance();
-  }
-
-  async initKeycloak(): Promise<void> {
-    if (!this.isLoggedIn()) {
-      await this.keycloakService.init({
-        config: {
-          url: 'https://backend-crm.efcon.ro/auth', // Update with your Keycloak server URL
-          realm: 'crm', // Replace with your realm name
-          clientId: 'crm_client', // Replace with your client ID
-        },
-        initOptions: {
-          onLoad: 'check-sso',
-          silentCheckSsoRedirectUri: window.location.origin + '/assets/silent-check-sso.html',
-        },
-      });
-    }
-  }
+  constructor(private http: HttpClient) {}
 
   async customLogin(username: string, password: string): Promise<void> {
     const clientId = 'crm_client'; // Replace with your client ID
@@ -50,26 +30,18 @@ export class AuthService {
 
     try {
       const response: any = await firstValueFrom(this.http.post(url, body.toString(), { headers }));
-      this.keycloakInstance.token = response.access_token;
-      this.keycloakInstance.refreshToken = response.refresh_token;
-      this.keycloakInstance.idToken = response.id_token;
-      this.keycloakInstance.tokenParsed = decodeToken(response.access_token);
-      this.keycloakInstance.refreshTokenParsed = decodeToken(response.refresh_token);
-      this.keycloakInstance.onAuthSuccess && this.keycloakInstance.onAuthSuccess();
-      this.keycloakInstance.authenticated = true;
-      localStorage.setItem('access_cookie', response.access_token);
+      localStorage.setItem('access_token', response.access_token);
     } catch (error) {
       console.error('Login failed', error);
     }
   }
 
-  logout(): Promise<void> {
-    localStorage.removeItem('access_cookie');
-    return this.keycloakService.logout();
+  logout() {
+    localStorage.removeItem('access_token');
   }
 
   async isLoggedIn(): Promise<boolean> {
-    var token = localStorage.getItem('access_cookie');
+    var token = localStorage.getItem('access_token');
     if (token == null || token == undefined){
       return false;
     }
@@ -77,6 +49,6 @@ export class AuthService {
   }
 
   getToken(): string | undefined {
-    return localStorage.getItem('access_cookie') ?? undefined;
+    return localStorage.getItem('access_token') ?? undefined;
   }
 }

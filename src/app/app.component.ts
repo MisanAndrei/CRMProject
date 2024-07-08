@@ -1,4 +1,5 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ViewEncapsulation, Renderer2, ElementRef } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, OnInit, ViewChild, ViewEncapsulation, Renderer2, Inject } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Router, NavigationEnd, Event } from '@angular/router';
 import { filter } from 'rxjs/operators';
@@ -12,7 +13,7 @@ import { filter } from 'rxjs/operators';
 export class AppComponent implements OnInit {
   @ViewChild('sidenav') sidenav!: MatSidenav;
   isExpanded = true;
-  showSubmenu = false;
+  showSubmenu = true;
   isShowing = false;
   showSubSubMenuBank = false;
   showSubSubMenuSettings = false;
@@ -22,9 +23,9 @@ export class AppComponent implements OnInit {
   companyVersion = localStorage.getItem("companyVersion") ?? '';
   companyName: string = localStorage.getItem("organizationName") ?? '';
   license: string = localStorage.getItem("license") ?? '';
-  footerText: string = 'Efcon CRM ' + 'V' + this.companyVersion + ' ' + 'Licenta client: ' + this.license;
-  
-  constructor(private router: Router) {}
+  footerText: string = 'Copyright EFCON CRM ' + 'V' + this.companyVersion + ' ' + 'Licenta client: ' + this.license;
+
+  constructor(private router: Router, private renderer: Renderer2, @Inject(DOCUMENT) private document: Document) {}
 
   ngOnInit() {
     this.router.events.pipe(
@@ -34,6 +35,7 @@ export class AppComponent implements OnInit {
     });
 
     this.setSidenavBackgroundColor();
+    this.setUsedFont();
   }
 
   mouseenter() {
@@ -56,6 +58,13 @@ export class AppComponent implements OnInit {
     }
     if (toolbarColor) {
       this.toolbarBackgroundColor = toolbarColor;
+    }
+  }
+
+  setUsedFont(){
+    const fontData = localStorage.getItem('selectedFont');
+    if (fontData) {
+      this.renderer.setStyle(this.document.body, 'font-family', fontData);
     }
   }
 }

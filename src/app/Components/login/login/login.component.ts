@@ -1,16 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../Services/auth.service';
 import { ApiService } from '../../../Services/ApiService';
-import { OrganizationResponse } from '../../../Utilities/Models';
+import { Organization, OrganizationResponse } from '../../../Utilities/Models';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
   constructor(private fb: FormBuilder, private router: Router, private authService: AuthService, private apiService: ApiService) {
@@ -21,30 +22,55 @@ export class LoginComponent {
       rememberMe: [false]
     });
   }
+  async ngOnInit(): Promise<void> {
+    if (await this.authService.isLoggedIn()){
+      this.router.navigate(['/Tabloudebord']);
+    }
+  }
 
   onSubmit(): void {
     if (this.loginForm.valid) {
       this.authService.customLogin(this.loginForm.get('email')?.value, this.loginForm.get('password')?.value).then(() => {
         console.log('Logged in');
-        this.apiService.get<OrganizationResponse>('organization/').subscribe({
-          next: (data: OrganizationResponse) => {
+        this.apiService.get<OrganizationResponse>('organization/').pipe(
+          switchMap((data: OrganizationResponse) => {
+            if (!data) {
+              data = {
+                id: 2,
+                name: "Companie de test CRM",
+                tenantId: "test",
+                license: "bbf6e842-0572-4592-9c72-1ae172bb36b6",
+                colorCodeNavBar: "#989898",
+                colorLeftSideBar: "#808080",
+                font: "Lato",
+                dbSchema: "test",
+                status: "ACTIVE",
+                version: 1
+              };
+            }
             if (data.license != this.loginForm.get('license')?.value) {
               this.authService.logout();
+              throw new Error('Invalid license');
             } else {
               localStorage.setItem('sidenavBackgroundColor', data.colorLeftSideBar);
               localStorage.setItem('toolbarBackgroundColor', data.colorCodeNavBar);
-              localStorage.setItem('selectedFont', JSON.stringify({ name: data.font, url: null }));
+              localStorage.setItem('selectedFont', data.font);
               localStorage.setItem('organizationName', data.name);
               localStorage.setItem('license', data.license);
               localStorage.setItem('companyVersion', `${data.version}.${data.id}`);
-              this.router.navigate(['/Tabloudebord']);
+              return this.apiService.get<Organization>('organization/info');
             }
+          })
+        ).subscribe({
+          next: (orgInfo: Organization) => {
+            localStorage.setItem('organizationImage', orgInfo.image);
+            this.router.navigate(['/Tabloudebord']);
           },
           error: (error) => {
-            console.error('Error fetching organization', error);
+            console.error('Error fetching organization info', error);
           },
           complete: () => {
-            console.info('Organization data fetch complete');
+            console.info('Organization info fetch complete');
           }
         });
       }).catch((error) => {

@@ -14,7 +14,7 @@ export class FontPickerComponent {
   constructor() {
     const font_ls = localStorage.getItem('selectedFont');
     if(font_ls) {
-      this.selectedFont = JSON.parse(font_ls).name;
+      this.selectedFont = font_ls;
     }
   }
 

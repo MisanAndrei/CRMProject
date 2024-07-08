@@ -31,9 +31,9 @@ export class BillUpsertComponent implements OnInit {
     { id: 3, name: 'Category 3', type: 'Type C', colorCode: '#3357FF' }
   ];
   elements: Element[] = [
-    { id: 1, type: 'product', name: 'Element A', categoryName: 'Category 1', categoryId: 1, description: 'Description A', aquisitionPrice: 100, sellingPrice: 150, taxValue: 5, taxId: 2 },
-    { id: 2, type: 'service', name: 'Element B', categoryName: 'Category 2', categoryId: 2, description: 'Description B', aquisitionPrice: 200, sellingPrice: 250, taxValue: 10, taxId: 3 },
-    { id: 3, type: 'product', name: 'Element C', categoryName: 'Category 3', categoryId: 3, description: 'Description C', aquisitionPrice: 300, sellingPrice: 350, taxValue: 8, taxId: 4 }
+    { id: 1, type: 'product', name: 'Element A', categoryName: 'Category 1', categoryId: 1, description: 'Description A', acquisitionPrice: 100, sellingPrice: 150, taxValue: 5, taxId: 2 },
+    { id: 2, type: 'service', name: 'Element B', categoryName: 'Category 2', categoryId: 2, description: 'Description B', acquisitionPrice: 200, sellingPrice: 250, taxValue: 10, taxId: 3 },
+    { id: 3, type: 'product', name: 'Element C', categoryName: 'Category 3', categoryId: 3, description: 'Description C', acquisitionPrice: 300, sellingPrice: 350, taxValue: 8, taxId: 4 }
   ];
   overallTotal: number = 0;
 
@@ -132,7 +132,7 @@ export class BillUpsertComponent implements OnInit {
 
     if (selectedItem) {
       const transactionType = this.transactionForm.get('transactionType')?.value;
-      const price = transactionType === 'purchase' ? selectedItem.aquisitionPrice : selectedItem.sellingPrice;
+      const price = transactionType === 'purchase' ? selectedItem.acquisitionPrice : selectedItem.sellingPrice;
 
       priceControl?.setValue(price || 0);
       nameControl?.setValue(selectedItem.name);

@@ -59,7 +59,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { FontPickerComponent } from './Components/font-picker/font-picker.component';
 import { AuthService } from './Services/auth.service';
 import { AuthGuard } from './guards/auth.guard';
-import { AuthInterceptor } from './interceptors/auth.interceptor';
+
 
 
 @NgModule({
@@ -124,18 +124,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
   ApiService,
   ApiService,
   AuthService,
-  AuthGuard,
-  {
-    provide: APP_INITIALIZER,
-    useFactory: initializeKeycloak,
-    multi: true,
-    deps: [KeycloakService]
-  },
-  {
-    provide: HTTP_INTERCEPTORS,
-    useClass: AuthInterceptor,
-    multi: true
-  }],
+  AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -42,16 +42,7 @@ export class CompanyComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.companyForm.get('selectedColor')!.valueChanges.subscribe((value:string) => {
-      this.selectedColor = value;
-    })
-
     this.fetchCompanyDetails();
-
-    const font_ls = localStorage.getItem('selectedFont')
-    if(font_ls) {
-      this.applyFont(JSON.parse(font_ls).name)
-    }
   }
 
   openColorPicker(): void {
@@ -59,7 +50,7 @@ export class CompanyComponent implements OnInit {
   }
 
   fetchCompanyDetails(): void {
-    this.apiService.get<Organization>('organization/').subscribe((company) => {
+    this.apiService.get<Organization>('organization/info').subscribe((company) => {
       this.companyForm.patchValue({
         name: company.name,
         email: company.email,
@@ -70,6 +61,7 @@ export class CompanyComponent implements OnInit {
         postalCode: company.postalCode,
         county: company.county,
         country: company.country,
+        selectedFont: company.font,
         image: this.stripBase64Prefix(company.image),
       });
       this.imageBase64 = this.stripBase64Prefix(company.image);
@@ -109,7 +101,7 @@ export class CompanyComponent implements OnInit {
 
   onFontSelected(font: string): void {
     this.selectedFont = font;
-    localStorage.setItem('selectedFont', JSON.stringify({ name: font, url: null }));
+    localStorage.setItem('selectedFont', font);
     this.applyFont(font);
   }
 

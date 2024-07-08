@@ -31,7 +31,7 @@ export class UpsertElementComponent implements OnInit {
       description: [''],
       acquireInfo: [true],
       sellingInfo: [false],
-      aquisitionPrice: [0],
+      acquisitionPrice: [0],
       sellingPrice: [{ value: 0, disabled: true }],
       selectedTaxId: [0],
       selectedTaxValue: [0],
@@ -55,9 +55,9 @@ export class UpsertElementComponent implements OnInit {
   private setupFormListeners() {
     this.elementForm.get('acquireInfo')!.valueChanges.subscribe((value) => {
       if (value) {
-        this.elementForm.get('aquisitionPrice')!.enable();
+        this.elementForm.get('acquisitionPrice')!.enable();
       } else {
-        this.elementForm.get('aquisitionPrice')!.disable();
+        this.elementForm.get('acquisitionPrice')!.disable();
       }
     });
 
@@ -71,7 +71,7 @@ export class UpsertElementComponent implements OnInit {
 
     // Initialize state based on the current values
     if (!this.elementForm.get('acquireInfo')!.value) {
-      this.elementForm.get('aquisitionPrice')!.disable();
+      this.elementForm.get('acquisitionPrice')!.disable();
     }
 
     if (!this.elementForm.get('sellingInfo')!.value) {
@@ -86,7 +86,7 @@ export class UpsertElementComponent implements OnInit {
         name: element.name,
         selectedCategoryId: element.categoryId,
         description: element.description || '',
-        aquisitionPrice: element.aquisitionPrice || 0,
+        acquisitionPrice: element.acquisitionPrice || 0,
         sellingPrice: element.sellingPrice || 0,
         selectedTaxId: element.taxId ?? 0,
         selectedTaxValue: element.taxValue ?? 0,
@@ -155,7 +155,7 @@ export class UpsertElementComponent implements OnInit {
         categoryName: this.selectedCategoryName,
         categoryId: this.elementForm.get('selectedCategoryId')?.value,
         description: this.elementForm.get('description')?.value,
-        aquisitionPrice: this.elementForm.get('aquisitionPrice')?.value,
+        acquisitionPrice: this.elementForm.get('acquisitionPrice')?.value,
         sellingPrice: this.elementForm.get('sellingPrice')?.value,
         taxId: this.elementForm.get('selectedTaxId')?.value,
         taxValue: this.elementForm.get('selectedTaxValue')?.value

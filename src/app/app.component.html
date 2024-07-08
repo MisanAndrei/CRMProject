@@ -2,6 +2,9 @@
   <button mat-icon-button (click)="isExpanded = !isExpanded">
     <mat-icon class="icon-meniu">menu</mat-icon>
   </button>
+  <div class="toolbar-image-container">
+    <img src="assets/images/login.png" alt="Company Logo" class="toolbar-image">
+  </div>
   <div class="toolbar-title-container">
     <h1 class="example-app-name">{{companyName}}</h1>
   </div>
@@ -108,7 +111,7 @@
 </mat-sidenav-container>
 <!-- Footer -->
 <mat-toolbar class="footer" *ngIf="!isLoginRoute">
-  <span class="footer-text">footerText</span>
+  <span class="footer-text">{{footerText}}</span>
 </mat-toolbar>
 <div *ngIf="isLoginRoute">
 <app-login></app-login>
