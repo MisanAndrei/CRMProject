@@ -22,27 +22,8 @@ button {
   margin-top: 10px;
 }
 
-.elements-buttons {
-  width: 150px;
-  height: 50px;
-  border-radius: 2%;
-  cursor: pointer;
-  border: none;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-}
-
 .add-btn {
   background-color: lightgray;
-}
-
-.delete-btn {
-  background-color: #EE4B2B;
-  color: white;
-}
-
-.item-row {
-  display: flex;
-  align-items: center;
 }
 
 .item-fields {
@@ -56,6 +37,9 @@ button {
 .item-fields select {
   flex: 1;
   min-width: 120px;
+  height: 40px;
+  padding: 8px;
+  box-sizing: border-box;
 }
 
 .item-fields button {
@@ -64,7 +48,7 @@ button {
 }
 
 .overall-total {
-  margin-top: 20px;
+  margin-right: 25px;
   font-weight: bold;
   text-align: right;
 }
@@ -80,7 +64,15 @@ button {
 }
 
 .plus-button {
-  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.plus-button button {
+  height: 43px;
+  background-color: #80b3ff;
+  border-color: #80b3ff;
 }
 
 ::ng-deep .mat-dialog-container {
@@ -99,5 +91,69 @@ button {
   flex-shrink: 0;
 }
 
+.inputs-container {
+  width: 30%;
+  margin-bottom: 15px;
+}
 
+.align-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
 
+.no-shadow-button {
+  box-shadow: none !important;
+  border-radius: none !important;
+  border: 1px solid rgba(0, 0, 0, 0.6);
+}
+
+input {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+option {
+  font-size: 16px;
+  color: #333;
+  background-color: #f9f9f9;
+}
+
+select {
+  border-radius: 5px;
+  border: 1px solid #d8d8d8;
+}
+
+.buttons-container {
+  display: inline;
+}
+
+.buttons-container button {
+  margin-right: 25px;
+}
+
+.remove-button {
+  background-color: #ff6363;
+  border: 1px solid #ff6363;
+  height: 45px;
+  width: 120px;
+  border-radius: 3px;
+}
+
+.elements-button {
+  background-color: #99cb75;
+  border: 1px solid #99cb75;
+  height: 45px;
+  width: 150px;
+  border-radius: 3px;
+  margin-right: 25px;
+}
+
+.submit-button {
+  margin-right: 25px;
+  background-color: #99cb75;
+  border: 1px solid #99cb75;
+  height: 45px;
+  width: 185px;
+  border-radius: 3px;
+}

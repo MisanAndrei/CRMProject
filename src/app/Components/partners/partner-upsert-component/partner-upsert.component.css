@@ -1,4 +1,3 @@
-
 form {
   margin: auto;
 }
@@ -25,11 +24,37 @@ button {
 }
 
 ::placeholder {
-  color: #D8D8D8; /* Set the placeholder text color to light grey */
+  color: #d8d8d8; /* Set the placeholder text color to light grey */
   opacity: 1; /* Firefox */
 }
 
 ::-ms-input-placeholder {
   /* Edge 12 -18 */
   color: lightgrey;
+}
+.header{
+  display: flex;
+  justify-content: space-around;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.button-content-remove {
+  background-color: #ff6363;
+  border: 1px solid #ff6363;
+  height: 45px;
+  width: 185px;
+  border-radius: 3px;
+}
+
+.button-content-save {
+  background-color: #99cb75;
+  border: 1px solid #99cb75;
+  height: 45px;
+  width: 185px;
+  border-radius: 3px;
+  margin-right: 25px;
 }

@@ -12,39 +12,45 @@
                                 <mat-date-range-picker #picker></mat-date-range-picker>
                         </mat-form-field>
                 
-                        <button mat-stroked-button color="primary" type="submit" class="submit-button">Salveaza</button>
+                        <button mat-stroked-button color="primary" type="submit" class="submit-button">Filtrează</button>
                 </form>
         </div>
       
         <!-- Receivables -->
+      <div class="card">
         <div class="info-section">
-          <h4>Receivables</h4>
-          <p>Total to Receive: {{ aggregatedStatistics.receivables.totalToReceive }}</p>
-          <p>Total Open: {{ aggregatedStatistics.receivables.totalOpen }}</p>
-          <p>Total Overdue: {{ aggregatedStatistics.receivables.totalOverdue }}</p>
+          <h4>Creanțe</h4>
+          <p>Total de primit: {{ aggregatedStatistics.receivables.totalToReceive }}</p>
+          <p>Total deschise: {{ aggregatedStatistics.receivables.totalOpen }}</p>
+          <p>Total întârziere: {{ aggregatedStatistics.receivables.totalOverdue }}</p>
         </div>
-      
+      </div>  
+        
+      <div class="card">
         <!-- Payables -->
         <div class="info-section">
-          <h4>Payables</h4>
-          <p>Total to Pay: {{ aggregatedStatistics.payables.totalToPay }}</p>
-          <p>Total Open: {{ aggregatedStatistics.payables.totalOpen }}</p>
-          <p>Total Overdue: {{ aggregatedStatistics.payables.totalOverdue }}</p>
+          <h4>Datorii</h4>
+          <p>Total de plătit: {{ aggregatedStatistics.payables.totalToPay }}</p>
+          <p>Total deschise: {{ aggregatedStatistics.payables.totalOpen }}</p>
+          <p>Total întârziere: {{ aggregatedStatistics.payables.totalOverdue }}</p>
         </div>
-      
+      </div>
         <!-- Accounts Sold -->
+
+      <div class="card">
         <div class="info-section">
-          <h4>Accounts Sold</h4>
+          <h4>Sold Conturi</h4>
           <ul>
             <li *ngFor="let account of aggregatedStatistics.accountsSold">
               {{ account.accountName }}: {{ account.totalSold }}
             </li>
           </ul>
         </div>
-      
+      </div>
+
         <!-- Income by Category Pie Chart -->
-        <div>
-          <h4>Income by Category</h4>
+        <div class="card">
+          <h4>Venituri pe categorii</h4>
           <canvas baseChart
             [data]="pieChartIncomeData"
             [options]="pieChartIncomeOptions"
@@ -54,8 +60,9 @@
         </div>
       
         <!-- Expenses by Category Pie Chart -->
+       <div class="card">
         <div>
-          <h4>Expenses by Category</h4>
+          <h4>Cheltuieli pe categorii</h4>
           <canvas baseChart
             [data]="pieChartExpensesData"
             [options]="pieChartExpensesOptions"
@@ -63,8 +70,9 @@
             class="chart-canvas-pie">
           </canvas>
         </div>
-      
+      </div> 
         <!-- Cash Flow Bar Chart -->
+       <div class="card"> 
         <div class="chart-container-bar">
           <h4>Cash Flow</h4>
           <canvas baseChart
@@ -74,4 +82,5 @@
             class="chart-canvas-bar">
           </canvas>
         </div>
+       </div> 
       </div>
