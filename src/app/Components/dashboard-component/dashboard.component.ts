@@ -10,7 +10,9 @@ import {
   Receivables,
   Payables,
   AccountSoldItem,
+  Partner,
 } from '../../Utilities/Models'
+import { ApiService } from '../../Services/ApiService'
 
 @Component({
   selector: 'app-dashboard',
@@ -18,6 +20,57 @@ import {
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
+  selectedPartnerId!: number;
+  partners: Partner[] = [
+    {
+      id: 1,
+      name: 'Partner A',
+      cui: 'CUI12345',
+      regCom: 'RegCom123',
+      email: 'partnerA@example.com',
+      phoneNumber: '123456789',
+      country: 'Country A',
+      website: 'www.partnerA.com',
+      reference: 'RefA',
+      address: 'Address A',
+      city: 'City A',
+      county: 'County A',
+      postalCode: '12345',
+      image: 'path/to/imageA.png',
+    },
+    {
+      id: 2,
+      name: 'Partner B',
+      cui: 'CUI67890',
+      regCom: 'RegCom678',
+      email: 'partnerB@example.com',
+      phoneNumber: '987654321',
+      country: 'Country B',
+      website: 'www.partnerB.com',
+      reference: 'RefB',
+      address: 'Address B',
+      city: 'City B',
+      county: 'County B',
+      postalCode: '67890',
+      image: 'path/to/imageB.png',
+    },
+    {
+      id: 3,
+      name: 'Partner C',
+      cui: 'CUI54321',
+      regCom: 'RegCom543',
+      email: 'partnerC@example.com',
+      phoneNumber: '456789123',
+      country: 'Country C',
+      website: 'www.partnerC.com',
+      reference: 'RefC',
+      address: 'Address C',
+      city: 'City C',
+      county: 'County C',
+      postalCode: '54321',
+      image: 'path/to/imageC.png',
+    },
+  ];
   aggregatedStatistics: AggregatedStatistics = {
     accountsSold: [
       { accountName: 'Cont A', totalSold: 1000 },
@@ -118,6 +171,7 @@ export class DashboardComponent implements OnInit {
       { categoryName: 'Categoria 2', colorCode: '#BBE9FF', expenses: 7000 },
       { categoryName: 'Categoria 3', colorCode: '#B1AFFF', expenses: 5000 },
     ],
+    cashFlowByPartner: {partnerName: 'partener', totalPaid: 1234, totalReceived: 1234}
   }
 
   public barChartOptions: ChartOptions<'bar'> = {
@@ -183,9 +237,55 @@ export class DashboardComponent implements OnInit {
     endDate: [''],
   })
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private apiService: ApiService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.setDefaultDates();
+  }
 
-  onSubmit() {}
+  onSubmit() {
+    const { startDate, endDate } = this.dateRangeForm.value;
+    this.apiService
+      .post<AggregatedStatistics>(`/your-api-endpoint`, startDate)
+      .subscribe({
+        next: (data) => {
+          this.aggregatedStatistics = data;
+        },
+        error: (error) => {
+          console.error('Error fetching data', error);
+        },
+      });
+  }
+
+  fetchPartnersData(){
+    this.apiService.get<Partner[]>('partner/').subscribe({
+      next: (data: Partner[]) => {
+        this.partners = data;
+        console.log(data);
+      },
+      error: (error) => {
+        console.error('Error fetching partners', error);
+      },
+      complete: () => {
+        console.info('partners data fetch complete');
+      }
+    });
+  }
+
+  setDefaultDates(): void {
+    const endDate = new Date();
+    const startDate = new Date();
+    startDate.setMonth(endDate.getMonth() - 6);
+
+    this.dateRangeForm.patchValue({
+      startDate: startDate.toISOString().split('T')[0],
+      endDate: endDate.toISOString().split('T')[0],
+    });
+  }
+
+  getCashFlowByPartner(): void {
+    
+  }
+
+  
 }

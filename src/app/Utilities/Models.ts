@@ -110,6 +110,7 @@ export interface Element {
     id: number;
     name: string;
     cui: string;
+    regCom: string;
     email: string;
     phoneNumber?: string;
     country: string;
@@ -127,6 +128,7 @@ export interface Element {
     email: string;
     phone: string;
     cui: string;
+    regCom: string;
     address: string;
     city: string;
     image: string;
@@ -175,6 +177,13 @@ export interface Element {
     cashFlow: CashFlowItem[];
     incomeByCategory: IncomeByCategoryItem[];
     expensesByCategory: ExpensesByCategoryItem[];
+    cashFlowByPartner?: CashFlowByPartner;
+  }
+
+  export interface CashFlowByPartner {
+    partnerName: string;
+    totalReceived: number;
+    totalPaid: number;
   }
 
   export interface Receivables {

@@ -15,8 +15,8 @@
         <div class="inputs-container">
           <label for="transactionType">Tipul Tranzacției</label>
           <select id="transactionType" formControlName="transactionType">
-            <option value="purchase">Cumpărare</option>
-            <option value="sale">Vânzare</option>
+            <option value="purchase">Cheltuiala</option>
+            <option value="sale">Venit</option>
           </select>
         </div>
 
@@ -113,6 +113,16 @@
             type="text"
             [disabled]="!transactionForm.get('customerCui')?.enabled"
             placeholder="Introduceți CUI"
+          />
+        </div>
+        <div class="input-wrapper">
+          <label for="customerRegCom">Reg. Com.</label>
+          <input
+            id="customerRegCom"
+            formControlName="customerRegCom"
+            type="text"
+            [disabled]="!transactionForm.get('customerRegCom')?.enabled"
+            placeholder="Introduceți Reg. Com."
           />
         </div>
 

@@ -18,7 +18,7 @@ import { ApiService } from '../../../Services/ApiService';
   styleUrls: ['./taxes.component.css']
 })
 export class TaxesComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['select', 'name', 'type', 'percent'];
+  displayedColumns: string[] = ['select', 'name', 'percent'];
   dataSource: MatTableDataSource<Tax>;
   searchControl: FormControl = new FormControl('');
   initialSelection = [];

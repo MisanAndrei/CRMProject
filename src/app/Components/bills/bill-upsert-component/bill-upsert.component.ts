@@ -21,9 +21,9 @@ export class BillUpsertComponent implements OnInit {
     { id: 4, name: 'Sales Tax 8%', value: 8 }
   ];
   partners: Partner[] = [
-    { id: 1, name: 'Partner A', cui: 'CUI12345', city: 'City A', email: 'partnerA@test.com', country: 'Romania', address: 'Address A', postalCode: '12345' },
-    { id: 2, name: 'Partner B', cui: 'CUI67890', city: 'City B', email: 'partnerB@test.com', country: 'Romania', address: 'Address B', postalCode: '67890' },
-    { id: 3, name: 'Partner C', cui: 'CUI54321', city: 'City C', email: 'partnerC@test.com', country: 'Romania', address: 'Address C', postalCode: '54321' }
+    { id: 1, name: 'Partner A', regCom: '2345', cui: 'CUI12345', city: 'City A', email: 'partnerA@test.com', country: 'Romania', address: 'Address A', postalCode: '12345' },
+    { id: 2, name: 'Partner B', regCom: '2345', cui: 'CUI67890', city: 'City B', email: 'partnerB@test.com', country: 'Romania', address: 'Address B', postalCode: '67890' },
+    { id: 3, name: 'Partner C', regCom: '2345', cui: 'CUI54321', city: 'City C', email: 'partnerC@test.com', country: 'Romania', address: 'Address C', postalCode: '54321' }
   ];
   categories: Category[] = [
     { id: 1, name: 'Category 1', type: 'Type A', colorCode: '#FF5733' },
@@ -48,6 +48,7 @@ export class BillUpsertComponent implements OnInit {
       partner: [''],
       partnerName: [{ value: '', disabled: false }, Validators.required],
       customerCui: [{ value: '', disabled: false }, Validators.required],
+      customerRegCom: [{ value: '', disabled: false }, Validators.required],
       customerCity: [{ value: '', disabled: false }, Validators.required],
       items: this.fb.array([])
     });
@@ -92,19 +93,23 @@ export class BillUpsertComponent implements OnInit {
       this.transactionForm.patchValue({
         partnerName: selectedPartner.name,
         customerCui: selectedPartner.cui,
+        regCom: selectedPartner.regCom,
         customerCity: selectedPartner.city
       });
       this.transactionForm.get('partnerName')?.disable();
       this.transactionForm.get('customerCui')?.disable();
+      this.transactionForm.get('customerRegCom')?.disable();
       this.transactionForm.get('customerCity')?.disable();
     } else {
       this.transactionForm.patchValue({
         partnerName: '',
         customerCui: '',
+        customerRegCom: '',
         customerCity: ''
       });
       this.transactionForm.get('partnerName')?.enable();
       this.transactionForm.get('customerCui')?.enable();
+      this.transactionForm.get('customerRegCom')?.enable();
       this.transactionForm.get('customerCity')?.enable();
     }
   }

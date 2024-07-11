@@ -28,7 +28,16 @@
             <label for="cui">Cod unic de înregistrare</label>
             <input id="cui" formControlName="cui" type="text" placeholder="Cod unic de înregistrare"/>
           </div>
+
+          <div class="input-wrapper">
+            <label for="regCom">Reg. Com.</label>
+            <input id="regCom" formControlName="regCom" type="text" placeholder="Reg. Com."/>
+          </div>
         </div>
+
+        
+
+        
       
         <div class="input-wrapper">
           <div class="image-container">
@@ -37,6 +46,29 @@
           </div>
           <input type="file" (change)="onImageChange($event)">
         </div>
+      </div>
+    </div>
+    <button type="button" (click)="toggleChangePassword()">Schimbare parolă</button>
+    <div *ngIf="showChangePassword">
+      <h4>Schimbare parolă</h4>
+      <div class="separator-line"></div>
+
+      <div [formGroup]="changePasswordForm">
+        <div class="double-input-container">
+          <div class="input-wrapper">
+            <label for="oldPassword">Parola veche</label>
+            <input id="oldPassword" formControlName="oldPassword" type="password" placeholder="Introduceți parola veche"/>
+          </div>
+          <div class="input-wrapper">
+            <label for="newPassword">Parola nouă</label>
+            <input id="newPassword" formControlName="newPassword" type="password" placeholder="Introduceți parola nouă"/>
+          </div>
+          <div class="input-wrapper">
+            <label for="repeatNewPassword">Reintroduceți parola nouă</label>
+            <input id="repeatNewPassword" formControlName="repeatNewPassword" type="password" placeholder="Reintroduceți parola nouă"/>
+          </div>
+        </div>
+        <button type="button" (click)="onChangePasswordSubmit()">Salvează modificările</button>
       </div>
     </div>
   </div>
@@ -80,7 +112,7 @@
       <input type="color" id="colorPicker" #colorInput formControlName="selectedColor" class="hidden-color-input" />
       
       <div class="color-display">
-        <div [style.background-color]="selectedColor" class="color-circle" (click)="openColorPicker()" ></div> 
+        <div [style.background-color]="selectedNavBarColor" class="color-circle" (click)="openColorPicker()" ></div> 
       </div>
     </div>
     <div class="color-picker-wrapper">
@@ -88,7 +120,7 @@
       <input type="color" id="colorPicker" #colorInput formControlName="selectedColor" class="hidden-color-input" />
       
       <div class="color-display">
-        <div [style.background-color]="selectedColor" class="color-circle" (click)="openColorPicker()" ></div> 
+        <div [style.background-color]="selectedLeftBarColumn" class="color-circle" (click)="openColorPicker()" ></div> 
       </div>
     </div>
     <app-font-picker (fontSelected)="onFontSelected($event)" formControlName="selectedFont"></app-font-picker>

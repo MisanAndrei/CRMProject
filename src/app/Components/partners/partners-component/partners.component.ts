@@ -41,8 +41,8 @@ export class PartnersComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     // Example data
     const PARTNER_DATA: Partner[] = [
-      { id: 1, name: 'Partner 1', cui: 'CUI 1', email: 'partner1@example.com', phoneNumber: '123456789', country: 'Country 1', address: 'asd', city: 'asdfa', postalCode: 'asdfasf' },
-      { id: 2, name: 'Partner 2', cui: 'CUI 2', email: 'partner2@example.com', phoneNumber: '987654321', country: 'Country 2', address: 'asd', city: 'asdfa', postalCode: 'asdfasf' },
+      { id: 1, name: 'Partner 1', regCom: '2345', cui: 'CUI 1', email: 'partner1@example.com', phoneNumber: '123456789', country: 'Country 1', address: 'asd', city: 'asdfa', postalCode: 'asdfasf' },
+      { id: 2, name: 'Partner 2', regCom: '2345', cui: 'CUI 2', email: 'partner2@example.com', phoneNumber: '987654321', country: 'Country 2', address: 'asd', city: 'asdfa', postalCode: 'asdfasf' },
       // Add more data as needed
     ];
 
