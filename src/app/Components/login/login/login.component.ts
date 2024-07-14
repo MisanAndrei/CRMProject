@@ -34,20 +34,6 @@ export class LoginComponent implements OnInit {
         console.log('Logged in');
         this.apiService.get<OrganizationResponse>('organization/').pipe(
           switchMap((data: OrganizationResponse) => {
-            if (!data) {
-              data = {
-                id: 2,
-                name: "Companie de test CRM",
-                tenantId: "test",
-                license: "bbf6e842-0572-4592-9c72-1ae172bb36b6",
-                colorCodeNavBar: "#989898",
-                colorLeftSideBar: "#808080",
-                font: "Lato",
-                dbSchema: "test",
-                status: "ACTIVE",
-                version: 1
-              };
-            }
             if (data.license != this.loginForm.get('license')?.value) {
               this.authService.logout();
               throw new Error('Invalid license');

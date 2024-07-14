@@ -126,7 +126,7 @@ export interface Element {
   export interface Organization {
     name: string;
     email: string;
-    phone: string;
+    phoneNumber: string;
     cui: string;
     regCom: string;
     address: string;
@@ -230,4 +230,10 @@ export interface Element {
     notes: string;
     subHeader: string;
     footer: string;
+  }
+
+  export interface DetailedInvoice {
+    organization: Organization;
+    partner: Partner;
+    invoice: Invoice;
   }

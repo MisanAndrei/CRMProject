@@ -14,6 +14,9 @@
         <button mat-icon-button aria-label="Edit" [disabled]="!isSingleSelection()">
           <mat-icon>edit</mat-icon>
         </button>
+        <button mat-icon-button aria-label="Generate PDF" [disabled]="!isSingleSelection()" (click)="generatePdf()">
+          <mat-icon>picture_as_pdf</mat-icon>
+        </button>
         <button mat-icon-button aria-label="Add Payment" [disabled]="!isSingleSelection()" (click)="addPayment()">
             <mat-icon>payment</mat-icon>
           </button>

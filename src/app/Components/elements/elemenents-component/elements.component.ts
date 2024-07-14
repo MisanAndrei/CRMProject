@@ -39,24 +39,6 @@ export class ElementsComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    // Example data
-    const ELEMENT_DATA: Element[] = [
-      { id: 1, type: 'Produs', name: 'Element 1', categoryName: 'Category 1', categoryId: 1, description: 'Description for Element 1', acquisitionPrice: 10, sellingPrice: 20, taxValue: 5, taxId: 1 },
-      { id: 2, type: 'Serviciu', name: 'Element 2', categoryName: 'Category 2', categoryId: 2, description: 'Description for Element 2', acquisitionPrice: 15, sellingPrice: 25, taxValue: 10, taxId: 2 },
-      { id: 3, type: 'Produs', name: 'Element 3', categoryName: 'Category 1', categoryId: 1, description: 'Description for Element 3', acquisitionPrice: 10, sellingPrice: 20, taxValue: 5, taxId: 1 },
-      { id: 4, type: 'Serviciu', name: 'Element 4', categoryName: 'Category 2', categoryId: 2, description: 'Description for Element 4', acquisitionPrice: 15, sellingPrice: 25, taxValue: 10, taxId: 2 },
-      { id: 5, type: 'Produs', name: 'Element 5', categoryName: 'Category 1', categoryId: 1, description: 'Description for Element 5', acquisitionPrice: 10, sellingPrice: 20, taxValue: 5, taxId: 1 },
-      { id: 6, type: 'Serviciu', name: 'Element 6', categoryName: 'Category 2', categoryId: 2, description: 'Description for Element 6', acquisitionPrice: 15, sellingPrice: 25, taxValue: 10, taxId: 2 },
-      { id: 7, type: 'Produs', name: 'Element 7', categoryName: 'Category 1', categoryId: 1, description: 'Description for Element 7', acquisitionPrice: 10, sellingPrice: 20, taxValue: 5, taxId: 1 },
-      { id: 8, type: 'Serviciu', name: 'Element 8', categoryName: 'Category 2', categoryId: 2, description: 'Description for Element 8', acquisitionPrice: 15, sellingPrice: 25, taxValue: 10, taxId: 2 },
-      { id: 9, type: 'Produs', name: 'Element 9', categoryName: 'Category 1', categoryId: 1, description: 'Description for Element 9', acquisitionPrice: 10, sellingPrice: 20, taxValue: 5, taxId: 1 },
-      { id: 10, type: 'Serviciu', name: 'Element 10', categoryName: 'Category 2', categoryId: 2, description: 'Description for Element 10', acquisitionPrice: 15, sellingPrice: 25, taxValue: 10, taxId: 2 },
-      { id: 11, type: 'Produs', name: 'Element 11', categoryName: 'Category 1', categoryId: 1, description: 'Description for Element 11', acquisitionPrice: 10, sellingPrice: 20, taxValue: 5, taxId: 1 },
-      { id: 12, type: 'Serviciu', name: 'Element 12', categoryName: 'Category 2', categoryId: 2, description: 'Description for Element 12', acquisitionPrice: 15, sellingPrice: 25, taxValue: 10, taxId: 2 }
-      // Add more data as needed
-    ];
-
-    this.dataSource.data = ELEMENT_DATA;
 
     this.fetchData();
 

@@ -192,7 +192,7 @@ export class UpsertElementComponent implements OnInit {
     
     this.apiService.get<Category[]>('financial/category/').subscribe({
       next: (data: Category[]) => {
-        this.categories = data.filter(x => x.type == 'element');
+        this.categories = data.filter(x => x.type == 'Element');
         if (this.categories.length == 1){
           this.selectedCategoryName = this.categories[0].name;
           this.elementForm.patchValue({

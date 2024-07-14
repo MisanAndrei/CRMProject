@@ -9,8 +9,10 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { DeleteDialogComponent } from '../../dialogs/delete-dialog-component/delete-dialog.component';
-import { Bill } from '../../../Utilities/Models';
+import { Bill, DetailedInvoice } from '../../../Utilities/Models';
 import { ApiService } from '../../../Services/ApiService';
+import { InvoiceDirection } from '../../../Utilities/Enums';
+import { InvoicePdfService } from '../../../Services/InvoicePDFService';
 
 @Component({
   selector: 'app-bills',
@@ -29,7 +31,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private _liveAnnouncer: LiveAnnouncer, private dialog: MatDialog, private router: Router, private apiService: ApiService) {
+  constructor(private _liveAnnouncer: LiveAnnouncer, private dialog: MatDialog, private router: Router, private apiService: ApiService, private invoicePdfService: InvoicePdfService) {
     this.dataSource = new MatTableDataSource<Bill>();
 
   }
@@ -43,7 +45,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
     // For demonstration, let's assume you have a function called getBills() that returns the list of bills
     const billList: Bill[] = this.getBills();
     this.dataSource.data = billList;
-    this.fetchData();
+    //this.fetchData();
 
     // Subscribe to search input changes
     this.searchControl.valueChanges.pipe(
@@ -147,5 +149,77 @@ export class BillsComponent implements OnInit, AfterViewInit {
         console.info('elements data fetch complete');
       }
     });
+  }
+
+  generatePdf() {
+    const detailedInvoice: DetailedInvoice = {
+      organization: {
+        name: "Furnizor SRL",
+        email: "contact@furnizor.com",
+        phoneNumber: "123456789",
+        cui: "RO123456",
+        regCom: "J40/12345/2023",
+        address: "Strada Furnizorului, Nr. 1",
+        city: "Bucuresti",
+        image: "", 
+        postalCode: "010101",
+        county: "Bucuresti",
+        country: "Romania",
+        colorCodeNavBar: "#000000",
+        colorCodeLeftBar: "#FFFFFF",
+        font: "Arial"
+      },
+      partner: {
+        id: 1,
+        name: "Client SRL",
+        cui: "RO654321",
+        regCom: "J40/54321/2023",
+        email: "contact@client.com",
+        phoneNumber: "987654321",
+        country: "Romania",
+        website: "www.client.com",
+        reference: "Referință client",
+        address: "Strada Clientului, Nr. 2",
+        city: "Cluj-Napoca",
+        county: "Cluj",
+        postalCode: "400001",
+        image: ""
+      },
+      invoice: {
+        id: 1,
+        total: 1500,
+        partnerId: 1,
+        partnerName: "Client SRL",
+        categoryId: 1,
+        categoryName: "Servicii",
+        invoiceNumber: "INV-001",
+        orderNumber: "ORD-001",
+        direction: InvoiceDirection.out,
+        invoiceDate: new Date("2023-04-01"),
+        dueDate: new Date("2023-05-01"),
+        completed: false,
+        remainingAmount: 500,
+        elements: [
+          {
+            elementId: 1,
+            elementName: "Serviciu A",
+            elementPrice: 500,
+            elementDescription: "Descriere Serviciu A",
+            elementTax: 19,
+            quantity: 2
+          },
+          {
+            elementId: 2,
+            elementName: "Serviciu B",
+            elementPrice: 250,
+            elementDescription: "Descriere Serviciu B",
+            elementTax: 19,
+            quantity: 2
+          }
+        ]
+      }
+    };
+
+    this.invoicePdfService.generatePdf(detailedInvoice);
   }
 }

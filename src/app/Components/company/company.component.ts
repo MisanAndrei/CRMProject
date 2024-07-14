@@ -76,7 +76,7 @@ export class CompanyComponent implements OnInit {
       this.companyForm.patchValue({
         name: company.name,
         email: company.email,
-        phone: company.phone,
+        phone: company.phoneNumber,
         cui: company.cui,
         regCom: company.regCom,
         address: company.address,

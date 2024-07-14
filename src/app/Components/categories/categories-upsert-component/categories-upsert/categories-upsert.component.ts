@@ -81,13 +81,13 @@ export class CategoriesUpsertComponent implements OnInit {
 
       if (this.isEditMode) {
         this.apiService.put(`financial/category/${this.categoryId}`, categoryData).subscribe(() => {
-          this.router.navigate(['/categories']);
+          this.router.navigate(['/Categorii']);
         });
       } else {
         if (categoryData.id == 0)
           categoryData.id = undefined;
         this.apiService.post('financial/category/', categoryData).subscribe(() => {
-          this.router.navigate(['/categories']);
+          this.router.navigate(['/Categorii']);
         });
       }
     } else {

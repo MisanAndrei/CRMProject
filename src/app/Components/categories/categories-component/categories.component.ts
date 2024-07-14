@@ -39,18 +39,7 @@ export class CategoriesComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    // Example data
-    const CATEGORIES_DATA: Category[] = [
-      { id: 1, name: 'Category 1', type: 'Expense', colorCode: 'red' },
-      { id: 2, name: 'Category 2', type: 'Income', colorCode: 'red' },
-      // Add more data as needed
-    ];
-
-    this.dataSource.data = CATEGORIES_DATA;
-
     this.fetchCategories();
-
-
     this.searchControl.valueChanges.pipe(
       debounceTime(300),
       distinctUntilChanged()

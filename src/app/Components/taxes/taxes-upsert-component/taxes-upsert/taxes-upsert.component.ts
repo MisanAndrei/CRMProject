@@ -16,13 +16,6 @@ interface Type {
 })
 export class TaxesUpsertComponent implements OnInit {
   typeForm: FormGroup;
-  types: Type[] = [
-    { id: 1, name: 'Corectat' },
-    { id: 2, name: 'Inclusiv' },
-    { id: 3, name: 'Normal' },
-    { id: 4, name: 'Taxă compusă' },
-    { id: 5, name: 'Taxă salarială' }
-  ];
   isEditMode = false;
   taxId?: number;
 
@@ -34,8 +27,7 @@ export class TaxesUpsertComponent implements OnInit {
   ) {
     this.typeForm = this.fb.group({
       name: ['', Validators.required],
-      tax: ['', Validators.required],
-      type: ['', Validators.required],
+      tax: ['', Validators.required]
     });
   }
 
@@ -55,8 +47,7 @@ export class TaxesUpsertComponent implements OnInit {
       next: (tax: Tax) => {
         this.typeForm.patchValue({
           name: tax.name,
-          tax: tax.value,
-          type: this.types.find(t => t.name === tax.type)?.id,
+          tax: tax.value
         });
       },
       error: (error) => {
@@ -70,8 +61,7 @@ export class TaxesUpsertComponent implements OnInit {
       const formValue = this.typeForm.value;
       const tax: Tax = {
         name: formValue.name,
-        value: formValue.tax,
-        type: this.types.find(t => t.name === formValue.type)?.name
+        value: formValue.tax
       };
 
       if (this.isEditMode && this.taxId) {
@@ -79,7 +69,7 @@ export class TaxesUpsertComponent implements OnInit {
         this.apiService.put(`financial/tax/`, tax).subscribe({
           next: () => {
             console.log('Tax updated successfully');
-            this.router.navigate(['/taxes']);
+            this.router.navigate(['/taxe']);
           },
           error: (error) => {
             console.error('Error updating tax', error);
@@ -89,7 +79,7 @@ export class TaxesUpsertComponent implements OnInit {
         this.apiService.post('financial/tax/', tax).subscribe({
           next: () => {
             console.log('Tax created successfully');
-            this.router.navigate(['/taxes']);
+            this.router.navigate(['/taxe']);
           },
           error: (error) => {
             console.error('Error creating tax', error);

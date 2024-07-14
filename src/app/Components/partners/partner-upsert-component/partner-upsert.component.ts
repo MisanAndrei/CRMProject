@@ -28,10 +28,10 @@ export class PartnerUpsertComponent implements OnInit {
     this.partnerForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      phone: ['', Validators.required],
+      phoneNumber: ['', Validators.required],
       website: [''],
       reference: [''],
-      image: [''],
+      image: [null],
       cui: ['', Validators.required],
       regCom: ['', Validators.required],
       address: ['', Validators.required],
@@ -58,7 +58,7 @@ export class PartnerUpsertComponent implements OnInit {
       this.partnerForm.patchValue({
         name: partner.name,
         email: partner.email,
-        phone: partner.phoneNumber,
+        phoneNumber: partner.phoneNumber,
         website: partner.website,
         reference: partner.reference,
         image: partner.image,
