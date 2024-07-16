@@ -38,15 +38,6 @@ export class TransfersComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    // Example data
-    const TRANSFER_DATA: Transfer[] = [
-      { id: 1, fromBankAccountId: 1, fromBankAccountName: 'Account A', toBankAccountId: 2, toBankAccountName: 'Account B', amount: 100.50, date: new Date('2023-05-20'), paymentMethod: 'Credit Card', reference: 'Ref001', description: 'Transfer Description A' },
-      { id: 2, fromBankAccountId: 3, fromBankAccountName: 'Account C', toBankAccountId: 4, toBankAccountName: 'Account D', amount: 200.75, date: new Date('2023-05-21'), paymentMethod: 'Bank Transfer', reference: 'Ref002', description: 'Transfer Description B' },
-      { id: 3, fromBankAccountId: 5, fromBankAccountName: 'Account E', toBankAccountId: 6, toBankAccountName: 'Account F', amount: 300.00, date: new Date('2023-05-22'), paymentMethod: 'Cash', reference: 'Ref003', description: 'Transfer Description C' },
-    ];
-
-    this.dataSource.data = TRANSFER_DATA;
-
     this.fetchData();
 
     this.searchControl.valueChanges.pipe(
@@ -102,6 +93,13 @@ export class TransfersComponent implements OnInit, AfterViewInit {
 
   addTransfer() {
     this.router.navigate(['/TransferNou']);
+  }
+
+  editTransfer() {
+    if (this.isSingleSelection()) {
+      const selectedTransferId = this.selection.selected[0].id;
+      this.router.navigate(['/EditareTransfer', selectedTransferId]);
+    }
   }
 
   onPaginatorPageChange(event: PageEvent) {

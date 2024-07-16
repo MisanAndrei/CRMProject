@@ -10,15 +10,15 @@
     <div class="subsection">
       <div class="double-input-container">
         <div class="input-wrapper">
-          <label for="fromBankAccount">Cont Plătitor</label>
-          <select id="fromBankAccount" formControlName="fromBankAccount">
+          <label for="fromBankAccountId">Cont Plătitor</label>
+          <select id="fromBankAccountId" formControlName="fromBankAccountId">
             <option *ngFor="let account of accounts" [value]="account.id">{{ account.name }}</option>
           </select>
         </div>
       
         <div class="input-wrapper">
-          <label for="toBankAccountName">Cont Beneficiar</label>
-          <select id="toBankAccountName" formControlName="toBankAccountName">
+          <label for="toBankAccountId">Cont Beneficiar</label>
+          <select id="toBankAccountId" formControlName="toBankAccountId">
             <option *ngFor="let account of accounts" [value]="account.id">{{ account.name }}</option>
           </select>
         </div>
@@ -52,7 +52,7 @@
           <div class="input-wrapper">
             <label for="paymentMethod">Metodă de Plată</label>
             <select id="paymentMethod" formControlName="paymentMethod">
-              <option *ngFor="let method of methodsOfPayment" [value]="method.id">{{ method.name }}</option>
+              <option *ngFor="let method of methodsOfPayment" [value]="method.name">{{ method.name }}</option>
             </select>
           </div>
         

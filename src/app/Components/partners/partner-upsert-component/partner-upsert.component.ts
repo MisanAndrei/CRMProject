@@ -62,7 +62,7 @@ export class PartnerUpsertComponent implements OnInit {
         website: partner.website,
         reference: partner.reference,
         image: partner.image,
-        cui: partner.cui,
+        cui: partner.CUI,
         regCom: partner.regCom,
         address: partner.address,
         postalCode: partner.postalCode,

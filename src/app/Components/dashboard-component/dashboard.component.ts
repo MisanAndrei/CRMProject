@@ -25,7 +25,7 @@ export class DashboardComponent implements OnInit {
     {
       id: 1,
       name: 'Partner A',
-      cui: 'CUI12345',
+      CUI: 'CUI12345',
       regCom: 'RegCom123',
       email: 'partnerA@example.com',
       phoneNumber: '123456789',
@@ -41,7 +41,7 @@ export class DashboardComponent implements OnInit {
     {
       id: 2,
       name: 'Partner B',
-      cui: 'CUI67890',
+      CUI: 'CUI67890',
       regCom: 'RegCom678',
       email: 'partnerB@example.com',
       phoneNumber: '987654321',
@@ -57,7 +57,7 @@ export class DashboardComponent implements OnInit {
     {
       id: 3,
       name: 'Partner C',
-      cui: 'CUI54321',
+      CUI: 'CUI54321',
       regCom: 'RegCom543',
       email: 'partnerC@example.com',
       phoneNumber: '456789123',

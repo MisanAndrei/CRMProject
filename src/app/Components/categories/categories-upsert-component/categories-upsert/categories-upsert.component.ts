@@ -56,7 +56,7 @@ export class CategoriesUpsertComponent implements OnInit {
   }
 
   fetchCategoryDetails(id: number): void {
-    this.apiService.get<Category>(`/categories/${id}`).subscribe((category) => {
+    this.apiService.get<Category>(`financial/category/${id}`).subscribe((category) => {
       this.typeForm.patchValue({
         name: category.name,
         type: category.type,
@@ -80,7 +80,7 @@ export class CategoriesUpsertComponent implements OnInit {
       };
 
       if (this.isEditMode) {
-        this.apiService.put(`financial/category/${this.categoryId}`, categoryData).subscribe(() => {
+        this.apiService.put(`financial/category/`, categoryData).subscribe(() => {
           this.router.navigate(['/Categorii']);
         });
       } else {

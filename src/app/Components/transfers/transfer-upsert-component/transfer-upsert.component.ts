@@ -21,11 +21,7 @@ interface MethodOfPayment {
 })
 export class TransferUpsertComponent implements OnInit {
   transferForm: FormGroup;
-  accounts: Account[] = [
-    { id: 1, name: 'Account A' },
-    { id: 2, name: 'Account B' },
-    { id: 3, name: 'Account C' }
-  ];
+  accounts: Account[] = [];
   methodsOfPayment: MethodOfPayment[] = [
     { id: 1, name: 'Card de credit' },
     { id: 2, name: 'Transfer Bancar' },
@@ -41,12 +37,10 @@ export class TransferUpsertComponent implements OnInit {
     private apiService: ApiService
   ) {
     this.transferForm = this.fb.group({
-      fromBankAccount: ['', Validators.required],
       fromBankAccountId: [0, Validators.required],
-      fromBankAccountName: [''],
-      toBankAccount: ['', Validators.required],
+      fromBankAccountName: ['Nume Banca'],
       toBankAccountId: [0, Validators.required],
-      toBankAccountName: [''],
+      toBankAccountName: ['Nume Banca'],
       date: ['', Validators.required],
       amount: [0, [Validators.required, Validators.min(0)]],
       description: '',
@@ -107,22 +101,35 @@ export class TransferUpsertComponent implements OnInit {
         id: this.transferId,
         date: new Date(this.transferForm.get('date')?.value),
         amount: this.transferForm.get('amount')?.value,
-        fromBankAccountId: this.transferForm.get('fromBankAccountId')?.value,
-        fromBankAccountName: this.transferForm.get('fromBankAccountName')?.value,
-        toBankAccountId: this.transferForm.get('toBankAccountId')?.value,
-        toBankAccountName: this.transferForm.get('toBankAccountName')?.value,
+        fromBankAccountId: Number(this.transferForm.get('fromBankAccountId')?.value),
+        fromBankAccountName: this.accounts.filter(x => x.id === Number(this.transferForm.get('fromBankAccountId')?.value))[0].name,
+        toBankAccountId: Number(this.transferForm.get('toBankAccountId')?.value),
+        toBankAccountName: this.accounts.filter(x => x.id === Number(this.transferForm.get('toBankAccountId')?.value))[0].name,
         description: this.transferForm.get('description')?.value,
         paymentMethod: this.transferForm.get('paymentMethod')?.value,
         reference: this.transferForm.get('reference')?.value
       };
 
       if (this.isEditMode) {
-        this.apiService.put(`financial/account/transfer/${this.transferId}`, transferData).subscribe(() => {
-          this.router.navigate(['/transfers']);
+        transferData.id = this.transferId;
+        this.apiService.put(`financial/account/transfer/${this.transferId}`, transferData).subscribe({
+          next: () => {
+            console.log('Transfer updated successfully');
+            this.router.navigate(['/Transferuri']);
+          },
+          error: (error) => {
+            console.error('Error updating transfer', error);
+          },
         });
       } else {
-        this.apiService.post('financial/account/transfer/create', transferData).subscribe(() => {
-          this.router.navigate(['/transfers']);
+        this.apiService.post('financial/account/transfer/create', transferData).subscribe({
+          next: () => {
+            console.log('Transfer created successfully');
+            this.router.navigate(['/Transferuri']);
+          },
+          error: (error) => {
+            console.error('Error creating transfer', error);
+          },
         });
       }
     } else {

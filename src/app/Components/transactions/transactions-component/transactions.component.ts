@@ -39,15 +39,6 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    // Example data
-    const TRANSACTIONS_DATA: Transaction[] = [
-      { id: 1, paymentDate: new Date(), invoiceId: 101, reference: 'Ref001', amount: 50, paymentDirection: TransactionDirection.in, bankAccountId: 1, paymentMethod: 'Credit Card', description: 'Groceries' },
-      { id: 2, paymentDate: new Date(), invoiceId: 102, reference: 'Ref002', amount: 1000, paymentDirection: TransactionDirection.out, bankAccountId: 2, paymentMethod: 'Bank Transfer', description: 'Salary' },
-      // Add more data as needed
-    ];
-
-    this.dataSource.data = TRANSACTIONS_DATA;
-
     this.fetchData();
 
     this.searchControl.valueChanges.pipe(
@@ -131,5 +122,12 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
         console.info('elements data fetch complete');
       }
     });
+  }
+
+  editTransaction() {
+    if (this.isSingleSelection()) {
+      const selectedTransactionId = this.selection.selected[0].id;
+      this.router.navigate(['/EditareTranzactie', selectedTransactionId]);
+    }
   }
 }

@@ -128,4 +128,11 @@ export class CategoriesComponent implements OnInit, AfterViewInit {
       }
     });
   }
+
+  editCategory() {
+    if (this.isSingleSelection()) {
+      const selectedCategoryId = this.selection.selected[0].id;
+      this.router.navigate(['/EditareCategorie', selectedCategoryId]);
+    }
+  }
 }

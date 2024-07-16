@@ -39,16 +39,7 @@ export class AccountsComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    // Example data
-    const ACCOUNTS_DATA: Account[] = [
-      { id: 1, name: 'Account 1', accountNumber: 'Bank 1', sold: 1000 },
-      { id: 2, name: 'Account 2', accountNumber: 'Bank 2', sold: 1000 },
-      // Add more data as needed
-    ];
-
-    this.dataSource.data = ACCOUNTS_DATA;
-
-
+    this.fetchData();
     this.searchControl.valueChanges.pipe(
       debounceTime(300),
       distinctUntilChanged()
@@ -136,5 +127,12 @@ export class AccountsComponent implements OnInit, AfterViewInit {
         console.info('elements data fetch complete');
       }
     });
+  }
+
+  editAccount() {
+    if (this.isSingleSelection()) {
+      const selectedAccountId = this.selection.selected[0].id;
+      this.router.navigate(['/EditareCont', selectedAccountId]);
+    }
   }
 }

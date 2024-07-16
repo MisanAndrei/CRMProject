@@ -11,7 +11,7 @@
       <button mat-mini-fab  aria-label="Remove" [disabled]="!selection.hasValue()" (click)="openDeleteDialog()">
         <mat-icon>remove</mat-icon>
       </button>
-      <button mat-mini-fab  aria-label="Edit" [disabled]="!isSingleSelection()">
+      <button mat-mini-fab  aria-label="Edit" [disabled]="!isSingleSelection()" (click)="editElement()">
         <mat-icon>edit</mat-icon>
       </button>
     </div>

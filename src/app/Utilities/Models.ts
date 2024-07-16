@@ -109,7 +109,8 @@ export interface Element {
   export interface Partner {
     id: number;
     name: string;
-    cui: string;
+    partnerName?: string;
+    CUI: string;
     regCom: string;
     email: string;
     phoneNumber?: string;
@@ -127,7 +128,8 @@ export interface Element {
     name: string;
     email: string;
     phoneNumber: string;
-    cui: string;
+    tenantId?: string;
+    CUI: string;
     regCom: string;
     address: string;
     city: string;

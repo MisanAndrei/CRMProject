@@ -31,7 +31,7 @@ export class InvoicePdfService {
     doc.text('Furnizor:', 10, 40);
     doc.setFontSize(10);
     doc.text(`Nume: ${provider.name}`, 10, 45);
-    doc.text(`CUI: ${provider.cui}`, 10, 50);
+    doc.text(`CUI: ${provider.CUI}`, 10, 50);
     doc.text(`Reg. Com.: ${provider.regCom}`, 10, 55);
     doc.text(`Adresa:`, 10, 60);
     doc.text(`${provider.address}`, 10, 65);
@@ -45,7 +45,7 @@ export class InvoicePdfService {
     doc.text('Client:', doc.internal.pageSize.getWidth() - 100, 40);
     doc.setFontSize(10);
     doc.text(`Nume: ${client.name}`, doc.internal.pageSize.getWidth() - 100, 45);
-    doc.text(`CUI: ${client.cui}`, doc.internal.pageSize.getWidth() - 100, 50);
+    doc.text(`CUI: ${client.CUI}`, doc.internal.pageSize.getWidth() - 100, 50);
     doc.text(`Reg. Com.: ${client.regCom}`, doc.internal.pageSize.getWidth() - 100, 55);
     doc.text(`Adresa:`, doc.internal.pageSize.getWidth() - 100, 60);
     doc.text(`${client.address}`, doc.internal.pageSize.getWidth() - 100, 65);

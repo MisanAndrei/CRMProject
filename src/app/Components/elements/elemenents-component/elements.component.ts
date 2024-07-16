@@ -130,4 +130,11 @@ export class ElementsComponent implements OnInit, AfterViewInit {
       }
     });
   }
+
+  editElement() {
+    if (this.isSingleSelection()) {
+      const selectedElementId = this.selection.selected[0].id;
+      this.router.navigate(['/EditareElement', selectedElementId]);
+    }
+  }
 }

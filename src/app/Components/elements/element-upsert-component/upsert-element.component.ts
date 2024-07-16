@@ -80,7 +80,7 @@ export class UpsertElementComponent implements OnInit {
   }
 
   fetchElementDetails(id: number) {
-    this.apiService.get<Element>(`/element/${id}`).subscribe((element) => {
+    this.apiService.get<Element>(`financial/element/${id}`).subscribe((element) => {
       this.elementForm.patchValue({
         type: element.type === 'Produs' ? ElementType.Produs : ElementType.Serviciu,
         name: element.name,

@@ -119,4 +119,11 @@ export class TaxesComponent implements OnInit, AfterViewInit {
       }
     });
   }
+
+  editTax() {
+    if (this.isSingleSelection()) {
+      const selectedElementTaxId = this.selection.selected[0].id;
+      this.router.navigate(['/EditareTaxa', selectedElementTaxId]);
+    }
+  }
 }

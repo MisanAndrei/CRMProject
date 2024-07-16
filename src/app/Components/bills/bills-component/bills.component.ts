@@ -157,7 +157,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
         name: "Furnizor SRL",
         email: "contact@furnizor.com",
         phoneNumber: "123456789",
-        cui: "RO123456",
+        CUI: "RO123456",
         regCom: "J40/12345/2023",
         address: "Strada Furnizorului, Nr. 1",
         city: "Bucuresti",
@@ -172,7 +172,7 @@ export class BillsComponent implements OnInit, AfterViewInit {
       partner: {
         id: 1,
         name: "Client SRL",
-        cui: "RO654321",
+        CUI: "RO654321",
         regCom: "J40/54321/2023",
         email: "contact@client.com",
         phoneNumber: "987654321",

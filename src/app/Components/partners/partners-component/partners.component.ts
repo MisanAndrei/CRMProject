@@ -106,6 +106,13 @@ export class PartnersComponent implements OnInit, AfterViewInit {
     this.router.navigate(['/PartenerNou']);
   }
 
+  editPartner() {
+    if (this.isSingleSelection()) {
+      const selectedPartnerId = this.selection.selected[0].id;
+      this.router.navigate(['/EditarePartener', selectedPartnerId]);
+    }
+  }
+
   fetchData(){
     this.apiService.get<Partner[]>('partner/').subscribe({
       next: (data: Partner[]) => {

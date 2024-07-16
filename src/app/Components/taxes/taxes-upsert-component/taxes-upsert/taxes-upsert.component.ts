@@ -69,7 +69,7 @@ export class TaxesUpsertComponent implements OnInit {
         this.apiService.put(`financial/tax/`, tax).subscribe({
           next: () => {
             console.log('Tax updated successfully');
-            this.router.navigate(['/taxe']);
+            this.router.navigate(['/Taxe']);
           },
           error: (error) => {
             console.error('Error updating tax', error);
@@ -79,7 +79,7 @@ export class TaxesUpsertComponent implements OnInit {
         this.apiService.post('financial/tax/', tax).subscribe({
           next: () => {
             console.log('Tax created successfully');
-            this.router.navigate(['/taxe']);
+            this.router.navigate(['/Taxe']);
           },
           error: (error) => {
             console.error('Error creating tax', error);

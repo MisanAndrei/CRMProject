@@ -8,7 +8,7 @@
         <button mat-icon-button aria-label="Add" (click)="addAccount()">
           <mat-icon>add</mat-icon>
         </button>
-        <button mat-icon-button aria-label="Edit" [disabled]="!isSingleSelection()">
+        <button mat-icon-button aria-label="Edit" [disabled]="!isSingleSelection()" (click)="editAccount()">
           <mat-icon>edit</mat-icon>
         </button>
       </div>

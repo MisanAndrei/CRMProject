@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Category, Transaction } from '../../../Utilities/Models';
 import { ApiService } from '../../../Services/ApiService';
 import { TransactionDirection } from '../../../Utilities/Enums';
@@ -33,54 +33,72 @@ export class TransactionUpsertComponent implements OnInit {
     { id: 2, name: 'Transfer Bancar' },
     { id: 3, name: 'Cash' }
   ];
-  accounts: Account[] = [
-    { id: 1, name: 'Account A' },
-    { id: 2, name: 'Account B' },
-    { id: 3, name: 'Account C' }
-  ];
-  invoices: Invoice[] = [
-    { id: 1, name: 'Invoice 001' },
-    { id: 2, name: 'Invoice 002' },
-    { id: 3, name: 'Invoice 003' }
-  ];
+  accounts: Account[] = [];
+  invoices: Invoice[] = [];
 
   transactionDirections = [
     { id: 'INCOME', name: 'Incasare' },
     { id: 'EXPENSE', name: 'Plata' }
   ];
 
-  categories: Category[] = [
-    { id: 1, name: 'Categorie 1', type: 'Cheltuiala', colorCode: 'asdasd' },
-    { id: 2, name: 'Categorie 2', type: 'Venit', colorCode: 'asdasd' }
-  ];
+  categories: Category[] = [];
+  transactionId: number | null = null;
 
-  constructor(private fb: FormBuilder, private router: Router, private apiService: ApiService) { // Inject your API service
+  constructor(private fb: FormBuilder, private router: Router, private apiService: ApiService, private route: ActivatedRoute,) { // Inject your API service
     this.transactionForm = this.fb.group({
       date: ['', Validators.required],
       methodOfPayment: ['', Validators.required],
       account: ['', Validators.required],
       sum: [0, [Validators.required, Validators.min(0)]],
       description: ['', Validators.required],
-      invoice: ['', Validators.required],
+      invoiceId: [null],
       reference: [''],
       direction: ['', Validators.required],
-      category: ['', Validators.required]
+      category: [null, Validators.required]
     });
   }
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+      this.transactionId = Number(params.get('id'));
+      if (this.transactionId) {
+        this.loadTransaction(this.transactionId);
+      }
+    });
     this.fetchAccounts();
     this.fetchInvoices();
+    this.fetchCategories();
    }
+
+   loadTransaction(id: number): void {
+    this.apiService.get<Transaction>(`financial/invoice/payments/${id}`).subscribe({
+      next: (transaction) => {
+        this.transactionForm.patchValue({
+          date: transaction.paymentDate,
+          methodOfPayment: transaction.paymentMethod,
+          account: transaction.bankAccountId,
+          sum: transaction.amount,
+          description: transaction.description,
+          invoiceId: transaction.invoiceId,
+          reference: transaction.reference,
+          direction: transaction.paymentDirection === TransactionDirection.in ? 'INCOME' : 'EXPENSE',
+          category: transaction.categoryId
+        });
+      },
+      error: (error) => {
+        console.error('Error loading transaction', error);
+      }
+    });
+  }
 
   onSubmit(): void {
     if (this.transactionForm.valid) {
       const formValue = this.transactionForm.value;
-      const selectedCategory = this.categories.find(category => category.id === formValue.category);
+      const selectedCategory = this.categories.find(x => x.id?.toString() === formValue.category);
 
       const transaction: Transaction = {
         paymentDate: formValue.date,
-        invoiceId: formValue.invoice,
+        invoiceId: formValue.invoiceId,
         reference: formValue.reference,
         amount: formValue.sum,
         paymentDirection: formValue.direction === 'INCOME' ? TransactionDirection.in : TransactionDirection.out,
@@ -146,6 +164,21 @@ export class TransactionUpsertComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error fetching categories', error);
+      },
+      complete: () => {
+        console.info('categories data fetch complete');
+      }
+    });
+  }
+
+  fetchCategories(){
+    this.apiService.get<Category[]>('financial/category/').subscribe({
+      next: (data: Category[]) => {
+        this.categories = data.filter(x => x.type !== 'Element');
+        console.log(data);
+      },
+      error: (error) => {
+        console.error('Error fetching categoryes', error);
       },
       complete: () => {
         console.info('categories data fetch complete');
