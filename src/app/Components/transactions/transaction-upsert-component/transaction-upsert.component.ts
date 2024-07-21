@@ -137,7 +137,7 @@ export class TransactionUpsertComponent implements OnInit {
         });
       }
     } else {
-      console.log('Form is invalid');
+      this.transactionForm.markAllAsTouched();
     }
   }
 
@@ -148,10 +148,10 @@ export class TransactionUpsertComponent implements OnInit {
         console.log(data);
       },
       error: (error) => {
-        console.error('Error fetching categories', error);
+        console.error('Error fetching accounts', error);
       },
       complete: () => {
-        console.info('categories data fetch complete');
+        console.info('Accounts data fetch complete');
       }
     });
   }
@@ -163,10 +163,10 @@ export class TransactionUpsertComponent implements OnInit {
         console.log(data);
       },
       error: (error) => {
-        console.error('Error fetching categories', error);
+        console.error('Error fetching invoices', error);
       },
       complete: () => {
-        console.info('categories data fetch complete');
+        console.info('Invoices data fetch complete');
       }
     });
   }
@@ -181,7 +181,7 @@ export class TransactionUpsertComponent implements OnInit {
         console.error('Error fetching categoryes', error);
       },
       complete: () => {
-        console.info('categories data fetch complete');
+        console.info('Categories data fetch complete');
       }
     });
   }

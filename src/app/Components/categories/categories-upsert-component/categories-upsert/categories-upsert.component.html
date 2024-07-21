@@ -11,22 +11,23 @@
     <div class="subsection">
       <div class="double-input-container">
         <div class="input-wrapper">
-          <label for="name">Nume</label>
+          <label for="name">Nume *</label>
           <input
             id="name"
             formControlName="name"
             type="string"
             placeholder="Introduceți nume"
           />
+          <app-validation-message [control]="typeForm.get('name')!"></app-validation-message>
         </div>
         <div class="input-wrapper">
-          <label for="type">Tip</label>
+          <label for="type">Tip *</label>
           <select id="type" formControlName="type">
-            <option value="" disabled selected>Selectează tip</option>
             <option *ngFor="let type of types" [value]="type.name">
               {{ type.name }}
             </option>
           </select>
+          <app-validation-message [control]="typeForm.get('type')!"></app-validation-message>
         </div>
       </div>
 
@@ -37,6 +38,7 @@
       <div class="color-display">
         <div [style.background-color]="selectedColor" class="color-circle" (click)="openColorPicker()" ></div> 
       </div>
+      <app-validation-message [control]="typeForm.get('selectedColor')!"></app-validation-message>
     </div>
     
     <div class="button-container">

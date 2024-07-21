@@ -10,23 +10,25 @@
     <div class="subsection">
       <div class="double-input-container">
         <div class="input-wrapper">
-          <label for="name">Nume</label>
+          <label for="name">Nume *</label>
           <input
             id="name"
             formControlName="name"
             type="text"
             placeholder="Introduceți Nume"
           />
+          <app-validation-message [control]="typeForm.get('name')!"></app-validation-message>
         </div>
 
         <div class="input-wrapper">
-          <label for="tax">Impozit(%)</label>
+          <label for="tax">Impozit(%) *</label>
           <input
             id="tax"
             formControlName="tax"
             type="number"
             placeholder="Introduceți impozit (%)"
           />
+          <app-validation-message [control]="typeForm.get('tax')!"></app-validation-message>
         </div>
       </div>
     </div>

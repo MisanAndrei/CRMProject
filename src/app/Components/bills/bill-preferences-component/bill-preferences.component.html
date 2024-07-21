@@ -10,13 +10,14 @@
     <div class="subsection">
       <div class="double-input-container">
         <div class="input-wrapper">
-          <label for="prefix">Prefix</label>
+          <label for="prefix">Prefix *</label>
           <input id="prefix" formControlName="prefix" type="text" placeholder="Introduceți Prefix">
+          <app-validation-message [control]="preferencesForm.get('prefix')!"></app-validation-message>
         </div>
-      
         <div class="input-wrapper">
-          <label for="nextNumber">Număr</label>
+          <label for="nextNumber">Număr *</label>
           <input id="nextNumber" formControlName="nextNumber" type="number">
+          <app-validation-message [control]="preferencesForm.get('nextNumber')!"></app-validation-message>
         </div>
       </div>
 
@@ -33,16 +34,12 @@
       </div>
 
       <div class="double-input-container">
-
-        <div class="single-input-wrapper">
+        <div class="input-wrapper">
           <label for="note">Note</label>
           <textarea id="note" formControlName="note" placeholder="Introduceți Note"></textarea>
         </div>
+        <div class="input-wrapper"></div>
       </div>
-    
-     
-    
-      
     </div>
   </div>
   <div class="button-container">

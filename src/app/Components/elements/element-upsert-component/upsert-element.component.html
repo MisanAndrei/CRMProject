@@ -10,31 +10,37 @@
       <div class="subsection">
         <!-- Product and Service selection -->
         <div class="single-input-wrapper">
-          <label >Tip</label>
+          <label >Tip *</label>
           <div class="button-container-m">
             <div class="selection-option" [ngClass]="{'selected': elementForm.get('type')!.value === 1}" (click)="elementForm.patchValue({type: 1})">Produs</div>
             <div class="selection-option" [ngClass]="{'selected': elementForm.get('type')!.value === 2}" (click)="elementForm.patchValue({type: 2})">Serviciu</div>
           </div>
+          <app-validation-message [control]="elementForm.get('type')!"></app-validation-message>
         </div>
 
         <!-- Nume and Categorie inputs -->
         <div class="double-input-container">
           <div class="input-wrapper">
-            <label for="nume">Nume</label>
+            <label for="nume">Nume *</label>
             <input id="nume" formControlName="name" placeholder="Introduceți Nume" />
+            <app-validation-message [control]="elementForm.get('name')!"></app-validation-message>
           </div>
           <div class="input-wrapper">
-            <label for="categorie">Categorie</label>
+            <label for="categorie">Categorie *</label>
             <select id="categorie" formControlName="selectedCategoryId" (change)="onCategorySelected($event)">
               <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
             </select>
+            <app-validation-message [control]="elementForm.get('selectedCategoryId')!"></app-validation-message>
           </div>
         </div>
 
         <!-- Descriere input -->
-        <div class="single-input-wrapper">
-          <label for="descriere">Descriere</label>
-          <textarea id="descriere" formControlName="description" rows="3" placeholder="Introduceți Descriere"></textarea>
+        <div class="double-input-container">
+          <div class="input-wrapper">
+            <label for="descriere">Descriere</label>
+            <textarea id="descriere" formControlName="description" placeholder="Introduceți Descriere"></textarea>
+          </div>
+          <div class="input-wrapper"></div>
         </div>
       </div>
     </div>
@@ -65,11 +71,14 @@
           </div>
         </div>
 
-        <div class="single-input-wrapper">
-          <label for="taxa">Taxă</label>
-          <select id="taxa" formControlName="selectedTaxId" (change)="onTaxSelected($event)">
-            <option *ngFor="let tax of taxes" [value]="tax.id">{{ tax.name }} ({{ tax.value }}%)</option>
-          </select>
+        <div class="double-input-container">
+          <div class="input-wrapper">
+            <label for="taxa">Taxă</label>
+            <select id="taxa" formControlName="selectedTaxId" (change)="onTaxSelected($event)">
+              <option *ngFor="let tax of taxes" [value]="tax.id">{{ tax.name }} ({{ tax.value }}%)</option>
+            </select>
+          </div>
+          <div class="input-wrapper"></div>
         </div>
       </div>
     </div>

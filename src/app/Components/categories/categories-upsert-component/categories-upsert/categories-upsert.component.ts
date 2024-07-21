@@ -91,7 +91,7 @@ export class CategoriesUpsertComponent implements OnInit {
         });
       }
     } else {
-      console.log('Form is invalid');
+      this.typeForm.markAllAsTouched();
     }
   }
 }

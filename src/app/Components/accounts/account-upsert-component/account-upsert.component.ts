@@ -57,15 +57,15 @@ export class AccountUpsertComponent implements OnInit {
 
       if (this.isEditMode) {
         this.apiService.put(`financial/account/`, accountData).subscribe(() => {
-          this.router.navigate(['/accounts']);
+          this.router.navigate(['/Conturi']);
         });
       } else {
         this.apiService.post('financial/account/', accountData).subscribe(() => {
-          this.router.navigate(['/accounts']);
+          this.router.navigate(['/Conturi']);
         });
       }
     } else {
-      console.log('Form is invalid');
+      this.accountForm.markAllAsTouched();
     }
   }
 }

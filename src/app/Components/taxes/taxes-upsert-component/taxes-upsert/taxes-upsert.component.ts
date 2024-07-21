@@ -87,7 +87,7 @@ export class TaxesUpsertComponent implements OnInit {
         });
       }
     } else {
-      console.log('Form is invalid');
+      this.typeForm.markAllAsTouched();
     }
   }
 }

@@ -13,15 +13,16 @@
     <div class="subsection">
       <div class="align-content">
         <div class="inputs-container">
-          <label for="transactionType">Tipul Tranzacției</label>
+          <label for="transactionType">Tipul Tranzacției *</label>
           <select id="transactionType" formControlName="transactionType">
             <option value="purchase">Cheltuiala</option>
             <option value="sale">Venit</option>
           </select>
+          <app-validation-message [control]="transactionForm.get('transactionType')!"></app-validation-message>
         </div>
 
         <div class="inputs-container">
-          <label for="category">Categorie</label>
+          <label for="category">Categorie *</label>
           <select
             id="category"
             formControlName="category"
@@ -32,39 +33,44 @@
               {{ category.name }}
             </option>
           </select>
+          <app-validation-message [control]="transactionForm.get('category')!"></app-validation-message>
         </div>
       </div>
       <div class="align-content">
         <div class="inputs-container">
-          <label for="dateOfBill">Data Facturii</label>
+          <label for="dateOfBill">Data Facturii *</label>
           <input id="dateOfBill" formControlName="dateOfBill" type="date" />
+          <app-validation-message [control]="transactionForm.get('dateOfBill')!"></app-validation-message>
         </div>
 
         <div class="inputs-container">
-          <label for="dueDate">Data Scadentă</label>
+          <label for="dueDate">Data Scadentă *</label>
           <input id="dueDate" formControlName="dueDate" type="date" />
+          <app-validation-message [control]="transactionForm.get('dueDate')!"></app-validation-message>
         </div>
       </div>
 
       <div class="align-content">
         <div class="inputs-container">
-          <label for="numberOfBill">Numărul Facturii</label>
+          <label for="numberOfBill">Numărul Facturii *</label>
           <input
             id="numberOfBill"
             formControlName="numberOfBill"
             type="text"
             placeholder="Introduceți Numărul Facturii"
           />
+          <app-validation-message [control]="transactionForm.get('numberOfBill')!"></app-validation-message>
         </div>
 
         <div class="inputs-container">
-          <label for="orderNumber">Număr de Comandă</label>
+          <label for="orderNumber">Număr de Comandă *</label>
           <input
             id="orderNumber"
             formControlName="orderNumber"
             type="text"
             placeholder="Introduceți Număr de Comandă"
           />
+          <app-validation-message [control]="transactionForm.get('orderNumber')!"></app-validation-message>
         </div>
       </div>
 
@@ -96,7 +102,7 @@
 
       <div class="double-input-container">
         <div class="input-wrapper">
-          <label for="partnerName">Nume Partener</label>
+          <label for="partnerName">Nume Partener *</label>
           <input
             id="partnerName"
             formControlName="partnerName"
@@ -104,9 +110,10 @@
             [disabled]="!transactionForm.get('partnerName')?.enabled"
             placeholder="Introduceți Nume Partener"
           />
+          <app-validation-message [control]="transactionForm.get('partnerName')!"></app-validation-message>
         </div>
         <div class="input-wrapper">
-          <label for="customerCui">CUI</label>
+          <label for="customerCui">CUI *</label>
           <input
             id="customerCui"
             formControlName="customerCui"
@@ -114,9 +121,10 @@
             [disabled]="!transactionForm.get('customerCui')?.enabled"
             placeholder="Introduceți CUI"
           />
+          <app-validation-message [control]="transactionForm.get('customerCui')!"></app-validation-message>
         </div>
         <div class="input-wrapper">
-          <label for="customerRegCom">Reg. Com.</label>
+          <label for="customerRegCom">Reg. Com. *</label>
           <input
             id="customerRegCom"
             formControlName="customerRegCom"
@@ -124,10 +132,11 @@
             [disabled]="!transactionForm.get('customerRegCom')?.enabled"
             placeholder="Introduceți Reg. Com."
           />
+          <app-validation-message [control]="transactionForm.get('customerRegCom')!"></app-validation-message>
         </div>
 
         <div class="input-wrapper">
-          <label for="customerCity">Oraș</label>
+          <label for="customerCity">Oraș *</label>
           <input
             id="customerCity"
             formControlName="customerCity"
@@ -135,6 +144,7 @@
             [disabled]="!transactionForm.get('customerCity')?.enabled"
             placeholder="Introduceți Oraș"
           />
+          <app-validation-message [control]="transactionForm.get('customerCity')!"></app-validation-message>
         </div>
       </div>
     </div>
@@ -145,63 +155,82 @@
     <div class="separator-line"></div>
 
     <div class="subsection">
-      <label for="items">Articole</label>
       <div formArrayName="items">
         <div *ngFor="let item of items.controls; let i = index">
           <div [formGroupName]="i" class="item-fields">
-            <select formControlName="selectedItem" (change)="onItemChange(i)">
-              <option value="">Adaugă</option>
-              <option *ngFor="let element of elements" [value]="element.id">
-                {{ element.name }}
-              </option>
-            </select>
+            <div class="field">
+              <label>Element</label>
+              <select formControlName="selectedItem" (change)="onItemChange(i)">
+                <option value="">Adaugă</option>
+                <option *ngFor="let element of elements" [value]="element.id">
+                  {{ element.name }}
+                </option>
+              </select>
+            </div>
 
-            <input
-              formControlName="elementDescription"
-              placeholder="Descriere"
-              type="text"
-              [disabled]="true"
-            />
-            <input
-              formControlName="quantity"
-              placeholder="Cantitate"
-              type="number"
-              (change)="onQuantityOrPriceChange(i)"
-            />
-            <input
-              formControlName="elementPrice"
-              placeholder="Preț"
-              type="number"
-              [disabled]="true"
-            />
-            <select formControlName="elementTax" (change)="onTaxChange(i)">
-              <option value="">Selectează Taxă</option>
-              <option *ngFor="let tax of taxOptions" [value]="tax.value">
-                {{ tax.name }}
-              </option>
-            </select>
-            <input
-              formControlName="total"
-              placeholder="Total"
-              type="text"
-              [disabled]="true"
-            />
-          </div>
-          <div class="buttons-container">
-            <button type="button" (click)="addItem()" class="elements-button">
-              Adaugă element
-            </button>
-            <button type="button" (click)="removeItem(i)" class="remove-button">
-              Anulează
-            </button>
+            <div class="field">
+              <label>Descriere</label>
+              <input
+                formControlName="elementDescription"
+                placeholder="Descriere"
+                type="text"
+                [disabled]="true"
+              />
+            </div>
+            <div class="field">
+              <label>Cantitate</label>
+              <input
+                formControlName="quantity"
+                placeholder="Cantitate"
+                type="number"
+                (change)="onQuantityOrPriceChange(i)"
+              />
+            </div>
+            <div class="field">
+              <label>Pret</label>
+              <input
+                formControlName="elementPrice"
+                placeholder="Preț"
+                type="number"
+                [disabled]="true"
+                (change)="onQuantityOrPriceChange(i)"
+              />
+            </div>
+            <div class="field">
+              <label>Taxa</label>
+              <select formControlName="elementTax" (change)="onTaxChange(i)">
+                <option value="">Selectează Taxă</option>
+                <option *ngFor="let tax of taxOptions" [value]="tax.value">
+                  {{ tax.name }}
+                </option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Total</label>
+              <input
+                formControlName="total"
+                placeholder="Total"
+                type="text"
+                [disabled]="true"
+              />
+            </div>
+            <div >
+              <button type="button" (click)="removeItem(i)" class="remove-button">
+                <mat-icon class="icon-margin">delete</mat-icon>
+              </button>
+            </div>
           </div>
         </div>
+      </div>
+      <div class="buttons-container">
+        <button type="button" (click)="addItem()" class="elements-button">
+          Adaugă element
+        </button>
       </div>
     </div>
 
     <div class="overall-total">
-      <label for="overallTotal">Total:</label>
-      <input id="overallTotal" [value]="overallTotal.toFixed(2)" disabled />
+      <label for="overallTotal" class="total-label">Total: <span>{{ overallTotal.toFixed(2) }}</span></label>
     </div>
   </div>
 

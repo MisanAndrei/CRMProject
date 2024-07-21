@@ -123,7 +123,7 @@ export class CompanyComponent implements OnInit {
         console.log('Company details updated successfully');
       });
     } else {
-      console.log('Form is invalid');
+      this.companyForm.markAllAsTouched();
     }
   }
 
@@ -146,7 +146,7 @@ export class CompanyComponent implements OnInit {
       // Handle change password logic here
       console.log('Password changed successfully');
     } else {
-      console.log('Password form is invalid');
+      this.changePasswordForm.markAllAsTouched();
     }
   }
 

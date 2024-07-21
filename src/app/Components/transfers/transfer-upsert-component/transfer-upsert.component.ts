@@ -61,35 +61,39 @@ export class TransferUpsertComponent implements OnInit {
   }
 
   fetchTransferDetails(id: number): void {
-    this.apiService.get<Transfer>(`financial/account/transfer/${id}`).subscribe((transfer) => {
-      this.transferForm.patchValue({
-        fromBankAccount: transfer.fromBankAccountId,
-        fromBankAccountId: transfer.fromBankAccountId,
-        fromBankAccountName: transfer.fromBankAccountName,
-        toBankAccount: transfer.toBankAccountId,
-        toBankAccountId: transfer.toBankAccountId,
-        toBankAccountName: transfer.toBankAccountName,
-        date: transfer.date.toISOString().split('T')[0],
-        amount: transfer.amount,
-        description: transfer.description,
-        paymentMethod: transfer.paymentMethod,
-        reference: transfer.reference
+    this.apiService
+      .get<Transfer>(`financial/account/transfer/${id}`)
+      .subscribe((transfer) => {
+        this.transferForm.patchValue({
+          fromBankAccount: transfer.fromBankAccountId,
+          fromBankAccountId: transfer.fromBankAccountId,
+          fromBankAccountName: transfer.fromBankAccountName,
+          toBankAccount: transfer.toBankAccountId,
+          toBankAccountId: transfer.toBankAccountId,
+          toBankAccountName: transfer.toBankAccountName,
+          date: transfer.date.toISOString().split('T')[0],
+          amount: transfer.amount,
+          description: transfer.description,
+          paymentMethod: transfer.paymentMethod,
+          reference: transfer.reference,
+        });
       });
-    });
   }
 
   onAccountChange(accountType: 'from' | 'to', accountId: number): void {
-    const selectedAccount = this.accounts.find(account => account.id === accountId);
+    const selectedAccount = this.accounts.find(
+      (account) => account.id === accountId
+    );
     if (selectedAccount) {
       if (accountType === 'from') {
         this.transferForm.patchValue({
           fromBankAccountId: selectedAccount.id,
-          fromBankAccountName: selectedAccount.name
+          fromBankAccountName: selectedAccount.name,
         });
       } else {
         this.transferForm.patchValue({
           toBankAccountId: selectedAccount.id,
-          toBankAccountName: selectedAccount.name
+          toBankAccountName: selectedAccount.name,
         });
       }
     }
@@ -101,39 +105,53 @@ export class TransferUpsertComponent implements OnInit {
         id: this.transferId,
         date: new Date(this.transferForm.get('date')?.value),
         amount: this.transferForm.get('amount')?.value,
-        fromBankAccountId: Number(this.transferForm.get('fromBankAccountId')?.value),
-        fromBankAccountName: this.accounts.filter(x => x.id === Number(this.transferForm.get('fromBankAccountId')?.value))[0].name,
-        toBankAccountId: Number(this.transferForm.get('toBankAccountId')?.value),
-        toBankAccountName: this.accounts.filter(x => x.id === Number(this.transferForm.get('toBankAccountId')?.value))[0].name,
+        fromBankAccountId: Number(
+          this.transferForm.get('fromBankAccountId')?.value
+        ),
+        fromBankAccountName: this.accounts.filter(
+          (x) =>
+            x.id === Number(this.transferForm.get('fromBankAccountId')?.value)
+        )[0].name,
+        toBankAccountId: Number(
+          this.transferForm.get('toBankAccountId')?.value
+        ),
+        toBankAccountName: this.accounts.filter(
+          (x) =>
+            x.id === Number(this.transferForm.get('toBankAccountId')?.value)
+        )[0].name,
         description: this.transferForm.get('description')?.value,
         paymentMethod: this.transferForm.get('paymentMethod')?.value,
-        reference: this.transferForm.get('reference')?.value
+        reference: this.transferForm.get('reference')?.value,
       };
 
       if (this.isEditMode) {
         transferData.id = this.transferId;
-        this.apiService.put(`financial/account/transfer/${this.transferId}`, transferData).subscribe({
-          next: () => {
-            console.log('Transfer updated successfully');
-            this.router.navigate(['/Transferuri']);
-          },
-          error: (error) => {
-            console.error('Error updating transfer', error);
-          },
-        });
+        this.apiService
+          .put(`financial/account/transfer/${this.transferId}`, transferData)
+          .subscribe({
+            next: () => {
+              console.log('Transfer updated successfully');
+              this.router.navigate(['/Transferuri']);
+            },
+            error: (error) => {
+              console.error('Error updating transfer', error);
+            },
+          });
       } else {
-        this.apiService.post('financial/account/transfer/create', transferData).subscribe({
-          next: () => {
-            console.log('Transfer created successfully');
-            this.router.navigate(['/Transferuri']);
-          },
-          error: (error) => {
-            console.error('Error creating transfer', error);
-          },
-        });
+        this.apiService
+          .post('financial/account/transfer/create', transferData)
+          .subscribe({
+            next: () => {
+              console.log('Transfer created successfully');
+              this.router.navigate(['/Transferuri']);
+            },
+            error: (error) => {
+              console.error('Error creating transfer', error);
+            },
+          });
       }
     } else {
-      console.log('Form is invalid');
+      this.transferForm.markAllAsTouched();
     }
   }
 
@@ -148,7 +166,7 @@ export class TransferUpsertComponent implements OnInit {
       },
       complete: () => {
         console.info('categories data fetch complete');
-      }
+      },
     });
   }
 }

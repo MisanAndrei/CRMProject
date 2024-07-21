@@ -59,8 +59,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { FontPickerComponent } from './Components/font-picker/font-picker.component';
 import { AuthService } from './Services/auth.service';
 import { AuthGuard } from './guards/auth.guard';
-
-
+import { ValidationMessageComponent } from './Components/validation-message/validation-message.component';
 
 @NgModule({
   declarations: [
@@ -88,7 +87,8 @@ import { AuthGuard } from './guards/auth.guard';
     CategoriesUpsertComponent,
     AccountUpsertComponent,
     LoginComponent,
-    FontPickerComponent
+    FontPickerComponent,
+    ValidationMessageComponent
   ],
   imports: [
     BrowserModule,

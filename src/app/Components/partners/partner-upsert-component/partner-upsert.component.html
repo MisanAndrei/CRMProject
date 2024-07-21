@@ -13,7 +13,7 @@
     <div class="subsection">
       <div class="double-input-container">
         <div class="input-wrapper">
-          <label for="name">Nume</label>
+          <label for="name">Nume *</label>
           <input
             id="name"
             formControlName="name"
@@ -21,28 +21,31 @@
             class="set-border"
             placeholder="Introduceți Nume"
           />
+          <app-validation-message [control]="partnerForm.get('name')!"></app-validation-message>
         </div>
 
         <div class="input-wrapper">
-          <label for="email">Email</label>
+          <label for="email">Email *</label>
           <input
             id="email"
             formControlName="email"
             type="email"
             placeholder="Introduceți Email"
           />
+          <app-validation-message [control]="partnerForm.get('email')!"></app-validation-message>
         </div>
       </div>
 
       <div class="double-input-container">
         <div class="input-wrapper">
-          <label for="phoneNumber">Telefon</label>
+          <label for="phoneNumber">Telefon *</label>
           <input
             id="phoneNumber"
             formControlName="phoneNumber"
             type="text"
             placeholder="Introduceți Telefon"
           />
+          <app-validation-message [control]="partnerForm.get('phoneNumber')!"></app-validation-message>
         </div>
 
         <div class="input-wrapper">
@@ -72,14 +75,18 @@
         </div>
       </div>
 
-      <div class="input-wrapper">
-        <label for="regCom">Reg. Com.</label>
+      <div class="double-input-container">
+        <div class="input-wrapper">
+        <label for="regCom">Reg. Com. *</label>
         <input
           id="regCom"
           formControlName="regCom"
           type="text"
           placeholder="Introduceți Reg. Com."
         />
+        <app-validation-message [control]="partnerForm.get('regCom')!"></app-validation-message>
+        </div>
+        <div class="input-wrapper"></div>
       </div>
     </div>
   </div>
@@ -91,64 +98,69 @@
     <div class="subsection">
       <div class="double-input-container">
         <div class="input-wrapper">
-          <label for="cui">CUI</label>
+          <label for="cui">CUI *</label>
           <input
             id="cui"
             formControlName="cui"
             type="text"
             placeholder="Introduceți CUI"
           />
+          <app-validation-message [control]="partnerForm.get('cui')!"></app-validation-message>
         </div>
         <div class="input-wrapper">
-          <label for="postalCode">Cod Poștal</label>
+          <label for="postalCode">Cod Poștal *</label>
           <input
             id="postalCode"
             formControlName="postalCode"
             type="text"
             placeholder="Introduceți Cod Poștal"
           />
+          <app-validation-message [control]="partnerForm.get('postalCode')!"></app-validation-message>
         </div>
       </div>
 
       <div class="double-input-container">
         <div class="input-wrapper">
-          <label for="address">Adresă</label>
+          <label for="address">Adresă *</label>
           <input
             id="address"
             formControlName="address"
-            rows="3"
             placeholder="Introduceți Adresă"
           />
+          <app-validation-message [control]="partnerForm.get('address')!"></app-validation-message>
         </div>
 
         <div class="input-wrapper">
-          <label for="country">Țară</label>
+          <label for="country">Țară *</label>
           <input
             id="country"
             formControlName="country"
             type="text"
             placeholder="Introduceți Țară"
           />
+          <app-validation-message [control]="partnerForm.get('country')!"></app-validation-message>
         </div>
       </div>
       <div class="double-input-container">
         <div class="input-wrapper">
-          <label for="county">Judet</label>
+          <label for="county">Judet *</label>
           <input
             id="county"
             formControlName="county"
             type="text"
             placeholder="Introduceți Judet"
           />
+          <app-validation-message [control]="partnerForm.get('county')!"></app-validation-message>
         </div>
         <div class="input-wrapper">
-          <label for="city">Oraș</label>
+          <label for="city">Oraș *</label>
           <input
             id="city"
             formControlName="city"
             type="text"
             placeholder="Introduceți Oraș"
           />
+          <app-validation-message [control]="partnerForm.get('city')!"></app-validation-message>
         </div>
       </div>
     </div>

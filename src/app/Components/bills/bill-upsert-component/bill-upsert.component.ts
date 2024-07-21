@@ -214,6 +214,7 @@ export class BillUpsertComponent implements OnInit {
       this.apiService.post<Invoice>('financial/invoice/', invoice).subscribe({
         next: () => {
           console.log('Invoice created successfully');
+          this.router.navigate(['/Facturi'])
           // Navigate to another page or show a success message
         },
         error: (error) => {
@@ -221,7 +222,7 @@ export class BillUpsertComponent implements OnInit {
         }
       });
     } else {
-      console.log('Form is invalid');
+      this.transactionForm.markAllAsTouched();
     }
   }
 

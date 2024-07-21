@@ -29,18 +29,28 @@ button {
 
 .item-fields {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 10px;
   width: 100%;
 }
 
 .item-fields input,
 .item-fields select {
-  flex: 1;
+  flex: 1 1 15%;
   min-width: 120px;
   height: 40px;
   padding: 8px;
   box-sizing: border-box;
+}
+
+.field {
+  flex: 1 1 15%;
+  min-width: 120px;
+}
+
+.total-label {
+  font-size: 1.5em;
+  font-weight: bold;
 }
 
 .item-fields button {
@@ -134,11 +144,19 @@ select {
 }
 
 .remove-button {
-  background-color: #ff6363;
-  border: 1px solid #ff6363;
-  height: 45px;
-  width: 120px;
-  border-radius: 3px;
+  background: none;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.icon-margin {
+  font-size: 27px;
+  color: black;
+  margin-top: 23px;
 }
 
 .elements-button {

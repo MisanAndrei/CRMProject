@@ -10,25 +10,29 @@
     <div class="subsection">
       <div class="double-input-container">
         <div class="input-wrapper">
-          <label for="name">Nume</label>
+          <label for="name">Nume *</label>
           <input id="name" formControlName="name" type="text" placeHolder="Introduceți Nume">
+          <app-validation-message [control]="accountForm.get('name')!"></app-validation-message>
         </div>
       
         <div class="input-wrapper">
-          <label for="number">Număr</label>
+          <label for="number">Număr *</label>
           <input id="number" formControlName="number" type="text" placeHolder="Introduceți Număr">
+          <app-validation-message [control]="accountForm.get('number')!"></app-validation-message>
         </div>
       </div>
     
       <div class="double-input-container">
         <div class="input-wrapper">
-          <label for="currency">Monedă</label>
+          <label for="currency">Monedă *</label>
           <input id="currency" formControlName="currency" type="text" [disabled]="true">
+          <app-validation-message [control]="accountForm.get('currency')!"></app-validation-message>
         </div>
       
         <div class="input-wrapper">
-          <label for="initialSold">Soldul Inițial</label>
+          <label for="initialSold">Soldul Inițial *</label>
           <input id="initialSold" formControlName="initialSold" type="number" step="0.01">
+          <app-validation-message [control]="accountForm.get('initialSold')!"></app-validation-message>
         </div>
       </div>
     </div>

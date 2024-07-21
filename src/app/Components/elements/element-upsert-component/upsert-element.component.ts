@@ -184,7 +184,7 @@ export class UpsertElementComponent implements OnInit {
         });
       }
     } else {
-      console.log('Form is invalid');
+      this.elementForm.markAllAsTouched();
     }
   }
 

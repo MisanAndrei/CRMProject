@@ -10,50 +10,57 @@
     <div class="subsection">
       <div class="double-input-container">
         <div class="input-wrapper">
-          <label for="date">Dată</label>
+          <label for="date">Dată *</label>
           <input id="date" formControlName="date" type="date">
+          <app-validation-message [control]="transactionForm.get('date')!"></app-validation-message>
         </div>
       
         <div class="input-wrapper">
-          <label for="methodOfPayment">Metodă de Plată</label>
+          <label for="methodOfPayment">Metodă de Plată *</label>
           <select id="methodOfPayment" formControlName="methodOfPayment">
             <option *ngFor="let method of paymentMethods" [value]="method.id">{{ method.name }}</option>
           </select>
+          <app-validation-message [control]="transactionForm.get('methodOfPayment')!"></app-validation-message>
         </div>
       </div>
 
       <div class="double-input-container">
         <div class="input-wrapper">
-          <label for="direction">Direcția Tranzacției</label>
+          <label for="direction">Direcția Tranzacției *</label>
           <select id="direction" formControlName="direction">
             <option *ngFor="let direction of transactionDirections" [value]="direction.id">{{ direction.name }}</option>
           </select>
+          <app-validation-message [control]="transactionForm.get('direction')!"></app-validation-message>
         </div>
       
         <div class="input-wrapper">
-          <label for="account">Cont</label>
+          <label for="account">Cont *</label>
           <select id="account" formControlName="account">
             <option *ngFor="let account of accounts" [value]="account.id">{{ account.name }}</option>
           </select>
+          <app-validation-message [control]="transactionForm.get('account')!"></app-validation-message>
         </div>
       </div>
       
       <div class="double-input-container">
         <div class="input-wrapper">
-          <label for="sum">Suma</label>
+          <label for="sum">Suma *</label>
           <input id="sum" formControlName="sum" type="number" step="0.01">
+          <app-validation-message [control]="transactionForm.get('sum')!"></app-validation-message>
         </div>
 
         <div class="input-wrapper">
-          <label for="category">Categorie</label>
+          <label for="category">Categorie *</label>
           <select id="category" formControlName="category">
             <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
           </select>
+          <app-validation-message [control]="transactionForm.get('category')!"></app-validation-message>
         </div>
 
         <div class="input-wrapper">
-          <label for="description">Descriere</label>
-          <textarea id="description" formControlName="description" rows="3" placeholder="Introduceți Descriere"></textarea>
+          <label for="description">Descriere *</label>
+          <textarea id="description" formControlName="description" placeholder="Introduceți Descriere"></textarea>
+          <app-validation-message [control]="transactionForm.get('description')!"></app-validation-message>
         </div>
       </div>
     </div>

@@ -103,7 +103,7 @@ export class PartnerUpsertComponent implements OnInit {
             if (this.dialogRef) {
               this.dialogRef.close(true); // Close the dialog and return true
             } else {
-              this.router.navigate(['/partners']);
+              this.router.navigate(['/Parteneri']);
             }
           },
           error: (error) => {
@@ -117,7 +117,7 @@ export class PartnerUpsertComponent implements OnInit {
             if (this.dialogRef) {
               this.dialogRef.close(true); // Close the dialog and return true
             } else {
-              this.router.navigate(['/partners']);
+              this.router.navigate(['/Parteneri']);
             }
           },
           error: (error) => {
@@ -126,7 +126,7 @@ export class PartnerUpsertComponent implements OnInit {
         });
       }
     } else {
-      console.log('Form is invalid');
+      this.partnerForm.markAllAsTouched();
     }
   }
 }

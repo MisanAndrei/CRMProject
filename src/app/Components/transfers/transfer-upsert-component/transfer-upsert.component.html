@@ -10,35 +10,42 @@
     <div class="subsection">
       <div class="double-input-container">
         <div class="input-wrapper">
-          <label for="fromBankAccountId">Cont Plătitor</label>
+          <label for="fromBankAccountId">Cont Plătitor *</label>
           <select id="fromBankAccountId" formControlName="fromBankAccountId">
             <option *ngFor="let account of accounts" [value]="account.id">{{ account.name }}</option>
           </select>
+          <app-validation-message [control]="transferForm.get('fromBankAccountId')!"></app-validation-message>
         </div>
       
         <div class="input-wrapper">
-          <label for="toBankAccountId">Cont Beneficiar</label>
+          <label for="toBankAccountId">Cont Beneficiar *</label>
           <select id="toBankAccountId" formControlName="toBankAccountId">
             <option *ngFor="let account of accounts" [value]="account.id">{{ account.name }}</option>
           </select>
+          <app-validation-message [control]="transferForm.get('toBankAccountId')!"></app-validation-message>
         </div>
       </div>
     
       <div class="double-input-container">
         <div class="input-wrapper">
-          <label for="date">Dată Transacție</label>
+          <label for="date">Dată Transacție *</label>
           <input id="date" formControlName="date" type="date">
+          <app-validation-message [control]="transferForm.get('date')!"></app-validation-message>
         </div>
       
         <div class="input-wrapper">
-          <label for="amount">Sumă</label>
+          <label for="amount">Sumă *</label>
           <input id="amount" formControlName="amount" type="number" step="0.01">
+          <app-validation-message [control]="transferForm.get('amount')!"></app-validation-message>
         </div>
       </div>
     
-      <div class="single-input-wrapper">
-        <label for="description">Descriere</label>
-        <textarea id="description" formControlName="description" rows="3" placeholder="Introduceți Descriere"></textarea>
+      <div class="double-input-container">
+        <div class="input-wrapper">
+          <label for="description">Descriere</label>
+          <textarea id="description" formControlName="description" placeholder="Introduceți Descriere"></textarea>
+        </div>
+        <div class="input-wrapper"></div>
       </div>
     </div>
 
@@ -50,10 +57,11 @@
       <div class="subsection">
         <div class="double-input-container">
           <div class="input-wrapper">
-            <label for="paymentMethod">Metodă de Plată</label>
+            <label for="paymentMethod">Metodă de Plată *</label>
             <select id="paymentMethod" formControlName="paymentMethod">
               <option *ngFor="let method of methodsOfPayment" [value]="method.name">{{ method.name }}</option>
             </select>
+            <app-validation-message [control]="transferForm.get('paymentMethod')!"></app-validation-message>
           </div>
         
           <div class="input-wrapper">

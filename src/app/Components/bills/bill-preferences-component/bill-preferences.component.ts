@@ -61,7 +61,7 @@ export class BillPreferencesComponent implements OnInit {
         }
       });
     } else {
-      console.log('Form is invalid');
+      this.preferencesForm.markAllAsTouched();
     }
   }
 }
