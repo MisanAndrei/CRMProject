@@ -15,12 +15,12 @@ export interface Element {
 
   export interface Bill {
     id: number;
-    dateOfBill: string;
-    maturityOfBill: string;
-    status: string;
-    partner: string;
-    number: string;
-    sum: string; 
+    invoiceDate: string;
+    dueDate: string;
+    completed: string;
+    partnerName: string;
+    orderNumber: string;
+    total: string; 
   }
 
   export interface Account {
@@ -110,7 +110,7 @@ export interface Element {
     id: number;
     name: string;
     partnerName?: string;
-    CUI: string;
+    cui: string;
     regCom: string;
     email: string;
     phoneNumber?: string;
@@ -129,7 +129,7 @@ export interface Element {
     email: string;
     phoneNumber: string;
     tenantId?: string;
-    CUI: string;
+    cui: string;
     regCom: string;
     address: string;
     city: string;

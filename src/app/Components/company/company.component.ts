@@ -77,7 +77,7 @@ export class CompanyComponent implements OnInit {
         name: company.name,
         email: company.email,
         phone: company.phoneNumber,
-        CUI: company.CUI,
+        CUI: company.cui,
         regCom: company.regCom,
         address: company.address,
         city: company.city,

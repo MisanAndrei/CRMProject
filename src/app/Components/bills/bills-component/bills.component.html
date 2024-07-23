@@ -43,51 +43,51 @@
     </ng-container>
   
     <!-- Date of Bill Column -->
-    <ng-container matColumnDef="dateOfBill">
+    <ng-container matColumnDef="invoiceDate">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>
         Data facturii
       </th>
-      <td mat-cell *matCellDef="let bill"> {{ bill.dateOfBill }} </td>
+      <td mat-cell *matCellDef="let bill"> {{ bill.invoiceDate }} </td>
     </ng-container>
   
     <!-- Maturity of Bill Column -->
-    <ng-container matColumnDef="maturityOfBill">
+    <ng-container matColumnDef="dueDate">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>
         Data Scadentă
       </th>
-      <td mat-cell *matCellDef="let bill"> {{ bill.maturityOfBill }} </td>
+      <td mat-cell *matCellDef="let bill"> {{ bill.dueDate }} </td>
     </ng-container>
   
     <!-- Status Column -->
-    <ng-container matColumnDef="status">
+    <ng-container matColumnDef="completed">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>
         Status
       </th>
-      <td mat-cell *matCellDef="let bill"> {{ bill.status }} </td>
+      <td mat-cell *matCellDef="let bill"> {{ bill.completed }} </td>
     </ng-container>
   
     <!-- Partner Column -->
-    <ng-container matColumnDef="partner">
+    <ng-container matColumnDef="partnerName">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>
         Partener
       </th>
-      <td mat-cell *matCellDef="let bill"> {{ bill.partner }} </td>
+      <td mat-cell *matCellDef="let bill"> {{ bill.partnerName }} </td>
     </ng-container>
   
     <!-- Number Column -->
-    <ng-container matColumnDef="number">
+    <ng-container matColumnDef="invoiceNumber">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>
         Numărul facturii
       </th>
-      <td mat-cell *matCellDef="let bill"> {{ bill.number }} </td>
+      <td mat-cell *matCellDef="let bill"> {{ bill.invoiceNumber }} </td>
     </ng-container>
   
     <!-- Sum Column -->
-    <ng-container matColumnDef="sum">
+    <ng-container matColumnDef="total">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>
         Sumă
       </th>
-      <td mat-cell *matCellDef="let bill"> {{ bill.sum }} </td>
+      <td mat-cell *matCellDef="let bill"> {{ bill.total }} </td>
     </ng-container>
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

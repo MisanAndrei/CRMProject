@@ -71,7 +71,7 @@ export class TransferUpsertComponent implements OnInit {
           toBankAccount: transfer.toBankAccountId,
           toBankAccountId: transfer.toBankAccountId,
           toBankAccountName: transfer.toBankAccountName,
-          date: transfer.date.toISOString().split('T')[0],
+          date: new Date(transfer.date).toISOString().split('T')[0],
           amount: transfer.amount,
           description: transfer.description,
           paymentMethod: transfer.paymentMethod,
@@ -127,7 +127,7 @@ export class TransferUpsertComponent implements OnInit {
       if (this.isEditMode) {
         transferData.id = this.transferId;
         this.apiService
-          .put(`financial/account/transfer/${this.transferId}`, transferData)
+          .put(`financial/account/transfer/`, transferData)
           .subscribe({
             next: () => {
               console.log('Transfer updated successfully');
@@ -139,7 +139,7 @@ export class TransferUpsertComponent implements OnInit {
           });
       } else {
         this.apiService
-          .post('financial/account/transfer/create', transferData)
+          .post('financial/account/transfer/', transferData)
           .subscribe({
             next: () => {
               console.log('Transfer created successfully');

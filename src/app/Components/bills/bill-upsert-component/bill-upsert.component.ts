@@ -21,9 +21,9 @@ export class BillUpsertComponent implements OnInit {
     { id: 4, name: 'Sales Tax 8%', value: 8 }
   ];
   partners: Partner[] = [
-    { id: 1, name: 'Partner A', regCom: '2345', CUI: 'CUI12345', city: 'City A', email: 'partnerA@test.com', country: 'Romania', address: 'Address A', postalCode: '12345' },
-    { id: 2, name: 'Partner B', regCom: '2345', CUI: 'CUI67890', city: 'City B', email: 'partnerB@test.com', country: 'Romania', address: 'Address B', postalCode: '67890' },
-    { id: 3, name: 'Partner C', regCom: '2345', CUI: 'CUI54321', city: 'City C', email: 'partnerC@test.com', country: 'Romania', address: 'Address C', postalCode: '54321' }
+    { id: 1, name: 'Partner A', regCom: '2345', cui: 'CUI12345', city: 'City A', email: 'partnerA@test.com', country: 'Romania', address: 'Address A', postalCode: '12345' },
+    { id: 2, name: 'Partner B', regCom: '2345', cui: 'CUI67890', city: 'City B', email: 'partnerB@test.com', country: 'Romania', address: 'Address B', postalCode: '67890' },
+    { id: 3, name: 'Partner C', regCom: '2345', cui: 'CUI54321', city: 'City C', email: 'partnerC@test.com', country: 'Romania', address: 'Address C', postalCode: '54321' }
   ];
   categories: Category[] = [
     { id: 1, name: 'Category 1', type: 'Type A', colorCode: '#FF5733' },
@@ -60,6 +60,7 @@ export class BillUpsertComponent implements OnInit {
     this.fetchElements();
     this.fetchPartners();
     this.fetchTaxes();
+    this.fetchInvoiceNumber();
   }
 
   get items(): FormArray {
@@ -92,8 +93,8 @@ export class BillUpsertComponent implements OnInit {
     if (selectedPartner) {
       this.transactionForm.patchValue({
         partnerName: selectedPartner.name,
-        customerCui: selectedPartner.CUI,
-        regCom: selectedPartner.regCom,
+        customerCui: selectedPartner.cui,
+        customerRegCom: selectedPartner.regCom,
         customerCity: selectedPartner.city
       });
       this.transactionForm.get('partnerName')?.disable();
@@ -267,7 +268,7 @@ export class BillUpsertComponent implements OnInit {
   }
 
   fetchCategories(): void {
-    this.apiService.get<Category[]>('category/').subscribe({
+    this.apiService.get<Category[]>('financial/category/').subscribe({
       next: (data: Category[]) => {
         this.categories = data;
       },
@@ -278,12 +279,25 @@ export class BillUpsertComponent implements OnInit {
   }
 
   fetchElements(): void {
-    this.apiService.get<Element[]>('element/').subscribe({
+    this.apiService.get<Element[]>('financial/element/').subscribe({
       next: (data: Element[]) => {
         this.elements = data;
       },
       error: (error) => {
         console.error('Error fetching elements', error);
+      }
+    });
+  }
+
+  fetchInvoiceNumber(): void {
+    this.apiService.get<number>('financial/invoice/next-number').subscribe({
+      next: (data: number) => {
+        this.transactionForm.patchValue({
+          numberOfBill: data
+        });
+      },
+      error: (error) => {
+        console.error('Error fetching invoice number', error);
       }
     });
   }

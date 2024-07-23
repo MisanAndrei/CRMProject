@@ -23,15 +23,15 @@ export class InvoicePdfService {
     doc.text('Factura', doc.internal.pageSize.getWidth() / 2, 10, { align: 'center' });
     doc.setFontSize(10);
     doc.text(`Numar factura: ${invoice.invoiceNumber}`, doc.internal.pageSize.getWidth() / 2, 20, { align: 'center' });
-    doc.text(`Data facturii: ${invoice.invoiceDate.toDateString()}`, doc.internal.pageSize.getWidth() / 2, 25, { align: 'center' });
-    doc.text(`Data scadentei: ${invoice.dueDate.toDateString()}`, doc.internal.pageSize.getWidth() / 2, 30, { align: 'center' });
+    doc.text(`Data facturii: ${new Date(invoice.invoiceDate).toDateString()}`, doc.internal.pageSize.getWidth() / 2, 25, { align: 'center' });
+    doc.text(`Data scadentei: ${new Date(invoice.dueDate).toDateString()}`, doc.internal.pageSize.getWidth() / 2, 30, { align: 'center' });
 
     // Provider Information
     doc.setFontSize(12);
     doc.text('Furnizor:', 10, 40);
     doc.setFontSize(10);
     doc.text(`Nume: ${provider.name}`, 10, 45);
-    doc.text(`CUI: ${provider.CUI}`, 10, 50);
+    doc.text(`CUI: ${provider.cui}`, 10, 50);
     doc.text(`Reg. Com.: ${provider.regCom}`, 10, 55);
     doc.text(`Adresa:`, 10, 60);
     doc.text(`${provider.address}`, 10, 65);
@@ -45,7 +45,7 @@ export class InvoicePdfService {
     doc.text('Client:', doc.internal.pageSize.getWidth() - 100, 40);
     doc.setFontSize(10);
     doc.text(`Nume: ${client.name}`, doc.internal.pageSize.getWidth() - 100, 45);
-    doc.text(`CUI: ${client.CUI}`, doc.internal.pageSize.getWidth() - 100, 50);
+    doc.text(`CUI: ${client.cui}`, doc.internal.pageSize.getWidth() - 100, 50);
     doc.text(`Reg. Com.: ${client.regCom}`, doc.internal.pageSize.getWidth() - 100, 55);
     doc.text(`Adresa:`, doc.internal.pageSize.getWidth() - 100, 60);
     doc.text(`${client.address}`, doc.internal.pageSize.getWidth() - 100, 65);

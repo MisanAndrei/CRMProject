@@ -41,7 +41,8 @@ export class AccountUpsertComponent implements OnInit {
     this.apiService.get<Account>(`financial/account/${id}`).subscribe((account) => {
       this.accountForm.patchValue({
         name: account.name,
-        number: account.accountNumber
+        number: account.accountNumber,
+        initialSold: account.sold
       });
     });
   }

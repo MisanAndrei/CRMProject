@@ -3,16 +3,17 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { FormControl } from '@angular/forms';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { DeleteDialogComponent } from '../../dialogs/delete-dialog-component/delete-dialog.component';
-import { Bill, DetailedInvoice } from '../../../Utilities/Models';
+import { Bill, DetailedInvoice, Invoice, Organization, Partner } from '../../../Utilities/Models';
 import { ApiService } from '../../../Services/ApiService';
 import { InvoiceDirection } from '../../../Utilities/Enums';
 import { InvoicePdfService } from '../../../Services/InvoicePDFService';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-bills',
@@ -20,7 +21,7 @@ import { InvoicePdfService } from '../../../Services/InvoicePDFService';
   styleUrls: ['./bills.component.css']
 })
 export class BillsComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['select', 'dateOfBill', 'maturityOfBill', 'status', 'partner', 'number', 'sum'];
+  displayedColumns: string[] = ['select', 'invoiceDate', 'dueDate', 'completed', 'partnerName', 'invoiceNumber', 'total'];
   dataSource: MatTableDataSource<Bill>;
   searchControl: FormControl = new FormControl('');
   initialSelection = [];
@@ -33,19 +34,15 @@ export class BillsComponent implements OnInit, AfterViewInit {
 
   constructor(private _liveAnnouncer: LiveAnnouncer, private dialog: MatDialog, private router: Router, private apiService: ApiService, private invoicePdfService: InvoicePdfService) {
     this.dataSource = new MatTableDataSource<Bill>();
-
   }
+
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
   }
 
   ngOnInit(): void {
-    // Fetch list of bills from your data source
-    // For demonstration, let's assume you have a function called getBills() that returns the list of bills
-    const billList: Bill[] = this.getBills();
-    this.dataSource.data = billList;
-    //this.fetchData();
+    this.fetchData();
 
     // Subscribe to search input changes
     this.searchControl.valueChanges.pipe(
@@ -105,22 +102,11 @@ export class BillsComponent implements OnInit, AfterViewInit {
   }
 
   addBill() {
-    // Navigate to the page for adding a new bill
     this.router.navigate(['/FacturaNoua']);
   }
 
   addPayment(){
     
-  }
-
-  getBills(): Bill[] {
-    // Implement your logic to fetch bills from the data source (e.g., API)
-    // For now, return a mock list of bills
-    return [
-      { id: 1, dateOfBill: '2022-04-01', maturityOfBill: '2022-05-01', status: 'Paid', partner: 'Partner A', number: '123', sum: '1000' },
-      { id: 2, dateOfBill: '2022-04-15', maturityOfBill: '2022-05-15', status: 'Unpaid', partner: 'Partner B', number: '124', sum: '1500' },
-      // Add more bills as needed
-    ];
   }
 
   onPaginatorPageChange(event: PageEvent) {
@@ -139,6 +125,13 @@ export class BillsComponent implements OnInit, AfterViewInit {
   fetchData(){
     this.apiService.get<Bill[]>('financial/invoice/').subscribe({
       next: (data: Bill[]) => {
+
+        data.forEach(bill => {
+          bill.invoiceDate = new Date(bill.invoiceDate).toISOString().split('T')[0];
+          bill.dueDate = new Date(bill.dueDate).toISOString().split('T')[0];
+          bill.completed = bill.completed ? 'Finalizat' : 'Nefinalizat';
+        });
+
         this.dataSource.data = data;
         console.log(data);
       },
@@ -151,75 +144,73 @@ export class BillsComponent implements OnInit, AfterViewInit {
     });
   }
 
-  generatePdf() {
-    const detailedInvoice: DetailedInvoice = {
-      organization: {
-        name: "Furnizor SRL",
-        email: "contact@furnizor.com",
-        phoneNumber: "123456789",
-        CUI: "RO123456",
-        regCom: "J40/12345/2023",
-        address: "Strada Furnizorului, Nr. 1",
-        city: "Bucuresti",
-        image: "", 
-        postalCode: "010101",
-        county: "Bucuresti",
-        country: "Romania",
-        colorCodeNavBar: "#000000",
-        colorCodeLeftBar: "#FFFFFF",
-        font: "Arial"
-      },
-      partner: {
-        id: 1,
-        name: "Client SRL",
-        CUI: "RO654321",
-        regCom: "J40/54321/2023",
-        email: "contact@client.com",
-        phoneNumber: "987654321",
-        country: "Romania",
-        website: "www.client.com",
-        reference: "Referință client",
-        address: "Strada Clientului, Nr. 2",
-        city: "Cluj-Napoca",
-        county: "Cluj",
-        postalCode: "400001",
-        image: ""
-      },
-      invoice: {
-        id: 1,
-        total: 1500,
-        partnerId: 1,
-        partnerName: "Client SRL",
-        categoryId: 1,
-        categoryName: "Servicii",
-        invoiceNumber: "INV-001",
-        orderNumber: "ORD-001",
-        direction: InvoiceDirection.out,
-        invoiceDate: new Date("2023-04-01"),
-        dueDate: new Date("2023-05-01"),
-        completed: false,
-        remainingAmount: 500,
-        elements: [
-          {
-            elementId: 1,
-            elementName: "Serviciu A",
-            elementPrice: 500,
-            elementDescription: "Descriere Serviciu A",
-            elementTax: 19,
-            quantity: 2
-          },
-          {
-            elementId: 2,
-            elementName: "Serviciu B",
-            elementPrice: 250,
-            elementDescription: "Descriere Serviciu B",
-            elementTax: 19,
-            quantity: 2
-          }
-        ]
+  async generatePdf() {
+    if (!this.isSingleSelection()) {
+      console.error('Please select a single invoice to generate PDF');
+      return;
+    }
+  
+    const selectedId = this.selection.selected[0].id;
+    try {
+      const detailedInvoice = await this.fetchDetailedInvoiceFromBackend(selectedId);
+      this.invoicePdfService.generatePdf(detailedInvoice);
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+      // Handle error (e.g., show an error message to the user)
+    }
+  }
+  
+  async fetchDetailedInvoiceFromBackend(id: number): Promise<DetailedInvoice> {
+    try {
+      const [organization, organizationWithName, invoice] = await Promise.all([
+        this.fetchOrganizationInfo(),
+        this.fetchOrganization(),
+        this.fetchInvoice(id)
+      ]);
+  
+      if (!invoice) {
+        throw new Error('Invoice not found');
       }
-    };
+  
+      const partner = await this.fetchPartner(invoice.partnerId);
+  
+      if (!partner) {
+        throw new Error('Partner not found');
+      }
 
-    this.invoicePdfService.generatePdf(detailedInvoice);
+      organization.name = organizationWithName.name;
+  
+      return {
+        organization,
+        partner,
+        invoice
+      };
+    } catch (error) {
+      console.error('Error fetching detailed invoice:', error);
+      throw error;
+    }
+  }
+  
+  async fetchOrganizationInfo(): Promise<Organization> {
+    return await firstValueFrom(this.apiService.get<Organization>('organization/info'));
+  }
+
+  async fetchOrganization(): Promise<Organization> {
+    return await firstValueFrom(this.apiService.get<Organization>('organization/'));
+  }
+  
+  async fetchPartner(partnerId: number): Promise<Partner> {
+    return await firstValueFrom(this.apiService.get<Partner>(`partner/${partnerId}`));
+  }
+  
+  async fetchInvoice(invoiceId: number): Promise<Invoice> {
+    return await firstValueFrom(this.apiService.get<Invoice>(`financial/invoice/${invoiceId}`));
+  }
+
+  editBill() {
+    if (this.isSingleSelection()) {
+      const selectedId = this.selection.selected[0].id;
+      this.router.navigate(['/EditareFactura', selectedId]);
+    }
   }
 }

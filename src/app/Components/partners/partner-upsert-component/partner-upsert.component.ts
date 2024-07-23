@@ -62,7 +62,7 @@ export class PartnerUpsertComponent implements OnInit {
         website: partner.website,
         reference: partner.reference,
         image: partner.image,
-        cui: partner.CUI,
+        cui: partner.cui,
         regCom: partner.regCom,
         address: partner.address,
         postalCode: partner.postalCode,
@@ -97,6 +97,7 @@ export class PartnerUpsertComponent implements OnInit {
     if (this.partnerForm.valid) {
       const partnerData = this.partnerForm.value;
       if (this.isEditMode) {
+        partnerData.id = this.elementId;
         this.apiService.put('partner/', partnerData).subscribe({
           next: () => {
             console.log('Partner updated successfully');
