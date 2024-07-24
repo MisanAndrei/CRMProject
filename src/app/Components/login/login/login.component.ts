@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
           })
         ).subscribe({
           next: (orgInfo: Organization) => {
-            localStorage.setItem('organizationImage', orgInfo.image);
+            localStorage.setItem('organizationImage', orgInfo.image ?? '');
             this.router.navigate(['/Tabloudebord']);
           },
           error: (error) => {

@@ -133,7 +133,7 @@ export interface Element {
     regCom: string;
     address: string;
     city: string;
-    image: string;
+    image?: string;
     postalCode: string;
     county: string;
     country: string;

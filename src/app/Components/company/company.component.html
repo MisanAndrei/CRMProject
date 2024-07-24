@@ -28,9 +28,9 @@
           </div>
   
           <div class="input-wrapper">
-            <label for="CUI">Cod unic de înregistrare *</label>
-            <input id="CUI" formControlName="CUI" type="text" placeholder="Cod unic de înregistrare"/>
-            <app-validation-message [control]="companyForm.get('CUI')!"></app-validation-message>
+            <label for="cui">Cod unic de înregistrare *</label>
+            <input id="cui" formControlName="cui" type="text" placeholder="Cod unic de înregistrare"/>
+            <app-validation-message [control]="companyForm.get('cui')!"></app-validation-message>
           </div>
 
           <div class="input-wrapper">
@@ -135,7 +135,7 @@
         <div [style.background-color]="selectedLeftBarColor" class="color-circle" (click)="openColorPicker()" ></div> 
       </div>
     </div>
-    <app-font-picker (fontSelected)="onFontSelected($event)" formControlName="selectedFont"></app-font-picker>
+    <app-font-picker (fontSelected)="onFontSelected($event)" formControlName="font"></app-font-picker>
     <button class="button content" type="submit">Salvează</button>
   </div>
 </form>

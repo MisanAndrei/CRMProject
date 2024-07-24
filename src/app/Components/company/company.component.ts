@@ -14,7 +14,7 @@ export class CompanyComponent implements OnInit {
   selectedNavBarColor: string = '#9dcd8a';
   selectedLeftBarColor: string = '#9dcd8a';
   imageBase64: string | ArrayBuffer | null = '';
-  selectedFont: string = '';
+  font: string = '';
   showChangePassword: boolean = false;
   changePasswordForm: FormGroup;
 
@@ -33,7 +33,7 @@ export class CompanyComponent implements OnInit {
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       phoneNumber: ['', Validators.required],
-      CUI: ['', Validators.required],
+      cui: ['', Validators.required],
       regCom: ['', Validators.required],
       address: ['', Validators.required],
       city: ['', Validators.required],
@@ -43,7 +43,7 @@ export class CompanyComponent implements OnInit {
       image: [null],
       selectedNavBarColor: [this.selectedNavBarColor],
       selectedLeftBarColor: [this.selectedLeftBarColor],
-      selectedFont: this.selectedFont
+      font: this.font
     });
 
     this.changePasswordForm = this.fb.group({
@@ -76,15 +76,15 @@ export class CompanyComponent implements OnInit {
       this.companyForm.patchValue({
         email: company.email,
         phoneNumber: company.phoneNumber,
-        CUI: company.cui,
+        cui: company.cui,
         regCom: company.regCom,
         address: company.address,
         city: company.city,
         postalCode: company.postalCode,
         county: company.county,
         country: company.country,
-        selectedFont: company.font,
-        image: this.stripBase64Prefix(company.image),
+        font: company.font,
+        image: this.stripBase64Prefix(company.image ?? ''),
       });
       this.applyFont(company.font);
     });
@@ -92,12 +92,12 @@ export class CompanyComponent implements OnInit {
     this.apiService.get<Organization>('organization/').subscribe((company) => {
       this.companyForm.patchValue({
         name: company.name,
-        selectedFont: company.font,
+        font: company.font,
         selectedNavBarColor: company.colorCodeNavBar,
         selectedLeftBarColor: company.colorCodeLeftSideBar,
-        image: this.stripBase64Prefix(company.image),
+        image: this.stripBase64Prefix(company.image ?? ''),
       });
-      this.imageBase64 = this.stripBase64Prefix(company.image);
+      this.imageBase64 = this.stripBase64Prefix(company.image ?? '');
       this.selectedNavBarColor = company.colorCodeNavBar;
       this.selectedLeftBarColor = company.colorCodeLeftSideBar;
       this.applyFont(company.font);
@@ -126,7 +126,10 @@ export class CompanyComponent implements OnInit {
   onSubmit(): void {
     if (this.companyForm.valid) {
       const companyData: Organization = this.companyForm.value;
-      companyData.image = this.stripBase64Prefix(companyData.image);
+      companyData.font = this.font;
+      if (companyData.image == ''){
+        companyData.image = undefined;
+      }
       this.apiService.put('organization/', companyData).subscribe({
         next: () => {
           console.log('Company created successfully');
@@ -144,7 +147,7 @@ export class CompanyComponent implements OnInit {
   }
 
   onFontSelected(font: string): void {
-    this.selectedFont = font;
+    this.font = font;
     localStorage.setItem('selectedFont', font);
     this.applyFont(font);
   }
