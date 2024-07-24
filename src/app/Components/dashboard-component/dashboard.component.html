@@ -84,26 +84,24 @@
         </div>
        </div> 
 
-       <div class="form-group">
-        <label for="partner">Partener</label>
-        <select id="partner" [(ngModel)]="selectedPartnerId">
-          <option *ngFor="let partner of partners" [value]="partner.id">
-            {{ partner.name }}
-          </option>
-        </select>
-        <button mat-stroked-button color="primary" (click)="getCashFlowByPartner()">Get Data</button>
-      </div>
+      <div class="card large-card">
+        <div class="info-section">
+          <h4 for="partner">Selecteaza Partener</h4>
+          <select id="partner" [(ngModel)]="selectedPartnerId" class="partner-select">
+            <option *ngFor="let partner of partners" [value]="partner.id">
+              {{ partner.name }}
+            </option>
+          </select>
+          <button mat-stroked-button color="primary" (click)="getCashFlowByPartner()" class="partner-button">Obtine Date</button>
+        </div>
     
-      <div *ngIf="aggregatedStatistics.cashFlowByPartner">
-        <div class="chart-container-bar">
-          <h4>Cash Flow by Partner</h4>
+        <div *ngIf="aggregatedStatistics.cashFlowByPartner">
+          <h4>Fluxul de Date</h4>
           <ul>
             <li>
-              {{ aggregatedStatistics.cashFlowByPartner.partnerName }} - Total Received: {{ aggregatedStatistics.cashFlowByPartner.totalReceived }} - Total Paid: {{ aggregatedStatistics.cashFlowByPartner.totalPaid }}
+              {{ aggregatedStatistics.cashFlowByPartner.partnerName }} - Total Încasat: <strong>{{ aggregatedStatistics.cashFlowByPartner.totalReceived }} RON</strong> | Total Plătit: <strong>{{ aggregatedStatistics.cashFlowByPartner.totalPaid }} RON</strong>
             </li>
           </ul>
-        </div>
-      </div>
-
-       
-      </div>
+         </div>
+    </div>
+</div>

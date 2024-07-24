@@ -131,3 +131,36 @@ span {
 .info-section p {
   margin: 5px; 
 }
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.partner-box {
+  margin: 10px 16px;
+}
+
+select,
+textarea {
+  width: 30%;
+  padding: 8px;
+  box-sizing: border-box;
+  margin-top: 10px;
+}
+
+.large-card {
+  grid-column: span 2;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.partner-select {
+  background-color: #f5f5f5;
+  border: 1px solid #555;
+  border-radius: 5px;
+  padding: 8px;
+  margin-right: 10px;
+  width: 40%; /* Adjust the width as needed */
+}
