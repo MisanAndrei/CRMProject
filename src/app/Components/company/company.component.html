@@ -49,7 +49,9 @@
         </div>
       </div>
     </div>
-    <button type="button" (click)="toggleChangePassword()">Schimbare parolă</button>
+    <div *ngIf="buttonVisible">
+    <button mat-raised-button class="no-shadow-button" type="button" (click)="toggleChangePassword()">Schimbare parolă</button>
+  </div>
     <div *ngIf="showChangePassword">
       <h4>Schimbare parolă</h4>
       <div class="separator-line"></div>
@@ -72,7 +74,7 @@
             <app-validation-message [control]="changePasswordForm.get('repeatNewPassword')!"></app-validation-message>
           </div>
         </div>
-        <button type="button" (click)="onChangePasswordSubmit()">Salvează modificările</button>
+        <button mat-raised-button class="no-shadow-button" type="button" (click)="onChangePasswordSubmit()">Salvează modificările</button>
       </div>
     </div>
   </div>

@@ -1,79 +1,85 @@
-  
-  form {
-    margin: auto;
-  }
-  
-  div {
-    margin-bottom: 15px;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  input,
-  select,
-  textarea {
-    width: 100%;
-    padding: 8px;
-    box-sizing: border-box;
-  }
-  
-  button {
-    margin-top: 10px;
-  }
-  
-  ::placeholder {
-    color: #D8D8D8; /* Set the placeholder text color to light grey */
-    opacity: 1; /* Firefox */
-  }
-  
-  ::-ms-input-placeholder {
-    /* Edge 12 -18 */
-    color: lightgrey;
-  }
+form {
+  margin: auto;
+}
 
-  .image-container {
-    width: 200px;
-    height: 200px;
-    border: 1px solid #ccc;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 30px;
-    margin-left: 50px;
-  }
+div {
+  margin-bottom: 15px;
+}
 
-  .color-picker-wrapper {
-    display: flex;
-    flex-direction: row;
-    padding: 1em;
-    border: 1px solid;
-    width: 300px;
-    justify-content: space-between;
-    height: 60px;
-    background-color: white;
+label {
+  display: block;
+  margin-bottom: 5px;
+}
 
-  }
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
 
-  .hidden-color-input {
-    display: none;
-  }
-  
-  .color-display {
-    flex-direction: row;
-  }
-  
-  .color-circle {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    margin-right: 10px;
-    cursor: pointer;
-  }
-  
-  .button-container {
-    justify-content: space-around;;
+button {
+  margin-top: 10px;
+}
 
-  }
+::placeholder {
+  color: #d8d8d8; /* Set the placeholder text color to light grey */
+  opacity: 1; /* Firefox */
+}
+
+::-ms-input-placeholder {
+  /* Edge 12 -18 */
+  color: lightgrey;
+}
+
+.image-container {
+  width: 200px;
+  height: 200px;
+  border: 1px solid #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  margin-left: 50px;
+}
+
+.color-picker-wrapper {
+  display: flex;
+  flex-direction: row;
+  padding: 1em;
+  border: 1px solid;
+  width: 300px;
+  justify-content: space-between;
+  height: 60px;
+  background-color: white;
+}
+
+.hidden-color-input {
+  display: none;
+}
+
+.color-display {
+  flex-direction: row;
+}
+
+.color-circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.button-container {
+  justify-content: space-around;
+}
+
+.mat-mdc-raised-button:not(:disabled) {
+  background-color: #80b3ff;
+}
+
+.no-shadow-button {
+  box-shadow: none !important;
+  border-radius: none !important;
+}
