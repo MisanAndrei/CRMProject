@@ -119,8 +119,19 @@ export class CompanyComponent implements OnInit {
     if (this.companyForm.valid) {
       const companyData: Organization = this.companyForm.value;
       companyData.image = this.stripBase64Prefix(companyData.image);
-      this.apiService.put('/company', companyData).subscribe(() => {
+      this.apiService.put('organization/', companyData).subscribe(() => {
         console.log('Company details updated successfully');
+      });
+      this.apiService.put('organization/', companyData).subscribe({
+        next: () => {
+          console.log('Company created successfully');
+        },
+        error: (error) => {
+          console.error('Error creating transaction', error);
+        },
+        complete: () => {
+          console.info('Transaction creation complete');
+        }
       });
     } else {
       this.companyForm.markAllAsTouched();

@@ -1,22 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Category, Transaction } from '../../../Utilities/Models';
+import { Account, Category, Invoice, Transaction } from '../../../Utilities/Models';
 import { ApiService } from '../../../Services/ApiService';
-import { TransactionDirection } from '../../../Utilities/Enums';
+import { InvoiceDirection, TransactionDirection } from '../../../Utilities/Enums';
 
 
 interface PaymentMethod {
-  id: number;
-  name: string;
-}
-
-interface Account {
-  id: number;
-  name: string;
-}
-
-interface Invoice {
   id: number;
   name: string;
 }
@@ -36,6 +26,10 @@ export class TransactionUpsertComponent implements OnInit {
   accounts: Account[] = [];
   invoices: Invoice[] = [];
 
+  allAccounts: Account[] = [];
+  allInvoices: Invoice[] = [];
+  allCategories: Category[] = [];
+
   transactionDirections = [
     { id: 'INCOME', name: 'Incasare' },
     { id: 'EXPENSE', name: 'Plata' }
@@ -50,7 +44,7 @@ export class TransactionUpsertComponent implements OnInit {
       methodOfPayment: ['', Validators.required],
       account: ['', Validators.required],
       sum: [0, [Validators.required, Validators.min(0)]],
-      description: ['', Validators.required],
+      description: [''],
       invoiceId: [null],
       reference: [''],
       direction: ['', Validators.required],
@@ -68,7 +62,43 @@ export class TransactionUpsertComponent implements OnInit {
     this.fetchAccounts();
     this.fetchInvoices();
     this.fetchCategories();
+
+    this.transactionForm.get('direction')?.valueChanges.subscribe(value => {
+      this.onDirectionChange(value);
+    });
+
+    this.transactionForm.get('invoiceId')?.valueChanges.subscribe(value => {
+      this.onInvoiceChange(value);
+    });
    }
+
+   onDirectionChange(value: string): void {
+    if (value == 'INCOME'){
+      this.categories = this.allCategories.filter(x => x.type == 'Venit');
+      this.invoices = this.allInvoices.filter(x => x.direction == InvoiceDirection.out);
+    } else {
+      this.categories = this.allCategories.filter(x => x.type !== 'Venit');
+      this.invoices = this.allInvoices.filter(x => x.direction == InvoiceDirection.in);
+    }
+
+  }
+
+  onInvoiceChange(value: number): void {
+    const invoice = this.allInvoices.find(x => x.id == value);
+
+    if (invoice?.direction == InvoiceDirection.in){
+      this.categories = this.allCategories.filter(x => x.type !== 'Venit');
+    } else {
+      this.categories = this.allCategories.filter(x => x.type == 'Venit');
+    }
+
+      const direction = this.transactionDirections.find(x => x.id == (invoice?.direction == InvoiceDirection.in ? 'EXPENSE' : 'INCOME'))
+    this.transactionForm.patchValue({
+      category: invoice?.categoryId,
+      direction: direction?.id,
+    });
+
+  }
 
    loadTransaction(id: number): void {
     this.apiService.get<Transaction>(`financial/invoice/payments/${id}`).subscribe({
@@ -98,15 +128,15 @@ export class TransactionUpsertComponent implements OnInit {
 
       const transaction: Transaction = {
         paymentDate: formValue.date,
-        invoiceId: formValue.invoiceId,
+        invoiceId: Number(formValue.invoiceId),
         reference: formValue.reference,
         amount: formValue.sum,
         paymentDirection: formValue.direction === 'INCOME' ? TransactionDirection.in : TransactionDirection.out,
-        bankAccountId: formValue.account,
+        bankAccountId: Number(formValue.account),
         paymentMethod: formValue.methodOfPayment,
         description: formValue.description,
-        categoryId: selectedCategory?.id,
-        categoryName: selectedCategory?.name
+        categoryId: formValue.category,
+        categoryName: this.allCategories.find(x => x.id == formValue.category)?.name
       };
 
       if (transaction.id) {
@@ -144,6 +174,7 @@ export class TransactionUpsertComponent implements OnInit {
   fetchAccounts() {
     this.apiService.get<Account[]>('financial/account/').subscribe({
       next: (data: Account[]) => {
+        this.allAccounts = data;
         this.accounts = data;
         console.log(data);
       },
@@ -159,7 +190,8 @@ export class TransactionUpsertComponent implements OnInit {
   fetchInvoices() {
     this.apiService.get<Invoice[]>('financial/invoice/').subscribe({
       next: (data: Invoice[]) => {
-        this.accounts = data;
+        this.invoices = data;
+        this.allInvoices = data;
         console.log(data);
       },
       error: (error) => {
@@ -174,6 +206,7 @@ export class TransactionUpsertComponent implements OnInit {
   fetchCategories(){
     this.apiService.get<Category[]>('financial/category/').subscribe({
       next: (data: Category[]) => {
+        this.allCategories = data.filter(x => x.type !== 'Element');
         this.categories = data.filter(x => x.type !== 'Element');
         console.log(data);
       },

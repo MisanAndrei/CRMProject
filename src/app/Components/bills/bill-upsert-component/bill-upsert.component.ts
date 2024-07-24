@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { PartnerUpsertComponent } from '../../partners/partner-upsert-component/partner-upsert.component';
 import { ApiService } from '../../../Services/ApiService';
-import { Category, Partner, Tax, Element, InvoiceElement, Invoice } from '../../../Utilities/Models';
+import { Category, Partner, Tax, Element, InvoiceElement, Invoice, InvoicePreferences } from '../../../Utilities/Models';
 import { InvoiceDirection } from '../../../Utilities/Enums';
 
 @Component({
@@ -14,27 +14,19 @@ import { InvoiceDirection } from '../../../Utilities/Enums';
 })
 export class BillUpsertComponent implements OnInit {
   transactionForm: FormGroup;
+  billNumber: string = '';
+  billPrefix: string = '';
+
   taxOptions: Tax[] = [
     { id: 1, name: 'No Tax', value: 0 },
     { id: 2, name: 'VAT 5%', value: 5 },
     { id: 3, name: 'VAT 10%', value: 10 },
     { id: 4, name: 'Sales Tax 8%', value: 8 }
   ];
-  partners: Partner[] = [
-    { id: 1, name: 'Partner A', regCom: '2345', cui: 'CUI12345', city: 'City A', email: 'partnerA@test.com', country: 'Romania', address: 'Address A', postalCode: '12345' },
-    { id: 2, name: 'Partner B', regCom: '2345', cui: 'CUI67890', city: 'City B', email: 'partnerB@test.com', country: 'Romania', address: 'Address B', postalCode: '67890' },
-    { id: 3, name: 'Partner C', regCom: '2345', cui: 'CUI54321', city: 'City C', email: 'partnerC@test.com', country: 'Romania', address: 'Address C', postalCode: '54321' }
-  ];
-  categories: Category[] = [
-    { id: 1, name: 'Category 1', type: 'Type A', colorCode: '#FF5733' },
-    { id: 2, name: 'Category 2', type: 'Type B', colorCode: '#33FF57' },
-    { id: 3, name: 'Category 3', type: 'Type C', colorCode: '#3357FF' }
-  ];
-  elements: Element[] = [
-    { id: 1, type: 'product', name: 'Element A', categoryName: 'Category 1', categoryId: 1, description: 'Description A', acquisitionPrice: 100, sellingPrice: 150, taxValue: 5, taxId: 2 },
-    { id: 2, type: 'service', name: 'Element B', categoryName: 'Category 2', categoryId: 2, description: 'Description B', acquisitionPrice: 200, sellingPrice: 250, taxValue: 10, taxId: 3 },
-    { id: 3, type: 'product', name: 'Element C', categoryName: 'Category 3', categoryId: 3, description: 'Description C', acquisitionPrice: 300, sellingPrice: 350, taxValue: 8, taxId: 4 }
-  ];
+  partners: Partner[] = [];
+  categories: Category[] = [];
+  allCategories: Category[]=[];
+  elements: Element[] = [];
   overallTotal: number = 0;
 
   constructor(private fb: FormBuilder, private router: Router, private dialog: MatDialog, private apiService: ApiService) {
@@ -43,8 +35,8 @@ export class BillUpsertComponent implements OnInit {
       category: ['', Validators.required],
       dateOfBill: ['', Validators.required],
       dueDate: ['', Validators.required],
-      numberOfBill: ['', Validators.required],
-      orderNumber: ['', Validators.required],
+      numberOfBill: [{ value: '', disabled: false }, Validators.required],
+      orderNumber: [''],
       partner: [''],
       partnerName: [{ value: '', disabled: false }, Validators.required],
       customerCui: [{ value: '', disabled: false }, Validators.required],
@@ -61,6 +53,11 @@ export class BillUpsertComponent implements OnInit {
     this.fetchPartners();
     this.fetchTaxes();
     this.fetchInvoiceNumber();
+    this.fetchInvoicePrefix();
+
+    this.transactionForm.get('transactionType')?.valueChanges.subscribe(value => {
+      this.onTransactionTypeChange(value);
+    });
   }
 
   get items(): FormArray {
@@ -270,7 +267,8 @@ export class BillUpsertComponent implements OnInit {
   fetchCategories(): void {
     this.apiService.get<Category[]>('financial/category/').subscribe({
       next: (data: Category[]) => {
-        this.categories = data;
+        this.allCategories = data;
+        this.categories = this.allCategories.filter(x => x.type == 'Cheltuiala');
       },
       error: (error) => {
         console.error('Error fetching categories', error);
@@ -292,13 +290,40 @@ export class BillUpsertComponent implements OnInit {
   fetchInvoiceNumber(): void {
     this.apiService.get<number>('financial/invoice/next-number').subscribe({
       next: (data: number) => {
-        this.transactionForm.patchValue({
-          numberOfBill: data
-        });
+          this.billNumber = data.toString();
       },
       error: (error) => {
         console.error('Error fetching invoice number', error);
       }
     });
+  }
+
+  fetchInvoicePrefix():void {
+    this.apiService.get<InvoicePreferences>('organization/invoice-preferences').subscribe({
+      next: (data: InvoicePreferences) => {
+        this.billPrefix = data.prefix;
+      },
+      error: (error) => {
+        console.error('Error fetching preferences', error);
+      }
+    });
+  }
+
+  onTransactionTypeChange(value: string){
+    const numberOfBillControl = this.transactionForm.get('numberOfBill');
+    if (value === 'sale'){
+      this.transactionForm.patchValue({
+        numberOfBill: this.billPrefix + this.billNumber
+      });
+      this.categories = this.allCategories.filter(x => x.type == 'Venit');
+      numberOfBillControl?.disable();
+    } else {
+      this.transactionForm.patchValue({
+        numberOfBill: ''
+      });
+      this.categories = this.allCategories.filter(x => x.type == 'Cheltuiala');
+      numberOfBillControl?.enable();
+    }
+    
   }
 }

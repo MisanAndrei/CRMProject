@@ -18,7 +18,7 @@
         <div class="input-wrapper">
           <label for="methodOfPayment">Metodă de Plată *</label>
           <select id="methodOfPayment" formControlName="methodOfPayment">
-            <option *ngFor="let method of paymentMethods" [value]="method.id">{{ method.name }}</option>
+            <option *ngFor="let method of paymentMethods" [value]="method.name">{{ method.name }}</option>
           </select>
           <app-validation-message [control]="transactionForm.get('methodOfPayment')!"></app-validation-message>
         </div>
@@ -58,9 +58,8 @@
         </div>
 
         <div class="input-wrapper">
-          <label for="description">Descriere *</label>
+          <label for="description">Descriere</label>
           <textarea id="description" formControlName="description" placeholder="Introduceți Descriere"></textarea>
-          <app-validation-message [control]="transactionForm.get('description')!"></app-validation-message>
         </div>
       </div>
     </div>
@@ -74,8 +73,8 @@
       <div class="double-input-container">
         <div class="input-wrapper">
           <label for="invoiceId">Factură</label>
-          <select id="Id" formControlName="invoice">
-            <option *ngFor="let invoice of invoices" [value]="invoice.id">{{ invoice.name }}</option>
+          <select id="Id" formControlName="invoiceId">
+            <option *ngFor="let invoice of invoices" [value]="invoice.id">{{ invoice.invoiceNumber }} - {{ invoice.partnerName }}</option>
           </select>
         </div>
 

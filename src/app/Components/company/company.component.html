@@ -120,16 +120,16 @@
 
   <div class="button-container">
     <div class="color-picker-wrapper">
-      <label for="colorPicker">Selectează o culoare:</label>
-      <input type="color" id="colorPicker" #colorInput formControlName="selectedColor" class="hidden-color-input" />
+      <label for="selectedLeftBarColumn">Selectează o culoare:</label>
+      <input type="color" id="colorPicker" #colorInput formControlName="selectedNavBarColor" class="hidden-color-input" />
       
       <div class="color-display">
         <div [style.background-color]="selectedNavBarColor" class="color-circle" (click)="openColorPicker()" ></div> 
       </div>
     </div>
     <div class="color-picker-wrapper">
-      <label for="colorPicker">Selectează o culoare:</label>
-      <input type="color" id="colorPicker" #colorInput formControlName="selectedColor" class="hidden-color-input" />
+      <label for="selectedLeftBarColumn">Selectează o culoare:</label>
+      <input type="color" id="colorPicker" #colorInput formControlName="selectedLeftBarColumn" class="hidden-color-input" />
       
       <div class="color-display">
         <div [style.background-color]="selectedLeftBarColumn" class="color-circle" (click)="openColorPicker()" ></div> 

@@ -63,14 +63,13 @@
         </div>
 
         <div class="inputs-container">
-          <label for="orderNumber">Număr de Comandă *</label>
+          <label for="orderNumber">Număr de Comandă</label>
           <input
             id="orderNumber"
             formControlName="orderNumber"
             type="text"
             placeholder="Introduceți Număr de Comandă"
           />
-          <app-validation-message [control]="transactionForm.get('orderNumber')!"></app-validation-message>
         </div>
       </div>
 
