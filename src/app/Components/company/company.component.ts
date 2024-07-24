@@ -16,6 +16,7 @@ export class CompanyComponent implements OnInit {
   imageBase64: string | ArrayBuffer | null = '';
   font: string = '';
   showChangePassword: boolean = false;
+  buttonVisible: boolean = true;
   changePasswordForm: FormGroup;
 
   @ViewChild('navBarColorInput') navBarColorInput!: ElementRef<HTMLInputElement>;
@@ -171,6 +172,7 @@ export class CompanyComponent implements OnInit {
 
   toggleChangePassword(): void {
     this.showChangePassword = !this.showChangePassword;
+    this.buttonVisible = false;
   }
 }
 
