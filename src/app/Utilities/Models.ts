@@ -138,7 +138,7 @@ export interface Element {
     county: string;
     country: string;
     colorCodeNavBar: string;
-    colorCodeLeftBar: string;
+    colorCodeLeftSideBar: string;
     font: string;
   }
 

@@ -12,7 +12,7 @@ import { Organization } from '../../Utilities/Models';
 export class CompanyComponent implements OnInit {
   companyForm: FormGroup;
   selectedNavBarColor: string = '#9dcd8a';
-  selectedLeftBarColumn: string = '#9dcd8a';
+  selectedLeftBarColor: string = '#9dcd8a';
   imageBase64: string | ArrayBuffer | null = '';
   selectedFont: string = '';
   showChangePassword: boolean = false;
@@ -32,7 +32,7 @@ export class CompanyComponent implements OnInit {
     this.companyForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      phone: ['', Validators.required],
+      phoneNumber: ['', Validators.required],
       CUI: ['', Validators.required],
       regCom: ['', Validators.required],
       address: ['', Validators.required],
@@ -40,9 +40,9 @@ export class CompanyComponent implements OnInit {
       postalCode: ['', Validators.required],
       county: ['', Validators.required],
       country: ['', Validators.required],
-      image: [''],
+      image: [null],
       selectedNavBarColor: [this.selectedNavBarColor],
-      selectedLeftBarColumn: [this.selectedLeftBarColumn],
+      selectedLeftBarColor: [this.selectedLeftBarColor],
       selectedFont: this.selectedFont
     });
 
@@ -74,9 +74,8 @@ export class CompanyComponent implements OnInit {
   fetchCompanyDetails(): void {
     this.apiService.get<Organization>('organization/info').subscribe((company) => {
       this.companyForm.patchValue({
-        name: company.name,
         email: company.email,
-        phone: company.phoneNumber,
+        phoneNumber: company.phoneNumber,
         CUI: company.cui,
         regCom: company.regCom,
         address: company.address,
@@ -85,13 +84,22 @@ export class CompanyComponent implements OnInit {
         county: company.county,
         country: company.country,
         selectedFont: company.font,
+        image: this.stripBase64Prefix(company.image),
+      });
+      this.applyFont(company.font);
+    });
+
+    this.apiService.get<Organization>('organization/').subscribe((company) => {
+      this.companyForm.patchValue({
+        name: company.name,
+        selectedFont: company.font,
         selectedNavBarColor: company.colorCodeNavBar,
-        selectedLeftBarColumn: company.colorCodeLeftBar,
+        selectedLeftBarColor: company.colorCodeLeftSideBar,
         image: this.stripBase64Prefix(company.image),
       });
       this.imageBase64 = this.stripBase64Prefix(company.image);
       this.selectedNavBarColor = company.colorCodeNavBar;
-      this.selectedLeftBarColumn = company.colorCodeLeftBar;
+      this.selectedLeftBarColor = company.colorCodeLeftSideBar;
       this.applyFont(company.font);
     });
   }
@@ -119,9 +127,6 @@ export class CompanyComponent implements OnInit {
     if (this.companyForm.valid) {
       const companyData: Organization = this.companyForm.value;
       companyData.image = this.stripBase64Prefix(companyData.image);
-      this.apiService.put('organization/', companyData).subscribe(() => {
-        console.log('Company details updated successfully');
-      });
       this.apiService.put('organization/', companyData).subscribe({
         next: () => {
           console.log('Company created successfully');

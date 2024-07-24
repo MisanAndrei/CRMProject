@@ -22,9 +22,9 @@
             <app-validation-message [control]="companyForm.get('email')!"></app-validation-message>
           </div>
           <div class="input-wrapper">
-            <label for="phone">Telefon *</label>
-            <input id="phone" formControlName="phone" type="text" placeholder="Introduceți Telefon"/>
-            <app-validation-message [control]="companyForm.get('phone')!"></app-validation-message>
+            <label for="phoneNumber">Telefon *</label>
+            <input id="phoneNumber" formControlName="phoneNumber" type="text" placeholder="Introduceți Telefon"/>
+            <app-validation-message [control]="companyForm.get('phoneNumber')!"></app-validation-message>
           </div>
   
           <div class="input-wrapper">
@@ -120,7 +120,7 @@
 
   <div class="button-container">
     <div class="color-picker-wrapper">
-      <label for="selectedLeftBarColumn">Selectează o culoare:</label>
+      <label for="selectedNavBarColor">Selectează o culoare:</label>
       <input type="color" id="colorPicker" #colorInput formControlName="selectedNavBarColor" class="hidden-color-input" />
       
       <div class="color-display">
@@ -128,11 +128,11 @@
       </div>
     </div>
     <div class="color-picker-wrapper">
-      <label for="selectedLeftBarColumn">Selectează o culoare:</label>
-      <input type="color" id="colorPicker" #colorInput formControlName="selectedLeftBarColumn" class="hidden-color-input" />
+      <label for="selectedLeftBarColor">Selectează o culoare:</label>
+      <input type="color" id="colorPicker" #colorInput formControlName="selectedLeftBarColor" class="hidden-color-input" />
       
       <div class="color-display">
-        <div [style.background-color]="selectedLeftBarColumn" class="color-circle" (click)="openColorPicker()" ></div> 
+        <div [style.background-color]="selectedLeftBarColor" class="color-circle" (click)="openColorPicker()" ></div> 
       </div>
     </div>
     <app-font-picker (fontSelected)="onFontSelected($event)" formControlName="selectedFont"></app-font-picker>
