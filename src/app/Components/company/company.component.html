@@ -123,18 +123,18 @@
   <div class="button-container">
     <div class="color-picker-wrapper">
       <label for="selectedNavBarColor">Selectează o culoare:</label>
-      <input type="color" id="colorPicker" #colorInput formControlName="selectedNavBarColor" class="hidden-color-input" />
+      <input type="color" id="selectedNavBarColor" #navBarColorInput formControlName="selectedNavBarColor" class="hidden-color-input" />
       
       <div class="color-display">
-        <div [style.background-color]="selectedNavBarColor" class="color-circle" (click)="openColorPicker()" ></div> 
+        <div [style.background-color]="selectedNavBarColor" class="color-circle" (click)="openNavBarColorPicker()" ></div> 
       </div>
     </div>
     <div class="color-picker-wrapper">
       <label for="selectedLeftBarColor">Selectează o culoare:</label>
-      <input type="color" id="colorPicker" #colorInput formControlName="selectedLeftBarColor" class="hidden-color-input" />
+      <input type="color" id="selectedLeftBarColor" #leftBarColorInput formControlName="selectedLeftBarColor" class="hidden-color-input" />
       
       <div class="color-display">
-        <div [style.background-color]="selectedLeftBarColor" class="color-circle" (click)="openColorPicker()" ></div> 
+        <div [style.background-color]="selectedLeftBarColor" class="color-circle" (click)="openLeftBarColorPicker()" ></div> 
       </div>
     </div>
     <app-font-picker (fontSelected)="onFontSelected($event)" formControlName="font"></app-font-picker>

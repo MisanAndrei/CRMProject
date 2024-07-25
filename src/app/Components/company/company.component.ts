@@ -20,9 +20,7 @@ export class CompanyComponent implements OnInit {
   changePasswordForm: FormGroup;
 
   @ViewChild('navBarColorInput') navBarColorInput!: ElementRef<HTMLInputElement>;
-  @ViewChild('leftBarColumnColorInput') leftBarColumnColorInput!: ElementRef<HTMLInputElement>;
-
-  @ViewChild('colorInput') colorInput!: ElementRef<HTMLInputElement>;
+  @ViewChild('leftBarColorInput') leftBarColorInput!: ElementRef<HTMLInputElement>;
 
   constructor(
     private fb: FormBuilder,
@@ -56,6 +54,13 @@ export class CompanyComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchCompanyDetails();
+
+    this.companyForm.get('selectedNavBarColor')!.valueChanges.subscribe((value: string) => {
+      this.selectedNavBarColor = value;
+    });
+    this.companyForm.get('selectedLeftBarColor')!.valueChanges.subscribe((value: string) => {
+      this.selectedLeftBarColor = value;
+    });
   }
 
   passwordsMatch(formGroup: FormGroup): { [key: string]: boolean } | null {
@@ -68,8 +73,8 @@ export class CompanyComponent implements OnInit {
     this.navBarColorInput.nativeElement.click();
   }
 
-  openLeftBarColumnColorPicker(): void {
-    this.leftBarColumnColorInput.nativeElement.click();
+  openLeftBarColorPicker(): void {
+    this.leftBarColorInput.nativeElement.click();
   }
 
   fetchCompanyDetails(): void {
@@ -155,10 +160,6 @@ export class CompanyComponent implements OnInit {
 
   applyFont(fontName: string): void {
     this.renderer.setStyle(this.document.body, 'font-family', fontName);
-  }
-
-  openColorPicker(): void {
-    this.colorInput.nativeElement.click();
   }
 
   onChangePasswordSubmit(): void {
