@@ -56,7 +56,7 @@ export class TransferUpsertComponent implements OnInit {
     if (this.isEditMode) {
       this.fetchTransferDetails(this.transferId);
     }
-
+    this.setFormControlsState();
     this.fetchAccounts();
   }
 
@@ -168,5 +168,19 @@ export class TransferUpsertComponent implements OnInit {
         console.info('categories data fetch complete');
       },
     });
+  }
+
+  setFormControlsState(): void {
+    if (this.isEditMode) {
+      this.transferForm.get('fromBankAccountId')?.disable();
+      this.transferForm.get('toBankAccountId')?.disable();
+      this.transferForm.get('amount')?.disable();
+      this.transferForm.get('date')?.disable();
+    } else {
+      this.transferForm.get('fromBankAccountId')?.enable();
+      this.transferForm.get('toBankAccountId')?.enable();
+      this.transferForm.get('amount')?.enable();
+      this.transferForm.get('date')?.enable();
+    }
   }
 }
