@@ -84,14 +84,25 @@ export class CategoriesComponent implements OnInit, AfterViewInit {
 
   openDeleteDialog(): void {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
-      data: { title: 'Confirm deletion', message: 'Are you sure you want to delete these categories?' }
+      data: { title: 'Confirma stergerea', message: 'Esti sigur ca vrei sa stergi aceasta categorie?' }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         const selectedIds = this.selection.selected.map(category => category.id);
         
-        // Call your function to delete categories using selectedIds
+        this.apiService.delete(`financial/category/${selectedIds}`).subscribe({
+          next: () => {
+            console.log('Stergere completa');
+            this.fetchCategories();
+          },
+          error: (error) => {
+            console.error('Error fetching elements', error);
+          },
+          complete: () => {
+            console.info('elements data fetch complete');
+          }
+        });
       }
       this.selection.clear();
     });

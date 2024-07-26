@@ -86,14 +86,25 @@ export class PartnersComponent implements OnInit, AfterViewInit {
 
   openDeleteDialog(): void {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
-      data: { title: 'Confirm deletion', message: 'Are you sure you want to delete these partners?' }
+      data: { title: 'Confirma stergerea', message: 'Esti sigur ca vrei sa stergi acest partener?' }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         const selectedIds = this.selection.selected.map(partner => partner.id);
         
-        // Call your function to delete partners using selectedIds
+        this.apiService.delete(`partner/${selectedIds}`).subscribe({
+          next: () => {
+            console.log('Stergere completa');
+            this.fetchData();
+          },
+          error: (error) => {
+            console.error('Error fetching elements', error);
+          },
+          complete: () => {
+            console.info('elements data fetch complete');
+          }
+        });
       }
       this.selection.clear();
     });

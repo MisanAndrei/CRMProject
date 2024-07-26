@@ -4,6 +4,8 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { Router, NavigationEnd, Event } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { AuthService } from './Services/auth.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteDialogComponent } from './Components/dialogs/delete-dialog-component/delete-dialog.component';
 
 @Component({
   selector: 'app-root',
@@ -26,7 +28,7 @@ export class AppComponent implements OnInit {
   license: string = localStorage.getItem("license") ?? '';
   footerText: string = 'Copyright EFCON CRM ' + 'V' + this.companyVersion + ' ' + 'Licenta client: ' + this.license;
 
-  constructor(private router: Router, private renderer: Renderer2, @Inject(DOCUMENT) private document: Document, private authService: AuthService) {}
+  constructor(private dialog: MatDialog, private router: Router, private renderer: Renderer2, @Inject(DOCUMENT) private document: Document, private authService: AuthService) {}
 
   ngOnInit() {
     this.router.events.pipe(
@@ -70,7 +72,17 @@ export class AppComponent implements OnInit {
   }
 
   logOut(){
-    this.authService.logout();
-    this.router.navigate(['/login']);
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {
+      data: { title: 'Confirma deconectarea', message: 'Sunteti sigur ca vreti sa va deconectati ?' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.authService.logout();
+        this.router.navigate(['/login']);
+      }
+
+    });
+
   }
 }

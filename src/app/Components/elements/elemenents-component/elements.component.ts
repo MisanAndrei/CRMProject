@@ -86,14 +86,25 @@ export class ElementsComponent implements OnInit, AfterViewInit {
 
   openDeleteDialog(): void {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
-      data: { title: 'Confirma stergerea', message: 'Esti sigur ca vrei sa stergi aceste categorii?' }
+      data: { title: 'Confirma stergerea', message: 'Esti sigur ca vrei sa stergi acest element?' }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         const selectedIds = this.selection.selected.map(element => element.id);
         
-        // Call your function to delete elements using selectedIds
+        this.apiService.delete(`financial/element/${selectedIds}`).subscribe({
+          next: () => {
+            console.log('Stergere completa');
+            this.fetchData();
+          },
+          error: (error) => {
+            console.error('Error fetching elements', error);
+          },
+          complete: () => {
+            console.info('elements data fetch complete');
+          }
+        });
       }
       this.selection.clear();
     });

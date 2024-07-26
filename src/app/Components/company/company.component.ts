@@ -93,6 +93,7 @@ export class CompanyComponent implements OnInit {
         font: company.font,
         image: company.image,
       });
+      this.imageBase64 = `data:image/jpeg;base64,${company.image}`;
       this.font = company.font;
       this.applyFont(company.font);
     });
@@ -103,7 +104,6 @@ export class CompanyComponent implements OnInit {
         font: company.font,
         colorCodeNavBar: company.colorCodeNavBar,
         colorCodeLeftSideBar: company.colorCodeLeftSideBar,
-        image: company.image
       });
       this.selectedNavBarColor = company.colorCodeNavBar;
       this.selectedLeftBarColor = company.colorCodeLeftSideBar;
@@ -125,6 +125,7 @@ export class CompanyComponent implements OnInit {
       reader.onload = () => {
         this.imageBase64 = this.stripBase64Prefix(reader.result as string);
         this.companyForm.patchValue({ image: this.imageBase64 });
+        this.imageBase64 = `data:image/jpeg;base64,${this.imageBase64}`;
       };
       reader.readAsDataURL(input.files[0]);
     }

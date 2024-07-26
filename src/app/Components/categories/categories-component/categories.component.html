@@ -8,8 +8,8 @@
         <button mat-icon-button aria-label="Add" (click)="addCategory()">
           <mat-icon>add</mat-icon>
         </button>
-        <button mat-icon-button aria-label="Remove" [disabled]="!selection.hasValue()" (click)="openDeleteDialog()">
-          <mat-icon>remove</mat-icon>
+        <button mat-icon-button aria-label="Delete" [disabled]="!selection.hasValue()" (click)="openDeleteDialog()">
+          <mat-icon>delete</mat-icon>
         </button>
         <button mat-icon-button aria-label="Edit" [disabled]="!isSingleSelection()" (click)="editCategory()">
           <mat-icon>edit</mat-icon>

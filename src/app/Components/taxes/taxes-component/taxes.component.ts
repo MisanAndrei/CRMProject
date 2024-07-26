@@ -80,13 +80,25 @@ export class TaxesComponent implements OnInit, AfterViewInit {
 
   openDeleteDialog(): void {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
-      data: { title: 'Confirm deletion', message: 'Are you sure you want to delete these taxes?' }
+      data: { title: 'Confirma stergerea', message: 'Esti sigur ca vrei sa stergi aceasta taxa?' }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         const selectedIds = this.selection.selected.map(tax => tax.id);
-        // Call your function to delete taxes using selectedIds
+        
+        this.apiService.delete(`financial/tax/${selectedIds}`).subscribe({
+          next: () => {
+            console.log('Stergere completa');
+            this.fetchTaxes();
+          },
+          error: (error) => {
+            console.error('Error fetching elements', error);
+          },
+          complete: () => {
+            console.info('elements data fetch complete');
+          }
+        });
       }
       this.selection.clear();
     });

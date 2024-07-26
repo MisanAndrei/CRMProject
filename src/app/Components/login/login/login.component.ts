@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
               this.authService.logout();
               throw new Error('Invalid license');
             } else {
-              localStorage.setItem('sidenavBackgroundColor', data.colorLeftSideBar);
+              localStorage.setItem('sidenavBackgroundColor', data.colorCodeLeftSideBar);
               localStorage.setItem('toolbarBackgroundColor', data.colorCodeNavBar);
               localStorage.setItem('selectedFont', data.font);
               localStorage.setItem('organizationName', data.name);
