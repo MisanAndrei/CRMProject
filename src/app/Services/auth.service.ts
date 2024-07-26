@@ -38,6 +38,7 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('access_token');
+    localStorage.clear();
   }
 
   async isLoggedIn(): Promise<boolean> {

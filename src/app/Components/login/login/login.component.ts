@@ -5,6 +5,7 @@ import { AuthService } from '../../../Services/auth.service';
 import { ApiService } from '../../../Services/ApiService';
 import { Organization, OrganizationResponse } from '../../../Utilities/Models';
 import { switchMap } from 'rxjs';
+import { RefreshService } from '../../../Services/RefreshService';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ import { switchMap } from 'rxjs';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router, private authService: AuthService, private apiService: ApiService) {
+  constructor(private fb: FormBuilder, private router: Router, private authService: AuthService, private apiService: ApiService, private refreshService: RefreshService) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -50,6 +51,7 @@ export class LoginComponent implements OnInit {
         ).subscribe({
           next: (orgInfo: Organization) => {
             localStorage.setItem('organizationImage', orgInfo.image ?? '');
+            this.refreshService.triggerRefresh();
             this.router.navigate(['/Tabloudebord']);
           },
           error: (error) => {

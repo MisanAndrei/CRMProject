@@ -40,8 +40,8 @@ export class CompanyComponent implements OnInit {
       county: ['', Validators.required],
       country: ['', Validators.required],
       image: [null],
-      selectedNavBarColor: [this.selectedNavBarColor],
-      selectedLeftBarColor: [this.selectedLeftBarColor],
+      colorCodeNavBar: [this.selectedNavBarColor],
+      colorCodeLeftSideBar: [this.selectedLeftBarColor],
       font: this.font
     });
 
@@ -53,14 +53,15 @@ export class CompanyComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fetchCompanyDetails();
-
-    this.companyForm.get('selectedNavBarColor')!.valueChanges.subscribe((value: string) => {
+    
+    this.companyForm.get('colorCodeNavBar')!.valueChanges.subscribe((value: string) => {
       this.selectedNavBarColor = value;
     });
-    this.companyForm.get('selectedLeftBarColor')!.valueChanges.subscribe((value: string) => {
+    this.companyForm.get('colorCodeLeftSideBar')!.valueChanges.subscribe((value: string) => {
       this.selectedLeftBarColor = value;
     });
+
+    this.fetchCompanyDetails();
   }
 
   passwordsMatch(formGroup: FormGroup): { [key: string]: boolean } | null {
@@ -90,8 +91,9 @@ export class CompanyComponent implements OnInit {
         county: company.county,
         country: company.country,
         font: company.font,
-        image: this.stripBase64Prefix(company.image ?? ''),
+        image: company.image,
       });
+      this.font = company.font;
       this.applyFont(company.font);
     });
 
@@ -99,11 +101,10 @@ export class CompanyComponent implements OnInit {
       this.companyForm.patchValue({
         name: company.name,
         font: company.font,
-        selectedNavBarColor: company.colorCodeNavBar,
-        selectedLeftBarColor: company.colorCodeLeftSideBar,
-        image: this.stripBase64Prefix(company.image ?? ''),
+        colorCodeNavBar: company.colorCodeNavBar,
+        colorCodeLeftSideBar: company.colorCodeLeftSideBar,
+        image: company.image
       });
-      this.imageBase64 = this.stripBase64Prefix(company.image ?? '');
       this.selectedNavBarColor = company.colorCodeNavBar;
       this.selectedLeftBarColor = company.colorCodeLeftSideBar;
       this.applyFont(company.font);
@@ -155,6 +156,9 @@ export class CompanyComponent implements OnInit {
   onFontSelected(font: string): void {
     this.font = font;
     localStorage.setItem('selectedFont', font);
+    this.companyForm.patchValue({
+      font: font
+    });
     this.applyFont(font);
   }
 

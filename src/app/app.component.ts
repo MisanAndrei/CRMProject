@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild, ViewEncapsulation, Renderer2, Inject } fr
 import { MatSidenav } from '@angular/material/sidenav';
 import { Router, NavigationEnd, Event } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { AuthService } from './Services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -25,7 +26,7 @@ export class AppComponent implements OnInit {
   license: string = localStorage.getItem("license") ?? '';
   footerText: string = 'Copyright EFCON CRM ' + 'V' + this.companyVersion + ' ' + 'Licenta client: ' + this.license;
 
-  constructor(private router: Router, private renderer: Renderer2, @Inject(DOCUMENT) private document: Document) {}
+  constructor(private router: Router, private renderer: Renderer2, @Inject(DOCUMENT) private document: Document, private authService: AuthService) {}
 
   ngOnInit() {
     this.router.events.pipe(
@@ -66,5 +67,10 @@ export class AppComponent implements OnInit {
     if (fontData) {
       this.renderer.setStyle(this.document.body, 'font-family', fontData);
     }
+  }
+
+  logOut(){
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 }

@@ -137,3 +137,10 @@ button[mat-icon-button] {
   object-fit: cover;
   border: 2px solid #d3d3d3; /* Optional: Add a border around the image */
 }
+
+.toolbar-log-out {
+  margin-top: 10px;
+  margin-right: 40px;
+  background: transparent;
+  border: none;
+}

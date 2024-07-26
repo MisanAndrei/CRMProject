@@ -2,9 +2,12 @@
   <button mat-icon-button (click)="isExpanded = !isExpanded">
     <mat-icon class="icon-meniu">menu</mat-icon>
   </button>
+  <button class="toolbar-log-out" (click)="logOut()">Deconectare</button>
   <div class="toolbar-image-container">
+    
     <img src="assets/images/login.png" alt="Company Logo" class="toolbar-image">
   </div>
+  
   <div class="toolbar-title-container">
     <h1 class="example-app-name">{{companyName}}</h1>
   </div>
