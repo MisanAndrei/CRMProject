@@ -169,8 +169,22 @@ export class CompanyComponent implements OnInit {
 
   onChangePasswordSubmit(): void {
     if (this.changePasswordForm.valid) {
-      // Handle change password logic here
-      console.log('Password changed successfully');
+      
+      this.apiService.put('user/password', this.changePasswordForm.value).subscribe({
+        next: () => {
+          console.log('Password changed successfully');
+          this.showChangePassword = false;
+          this.buttonVisible = true;
+          this.changePasswordForm.reset();
+        },
+        error: (error) => {
+          console.error('Error changing password', error);
+        },
+        complete: () => {
+          console.info('Password change complete');
+        }
+      });
+
     } else {
       this.changePasswordForm.markAllAsTouched();
     }

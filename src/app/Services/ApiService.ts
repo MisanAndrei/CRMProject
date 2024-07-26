@@ -8,7 +8,8 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = 'https://backend-crm.efcon.ro/crm/api/v1';
+  // private apiUrl = 'https://backend-crm.efcon.ro/crm/api/v1';
+  private apiUrl = 'http://localhost:8080/api/v1';
 
   constructor(private http: HttpClient, private router: Router) { }
 
