@@ -191,6 +191,9 @@ export class CompanyComponent implements OnInit {
       };
       this.apiService.put(`user/password`, changePasswordData).subscribe({
         next: () => {
+          this.showChangePassword = false;
+          this.buttonVisible = true;
+          this.changePasswordForm.reset();
           this.dialog.open(StatusDialogComponent, {
             data: {
               message: 'Parola a fost modificata cu succes !',
