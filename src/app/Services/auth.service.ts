@@ -3,13 +3,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { KeycloakService } from 'keycloak-angular';
 import { decodeToken } from '../Utilities/jwt-decode';
 import { firstValueFrom } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { StatusDialogComponent } from '../Components/dialogs/status-dialog-component/status-dialog.component';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private dialog: MatDialog) {}
 
   async customLogin(username: string, password: string): Promise<void> {
     const clientId = 'crm_client'; // Replace with your client ID
@@ -32,7 +34,12 @@ export class AuthService {
       const response: any = await firstValueFrom(this.http.post(url, body.toString(), { headers }));
       localStorage.setItem('access_token', response.access_token);
     } catch (error) {
-      console.error('Login failed', error);
+      this.dialog.open(StatusDialogComponent, {
+        data: {
+          message: 'Credentialele introduse nu sunt corecte, incercati din nou !',
+          status: 'failure'
+        }
+      });
     }
   }
 

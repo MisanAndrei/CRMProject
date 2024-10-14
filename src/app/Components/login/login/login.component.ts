@@ -6,6 +6,8 @@ import { ApiService } from '../../../Services/ApiService';
 import { Organization, OrganizationResponse } from '../../../Utilities/Models';
 import { switchMap } from 'rxjs';
 import { RefreshService } from '../../../Services/RefreshService';
+import { MatDialog } from '@angular/material/dialog';
+import { StatusDialogComponent } from '../../dialogs/status-dialog-component/status-dialog.component';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +17,7 @@ import { RefreshService } from '../../../Services/RefreshService';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router, private authService: AuthService, private apiService: ApiService, private refreshService: RefreshService) {
+  constructor(private fb: FormBuilder, private dialog: MatDialog, private router: Router, private authService: AuthService, private apiService: ApiService, private refreshService: RefreshService) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -37,6 +39,12 @@ export class LoginComponent implements OnInit {
           switchMap((data: OrganizationResponse) => {
             if (data.license != this.loginForm.get('license')?.value) {
               this.authService.logout();
+              this.dialog.open(StatusDialogComponent, {
+                data: {
+                  message: 'Licenta introdusa nu este valida, incercati din nou !',
+                  status: 'failure'
+                }
+              });
               throw new Error('Invalid license');
             } else {
               localStorage.setItem('sidenavBackgroundColor', data.colorCodeLeftSideBar);

@@ -33,14 +33,7 @@
           <small *ngIf="loginForm.get('license')?.errors?.['required']">Licența este necesară.</small>
         </div>
       </div>
-
-      <div class="form-group">
-        <label>
-          <input type="checkbox" formControlName="rememberMe" />
-          Ține-mă minte
-        </label>
-      </div>
-
+      
       <button type="submit" [disabled]="loginForm.invalid">Conectare</button>
     </form>
   </div>
