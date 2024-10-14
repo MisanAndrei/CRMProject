@@ -19,7 +19,7 @@ import { ApiService } from '../../../Services/ApiService';
   styleUrls: ['./transactions.component.css']
 })
 export class TransactionsComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['select', 'paymentDate', 'invoiceId', 'reference', 'amount', 'paymentDirection', 'bankAccountId', 'paymentMethod', 'description'];
+  displayedColumns: string[] = ['select', 'paymentDate', 'reference', 'amount', 'paymentDirection', 'bankAccountId', 'paymentMethod', 'description'];
   dataSource: MatTableDataSource<Transaction>;
   searchControl: FormControl = new FormControl('');
   initialSelection = [];
@@ -128,6 +128,17 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
     if (this.isSingleSelection()) {
       const selectedTransactionId = this.selection.selected[0].id;
       this.router.navigate(['/EditareTranzactie', selectedTransactionId]);
+    }
+  }
+
+  getPaymentLabel(direction: TransactionDirection): string {
+    switch (direction) {
+      case TransactionDirection.in:
+        return 'Incasare';
+      case TransactionDirection.out:
+        return 'Plată';
+      default:
+        return '';
     }
   }
 }

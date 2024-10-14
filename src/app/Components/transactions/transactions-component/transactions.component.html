@@ -39,13 +39,6 @@
       <td mat-cell *matCellDef="let transaction"> {{ transaction.paymentDate | date }} </td>
     </ng-container>
   
-    <ng-container matColumnDef="invoiceId">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>
-        Factură ID
-      </th>
-      <td mat-cell *matCellDef="let transaction"> {{ transaction.invoiceId }} </td>
-    </ng-container>
-  
     <ng-container matColumnDef="reference">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>
         Referință
@@ -64,7 +57,9 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header>
         Direcția Plății
       </th>
-      <td mat-cell *matCellDef="let transaction"> {{ transaction.paymentDirection }} </td>
+      <td mat-cell *matCellDef="let transaction"> 
+        {{ getPaymentLabel(transaction.paymentDirection) }}
+      </td>
     </ng-container>
   
     <ng-container matColumnDef="bankAccountId">

@@ -2,7 +2,9 @@ import { Component, ElementRef, Inject, OnInit, Renderer2, ViewChild } from '@an
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../../Services/ApiService'; // Update the path as necessary
 import { DOCUMENT } from '@angular/common';
-import { Organization } from '../../Utilities/Models';
+import { ChangePassword, Organization } from '../../Utilities/Models';
+import { MatDialog } from '@angular/material/dialog';
+import { StatusDialogComponent } from '../dialogs/status-dialog-component/status-dialog.component';
 
 @Component({
   selector: 'app-company',
@@ -26,6 +28,7 @@ export class CompanyComponent implements OnInit {
     private fb: FormBuilder,
     private apiService: ApiService,
     private renderer: Renderer2,
+    private dialog: MatDialog,
     @Inject(DOCUMENT) private document: Document
   ) {
     this.companyForm = this.fb.group({
@@ -56,9 +59,11 @@ export class CompanyComponent implements OnInit {
     
     this.companyForm.get('colorCodeNavBar')!.valueChanges.subscribe((value: string) => {
       this.selectedNavBarColor = value;
+      localStorage.setItem('toolbarBackgroundColor', value);
     });
     this.companyForm.get('colorCodeLeftSideBar')!.valueChanges.subscribe((value: string) => {
       this.selectedLeftBarColor = value;
+      localStorage.setItem('sidenavBackgroundColor', value);
     });
 
     this.fetchCompanyDetails();
@@ -140,10 +145,20 @@ export class CompanyComponent implements OnInit {
       }
       this.apiService.put('organization/', companyData).subscribe({
         next: () => {
-          console.log('Company created successfully');
+          this.dialog.open(StatusDialogComponent, {
+            data: {
+              message: 'Modificarile au fost salvate cu succes !',
+              status: 'success' // You can change this to 'failure' as needed
+            }
+          });
         },
         error: (error) => {
-          console.error('Error creating transaction', error);
+          this.dialog.open(StatusDialogComponent, {
+            data: {
+              message: 'Modificarile nu au fost salvate, verificati toate campurile !',
+              status: 'failure'
+            }
+          });
         },
         complete: () => {
           console.info('Transaction creation complete');
@@ -170,7 +185,28 @@ export class CompanyComponent implements OnInit {
   onChangePasswordSubmit(): void {
     if (this.changePasswordForm.valid) {
       // Handle change password logic here
-      console.log('Password changed successfully');
+      const changePasswordData: ChangePassword = {
+        oldPassword: this.changePasswordForm.value.oldPassword,
+        newPassword: this.changePasswordForm.value.newPassword
+      };
+      this.apiService.put(`user/password`, changePasswordData).subscribe({
+        next: () => {
+          this.dialog.open(StatusDialogComponent, {
+            data: {
+              message: 'Parola a fost modificata cu succes !',
+              status: 'success' // You can change this to 'failure' as needed
+            }
+          });
+        },
+        error: (error) => {
+          this.dialog.open(StatusDialogComponent, {
+            data: {
+              message: 'Modificarile nu au fost salvate, verificati toate campurile !',
+              status: 'failure'
+            }
+          });
+        }
+      });
     } else {
       this.changePasswordForm.markAllAsTouched();
     }

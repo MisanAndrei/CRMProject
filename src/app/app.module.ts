@@ -5,7 +5,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { KeycloakService, KeycloakAngularModule } from 'keycloak-angular';
 import { initializeKeycloak } from './app-init';
 
-
+import { CommonModule } from '@angular/common';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
@@ -60,6 +60,7 @@ import { FontPickerComponent } from './Components/font-picker/font-picker.compon
 import { AuthService } from './Services/auth.service';
 import { AuthGuard } from './guards/auth.guard';
 import { ValidationMessageComponent } from './Components/validation-message/validation-message.component';
+import { StatusDialogComponent } from './Components/dialogs/status-dialog-component/status-dialog.component';
 
 @NgModule({
   declarations: [
@@ -88,7 +89,8 @@ import { ValidationMessageComponent } from './Components/validation-message/vali
     AccountUpsertComponent,
     LoginComponent,
     FontPickerComponent,
-    ValidationMessageComponent
+    ValidationMessageComponent,
+    StatusDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -118,7 +120,8 @@ import { ValidationMessageComponent } from './Components/validation-message/vali
     MatNativeDateModule,
     MatTooltipModule,
     MatDialogModule,
-    KeycloakAngularModule
+    KeycloakAngularModule,
+    CommonModule
   ],
   providers: [provideCharts(withDefaultRegisterables()),
   ApiService,

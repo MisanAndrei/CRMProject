@@ -1,0 +1,13 @@
+<div class="dialog-container">
+    <div class="icon" [ngClass]="data.status">
+      <ng-container *ngIf="data.status === 'success'">
+        <mat-icon>check_circle</mat-icon>
+      </ng-container>
+      <ng-container *ngIf="data.status === 'failure'">
+        <mat-icon>cancel</mat-icon>
+      </ng-container>
+    </div>
+    <div class="message">
+      {{ data.message }}
+    </div>
+  </div>

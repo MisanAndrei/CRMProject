@@ -239,3 +239,8 @@ export interface Element {
     partner: Partner;
     invoice: Invoice;
   }
+
+  export interface ChangePassword {
+    oldPassword: string;
+    newPassword: string;
+  }
