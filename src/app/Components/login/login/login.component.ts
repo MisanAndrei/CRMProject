@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
               localStorage.setItem('selectedFont', data.font);
               localStorage.setItem('organizationName', data.name);
               localStorage.setItem('license', data.license);
-              localStorage.setItem('companyVersion', `${data.version}.${data.id}`);
+              localStorage.setItem('companyVersion', `4.${data.id}`);
               return this.apiService.get<Organization>('organization/info');
             }
           })
