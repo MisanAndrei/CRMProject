@@ -36,13 +36,16 @@ button {
 .image-container {
   width: 200px;
   height: 200px;
-  border: 1px solid #ccc;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 30px;
   margin-left: 50px;
   margin-bottom: 20px;
+}
+
+.no-image {
+  border: 1px solid #ccc;
 }
 
 .color-picker-wrapper {

@@ -16,6 +16,7 @@ import {
 import { ApiService } from '../../Services/ApiService'
 import { firstValueFrom } from 'rxjs/internal/firstValueFrom'
 import { HttpParams } from '@angular/common/http'
+import { RefreshService } from '../../Services/RefreshService'
 
 @Component({
   selector: 'app-dashboard',
@@ -50,9 +51,10 @@ export class DashboardComponent implements OnInit {
     endDate: [''],
   })
 
-  constructor(private fb: FormBuilder, private apiService: ApiService) {}
+  constructor(private fb: FormBuilder, private apiService: ApiService, private refreshService: RefreshService) {}
 
   ngOnInit(): void {
+    this.refreshService.triggerRefresh();
     this.setDefaultDates();
     this.fetchData();
     this.fetchPartnersData();

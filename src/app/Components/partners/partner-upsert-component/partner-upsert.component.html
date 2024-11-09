@@ -68,23 +68,24 @@
             placeholder="Introduceți Referință"
           />
         </div>
-
         <div class="input-wrapper">
-          <label for="image">Imagine</label>
-          <input id="image" type="file" (change)="onImageChange($event)" />
-        </div>
+          <label for="regCom">Reg. Com. *</label>
+          <input
+            id="regCom"
+            formControlName="regCom"
+            type="text"
+            placeholder="Introduceți Reg. Com."
+          />
+          <app-validation-message [control]="partnerForm.get('regCom')!"></app-validation-message>
+          </div>
+        
       </div>
 
       <div class="double-input-container">
         <div class="input-wrapper">
-        <label for="regCom">Reg. Com. *</label>
-        <input
-          id="regCom"
-          formControlName="regCom"
-          type="text"
-          placeholder="Introduceți Reg. Com."
-        />
-        <app-validation-message [control]="partnerForm.get('regCom')!"></app-validation-message>
+          <label for="image">Imagine</label>
+          <input id="image" type="file" (change)="onImageChange($event)" />
+          <img [src]=imageBase64 alt="Image" style="max-width: 200px; max-height: 200px;" class="image">
         </div>
         <div class="input-wrapper"></div>
       </div>
@@ -108,7 +109,7 @@
           <app-validation-message [control]="partnerForm.get('cui')!"></app-validation-message>
         </div>
         <div class="input-wrapper">
-          <label for="postalCode">Cod Poștal *</label>
+          <label for="postalCode">Cod Poștal</label>
           <input
             id="postalCode"
             formControlName="postalCode"

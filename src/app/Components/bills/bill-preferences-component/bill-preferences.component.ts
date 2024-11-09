@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../../../Services/ApiService';
 import { InvoicePreferences } from '../../../Utilities/Models';
+import { MatDialog } from '@angular/material/dialog';
+import { StatusDialogComponent } from '../../dialogs/status-dialog-component/status-dialog.component';
 
 @Component({
   selector: 'app-bill-preferences',
@@ -11,7 +13,7 @@ import { InvoicePreferences } from '../../../Utilities/Models';
 export class BillPreferencesComponent implements OnInit {
   preferencesForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private apiService: ApiService) {
+  constructor(private fb: FormBuilder, private apiService: ApiService, private dialog: MatDialog) {
     this.preferencesForm = this.fb.group({
       prefix: ['', Validators.required],
       nextNumber: [1, [Validators.required, Validators.min(1)]],
@@ -54,10 +56,21 @@ export class BillPreferencesComponent implements OnInit {
 
       this.apiService.put('invoice-preferences', updatedPreferences).subscribe({
         next: () => {
+          this.dialog.open(StatusDialogComponent, {
+            data: {
+              message: 'Modificarile au fost salvate cu succes !',
+              status: 'success' // You can change this to 'failure' as needed
+            }
+          });
           console.log('Preferences updated successfully');
         },
         error: (error) => {
-          console.error('Error updating preferences', error);
+          this.dialog.open(StatusDialogComponent, {
+            data: {
+              message: 'Modificarile nu au fost salvate, verificati toate campurile !',
+              status: 'failure'
+            }
+          });
         }
       });
     } else {

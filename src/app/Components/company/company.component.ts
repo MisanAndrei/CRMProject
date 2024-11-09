@@ -145,12 +145,16 @@ export class CompanyComponent implements OnInit {
       }
       this.apiService.put('organization/', companyData).subscribe({
         next: () => {
+          
           this.dialog.open(StatusDialogComponent, {
             data: {
               message: 'Modificarile au fost salvate cu succes !',
               status: 'success' // You can change this to 'failure' as needed
             }
           });
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
         },
         error: (error) => {
           this.dialog.open(StatusDialogComponent, {

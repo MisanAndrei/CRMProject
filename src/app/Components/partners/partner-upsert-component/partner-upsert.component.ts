@@ -3,7 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../../Services/ApiService'; // Update the path as necessary
 import { Partner } from '../../../Utilities/Models'; // Update the path as necessary
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { StatusDialogComponent } from '../../dialogs/status-dialog-component/status-dialog.component';
 
 @Component({
   selector: 'app-partner-upsert',
@@ -22,6 +23,7 @@ export class PartnerUpsertComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private apiService: ApiService,
+    private dialog: MatDialog,
     @Optional() public dialogRef: MatDialogRef<PartnerUpsertComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any
   ) {
@@ -35,7 +37,7 @@ export class PartnerUpsertComponent implements OnInit {
       cui: ['', Validators.required],
       regCom: ['', Validators.required],
       address: ['', Validators.required],
-      postalCode: ['', Validators.required],
+      postalCode: [''],
       county: ['', Validators.required],
       country: ['', Validators.required],
       city: ['', Validators.required]
@@ -70,7 +72,7 @@ export class PartnerUpsertComponent implements OnInit {
         country: partner.country,
         city: partner.city
       });
-      this.imageBase64 = partner.image ?? '';
+      this.imageBase64 = `data:image/jpeg;base64,${partner.image}`;
     });
   }
 
@@ -81,6 +83,7 @@ export class PartnerUpsertComponent implements OnInit {
       reader.onload = () => {
         this.imageBase64 = this.stripBase64Prefix(reader.result as string);
         this.partnerForm.patchValue({ image: this.imageBase64 });
+        this.imageBase64 = `data:image/jpeg;base64,${this.imageBase64}`
       };
       reader.readAsDataURL(input.files[0]);
     }
@@ -102,13 +105,33 @@ export class PartnerUpsertComponent implements OnInit {
           next: () => {
             console.log('Partner updated successfully');
             if (this.dialogRef) {
+              this.dialog.open(StatusDialogComponent, {
+                data: {
+                  message: 'Partenerul a fost salvat cu succes !',
+                  status: 'success' // You can change this to 'failure' as needed
+                }
+              });
               this.dialogRef.close(true); // Close the dialog and return true
             } else {
-              this.router.navigate(['/Parteneri']);
+              this.dialog.open(StatusDialogComponent, {
+                data: {
+                  message: 'Partenerul a fost salvat cu succes !',
+                  status: 'success' // You can change this to 'failure' as needed
+                }
+              });
+              setTimeout(() => {
+                this.router.navigate(['/Parteneri']);
+              }, 2000);
+              
             }
           },
           error: (error) => {
-            console.error('Error updating partner', error);
+            this.dialog.open(StatusDialogComponent, {
+              data: {
+                message: 'Modificarile nu au fost salvate, verificati toate campurile !',
+                status: 'failure'
+              }
+            });
           }
         });
       } else {
@@ -116,13 +139,32 @@ export class PartnerUpsertComponent implements OnInit {
           next: () => {
             console.log('Partner created successfully');
             if (this.dialogRef) {
+              this.dialog.open(StatusDialogComponent, {
+                data: {
+                  message: 'Partenerul a fost salvat cu succes !',
+                  status: 'success' // You can change this to 'failure' as needed
+                }
+              });
               this.dialogRef.close(true); // Close the dialog and return true
             } else {
-              this.router.navigate(['/Parteneri']);
+              this.dialog.open(StatusDialogComponent, {
+                data: {
+                  message: 'Partenerul a fost salvat cu succes !',
+                  status: 'success' // You can change this to 'failure' as needed
+                }
+              });
+              setTimeout(() => {
+                this.router.navigate(['/Parteneri']);
+              }, 2000);
             }
           },
           error: (error) => {
-            console.error('Error creating partner', error);
+            this.dialog.open(StatusDialogComponent, {
+              data: {
+                message: 'Modificarile nu au fost salvate, verificati toate campurile !',
+                status: 'failure'
+              }
+            });
           }
         });
       }

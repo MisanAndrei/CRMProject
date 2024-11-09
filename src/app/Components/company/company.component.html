@@ -41,8 +41,8 @@
         </div>
       
         <div class="input-wrapper">
-          <div class="image-container">
-            <img [src]=imageBase64 alt="Image" class="image">
+          <div class="image-container" [ngClass]="{'no-image': !imageBase64}">
+            <img [src]=imageBase64 alt="Image" style="max-width: 200px; max-height: 200px;" >
             
           </div>
           <input type="file" (change)="onImageChange($event)">
