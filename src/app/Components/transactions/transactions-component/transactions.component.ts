@@ -80,17 +80,30 @@ export class TransactionsComponent implements OnInit, AfterViewInit {
 
   openDeleteDialog(): void {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
-      data: { title: 'Confirm deletion', message: 'Are you sure you want to delete these transactions?' }
+      data: { title: 'Confirma stergerea', message: 'Esti sigur ca vrei sa stergi aceasta tranzactie ?' }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        const selectedIds = this.selection.selected.map(transaction => transaction.id);
-        // Call your function to delete transactions using selectedIds
+        const id = this.selection.selected.map(transaction => transaction.id)[0];
+        
+        this.apiService.delete(`financial/invoice/payments/${id}`).subscribe({
+          next: () => {
+            console.log('Stergere completa');
+            this.fetchData();
+          },
+          error: (error) => {
+            console.error('Error fetching elements', error);
+          },
+          complete: () => {
+            console.info('elements data fetch complete');
+          }
+        });
       }
       this.selection.clear();
     });
   }
+
 
   addTransaction() {
     this.router.navigateByUrl('/TranzactieNoua');

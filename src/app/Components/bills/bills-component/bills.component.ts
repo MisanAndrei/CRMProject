@@ -89,13 +89,25 @@ export class BillsComponent implements OnInit, AfterViewInit {
 
   openDeleteDialog(): void {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
-      data: { title: 'Confirm Delete', message: 'Are you sure you want to delete selected bills?' }
+      data: { title: 'Confirma stergerea', message: 'Esti sigur ca vrei sa stergi aceasta factura si toate tranzactiile aferente ?' }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        const selectedIds = this.selection.selected.map(bill => bill.id);
-        // Call your function to delete bills using selectedIds
+        const id = this.selection.selected.map(invoice => invoice.id)[0];
+        
+        this.apiService.delete(`financial/invoice/${id}`).subscribe({
+          next: () => {
+            console.log('Stergere completa');
+            this.fetchData();
+          },
+          error: (error) => {
+            console.error('Error fetching elements', error);
+          },
+          complete: () => {
+            console.info('elements data fetch complete');
+          }
+        });
       }
       this.selection.clear();
     });
